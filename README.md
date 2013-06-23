@@ -94,7 +94,12 @@ Add a `required` field to the descriptor to validate that the property exists.
 
 #### Type
 
-Add a `type` field to a descriptor to indicate that the field must be a `typeof` the specified type. 
+Add a `type` field to a descriptor to indicate that the field must be a `typeof` the specified type. Recognised type values are:
+
+* `string`
+* `number`
+* `integer`
+* `float`
 
 #### Pattern
 

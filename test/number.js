@@ -50,7 +50,6 @@ suite("Number validation:", function() {
     var validator = new schema(descriptor);
     validator.validate({port: 1.618}, function(errors, fields) {
       assert.equal(errors.length, 1);
-      //console.log(errors[0].message);
       assert.equal(errors[0].message, "port is not an integer");
     });
   });
@@ -62,7 +61,7 @@ suite("Number validation:", function() {
     validator.validate({ratio: 1618}, function(errors, fields) {
       assert.equal(errors.length, 1);
       //console.log(errors[0].message);
-      //assert.equal(errors[0].message, "port is not an integer");
+      assert.equal(errors[0].message, "ratio is not a float");
     });
   });
 });
