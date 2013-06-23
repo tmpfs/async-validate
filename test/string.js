@@ -85,7 +85,7 @@ suite("String validation:", function() {
         assert.equal(errors.length, 1);
         assert.equal(
           errors[0].message,
-          "Field name must be between 6 and 8 characters in length");
+          "Field name must be between 6 and 8 characters");
       });
     }
   );
@@ -99,7 +99,7 @@ suite("String validation:", function() {
         assert.equal(errors.length, 1);
         assert.equal(
           errors[0].message,
-          "Field name must be between 2 and 4 characters in length");
+          "Field name must be between 2 and 4 characters");
       });
     }
   );
