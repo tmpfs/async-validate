@@ -121,7 +121,7 @@ Add a `required` field to the rule to validate that the property exists.
 
 #### Type
 
-Add a `type` field to a rule to indicate that the field must be a `typeof` the specified type. Recognised type values are:
+Add a `type` field to a rule to indicate that the field must be of the specified type. Recognised type values are:
 
 * `string`
 * `number`
