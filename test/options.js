@@ -23,4 +23,14 @@ suite("Options validation:", function() {
       assert.equal(errors.length, 1);
     });
   });
+  test("validate single option", function() {
+    var descriptor = {
+      name: {type: "string", required: true, min: 10, pattern: /^[^-].*$/}
+    }
+    var validator = new schema(descriptor);
+    validator.validate({name: "-name"}, {first: true, single: true}, function(errors, fields) {
+      assert.equal(errors.length, 1);
+      assert.equal(fields.name.length, 1);
+    });
+  });
 });

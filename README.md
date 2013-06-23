@@ -101,6 +101,17 @@ function(source, [options], callback)
 ### Options
 
 * `first`: Invoke `callback` when the first validation rule generates an error. 
+* `single`: Only ever return a single error typically used in conjunction with `first` when a validation rule could generate multiple errors.
+
+Consider the rule:
+
+```javascript
+{type: "string", required: true, min: 10, pattern: /^[^-].*$/}
+```
+
+When supplied with a source object such as `{name: "-name"}` the validation rule would generate two errors, as the pattern does not match and the string length is less then the required minimum length for the field.
+
+In this instance when you only want the first error encountered use the `single` option.
 
 ## Rules
 
