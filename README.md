@@ -27,7 +27,31 @@ var validator = new schema(descriptor);
 validator.validate({name: "muji"}, function(errors, fields) {
   if(errors) {
     // validation failed, errors is an array of all errors
-    // fields is keyed by property name
+    // fields is keyed by field name
+    return handleErrors(errors, fields);
+  }
+  // validation passed
+});
+```
+
+Descriptors may be functions that perform validation:
+
+```
+var descriptor = {
+  name: function(descriptor, value, callback, values) {
+    var errors = [];
+    if(!/^[a-z0-9]+$/.test(value)) {
+      errors.push(
+        new ValidationError(
+          util.format("Field %s must be lowercase alphanumeric characters",
+            descriptor.field)));
+    }
+    callback(errors);
+  }
+}
+var validator = new schema(descriptor);
+validator.validate({name: "Firstname"}, function(errors, fields) {
+  if(errors) {
     return handleErrors(errors, fields);
   }
   // validation passed
