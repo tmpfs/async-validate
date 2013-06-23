@@ -28,11 +28,34 @@ suite("Multiple validation:", function() {
       ]
     }
     var validator = new schema(descriptor);
-    validator.validate({email: "joe@example"}, function(errors, fields) {
+    validator.validate({email: "user@example"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message,
-        "Field email value joe@example does not match pattern "
+        "Field email value user@example does not match pattern "
         + schema.pattern.email);
+    });
+  });
+  test("validate using multiple validation rules with a validation function", function() {
+    var descriptor = {
+      email: [
+        {type: "string", required: true},
+        {pattern: schema.pattern.email},
+        function(descriptor, value, callback, values) {
+          var errors = [];
+          var email = "user@example.com";
+          if(value == email) {
+            errors.push(new ValidationError(
+              util.format("Email address %s already exists", email)));
+          }
+          callback(errors);
+        }
+      ]
+    }
+    var validator = new schema(descriptor);
+    validator.validate({email: "user@example.com"}, function(errors, fields) {
+      assert.equal(errors.length, 1);
+      assert.equal(errors[0].message,
+        "Email address user@example.com already exists");
     });
   });
 });

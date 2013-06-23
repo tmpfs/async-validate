@@ -69,7 +69,7 @@ validator.validate({name: "Firstname"}, function(errors, fields) {
 });
 ```
 
-It is often useful to test against multiple validation rules for sigle field, to do so make the descriptor and array of objects, for example:
+It is often useful to test against multiple validation rules for a single field, to do so make the descriptor and array of objects, for example:
 
 ```javascript
 var descriptor = {
