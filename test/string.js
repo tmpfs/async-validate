@@ -57,7 +57,7 @@ suite("String validation:", function() {
   });
   test("validate a required string field with minimum length", function() {
     var descriptor = {
-      "name": {type: "string", required: true, min: 8}
+      name: {type: "string", required: true, min: 8}
     }
     var validator = new schema(descriptor);
     validator.validate({name: "field"}, function(errors, fields) {
@@ -67,7 +67,7 @@ suite("String validation:", function() {
   });
   test("validate a required string field with maximum length", function() {
     var descriptor = {
-      "name": {type: "string", required: true, max: 2}
+      name: {type: "string", required: true, max: 2}
     }
     var validator = new schema(descriptor);
     validator.validate({name: "field"}, function(errors, fields) {
@@ -78,7 +78,7 @@ suite("String validation:", function() {
   test("validate a required string field is less than a length range",
     function() {
       var descriptor = {
-        "name": {type: "string", required: true, min: 6, max: 8}
+        name: {type: "string", required: true, min: 6, max: 8}
       }
       var validator = new schema(descriptor);
       validator.validate({name: "field"}, function(errors, fields) {
@@ -92,7 +92,7 @@ suite("String validation:", function() {
   test("validate a required string field is greater than a length range",
     function() {
       var descriptor = {
-        "name": {type: "string", required: true, min: 2, max: 4}
+        name: {type: "string", required: true, min: 2, max: 4}
       }
       var validator = new schema(descriptor);
       validator.validate({name: "field"}, function(errors, fields) {
@@ -100,6 +100,21 @@ suite("String validation:", function() {
         assert.equal(
           errors[0].message,
           "Field name must be between 2 and 4 characters in length");
+      });
+    }
+  );
+  test("validate a regular expression pattern mismatch",
+    function() {
+      var descriptor = {
+        name: {pattern: /^[0-9]+$/}
+      }
+      var validator = new schema(descriptor);
+      validator.validate({name: "alpha"}, function(errors, fields) {
+        assert.equal(errors.length, 1);
+        //console.log(errors[0].message);
+        assert.equal(
+          errors[0].message,
+          "Field name value alpha does not match pattern /^[0-9]+$/");
       });
     }
   );
