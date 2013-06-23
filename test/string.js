@@ -43,6 +43,8 @@ suite("String validation:", function() {
     validator.validate({noname: "field"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "Field name is required");
+      assert.equal(fields.name.length, 1);
+      assert.isTrue((fields.name[0] instanceof ValidationError));
     });
   });
   test("validate a field of type string is of the correct type", function() {
