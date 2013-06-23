@@ -85,7 +85,23 @@ var descriptor = {
 }
 ```
 
-### Rule Properties
+## Validate
+
+The validate method has the signature:
+
+```javascript
+function(source, [options], callback)
+```
+
+* `source`: The object to validate - required.
+* `options`: An object describing processing options for the validation.
+* `callback`: A callback function to invoke when validation completes.
+
+### Options
+
+* `first`: Invoke `callback` when the first validation rule generates an error. 
+
+## Rules
 
 #### Required
 
