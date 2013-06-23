@@ -74,8 +74,7 @@ It is often useful to test against multiple validation rules for a single field,
 ```javascript
 var descriptor = {
   email: [
-    {type: "string", required: true},
-    {pattern: schema.pattern.email},
+    {type: "string", required: true, pattern: schema.pattern.email},
     function(rule, value, callback, values) {
       var errors = []; 
       // test if email address already exists in a database

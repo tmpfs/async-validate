@@ -38,8 +38,7 @@ suite("Multiple validation:", function() {
   test("validate using multiple validation rules with a validation function", function() {
     var descriptor = {
       email: [
-        {type: "string", required: true},
-        {pattern: schema.pattern.email},
+        schema.rules.std.email,
         function(descriptor, value, callback, values) {
           var errors = [];
           var email = "user@example.com";
