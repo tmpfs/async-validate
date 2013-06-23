@@ -34,7 +34,7 @@ validator.validate({name: "muji"}, function(errors, fields) {
 });
 ```
 
-Descriptors may be functions that perform validation. The signature for a validation function is:
+Rules may be functions that perform validation. The signature for a validation function is:
 
 ```javascript
 function(descriptor, value, callback, values)
