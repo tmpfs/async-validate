@@ -1,0 +1,21 @@
+{
+  "name": "async-validate",
+  "description": "Asynchronous validation for object properties.",
+  "version": "0.0.1",
+  "author": "muji <noop@xpm.io>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/freeformsystems/validate.git"
+  },
+  "keywords": ["validation","validate","valid","object"],
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "async": ">= 0.2.9"
+  },
+  "devDependencies": {
+    "mocha": ">= 1.9.0",
+    "chai": ">= 1.6.0"
+  }
+}
