@@ -86,10 +86,16 @@ var descriptor = {
 }
 ```
 
-### Required
+### Descriptor Properties
+
+#### Required
 
 Add a `required` field to the descriptor to validate that the property exists.
 
-### Type
+#### Type
 
 Add a `type` field to a descriptor to indicate that the field must be a `typeof` the specified type. 
+
+#### Pattern
+
+The `pattern` field should be a valid `RegExp` to test the value against.
