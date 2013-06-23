@@ -27,7 +27,8 @@ var validator = new schema(descriptor);
 validator.validate({name: "muji"}, function(errors, fields) {
   if(errors) {
     // validation failed, errors is an array of all errors
-    // fields is keyed by field name
+    // fields is an object keyed by field name with an array of
+    // errors per field
     return handleErrors(errors, fields);
   }
   // validation passed
