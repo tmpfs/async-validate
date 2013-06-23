@@ -69,6 +69,23 @@ validator.validate({name: "Firstname"}, function(errors, fields) {
 });
 ```
 
+It is often useful to test against multiple validation rules for sigle field, to do so make the descriptor and array of objects, for example:
+
+```javascript
+var descriptor = {
+  email: [
+    {type: "string", required: true},
+    {pattern: schema.pattern.email},
+    function(descriptor, value, callback, values) {
+      var errors = []; 
+      // test if email address already exists in a database
+      // and add a validation error to the errors array if it does
+      callback(errors);
+    }
+  ]
+}
+```
+
 ### Required
 
 Add a `required` field to the descriptor to validate that the property exists.
