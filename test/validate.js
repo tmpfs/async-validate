@@ -4,7 +4,7 @@ var schema = require('../index');
 suite("String validation:", function() {
   test("validate a required string field", function() {
     var descriptor = {
-      "name": {type: "string", required: true}
+      name: {type: "string", required: true}
     }
     var validator = new schema(descriptor);
     validator.validate({noname: "field"}, function(errors) {
@@ -14,7 +14,7 @@ suite("String validation:", function() {
   });
   test("validate a field of type string is of the correct type", function() {
     var descriptor = {
-      "name": {type: "string"}
+      name: {type: "string"}
     }
     var validator = new schema(descriptor);
     validator.validate({name: 10}, function(errors) {
