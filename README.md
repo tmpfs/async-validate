@@ -125,6 +125,7 @@ Add a `type` field to a rule to indicate that the field must be of the specified
 
 * `string`
 * `number`
+* `boolean`
 * `integer`
 * `float`
 * `array`
