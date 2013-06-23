@@ -34,7 +34,16 @@ validator.validate({name: "muji"}, function(errors, fields) {
 });
 ```
 
-Descriptors may be functions that perform validation:
+Descriptors may be functions that perform validation. The signature for a validation function is:
+
+```
+function(descriptor, value, callback, values)
+```
+
+* `descriptor`: The entry in the source descriptor that corresponds to the field name being validated. It is always assigned a `field` property with the name of the field being validated.
+* `value`: The value of the source object property being validated.
+* `callback`: A callback function to invoke once validation is complete. It expects to be passed an array of `Error` instances to indicate validation failure.
+* `values`: The source object that was passed to the `validate` method.
 
 ```
 var schema = require('async-validate');

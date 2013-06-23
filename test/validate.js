@@ -1,7 +1,7 @@
 var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../index');
-var ValidationError = require('../index').error;
+var ValidationError = schema.error;
 
 suite("String validation:", function() {
   test("validate a required string field is valid", function() {
