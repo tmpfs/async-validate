@@ -99,6 +99,7 @@ Add a `type` field to a rule to indicate that the field must be a `typeof` the s
 * `number`
 * `integer`
 * `float`
+* `array`
 
 #### Pattern
 
