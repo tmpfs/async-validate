@@ -1,5 +1,7 @@
+var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../index');
+var ValidationError = require('../index').error;
 
 suite("String validation:", function() {
   test("validate a required string field is valid", function() {
@@ -10,6 +12,27 @@ suite("String validation:", function() {
     validator.validate({name: "field"}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+    });
+  });
+
+  test("validate using a custom validator function", function() {
+    var descriptor = {
+      name: function(descriptor, value, callback, values) {
+        var errors = [];
+        if(!/^[a-z0-9]+$/.test(value)) {
+          errors.push(
+            new ValidationError(
+              util.format("Field %s must be lowercase alphanumeric characters",
+                descriptor.field)));
+        }
+        callback(errors);
+      }
+    }
+    var validator = new schema(descriptor);
+    validator.validate({name: "Firstname"}, function(errors, fields) {
+      assert.equal(errors.length, 1);
+      assert.equal(errors[0].message,
+        "Field name must be lowercase alphanumeric characters");
     });
   });
   test("validate a required string field", function() {
