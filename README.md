@@ -18,8 +18,7 @@ npm test
 
 Basic usage involves defining a descriptor, assigning it to a schema and passing the object to be validated and a callback function to the `validate` method of the schema:
 
-<div class="highlight">
-```
+```javascript
 var schema = require('async-validate');
 var descriptor = {
   name: {type: "string", required: true}
@@ -34,11 +33,10 @@ validator.validate({name: "muji"}, function(errors, fields) {
   // validation passed
 });
 ```
-</div>
 
 Descriptors may be functions that perform validation. The signature for a validation function is:
 
-```
+```javascript
 function(descriptor, value, callback, values)
 ```
 
@@ -47,8 +45,7 @@ function(descriptor, value, callback, values)
 * `callback`: A callback function to invoke once validation is complete. It expects to be passed an array of `Error` instances to indicate validation failure.
 * `values`: The source object that was passed to the `validate` method.
 
-<div class="highlight">
-```
+```javascript
 var schema = require('async-validate');
 var ValidationError = schema.error;
 var descriptor = {
@@ -71,7 +68,6 @@ validator.validate({name: "Firstname"}, function(errors, fields) {
   // validation passed
 });
 ```
-</div>
 
 ### Required
 
