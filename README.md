@@ -37,6 +37,8 @@ validator.validate({name: "muji"}, function(errors, fields) {
 Descriptors may be functions that perform validation:
 
 ```
+var schema = require('async-validate');
+var ValidationError = schema.error;
 var descriptor = {
   name: function(descriptor, value, callback, values) {
     var errors = [];
