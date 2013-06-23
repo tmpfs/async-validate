@@ -34,10 +34,10 @@ validator.validate({name: "muji"}, function(errors, fields) {
 });
 ```
 
-### Required Fields
+### Required
 
 Add a `required` field to the descriptor to validate that the property exists.
 
-### Fields Type
+### Type
 
 Add a `type` field to a descriptor to indicate that the field must be a `typeof` the specified type. 
