@@ -118,4 +118,17 @@ suite("String validation:", function() {
       });
     }
   );
+  test("validate a string consisting of whitespace",
+    function() {
+      var descriptor = {
+        name: {type: "string", whitespace: true}
+      }
+      var validator = new schema(descriptor);
+      validator.validate({name: "   "}, function(errors, fields) {
+        assert.equal(errors.length, 1);
+        //console.log(errors[0].message);
+        assert.equal( errors[0].message, "name cannot be whitespace");
+      });
+    }
+  );
 });
