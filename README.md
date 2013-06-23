@@ -100,7 +100,7 @@ function(source, [options], callback)
 
 ### Options
 
-* `first`: Invoke `callback` when the first validation rule generates an error. 
+* `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
 * `single`: Only ever return a single error typically used in conjunction with `first` when a validation rule could generate multiple errors.
 
 Consider the rule:
