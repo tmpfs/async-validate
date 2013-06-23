@@ -28,8 +28,16 @@ validator.validate({name: "muji"}, function(errors, fields) {
   if(errors) {
     // validation failed, errors is an array of all errors
     // fields is keyed by property name
-    return;
+    return handleErrors(errors, fields);
   }
   // validation passed
 });
 ```
+
+### Required Fields
+
+Add a `required` field to the descriptor to validate that the property exists.
+
+### Fields Type
+
+Add a `type` field to a descriptor to indicate that the field must be a `typeof` the specified type. 
