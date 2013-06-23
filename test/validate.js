@@ -10,7 +10,6 @@ suite("String validation:", function() {
     validator.validate({name: "field"}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
-      //assert.equal(errors[0].message, "Field name is required");
     });
   });
   test("validate a required string field", function() {
@@ -53,4 +52,32 @@ suite("String validation:", function() {
       assert.equal(errors[0].message, "Field name cannot be longer than 2 characters");
     });
   });
+  test("validate a required string field is less than a length range",
+    function() {
+      var descriptor = {
+        "name": {type: "string", required: true, min: 6, max: 8}
+      }
+      var validator = new schema(descriptor);
+      validator.validate({name: "field"}, function(errors, fields) {
+        assert.equal(errors.length, 1);
+        assert.equal(
+          errors[0].message,
+          "Field name must be between 6 and 8 characters in length");
+      });
+    }
+  );
+  test("validate a required string field is greater than a length range",
+    function() {
+      var descriptor = {
+        "name": {type: "string", required: true, min: 2, max: 4}
+      }
+      var validator = new schema(descriptor);
+      validator.validate({name: "field"}, function(errors, fields) {
+        assert.equal(errors.length, 1);
+        assert.equal(
+          errors[0].message,
+          "Field name must be between 2 and 4 characters in length");
+      });
+    }
+  );
 });
