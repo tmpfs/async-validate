@@ -99,3 +99,19 @@ Add a `type` field to a descriptor to indicate that the field must be a `typeof`
 #### Pattern
 
 The `pattern` field should be a valid `RegExp` to test the value against.
+
+#### Minimum
+
+When testing with a `type` of `string` the `min` property determines the minimum number of characters for the string.
+
+When testing with a `type` of `number` the `min` property indicates the number may not be less than `min`.
+
+#### Maximum
+
+When testing with a `type` of `string` the `max` property determines the maximum number of characters for the string.
+
+When testing with a `type` of `number` the `max` property indicates the number may not be greater than `max`.
+
+#### Range
+
+Combine the `min` and `max` properties to define a validation range.
