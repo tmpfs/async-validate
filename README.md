@@ -120,3 +120,7 @@ When testing with a `type` of `number` the `max` property indicates the number m
 #### Range
 
 Combine the `min` and `max` properties to define a validation range.
+
+#### Whitespace
+
+It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
