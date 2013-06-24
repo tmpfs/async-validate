@@ -142,7 +142,7 @@ A range is defined using the `min` and `max` properties. For `string` and `array
 
 ### Length
 
-To validate an exact length of a field specify the `len` property. For `string` and `array` types comparison is performed on the `length` property, for the `number` type the this property indicates and exact match for the `number`, ie, it may only be strictly equal to `len`.
+To validate an exact length of a field specify the `len` property. For `string` and `array` types comparison is performed on the `length` property, for the `number` type the this property indicates an exact match for the `number`, ie, it may only be strictly equal to `len`.
 
 If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
 
