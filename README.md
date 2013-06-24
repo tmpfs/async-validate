@@ -280,7 +280,7 @@ validator.validate(source, function(errors, fields) {
 
 Without the `transform` function validation would fail due to the pattern not matching as the input contains leading and trailing whitespace, but by adding the transform function validation passes and the field value is sanitized at the same time.
 
-## Custom Types
+## Register
 
 To extend the recognised validation types you may `register` your own validation functions by type.
 
