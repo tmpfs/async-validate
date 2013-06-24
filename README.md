@@ -196,7 +196,7 @@ It is typical to treat required fields that only contain whitespace as errors. T
 
 ### Deep Rules
 
-If you need to validate deep object properties you may do so for a validation rules that are of the `object` or `array` type by assigning nested rules to a `fields` property of the rule.
+If you need to validate deep object properties you may do so for validation rules that are of the `object` or `array` type by assigning nested rules to a `fields` property of the rule.
 
 ```javascript
 var descriptor = {
