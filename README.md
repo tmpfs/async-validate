@@ -329,15 +329,26 @@ schema.messages.required = "%s is a required field";  // change the message
 
 Potentially you may require the same schema validation rules for different languages, in which case duplicating the schema rules for each language does not make sense.
 
-In which case you could clone a default messages instance and then assign language specific messages to the schema using the `messages` method.
+In this scenario you could just require your own messages file for the language and assign it to the schema:
 
 ```javascript
 var schema = require('async-validate');
-var clone = schema.messages.clone();
-clone.required = "%s is a required field";  // change the message
+var es = require('messages-es');
 var descriptor = {name:{type: "string", required: true}};
 var validator = new schema(descriptor);
-validator.messages(clone); // ensure this schema uses the altered messages
+validator.messages(es);
+...
+```
+
+Or you could clone a default messages instance and then assign language specific messages to the schema using the `messages` method.
+
+```javascript
+var schema = require('async-validate');
+var es = schema.messages.clone();
+es.required = "%s es un campo obligatorio";  // change the message
+var descriptor = {name:{type: "string", required: true}};
+var validator = new schema(descriptor);
+validator.messages(es); // ensure this schema uses the altered messages
 ...
 ```
 
