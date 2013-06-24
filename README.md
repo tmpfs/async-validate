@@ -155,3 +155,42 @@ Combine the `min` and `max` properties to define a validation range.
 #### Whitespace
 
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
+
+## Standard Rules
+
+Some standard rules for common validation requirements are accessible via `schema.rules.std`. You may wish to use reference these rules or copy and modify them.
+
+### Field
+
+A typical required field:
+
+```javascript
+{type: "string", required: true, whitespace: true}
+```
+
+### Email
+
+A basic email validation rule using a pattern:
+
+```javascript
+{type: "string", required: true, pattern: pattern.email}
+```
+
+Note validating email addresses by regular expressions is fraught with pitfalls, use this with caution.
+
+### URL
+
+A simple http(s) URL rule:
+
+```javascript
+{type: "string", required: true, pattern: pattern.url}
+```
+
+### Hex
+
+A rule for hexadecimal color values with optional leading hash:
+
+```javascript
+{type: "string", required: true, pattern: pattern.hex}
+```
+
