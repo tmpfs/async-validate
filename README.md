@@ -307,6 +307,18 @@ schema.register('id', validator);
 
 You can then use validation rules such as `{type: "id"}`.
 
+## Messages
+
+Depending upon your application requirements, you may need i18n support or you may prefer different validation error messages.
+
+The easiest way to achieve this is to assign a `message` to a rule:
+
+```javascript
+{name:{type: "string", required: true, message: "Name is required"}}
+```
+
+Potentially you may require the same schema validation rules for different languages, in which case duplicating the schema rules for each language does not make sense.
+
 ## Standard Rules
 
 Some standard rules for common validation requirements are accessible via `schema.rules.std`. You may wish to reference these rules or copy and modify them.
