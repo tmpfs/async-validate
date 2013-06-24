@@ -14,7 +14,7 @@ suite("Multiple validation:", function() {
     var validator = new schema(descriptor);
     validator.validate({address: "joe@example"}, function(errors, fields) {
       assert.equal(errors.length, 2);
-      assert.equal(errors[0].message, "Field email is required");
+      assert.equal(errors[0].message, "email is required");
       assert.equal(errors[1].message,
         "email value undefined does not match pattern "
         + schema.pattern.email);

@@ -42,7 +42,7 @@ suite("String validation:", function() {
     var validator = new schema(descriptor);
     validator.validate({noname: "field"}, function(errors, fields) {
       assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "Field name is required");
+      assert.equal(errors[0].message, "name is required");
       assert.equal(fields.name.length, 1);
       assert.isTrue((fields.name[0] instanceof ValidationError));
     });

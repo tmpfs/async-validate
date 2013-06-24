@@ -126,15 +126,16 @@ In this instance when you only want the first error encountered use the `single`
 
 Indicates the `type` of validator to use. Recognised type values are:
 
-* `string`
-* `number`
-* `boolean`
-* `regexp`
-* `integer`
-* `float`
-* `array`
-* `enum`
-* `date`
+* `string`: Must be of type `string`.
+* `number`: Must be of type `number`.
+* `boolean`: Must be of type `boolean`.
+* `regexp`: Must be an instance of `RegExp` or a string that does not generate an exception when creating a new `RegExp`.
+* `integer`: Must be of type `number` and an integer.
+* `float`: Must be of type `number` and a floating point number.
+* `array`: Must be an array as determined by `Array.isArray`.
+* `object`: Must be of type `object` and not `Array.isArray`.
+* `enum`: Value must exists in the `enum`.
+* `date`: Value must be valid as determined by `moment().isValid()`.
 
 ### Required
 
