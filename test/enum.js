@@ -15,7 +15,7 @@ suite("Enum validator:", function() {
   });
   test("valid enum value", function() {
     var descriptor = {
-      role: {type: "enum", enum: ['admin', 'user', 'guest']},
+      role: {type: "enum", enum: ['admin', 'user', 'guest']}
     }
     var validator = new schema(descriptor);
     validator.validate({role: "user"}, function(errors, fields) {

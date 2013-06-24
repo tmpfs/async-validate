@@ -186,6 +186,31 @@ var descriptor = {
 
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
 
+### Transform
+
+Sometimes it is necessary to transform a value before validation, possibly to coerce the value or to sanitize it in some way. To do this add a `transform` function to the validation rule. The property is transformed prior to validation and re-assigned to the source object to mutate the value of the property in place.
+
+```javascript
+var schema = require('async-validate');
+var sanitize = require('validator').sanitize;
+var descriptor = {
+  name: {
+    type: "string",
+    required: true, pattern: /^[a-z]+$/,
+    transform: function(value) {
+      return sanitize(value).trim();
+    }
+  }
+}
+var validator = new schema(descriptor);
+var source = {name: " user  "};
+validator.validate(source, function(errors, fields) {
+  assert.equal(source.name, "user");
+});
+```
+
+Without the `transform` function validation would fail due to the pattern not matching as the input contains leading and trailing whitespace, but by adding the transform function validation passes and the field value is sanitized at the same time.
+
 ## Standard Rules
 
 Some standard rules for common validation requirements are accessible via `schema.rules.std`. You may wish to reference these rules or copy and modify them.
