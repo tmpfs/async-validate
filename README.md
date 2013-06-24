@@ -202,7 +202,7 @@ To extend the recognised validation types you may `register` your own validation
 function register(type, validator)
 ```
 
-The `type` arguments should be a string indicating the `type` property of the validation rule and `validator` must be function with the correct signature.
+The `type` arguments should be a string indicating the `type` property of the validation rule and `validator` must be a function with the correct signature.
 
 ```javascript
 var schema = require('async-validate');
