@@ -1,7 +1,7 @@
 {
   "name": "async-validate",
   "description": "Asynchronous validation for object properties.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "muji <noop@xpm.io>",
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
     "async": ">= 0.2.9"
   },
   "devDependencies": {
+    "strike": "== 0.1.66",
     "mocha": ">= 1.9.0",
     "chai": ">= 1.6.0"
   }
