@@ -193,6 +193,29 @@ var descriptor = {
 
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
 
+
+### Deep Rules
+
+If you need to validate deep object properties you may do so for a validation rules that are of the `object` or `array` type by assigning nested rules to a `fields` property of the rule.
+
+```javascript
+var descriptor = {
+  address: {
+    type: "object", required: true,
+    fields: {
+      street: {type: "string", required: true},
+      city: {type: "string", required: true},
+      zip: {type: "string", required: true, len: 8, message: "invalid zip"}
+    }
+  },
+  name: {type: "string", required: true}
+}
+var validator = new schema(descriptor);
+validator.validate({ address: {} }, function(errors, fields) {
+  // errors for street, city, zip and name
+});
+```
+
 ### Transform
 
 Sometimes it is necessary to transform a value before validation, possibly to coerce the value or to sanitize it in some way. To do this add a `transform` function to the validation rule. The property is transformed prior to validation and re-assigned to the source object to mutate the value of the property in place.
