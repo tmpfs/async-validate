@@ -16,7 +16,7 @@ suite("Multiple validation:", function() {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "Field email is required");
       assert.equal(errors[1].message,
-        "Field email value undefined does not match pattern "
+        "email value undefined does not match pattern "
         + schema.pattern.email);
     });
   });
@@ -31,7 +31,7 @@ suite("Multiple validation:", function() {
     validator.validate({email: "user@example"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message,
-        "Field email value user@example does not match pattern "
+        "email value user@example does not match pattern "
         + schema.pattern.email);
     });
   });

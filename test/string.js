@@ -116,7 +116,7 @@ suite("String validation:", function() {
         //console.log(errors[0].message);
         assert.equal(
           errors[0].message,
-          "Field name value alpha does not match pattern /^[0-9]+$/");
+          "name value alpha does not match pattern /^[0-9]+$/");
       });
     }
   );
