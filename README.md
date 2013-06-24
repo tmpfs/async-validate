@@ -194,3 +194,29 @@ A rule for hexadecimal color values with optional leading hash:
 {type: "string", required: true, pattern: pattern.hex}
 ```
 
+## Custom Types
+
+To extend the recognised validation types you may `register` your own validation functions by type.
+
+```javascript
+function register(type, validator)
+```
+
+The `type` arguments should be a string indicating the `type` property of the validation rule and `validator` must be function with the correct signature.
+
+```javascript
+var schema = require('async-validate');
+var ValidationError = schema.error;
+var validator = function(rule, value, callback, source) {
+  var errors = [];
+  var re = /^[^-][a-zA-Z0-9-]+$/;
+  if(!re.test(value)) {
+    errors.push(new ValidationError(
+      util.format("%s is not a valid identifier", rule.field)));
+  }
+  callback(errors);
+}
+schema.register('id', validator);
+```
+
+You can then use validation rules such as `{type: "id"}`.
