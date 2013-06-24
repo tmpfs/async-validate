@@ -1,7 +1,6 @@
 var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../index');
-var ValidationError = schema.error;
 
 suite("Custom message validation:", function() {
   test("validate using a custom error message", function() {

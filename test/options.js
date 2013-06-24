@@ -13,6 +13,16 @@ suite("Options validation:", function() {
       assert.equal(errors.length, 2);
     });
   });
+  test("validate keys option", function() {
+    var descriptor = {
+      firstname: {type: "string", required: true},
+      surname: {type: "string", required: true}
+    }
+    var validator = new schema(descriptor);
+    validator.validate({}, {keys: ["firstname"]}, function(errors, fields) {
+      assert.equal(errors.length, 1);
+    });
+  });
   test("validate fail on first error", function() {
     var descriptor = {
       firstname: {type: "string", required: true},
