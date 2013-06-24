@@ -309,6 +309,10 @@ You can then use validation rules such as `{type: "id"}`.
 
 ## Messages
 
+```javascript
+schema.messages(messages);
+```
+
 Depending upon your application requirements, you may need i18n support or you may prefer different validation error messages.
 
 The easiest way to achieve this is to assign a `message` to a rule:
@@ -318,6 +322,8 @@ The easiest way to achieve this is to assign a `message` to a rule:
 ```
 
 Potentially you may require the same schema validation rules for different languages, in which case duplicating the schema rules for each language does not make sense.
+
+In which case you could clone a default schema instance and then assign language specific messages to the schema using the `messages` setter.
 
 ## Standard Rules
 
