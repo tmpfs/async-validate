@@ -158,7 +158,7 @@ It is typical to treat required fields that only contain whitespace as errors. T
 
 ## Standard Rules
 
-Some standard rules for common validation requirements are accessible via `schema.rules.std`. You may wish to use reference these rules or copy and modify them.
+Some standard rules for common validation requirements are accessible via `schema.rules.std`. You may wish to reference these rules or copy and modify them.
 
 ### Field
 
