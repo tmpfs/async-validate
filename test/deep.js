@@ -114,4 +114,26 @@ suite("Deep validator:", function() {
       assert.isNull(fields);
     });
   });
+  test("invalid multiple deep rule", function() {
+    var descriptor = {
+      address: {
+        type: "object", required: true,
+        fields: {
+          house: {
+            type: "object", required: true,
+            fields: {
+              name: {type: "string", required: true},
+              number: {type: "string", required: true}
+            }
+          }
+        }
+      }
+    }
+    var validator = new schema(descriptor);
+    validator.validate({ address: {house: {}} }, function(errors, fields) {
+      assert.equal(errors.length, 2);
+      assert.equal(errors[0].message, "name is required");
+      assert.equal(errors[1].message, "number is required");
+    });
+  });
 });
