@@ -13,7 +13,7 @@ suite("Boolean validation:", function() {
       assert.equal(errors[0].message, "flag is not a boolean");
     });
   });
-  test("validate boolean type", function() {
+  test("validate boolean pass", function() {
     var descriptor = {
       flag: {type: "boolean"},
     }
