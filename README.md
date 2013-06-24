@@ -295,7 +295,7 @@ The `type` arguments should be a string indicating the `type` property of the va
 ```javascript
 var schema = require('async-validate');
 var ValidationError = schema.error;
-var validator = function(rule, value, callback, source) {
+var validator = function(rule, value, callback, source, options) {
   var errors = [];
   var re = /^[^-][a-zA-Z0-9-]+$/;
   if(!re.test(value)) {
