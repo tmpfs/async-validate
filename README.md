@@ -218,6 +218,26 @@ validator.validate({ address: {} }, function(errors, fields) {
 
 Note that if you do not specify the `required` property on the parent rule it is perfectly valid for the field not to be declared on the source object and the deep validation rules will not be executed as there is nothing to validate against.
 
+Because deep rule validation creates a schema for the nested rules you can also specify the `options` passed to the `schema.validate()` method for the deep object.
+
+```javascript
+var descriptor = {
+  address: {
+    type: "object", required: true, options: {single: true, first: true},
+    fields: {
+      street: {type: "string", required: true},
+      city: {type: "string", required: true},
+      zip: {type: "string", required: true, len: 8, message: "invalid zip"}
+    }
+  },
+  name: {type: "string", required: true}
+}
+var validator = new schema(descriptor);
+validator.validate({ address: {} }, function(errors, fields) {
+  // now only errors for street and name
+});
+```
+
 ### Transform
 
 Sometimes it is necessary to transform a value before validation, possibly to coerce the value or to sanitize it in some way. To do this add a `transform` function to the validation rule. The property is transformed prior to validation and re-assigned to the source object to mutate the value of the property in place.

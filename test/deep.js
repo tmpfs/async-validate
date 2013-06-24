@@ -59,4 +59,23 @@ suite("Deep validator:", function() {
       assert.equal(errors[3].message, "name is required");
     });
   });
+  test("invalid deep rule (with bail out options)", function() {
+    var descriptor = {
+      address: {
+        type: "object", required: true, options: {single: true, first: true},
+        fields: {
+          street: {type: "string", required: true},
+          city: {type: "string", required: true},
+          zip: {type: "string", required: true, len: 8, message: "invalid zip"}
+        }
+      },
+      name: {type: "string", required: true}
+    }
+    var validator = new schema(descriptor);
+    validator.validate({ address: {} }, function(errors, fields) {
+      assert.equal(errors.length, 2);
+      assert.equal(errors[0].message, "street is required");
+      assert.equal(errors[1].message, "name is required");
+    });
+  });
 });
