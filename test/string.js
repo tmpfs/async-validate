@@ -22,7 +22,7 @@ suite("String validation:", function() {
         if(!/^[a-z0-9]+$/.test(value)) {
           errors.push(
             new ValidationError(
-              util.format("Field %s must be lowercase alphanumeric characters",
+              util.format("%s must be lowercase alphanumeric characters",
                 descriptor.field)));
         }
         callback(errors);
@@ -32,7 +32,7 @@ suite("String validation:", function() {
     validator.validate({name: "Firstname"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message,
-        "Field name must be lowercase alphanumeric characters");
+        "name must be lowercase alphanumeric characters");
     });
   });
   test("validate a required string field", function() {
@@ -54,7 +54,7 @@ suite("String validation:", function() {
     var validator = new schema(descriptor);
     validator.validate({name: 10}, function(errors, fields) {
       assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "Field name is not a string");
+      assert.equal(errors[0].message, "name is not a string");
     });
   });
   test("validate a required string field with minimum length", function() {
@@ -64,7 +64,7 @@ suite("String validation:", function() {
     var validator = new schema(descriptor);
     validator.validate({name: "field"}, function(errors, fields) {
       assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "Field name must be at least 8 characters");
+      assert.equal(errors[0].message, "name must be at least 8 characters");
     });
   });
   test("validate a required string field with maximum length", function() {
@@ -74,7 +74,7 @@ suite("String validation:", function() {
     var validator = new schema(descriptor);
     validator.validate({name: "field"}, function(errors, fields) {
       assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "Field name cannot be longer than 2 characters");
+      assert.equal(errors[0].message, "name cannot be longer than 2 characters");
     });
   });
   test("validate a required string field is less than a length range",
@@ -87,7 +87,7 @@ suite("String validation:", function() {
         assert.equal(errors.length, 1);
         assert.equal(
           errors[0].message,
-          "Field name must be between 6 and 8 characters");
+          "name must be between 6 and 8 characters");
       });
     }
   );
@@ -101,7 +101,7 @@ suite("String validation:", function() {
         assert.equal(errors.length, 1);
         assert.equal(
           errors[0].message,
-          "Field name must be between 2 and 4 characters");
+          "name must be between 2 and 4 characters");
       });
     }
   );
