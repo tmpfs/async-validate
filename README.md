@@ -391,3 +391,7 @@ A rule for hexadecimal color values with optional leading hash:
 ```javascript
 {type: "string", required: true, pattern: pattern.hex}
 ```
+
+## License
+
+Everything is [MIT](http://en.wikipedia.org/wiki/MIT_License). Read the [license](/freeformsystems/strike/blob/master/LICENSE) if you feel inclined.
