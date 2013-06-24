@@ -47,9 +47,9 @@ validator.validate({name: "muji"}, function(errors, fields) {
 function(source, [options], callback)
 ```
 
-* `source`: The object to validate - required.
-* `options`: An object describing processing options for the validation.
-* `callback`: A callback function to invoke when validation completes.
+* `source`: The object to validate (required).
+* `options`: An object describing processing options for the validation (optional).
+* `callback`: A callback function to invoke when validation completes (required).
 
 ### Options
 
