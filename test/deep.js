@@ -51,7 +51,6 @@ suite("Deep validator:", function() {
     }
     var validator = new schema(descriptor);
     validator.validate({ address: {} }, function(errors, fields) {
-      //console.log("errors %j", errors);
       assert.equal(errors.length, 4);
       assert.equal(errors[0].message, "street is required");
       assert.equal(errors[1].message, "city is required");
@@ -76,6 +75,43 @@ suite("Deep validator:", function() {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "street is required");
       assert.equal(errors[1].message, "name is required");
+    });
+  });
+
+  test("invalid deep rule (array type length mismatch)", function() {
+    var descriptor = {
+      roles: {
+        type: "array", required: true, len: 3,
+        fields: {
+          0: {type: "string", required: true},
+          1: {type: "string", required: true},
+          2: {type: "string", required: true}
+        }
+      }
+    }
+    var validator = new schema(descriptor);
+    validator.validate({ roles: ["admin", "user"] }, function(errors, fields) {
+      assert.equal(errors.length, 2);
+      assert.equal(errors[0].message, "roles must be exactly 3 in length");
+      assert.equal(errors[1].message, "2 is required");
+    });
+  });
+
+  test("valid deep rule (array type)", function() {
+    var descriptor = {
+      roles: {
+        type: "array", required: true, len: 3,
+        fields: {
+          0: {type: "string", required: true},
+          1: {type: "string", required: true},
+          2: {type: "string", required: true}
+        }
+      }
+    }
+    var validator = new schema(descriptor);
+    validator.validate({ roles: ["admin", "user", "guest"] }, function(errors, fields) {
+      assert.isNull(errors);
+      assert.isNull(fields);
     });
   });
 });
