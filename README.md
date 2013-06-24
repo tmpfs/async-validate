@@ -283,7 +283,7 @@ A basic email validation rule using a pattern:
 {type: "string", required: true, pattern: pattern.email}
 ```
 
-Note validating email addresses by regular expressions is [fraught with pitfalls](http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address/201378#201378), use this with caution.
+Note validating email addresses with a regular expression is [fraught with pitfalls](http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address/201378#201378), use this with caution.
 
 ### URL
 
