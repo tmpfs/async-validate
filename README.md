@@ -238,6 +238,23 @@ validator.validate({ address: {} }, function(errors, fields) {
 });
 ```
 
+The parent rule is also validated so if you have a set of rules such as:
+
+```javascript
+var descriptor = {
+  roles: {
+    type: "array", required: true, len: 3,
+    fields: {
+      0: {type: "string", required: true},
+      1: {type: "string", required: true},
+      2: {type: "string", required: true}
+    }
+  }
+}
+```
+
+And supply a source object of `{roles: ["admin", "user"]}` then two errors will be created. One for the array length mismatch and one for the missing required array entry at index 2.
+
 ### Transform
 
 Sometimes it is necessary to transform a value before validation, possibly to coerce the value or to sanitize it in some way. To do this add a `transform` function to the validation rule. The property is transformed prior to validation and re-assigned to the source object to mutate the value of the property in place.
