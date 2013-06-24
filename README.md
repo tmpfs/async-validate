@@ -128,6 +128,7 @@ Indicates the `type` of validator to use. Recognised type values are:
 * `float`
 * `array`
 * `enum`
+* `date`
 
 ### Required
 
@@ -154,6 +155,30 @@ To validate a value from a list of possible values use the `enum` type with a `e
 ```javascript
 var descriptor = {
   role: {type: "enum", enum: ['admin', 'user', 'guest']}
+}
+```
+
+### Date Format
+
+Validating dates can be complex but using [moment](http://momentjs.com/) validation of dates is substantially easier.
+
+If no `format` is specified for a rule that is a `date` type then it is assumed the date is ISO 8601. If a format is specified then the date is validated according to the specified format.
+
+It is recommended you read the [moment documentation](http://momentjs.com/docs/#/parsing/is-valid/) on the `isValid` method to understand what validation is performed.
+
+The important part is:
+
+> Note: It is not intended to be used to validate that the input string matches the format string. Because the strictness of format matching can vary depending on the application and business requirements, this sort of validation is not included in Moment.js.
+
+This limitation may be overcome by combining a `pattern` in a date rule, for example:
+
+```javascript
+var descriptor = {
+  active: {
+    type: "date",
+    format: "YYYY-MM-DD",
+    pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/
+  }
 }
 ```
 
