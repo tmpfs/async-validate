@@ -134,7 +134,7 @@ Indicates the `type` of validator to use. Recognised type values are:
 * `float`: Must be of type `number` and a floating point number.
 * `array`: Must be an array as determined by `Array.isArray`.
 * `object`: Must be of type `object` and not `Array.isArray`.
-* `enum`: Value must exists in the `enum`.
+* `enum`: Value must exist in the `enum`.
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
 ### Required
