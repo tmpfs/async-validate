@@ -116,13 +116,9 @@ In this instance when you only want the first error encountered use the `single`
 
 ## Rules
 
-#### Required
+### Type
 
-Add a `required` field to the rule to validate that the property exists.
-
-#### Type
-
-Add a `type` field to a rule to indicate that the field must be of the specified type. Recognised type values are:
+Indicates the `type` of validator to use. Recognised type values are:
 
 * `string`
 * `number`
@@ -132,27 +128,25 @@ Add a `type` field to a rule to indicate that the field must be of the specified
 * `float`
 * `array`
 
-#### Pattern
+### Required
 
-The `pattern` field should be a valid `RegExp` to test the value against.
+The `required` rule property indicates that the field must exist on the source object being validated.
 
-#### Minimum
+### Pattern
 
-When testing with a `type` of `string` the `min` property determines the minimum number of characters for the string.
+The `pattern` rule property indicates a regular expression that the value must match to pass validation.
 
-When testing with a `type` of `number` the `min` property indicates the number may not be less than `min`.
+### Range
 
-#### Maximum
+A range is defined using the `min` and `max` properties. For `string` and `array` types comparison is performed against the `length`, for `number` types the number must not be less than `min` nor greater than `max`.
 
-When testing with a `type` of `string` the `max` property determines the maximum number of characters for the string.
+### Length
 
-When testing with a `type` of `number` the `max` property indicates the number may not be greater than `max`.
+To validate an exact length of a field specify the `len` property. For `string` and `array` types comparison is performed on the `length` property, for the `number` type the this property indicates and exact match for the `number`, ie, it may only be strictly equal to `len`.
 
-#### Range
+If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
 
-Combine the `min` and `max` properties to define a validation range.
-
-#### Whitespace
+### Whitespace
 
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
 
