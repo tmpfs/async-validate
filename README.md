@@ -41,7 +41,35 @@ validator.validate({name: "muji"}, function(errors, fields) {
 });
 ```
 
-Rules may be functions that perform validation. The signature for a validation function is:
+## Validate
+
+```javascript
+function(source, [options], callback)
+```
+
+* `source`: The object to validate - required.
+* `options`: An object describing processing options for the validation.
+* `callback`: A callback function to invoke when validation completes.
+
+### Options
+
+* `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
+* `single`: Only ever return a single error typically used in conjunction with `first` when a validation rule could generate multiple errors.
+* `keys`: Specifies the keys on the source object to be validated. Use this option to validate fields in a determinate order or to validate a subset of the rules assigned to a schema.
+
+Consider the rule:
+
+```javascript
+{name: {type: "string", required: true, min: 10, pattern: /^[^-].*$/}}
+```
+
+When supplied with a source object such as `{name: "-name"}` the validation rule would generate two errors, as the pattern does not match and the string length is less then the required minimum length for the field.
+
+In this instance when you only want the first error encountered use the `single` option.
+
+## Rules
+
+Rules may be functions that perform validation.
 
 ```javascript
 function(rule, value, callback, source)
@@ -61,7 +89,7 @@ var descriptor = {
     if(!/^[a-z0-9]+$/.test(value)) {
       errors.push(
         new ValidationError(
-          util.format("Field %s must be lowercase alphanumeric characters",
+          util.format("%s must be lowercase alphanumeric characters",
             rule.field)));
     }
     callback(errors);
@@ -91,36 +119,6 @@ var descriptor = {
   ]
 }
 ```
-
-## Validate
-
-The validate method has the signature:
-
-```javascript
-function(source, [options], callback)
-```
-
-* `source`: The object to validate - required.
-* `options`: An object describing processing options for the validation.
-* `callback`: A callback function to invoke when validation completes.
-
-### Options
-
-* `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
-* `single`: Only ever return a single error typically used in conjunction with `first` when a validation rule could generate multiple errors.
-* `keys`: Specifies the keys on the source object to be validated. Use this option to validate fields in a determinate order or to validate a subset of the rules assigned to a schema.
-
-Consider the rule:
-
-```javascript
-{type: "string", required: true, min: 10, pattern: /^[^-].*$/}
-```
-
-When supplied with a source object such as `{name: "-name"}` the validation rule would generate two errors, as the pattern does not match and the string length is less then the required minimum length for the field.
-
-In this instance when you only want the first error encountered use the `single` option.
-
-## Rules
 
 ### Type
 
@@ -193,6 +191,8 @@ var descriptor = {
 
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
 
+You may wish to sanitize user input instead of testing for whitespace, see [transform](#transform) for an example that would allow you to strip whitespace.
+
 
 ### Deep Rules
 
@@ -218,7 +218,7 @@ validator.validate({ address: {} }, function(errors, fields) {
 
 Note that if you do not specify the `required` property on the parent rule it is perfectly valid for the field not to be declared on the source object and the deep validation rules will not be executed as there is nothing to validate against.
 
-Because deep rule validation creates a schema for the nested rules you can also specify the `options` passed to the `schema.validate()` method.
+Deep rule validation creates a schema for the nested rules so you can also specify the `options` passed to the `schema.validate()` method.
 
 ```javascript
 var descriptor = {
@@ -263,6 +263,33 @@ validator.validate(source, function(errors, fields) {
 
 Without the `transform` function validation would fail due to the pattern not matching as the input contains leading and trailing whitespace, but by adding the transform function validation passes and the field value is sanitized at the same time.
 
+## Custom Types
+
+To extend the recognised validation types you may `register` your own validation functions by type.
+
+```javascript
+function register(type, validator)
+```
+
+The `type` arguments should be a string indicating the `type` property of the validation rule and `validator` must be a function with the correct signature.
+
+```javascript
+var schema = require('async-validate');
+var ValidationError = schema.error;
+var validator = function(rule, value, callback, source) {
+  var errors = [];
+  var re = /^[^-][a-zA-Z0-9-]+$/;
+  if(!re.test(value)) {
+    errors.push(new ValidationError(
+      util.format("%s is not a valid identifier", rule.field)));
+  }
+  callback(errors);
+}
+schema.register('id', validator);
+```
+
+You can then use validation rules such as `{type: "id"}`.
+
 ## Standard Rules
 
 Some standard rules for common validation requirements are accessible via `schema.rules.std`. You may wish to reference these rules or copy and modify them.
@@ -300,30 +327,3 @@ A rule for hexadecimal color values with optional leading hash:
 ```javascript
 {type: "string", required: true, pattern: pattern.hex}
 ```
-
-## Custom Types
-
-To extend the recognised validation types you may `register` your own validation functions by type.
-
-```javascript
-function register(type, validator)
-```
-
-The `type` arguments should be a string indicating the `type` property of the validation rule and `validator` must be a function with the correct signature.
-
-```javascript
-var schema = require('async-validate');
-var ValidationError = schema.error;
-var validator = function(rule, value, callback, source) {
-  var errors = [];
-  var re = /^[^-][a-zA-Z0-9-]+$/;
-  if(!re.test(value)) {
-    errors.push(new ValidationError(
-      util.format("%s is not a valid identifier", rule.field)));
-  }
-  callback(errors);
-}
-schema.register('id', validator);
-```
-
-You can then use validation rules such as `{type: "id"}`.
