@@ -54,7 +54,7 @@ function(source, [options], callback)
 ### Options
 
 * `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
-* `single`: Only ever return a single error typically used in conjunction with `first` when a validation rule could generate multiple errors.
+* `single`: Only ever return a single error. Typically used in conjunction with `first` when a validation rule could generate multiple errors.
 * `keys`: Specifies the keys on the source object to be validated. Use this option to validate fields in a determinate order or to validate a subset of the rules assigned to a schema.
 
 Consider the rule:
@@ -165,7 +165,7 @@ var descriptor = {
 
 ### Date Format
 
-Validating dates can be complex but using [moment](http://momentjs.com/) validation of dates is substantially easier.
+Validating dates can be complex but using [moment](http://momentjs.com/) date validation is substantially easier.
 
 If no `format` is specified for a rule that is a `date` type then it is assumed the date is ISO 8601. If a format is specified then the date is validated according to the specified format.
 
