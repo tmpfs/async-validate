@@ -72,19 +72,21 @@ In this instance when you only want the first error encountered use the `single`
 Rules may be functions that perform validation.
 
 ```javascript
-function(rule, value, callback, source)
+function(rule, value, callback, source, options)
 ```
 
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated. It is always assigned a `field` property with the name of the field being validated.
 * `value`: The value of the source object property being validated.
 * `callback`: A callback function to invoke once validation is complete. It expects to be passed an array of `Error` instances to indicate validation failure.
 * `source`: The source object that was passed to the `validate` method.
+* `options`: Additional options.
+* `options.messages`: The object containing validation error messages.
 
 ```javascript
 var schema = require('async-validate');
 var ValidationError = schema.error;
 var descriptor = {
-  name: function(rule, value, callback, source) {
+  name: function(rule, value, callback, source, options) {
     var errors = [];
     if(!/^[a-z0-9]+$/.test(value)) {
       errors.push(
@@ -110,7 +112,7 @@ It is often useful to test against multiple validation rules for a single field,
 var descriptor = {
   email: [
     {type: "string", required: true, pattern: schema.pattern.email},
-    function(rule, value, callback, source) {
+    function(rule, value, callback, source, options) {
       var errors = []; 
       // test if email address already exists in a database
       // and add a validation error to the errors array if it does
@@ -309,10 +311,6 @@ You can then use validation rules such as `{type: "id"}`.
 
 ## Messages
 
-```javascript
-schema.messages(messages);
-```
-
 Depending upon your application requirements, you may need i18n support or you may prefer different validation error messages.
 
 The easiest way to achieve this is to assign a `message` to a rule:
@@ -321,9 +319,29 @@ The easiest way to achieve this is to assign a `message` to a rule:
 {name:{type: "string", required: true, message: "Name is required"}}
 ```
 
+If you just want to change the default messages:
+
+```javascript
+var schema = require('async-validate');
+schema.messages.required = "%s is a required field";  // change the message
+...
+```
+
 Potentially you may require the same schema validation rules for different languages, in which case duplicating the schema rules for each language does not make sense.
 
-In which case you could clone a default schema instance and then assign language specific messages to the schema using the `messages` setter.
+In which case you could clone a default messages instance and then assign language specific messages to the schema using the `messages` method.
+
+```javascript
+var schema = require('async-validate');
+var clone = schema.messages.clone();
+clone.required = "%s is a required field";  // change the message
+var descriptor = {name:{type: "string", required: true}};
+var validator = new schema(descriptor);
+validator.messages(clone); // ensure this schema uses the altered messages
+...
+```
+
+If you are defining your own validation functions it is better practice to assign the message strings to a messages object and then access the messages via the `options.messages` property within the validation function.
 
 ## Standard Rules
 
