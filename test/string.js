@@ -129,7 +129,20 @@ suite("String validation:", function() {
       validator.validate({name: "   "}, function(errors, fields) {
         assert.equal(errors.length, 1);
         //console.log(errors[0].message);
-        assert.equal( errors[0].message, "name cannot be whitespace");
+        assert.equal( errors[0].message, "name cannot be empty");
+      });
+    }
+  );
+  test("validate the empty string",
+    function() {
+      var descriptor = {
+        name: {type: "string", required: true, whitespace: true}
+      }
+      var validator = new schema(descriptor);
+      validator.validate({name: ""}, function(errors, fields) {
+        assert.equal(errors.length, 1);
+        //console.log(errors[0].message);
+        assert.equal( errors[0].message, "name cannot be empty");
       });
     }
   );
