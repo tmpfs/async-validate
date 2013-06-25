@@ -146,4 +146,21 @@ suite("String validation:", function() {
       });
     }
   );
+  test("revalidate after failure",
+    function() {
+      var descriptor = {
+        name: {type: "string", required: true, whitespace: true}
+      }
+      var validator = new schema(descriptor);
+      validator.validate({name: ""}, function(errors, fields) {
+        assert.equal(errors.length, 1);
+        assert.equal( errors[0].message, "name cannot be empty");
+        validator.validate({name: "user"}, function(errors, fields) {
+          console.log("after revalidation %j", errors);
+          //assert.isNull(errors);
+          //assert.isNull(fields);
+        });
+      });
+    }
+  );
 });
