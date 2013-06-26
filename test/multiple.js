@@ -8,7 +8,7 @@ suite("Multiple validation:", function() {
     var descriptor = {
       email: [
         {type: "string", required: true},
-        {pattern: schema.pattern.email}
+        {pattern: schema.pattern.email, required: true}
       ]
     }
     var validator = new schema(descriptor);
