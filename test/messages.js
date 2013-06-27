@@ -30,4 +30,17 @@ suite("Custom message validation:", function() {
       assert.equal(errors[0].message, "name is a required field");
     });
   });
+  test("verify custom error message helper", function() {
+    var descriptor = {
+      name: function(rule, value, callback, source, options) {
+        var errors = options.error(rule, "%s is a required field", rule.field);
+        callback(errors);
+      }
+    }
+    var validator = new schema(descriptor);
+    validator.validate({}, function(errors, fields) {
+      assert.equal(errors.length, 1);
+      assert.equal(errors[0].message, "name is a required field");
+    });
+  });
 });
