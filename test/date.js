@@ -74,4 +74,20 @@ suite("Date validator:", function() {
       assert.isNull(fields);
     });
   });
+  var date = {
+    type: "date",
+    pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/,
+    format: "YYYY-MM-DD"
+  }
+  test("valid optional date range reference", function() {
+    var descriptor = {
+      start: date,
+      end: date
+    }
+    var validator = new schema(descriptor);
+    validator.validate({start: "", end: "2013-06-24"}, function(errors, fields) {
+      assert.isNull(errors);
+      assert.isNull(fields);
+    });
+  });
 });
