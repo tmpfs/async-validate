@@ -156,9 +156,9 @@ suite("String validation:", function() {
         assert.equal(errors.length, 1);
         assert.equal( errors[0].message, "name cannot be empty");
         validator.validate({name: "user"}, function(errors, fields) {
-          console.log("after revalidation %j", errors);
-          //assert.isNull(errors);
-          //assert.isNull(fields);
+          //console.log("after revalidation %j", errors);
+          assert.isNull(errors);
+          assert.isNull(fields);
         });
       });
     }
