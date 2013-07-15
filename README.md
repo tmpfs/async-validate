@@ -56,6 +56,7 @@ function(source, [options], callback)
 * `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
 * `single`: Only ever return a single error. Typically used in conjunction with `first` when a validation rule could generate multiple errors.
 * `keys`: Specifies the keys on the source object to be validated. Use this option to validate fields in a determinate order or to validate a subset of the rules assigned to a schema.
+* `parallel`: A boolean indicating that the validation should be executed in parallel.
 
 Consider the rule:
 
