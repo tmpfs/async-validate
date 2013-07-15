@@ -85,7 +85,7 @@ function(rule, value, callback, source, options)
 * `options.exception`: A reference to the ValidationError class.
 * `options.error`: A helper function for generating validation errors.
 
-THe options passed to `validate` are passed on to the validation functions so that you may reference transient data (such as model references) in validation functions. However, some option names are reserved; if you use these properties of the options object they are overwritten. The reserved properties are `messages`, `exception` and `error`.
+The options passed to `validate` are passed on to the validation functions so that you may reference transient data (such as model references) in validation functions. However, some option names are reserved; if you use these properties of the options object they are overwritten. The reserved properties are `messages`, `exception` and `error`.
 
 ```javascript
 var schema = require('async-validate');
