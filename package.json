@@ -4,7 +4,7 @@
   "version": "0.1.9",
   "author": "muji <noop@xpm.io>",
   "repository": {
-    "type": "https",
+    "type": "git",
     "url": "https://github.com/freeformsystems/async-validate.git"
   },
   "keywords": ["validation","validate","valid","object"],
