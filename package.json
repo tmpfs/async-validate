@@ -9,14 +9,13 @@
   },
   "keywords": ["validation","validate","valid","object"],
   "scripts": {
-    "test": "make test"
+    "test": "mocha -u tdd --reporter list"
   },
   "dependencies": {
-    "async": ">= 0.2.9",
-    "moment": ">= 2.0.0"
+    "async": "~0.9.0",
+    "moment": "~2.7.0"
   },
   "devDependencies": {
-    "strike": "== 0.1.66",
     "mocha": ">= 1.9.0",
     "chai": ">= 1.6.0",
     "validator": ">= 1.2.1"
