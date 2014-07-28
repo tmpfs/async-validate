@@ -47,8 +47,7 @@ suite("Date validator:", function() {
     }
     var validator = new schema(descriptor);
     validator.validate({active: "13-06-24"}, function(errors, fields) {
-      assert.equal(errors.length, 2);
-      //console.log(errors);
+      assert.equal(errors.length, 1);
       assert.equal(errors[0].message,
         "active value 13-06-24 does not match pattern " + ptn);
     });
