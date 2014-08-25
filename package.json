@@ -21,8 +21,9 @@
     "moment": "~2.7.0"
   },
   "devDependencies": {
-    "mocha": ">= 1.9.0",
     "chai": ">= 1.6.0",
+    "istanbul": "^0.3.0",
+    "mocha": ">= 1.9.0",
     "validator": ">= 1.2.1"
   }
 }
