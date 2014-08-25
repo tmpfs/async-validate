@@ -134,6 +134,7 @@ Indicates the `type` of validator to use. Recognised type values are:
 * `string`: Must be of type `string`.
 * `number`: Must be of type `number`.
 * `boolean`: Must be of type `boolean`.
+* `method`: Must be of type `function`.
 * `regexp`: Must be an instance of `RegExp` or a string that does not generate an exception when creating a new `RegExp`.
 * `integer`: Must be of type `number` and an integer.
 * `float`: Must be of type `number` and a floating point number.
