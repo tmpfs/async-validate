@@ -1,9 +1,9 @@
 var util = require('util');
 var assert = require('chai').assert;
-var schema = require('../index');
+var schema = require('../../index');
 
-suite("async-validate:", function() {
-  test("should allow undefined integer field if not required", function() {
+describe("async-validate:", function() {
+  it("should allow undefined integer field if not required", function(done) {
     var descriptor = {
       name: {type: 'string'},
       age: {type: 'integer', required: false}
@@ -14,10 +14,11 @@ suite("async-validate:", function() {
     validator.validate(source, opts, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
-  test("should allow undefined integer field if not required (first)",
-    function() {
+  it("should allow undefined integer field if not required (first)",
+    function(done) {
       var descriptor = {
         name: {type: 'string'},
         age: {type: 'integer', required: false}
@@ -28,11 +29,12 @@ suite("async-validate:", function() {
       validator.validate(source, opts, function(errors, fields) {
         assert.isNull(errors);
         assert.isNull(fields);
+        done();
       });
     }
   );
-  test("should error on invalid integer field if not required (first/single)",
-    function() {
+  it("should error on invalid integer field if not required (first/single)",
+    function(done) {
       var descriptor = {
         name: {type: 'string'},
         age: {type: 'integer', required: false}
@@ -44,6 +46,7 @@ suite("async-validate:", function() {
         assert.equal(errors.length, 1);
         assert.equal(errors[0].message, "age is not an integer");
         assert.equal(errors[0].field, 'age');
+        done();
       });
     }
   );

@@ -1,9 +1,9 @@
 var util = require('util');
 var assert = require('chai').assert;
-var schema = require('../index');
+var schema = require('../../index');
 
-suite("Deep validator:", function() {
-  test("valid deep rule (not required and no matching property on source)", function() {
+describe("async-validate:", function() {
+  it("should validate deep rule (not required/no matching property)", function(done) {
     var descriptor = {
       address: {
         type: "object",
@@ -18,9 +18,10 @@ suite("Deep validator:", function() {
     validator.validate({}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
-  test("invalid deep rule (required and no matching property on source)", function() {
+  it("should error on invalid deep rule (required/no matching property)", function(done) {
     var descriptor = {
       address: {
         type: "object", required: true,
@@ -35,9 +36,10 @@ suite("Deep validator:", function() {
     validator.validate({}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "address is required");
+      done();
     });
   });
-  test("invalid deep rule (required and validation failure on deep rule)", function() {
+  it("should error on invalid deep rule (required and validation failure on deep rule)", function(done) {
     var descriptor = {
       address: {
         type: "object", required: true,
@@ -56,9 +58,10 @@ suite("Deep validator:", function() {
       assert.equal(errors[1].message, "city is required");
       assert.equal(errors[2].message, "invalid zip");
       assert.equal(errors[3].message, "name is required");
+      done();
     });
   });
-  test("invalid deep rule (with bail out options)", function() {
+  it("should error on deep rule (with bail out options)", function(done) {
     var descriptor = {
       address: {
         type: "object", required: true, options: {single: true, first: true},
@@ -75,10 +78,11 @@ suite("Deep validator:", function() {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "street is required");
       assert.equal(errors[1].message, "name is required");
+      done();
     });
   });
 
-  test("invalid deep rule (array type length mismatch)", function() {
+  it("should error on deep rule (array type length mismatch)", function(done) {
     var descriptor = {
       roles: {
         type: "array", required: true, len: 3,
@@ -94,10 +98,11 @@ suite("Deep validator:", function() {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "roles must be exactly 3 in length");
       assert.equal(errors[1].message, "2 is required");
+      done();
     });
   });
 
-  test("valid deep rule (array type)", function() {
+  it("should validate deep rule (array type)", function(done) {
     var descriptor = {
       roles: {
         type: "array", required: true, len: 3,
@@ -112,9 +117,10 @@ suite("Deep validator:", function() {
     validator.validate({ roles: ["admin", "user", "guest"] }, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
-  test("invalid multiple deep rule", function() {
+  it("should error on invalid multiple deep rule", function(done) {
     var descriptor = {
       address: {
         type: "object", required: true,
@@ -134,6 +140,7 @@ suite("Deep validator:", function() {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "name is required");
       assert.equal(errors[1].message, "number is required");
+      done();
     });
   });
 });

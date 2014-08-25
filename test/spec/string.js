@@ -1,10 +1,10 @@
 var util = require('util');
 var assert = require('chai').assert;
-var schema = require('../index');
+var schema = require('../../index');
 var ValidationError = schema.error;
 
-suite("String validation:", function() {
-  test("validate a required string field is valid", function() {
+describe("async-validate:", function() {
+  it("should validate a required string field is valid", function(done) {
     var descriptor = {
       name: {type: "string", required: true}
     }
@@ -12,10 +12,11 @@ suite("String validation:", function() {
     validator.validate({name: "field"}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
 
-  test("validate using a custom validator function", function() {
+  it("should validate using a custom validator function", function(done) {
     var descriptor = {
       name: function(descriptor, value, callback, values) {
         var errors = [];
@@ -33,9 +34,10 @@ suite("String validation:", function() {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message,
         "name must be lowercase alphanumeric characters");
+      done();
     });
   });
-  test("validate a required string field", function() {
+  it("should validate a required string field", function(done) {
     var descriptor = {
       name: {type: "string", required: true}
     }
@@ -45,9 +47,10 @@ suite("String validation:", function() {
       assert.equal(errors[0].message, "name is required");
       assert.equal(fields.name.length, 1);
       assert.isTrue((fields.name[0] instanceof ValidationError));
+      done();
     });
   });
-  test("validate a required string field (null)", function() {
+  it("should validate a required string field (null)", function(done) {
     var descriptor = {
       name: {type: "string", required: true}
     }
@@ -57,9 +60,10 @@ suite("String validation:", function() {
       assert.equal(errors[0].message, "name is required");
       assert.equal(fields.name.length, 1);
       assert.isTrue((fields.name[0] instanceof ValidationError));
+      done();
     });
   });
-  test("validate a field of type string is of the correct type", function() {
+  it("should validate a field of type string is of the correct type", function(done) {
     var descriptor = {
       name: {type: "string"}
     }
@@ -67,9 +71,10 @@ suite("String validation:", function() {
     validator.validate({name: 10}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "name is not a string");
+      done();
     });
   });
-  test("validate a required string field with minimum length", function() {
+  it("should validate a required string field with minimum length", function(done) {
     var descriptor = {
       name: {type: "string", required: true, min: 8}
     }
@@ -77,9 +82,10 @@ suite("String validation:", function() {
     validator.validate({name: "field"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "name must be at least 8 characters");
+      done();
     });
   });
-  test("validate a required string field with maximum length", function() {
+  it("should validate a required string field with maximum length", function(done) {
     var descriptor = {
       name: {type: "string", required: true, max: 2}
     }
@@ -87,10 +93,11 @@ suite("String validation:", function() {
     validator.validate({name: "field"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "name cannot be longer than 2 characters");
+      done();
     });
   });
-  test("validate a required string field is less than a length range",
-    function() {
+  it("should validate a required string field is less than a length range",
+    function(done) {
       var descriptor = {
         name: {type: "string", required: true, min: 6, max: 8}
       }
@@ -100,11 +107,12 @@ suite("String validation:", function() {
         assert.equal(
           errors[0].message,
           "name must be between 6 and 8 characters");
+        done();
       });
     }
   );
-  test("validate a required string field is greater than a length range",
-    function() {
+  it("should validate a required string field is greater than a length range",
+    function(done) {
       var descriptor = {
         name: {type: "string", required: true, min: 2, max: 4}
       }
@@ -114,11 +122,12 @@ suite("String validation:", function() {
         assert.equal(
           errors[0].message,
           "name must be between 2 and 4 characters");
+        done();
       });
     }
   );
-  test("validate a regular expression pattern mismatch",
-    function() {
+  it("should validate a regular expression pattern mismatch",
+    function(done) {
       var descriptor = {
         name: {pattern: /^[0-9]+$/}
       }
@@ -129,11 +138,12 @@ suite("String validation:", function() {
         assert.equal(
           errors[0].message,
           "name value alpha does not match pattern /^[0-9]+$/");
+        done();
       });
     }
   );
-  test("validate a string consisting of whitespace",
-    function() {
+  it("should validate a string consisting of whitespace",
+    function(done) {
       var descriptor = {
         name: {type: "string", whitespace: true}
       }
@@ -142,11 +152,12 @@ suite("String validation:", function() {
         assert.equal(errors.length, 1);
         //console.log(errors[0].message);
         assert.equal( errors[0].message, "name cannot be empty");
+        done();
       });
     }
   );
-  test("validate the empty string",
-    function() {
+  it("should validate the empty string",
+    function(done) {
       var descriptor = {
         name: {type: "string", required: true, whitespace: true}
       }
@@ -155,11 +166,12 @@ suite("String validation:", function() {
         assert.equal(errors.length, 1);
         //console.log(errors[0].message);
         assert.equal( errors[0].message, "name cannot be empty");
+        done();
       });
     }
   );
-  test("revalidate after failure",
-    function() {
+  it("should revalidate after failure",
+    function(done) {
       var descriptor = {
         name: {type: "string", required: true, whitespace: true}
       }
@@ -171,6 +183,7 @@ suite("String validation:", function() {
           //console.log("after revalidation %j", errors);
           assert.isNull(errors);
           assert.isNull(fields);
+          done();
         });
       });
     }

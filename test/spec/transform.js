@@ -1,9 +1,9 @@
 var util = require('util');
 var assert = require('chai').assert;
-var schema = require('../index');
+var schema = require('../../index');
 
-suite("Transform validator:", function() {
-  test("transform by stripping whitespace", function() {
+describe("async-validate:", function() {
+  it("should transform by stripping whitespace", function(done) {
     var descriptor = {
       name: {
         type: "string",
@@ -19,6 +19,7 @@ suite("Transform validator:", function() {
       assert.isNull(errors);
       assert.isNull(fields);
       assert.equal(source.name, "user");
+      done();
     });
   });
 });

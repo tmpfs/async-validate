@@ -1,9 +1,9 @@
 var util = require('util');
 var assert = require('chai').assert;
-var schema = require('../index');
+var schema = require('../../index');
 
-suite("Enum validator:", function() {
-  test("invalid enum value", function() {
+describe("async-validate:", function() {
+  it("should error on invalid enum value", function(done) {
     var descriptor = {
       role: {type: "enum", enum: ['admin', 'user', 'guest']}
     }
@@ -11,9 +11,10 @@ suite("Enum validator:", function() {
     validator.validate({role: "manager"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "role must be one of admin, user, guest");
+      done();
     });
   });
-  test("valid enum value", function() {
+  it("should validate enum value", function(done) {
     var descriptor = {
       role: {type: "enum", enum: ['admin', 'user', 'guest']}
     }
@@ -21,6 +22,7 @@ suite("Enum validator:", function() {
     validator.validate({role: "user"}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
 });

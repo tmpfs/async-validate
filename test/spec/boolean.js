@@ -1,9 +1,9 @@
 var util = require('util');
 var assert = require('chai').assert;
-var schema = require('../index');
+var schema = require('../../index');
 
-suite("Boolean validation:", function() {
-  test("validate boolean type", function() {
+describe("async-validate:", function() {
+  it("should validate boolean type", function(done) {
     var descriptor = {
       flag: {type: "boolean"},
     }
@@ -11,9 +11,10 @@ suite("Boolean validation:", function() {
     validator.validate({flag: "false"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "flag is not a boolean");
+      done();
     });
   });
-  test("validate boolean pass", function() {
+  it("should validate boolean pass", function(done) {
     var descriptor = {
       flag: {type: "boolean"},
     }
@@ -21,6 +22,7 @@ suite("Boolean validation:", function() {
     validator.validate({flag: true}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
 });

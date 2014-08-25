@@ -1,9 +1,9 @@
 var util = require('util');
 var assert = require('chai').assert;
-var schema = require('../index');
+var schema = require('../../index');
 
-suite("Length validator:", function() {
-  test("invalid string length", function() {
+describe("async-validate:", function() {
+  it("should error on invalid string length", function(done) {
     var descriptor = {
       name: {type: "string", len: 10},
     }
@@ -11,9 +11,10 @@ suite("Length validator:", function() {
     validator.validate({name: "user"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "name must be exactly 10 characters");
+      done();
     });
   });
-  test("invalid number length", function() {
+  it("should error on invalid number length", function(done) {
     var descriptor = {
       port: {type: "number", len: 80},
     }
@@ -21,9 +22,10 @@ suite("Length validator:", function() {
     validator.validate({port: 8080}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "port must equal 80");
+      done();
     });
   });
-  test("invalid array length", function() {
+  it("should error on invalid array length", function(done) {
     var descriptor = {
       roles: {type: "array", len: 2},
     }
@@ -31,9 +33,10 @@ suite("Length validator:", function() {
     validator.validate({roles: ["user"]}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "roles must be exactly 2 in length");
+      done();
     });
   });
-  test("valid string length", function() {
+  it("should validate string length", function(done) {
     var descriptor = {
       name: {type: "string", len: 8},
     }
@@ -41,9 +44,10 @@ suite("Length validator:", function() {
     validator.validate({name: "username"}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
-  test("valid number length", function() {
+  it("should validiate number length", function(done) {
     var descriptor = {
       port: {type: "number", len: 80},
     }
@@ -51,9 +55,10 @@ suite("Length validator:", function() {
     validator.validate({port: 80}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
-  test("valid array length", function() {
+  it("should validate array length", function(done) {
     var descriptor = {
       roles: {type: "array", len: 2},
     }
@@ -61,6 +66,7 @@ suite("Length validator:", function() {
     validator.validate({roles: ["user", "admin"]}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
+      done();
     });
   });
 });
