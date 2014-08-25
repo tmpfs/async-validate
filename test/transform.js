@@ -1,7 +1,6 @@
 var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../index');
-var sanitize = require('validator').sanitize;
 
 suite("Transform validator:", function() {
   test("transform by stripping whitespace", function() {
@@ -10,7 +9,7 @@ suite("Transform validator:", function() {
         type: "string",
         required: true, pattern: /^[a-z]+$/,
         transform: function(value) {
-          return sanitize(value).trim();
+          return value.trim();
         }
       }
     }

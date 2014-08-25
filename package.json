@@ -14,7 +14,8 @@
     "object"
   ],
   "scripts": {
-    "test": "mocha -u tdd --reporter list"
+    "test": "NODE_ENV=test istanbul cover _mocha -- -u tdd --recursive --reporter list test"
+
   },
   "dependencies": {
     "async": "~0.9.0",
