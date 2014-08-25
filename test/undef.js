@@ -1,7 +1,6 @@
 var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../index');
-var sanitize = require('validator').sanitize;
 
 suite("async-validate:", function() {
   test("should allow undefined integer field if not required", function() {
