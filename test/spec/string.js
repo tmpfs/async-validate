@@ -96,6 +96,18 @@ describe("async-validate:", function() {
       done();
     });
   });
+  it("should validate a required string field is valid and in the range", function(done) {
+      var descriptor = {
+        name: {type: "string", required: true, min: 6, max: 20}
+      }
+      var validator = new schema(descriptor);
+      validator.validate({name: "valid field"}, function(errors, fields) {
+        assert.isNull(errors);
+        assert.isNull(fields);
+        done();
+      });
+    }
+  );
   it("should validate a required string field is less than a length range",
     function(done) {
       var descriptor = {
