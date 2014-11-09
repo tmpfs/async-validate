@@ -118,7 +118,7 @@ var descriptor = {
   email: [
     {type: "string", required: true, pattern: schema.pattern.email},
     function(rule, value, callback, source, options) {
-      var errors = []; 
+      var errors = [];
       // test if email address already exists in a database
       // and add a validation error to the errors array if it does
       callback(errors);
@@ -397,6 +397,12 @@ A rule for hexadecimal color values with optional leading hash:
 ```javascript
 {type: "string", required: true, pattern: pattern.hex}
 ```
+
+## Browser Support
+
+![Chrome](https://cloud.githubusercontent.com/assets/398893/3528328/23bc7bc4-078e-11e4-8752-ba2809bf5cce.png) | ![Firefox](https://cloud.githubusercontent.com/assets/398893/3528329/26283ab0-078e-11e4-84d4-db2cf1009953.png) | ![Opera](https://cloud.githubusercontent.com/assets/398893/3528330/27ec9fa8-078e-11e4-95cb-709fd11dac16.png) | ![Safari](https://cloud.githubusercontent.com/assets/398893/3528331/29df8618-078e-11e4-8e3e-ed8ac738693f.png)
+--- | --- | --- | ---
+Latest ✔ (tested on 39) | Latest ✔ (tested on 33) | Latest ✔ (tested on 25) | Latest ✔ (tested on 8)
 
 ## License
 
