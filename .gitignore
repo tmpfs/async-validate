@@ -1,4 +1,5 @@
 .DS_Store
+/async-validate.js
 node_modules
 coverage
 target

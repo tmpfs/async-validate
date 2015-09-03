@@ -13,19 +13,21 @@
     "valid",
     "object"
   ],
-  "scripts": {
-    "clean": "rm -rf coverage",
-    "test": "NODE_ENV=test mocha test/spec",
-    "cover": "NODE_ENV=test istanbul cover _mocha -- test/spec"
-  },
   "dependencies": {
-    "async": "~1.4.0",
+    "async": "~1.4.2",
     "moment": "~2.10.6"
   },
   "devDependencies": {
+    "browserify": "~11.0.1",
     "chai": "~3.2.0",
     "istanbul": "~0.3.17",
     "mocha": "~2.2.5",
     "validator": "~4.0.1"
+  },
+  "scripts": {
+    "browserify": "browserify -o async-validate.js -e ./lib/index.js",
+    "clean": "rm -rf coverage",
+    "test": "NODE_ENV=test mocha test/spec",
+    "cover": "NODE_ENV=test istanbul cover _mocha -- test/spec"
   }
 }
