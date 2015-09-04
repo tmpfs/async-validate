@@ -14,13 +14,13 @@
     "object"
   ],
   "dependencies": {
-    "moment": "~2.10.6"
   },
   "devDependencies": {
     "browserify": "~11.0.1",
     "chai": "~3.2.0",
     "istanbul": "~0.3.17",
     "mocha": "~2.2.5",
+    "moment": "~2.10.6",
     "validator": "~4.0.1"
   },
   "scripts": {
