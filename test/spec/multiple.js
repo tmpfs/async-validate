@@ -1,7 +1,7 @@
 var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../../index');
-var ValidationError = schema.error;
+var ValidationError = schema.ValidationError;
 var std = require('../../std-rules')
 
 describe("async-validate:", function(done) {
