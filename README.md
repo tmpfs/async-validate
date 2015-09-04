@@ -24,13 +24,13 @@ So this package was created to allow for asynchronous validation of user input u
 
 Note that as of the `0.2.x` series, this module no longer ships any built in type validators, you need to call `plugin()`, for example to load all plugins (backward compatibility):
 
-```
+```javascript
 require('async-validate/plugin/all');
 ```
 
 Otherwise only load the validators for the types you are using:
 
-```
+```javascript
 var schema = require('async-validate');
 schema.plugin([
   require('async-validate/plugin/array'),
