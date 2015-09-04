@@ -36,9 +36,12 @@ describe("async-validate:", function() {
   });
   it("should verify custom error message helper", function(done) {
     var descriptor = {
-      name: function(rule, value, callback, source, options) {
-        var errors = options.error(rule, "%s is a required field", rule.field);
-        callback(errors);
+      name: function(opts ,cb) {
+        var errors =
+          opts.options.error(
+            opts.rule, "%s is a required field", opts.rule.field);
+
+        cb(errors);
       }
     }
     var validator = new schema(descriptor);

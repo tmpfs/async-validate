@@ -18,15 +18,15 @@ describe("async-validate:", function() {
 
   it("should validate using a custom validator function", function(done) {
     var descriptor = {
-      name: function(descriptor, value, callback, values) {
-        var errors = [];
-        if(!/^[a-z0-9]+$/.test(value)) {
+      name: function(opts, cb) {
+        var errors = opts.errors;
+        if(!/^[a-z0-9]+$/.test(opts.value)) {
           errors.push(
             new ValidationError(
               util.format("%s must be lowercase alphanumeric characters",
-                descriptor.field)));
+                opts.rule.field)));
         }
-        callback(errors);
+        cb(errors);
       }
     }
     var validator = new schema(descriptor);

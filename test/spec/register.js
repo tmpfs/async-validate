@@ -6,14 +6,14 @@ var ValidationError = schema.ValidationError;
 describe("async-validate:", function() {
 
   before(function(done) {
-    var validator = function(rule, value, callback, source) {
-      var errors = [];
+    var validator = function(opts, cb) {
+      var errors = opts.errors;
       var re = /^[^-][a-zA-Z0-9-]+$/;
-      if(!re.test(value)) {
+      if(!re.test(opts.value)) {
         errors.push(new ValidationError(
-          util.format("%s is not a valid identifier", rule.field)));
+          util.format("%s is not a valid identifier", opts.rule.field)));
       }
-      callback(errors);
+      cb(errors);
     }
     schema.register('id', validator);
     done();

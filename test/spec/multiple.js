@@ -42,14 +42,14 @@ describe("async-validate:", function(done) {
     var descriptor = {
       email: [
         std.email,
-        function(descriptor, value, callback, values) {
+        function(opts, cb) {
           var errors = [];
           var email = "user@example.com";
-          if(value == email) {
+          if(opts.value === email) {
             errors.push(new ValidationError(
               util.format("Email address %s already exists", email)));
           }
-          callback(errors);
+          cb(errors);
         }
       ]
     }
