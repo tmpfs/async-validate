@@ -5,10 +5,10 @@ Asynchronous validation for [node](http://nodejs.org).
 ## Installation
 
 ```
-npm install async-validate
+npm i async-validate
 ```
 
-## Unit Tests
+## Test
 
 ```
 npm test
@@ -21,6 +21,24 @@ None of the existing validation packages met the requirement to asynchronously v
 So this package was created to allow for asynchronous validation of user input using a declarative schema based approach.
 
 ## Usage
+
+Note that as of the `0.2.x` series, this module no longer ships any built in type validators, you need to call `plugin()`, for example to load all plugins (backward compatibility):
+
+```
+require('async-validate/plugin/all');
+```
+
+Otherwise only load the validators for the types you are using:
+
+```
+var schema = require('async-validate');
+schema.plugin([
+  require('async-validate/plugin/array'),
+  require('async-validate/plugin/boolean'),
+  require('async-validate/plugin/number'),
+  require('async-validate/plugin/string')
+])
+```
 
 Basic usage involves defining a descriptor, assigning it to a schema and passing the object to be validated and a callback function to the `validate` method of the schema:
 
