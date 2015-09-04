@@ -362,7 +362,9 @@ If you are defining your own validation functions it is better practice to assig
 
 ## Standard Rules
 
-Some standard rules for common validation requirements are accessible via `schema.rules.std`. You may wish to reference these rules or copy and modify them.
+Some standard rules for common validation requirements are accessible, you may wish to reference these rules or copy and modify them.
+
+As of `v0.2.0` these rules must be required: `require('async-validate/std-rules')` and are no longer available via the schema class.
 
 ### Field
 
