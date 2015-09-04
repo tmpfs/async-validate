@@ -1,6 +1,7 @@
 var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../../index');
+var msg = require('../../messages');
 
 describe("async-validate:", function() {
 
@@ -17,7 +18,7 @@ describe("async-validate:", function() {
   });
 
   // quick and dirty clone of the default messages
-  var clone = schema.messages.clone();
+  var clone = msg.clone();
   // change a message
   clone.required = "%s is a required field";
   it("should validate using custom messages", function(done) {
