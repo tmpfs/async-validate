@@ -1,10 +1,13 @@
 /**
- *  Validates a boolean.
+ *  Validates a regular expression pattern.
+ *
+ *  Performs validation when a rule only contains
+ *  a pattern property but is not declared as a string type.
  *
  *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function bool(opts, cb) {
+function pattern(opts, cb) {
   var errors = opts.errors
     , rule = opts.rule
     , value = opts.value
@@ -16,11 +19,11 @@ function bool(opts, cb) {
     if(value === undefined && !rule.required) {
       return cb();
     }
-
-    opts.required();
-    opts.type();
+    opts.pattern();
   }
   cb(errors);
 }
 
-module.exports = bool;
+module.exports = function() {
+  this.main.pattern = pattern;
+}

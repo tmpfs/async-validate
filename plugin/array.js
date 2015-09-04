@@ -1,10 +1,10 @@
 /**
- *  Validates a number is an integer.
+ *  Validates an array.
  *
  *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function integer(opts, cb) {
+function array(opts, cb) {
   var errors = opts.errors
     , rule = opts.rule
     , value = opts.value
@@ -16,11 +16,17 @@ function integer(opts, cb) {
     if(value === undefined && !rule.required) {
       return cb();
     }
+
     opts.required();
-    opts.type();
-    opts.range();
+
+    if(rule.required || value !== undefined) {
+      opts.type();
+      opts.range();
+    }
   }
   cb(errors);
 }
 
-module.exports = integer;
+module.exports = function() {
+  this.main.array = array;
+}

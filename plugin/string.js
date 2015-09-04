@@ -1,10 +1,10 @@
 /**
- *  Validates a number is a floating point number.
+ *  Performs validation for string types.
  *
  *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function fraction(opts, cb) {
+function string(opts, cb) {
   var errors = opts.errors
     , rule = opts.rule
     , value = opts.value
@@ -20,8 +20,15 @@ function fraction(opts, cb) {
     opts.required();
     opts.type();
     opts.range();
+    opts.pattern();
+
+    if(rule.whitespace === true) {
+      opts.whitespace();
+    }
   }
   cb(errors);
 }
 
-module.exports = fraction;
+module.exports = function() {
+  this.main.string = string;
+}

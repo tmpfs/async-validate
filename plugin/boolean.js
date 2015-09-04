@@ -1,10 +1,10 @@
 /**
- *  Validates an enumerable list.
+ *  Validates a boolean.
  *
  *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function enumerable(opts, cb) {
+function bool(opts, cb) {
   var errors = opts.errors
     , rule = opts.rule
     , value = opts.value
@@ -18,9 +18,11 @@ function enumerable(opts, cb) {
     }
 
     opts.required();
-    opts.enumerable();
+    opts.type();
   }
   cb(errors);
 }
 
-module.exports = enumerable;
+module.exports = function() {
+  this.main.boolean = bool;
+}

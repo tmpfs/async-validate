@@ -1,10 +1,10 @@
 /**
- *  Validates a number.
+ *  Validates an enumerable list.
  *
  *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function number(opts, cb) {
+function enumerable(opts, cb) {
   var errors = opts.errors
     , rule = opts.rule
     , value = opts.value
@@ -18,10 +18,11 @@ function number(opts, cb) {
     }
 
     opts.required();
-    opts.type();
-    opts.range();
+    opts.enumerable();
   }
   cb(errors);
 }
 
-module.exports = number;
+module.exports = function() {
+  this.main.enum = enumerable;
+}

@@ -1,10 +1,10 @@
 /**
- *  Performs validation for string types.
+ *  Validates an object.
  *
  *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function string(opts, cb) {
+function object(opts, cb) {
   var errors = opts.errors
     , rule = opts.rule
     , value = opts.value
@@ -16,17 +16,14 @@ function string(opts, cb) {
     if(value === undefined && !rule.required) {
       return cb();
     }
-
     opts.required();
-    opts.type();
-    opts.range();
-    opts.pattern();
-
-    if(rule.whitespace === true) {
-      opts.whitespace();
+    if(rule.required || value !== undefined) {
+      opts.type();
     }
   }
   cb(errors);
 }
 
-module.exports = string;
+module.exports = function() {
+  this.main.object = object;
+}

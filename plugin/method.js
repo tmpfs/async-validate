@@ -1,16 +1,16 @@
 /**
- *  Validates the regular expression type.
+ *  Validates a function.
  *
  *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function regexp(opts, cb) {
+function method(opts, cb) {
   var errors = opts.errors
     , rule = opts.rule
     , value = opts.value
     , source = opts.source
     , validate = rule.required
-      || (!rule.required && source.hasOwnProperty(rule.field));
+        || (!rule.required && source.hasOwnProperty(rule.field));
 
   if(validate) {
     if(value === undefined && !rule.required) {
@@ -22,4 +22,6 @@ function regexp(opts, cb) {
   cb(errors);
 }
 
-module.exports = regexp;
+module.exports = function() {
+  this.main.method = method;
+}

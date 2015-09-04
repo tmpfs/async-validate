@@ -1,4 +1,4 @@
-var format = require('../format')
+var format = require('../lib/format')
   , moment = require('moment');
 
 /**
@@ -63,4 +63,6 @@ function date(opts, cb) {
   cb(errors);
 }
 
-module.exports = date;
+module.exports = function() {
+  this.main.date = date;
+}

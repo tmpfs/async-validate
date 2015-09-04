@@ -1,10 +1,10 @@
 /**
- *  Validates an object.
+ *  Validates a number is a floating point number.
  *
  *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function object(opts, cb) {
+function fraction(opts, cb) {
   var errors = opts.errors
     , rule = opts.rule
     , value = opts.value
@@ -16,12 +16,14 @@ function object(opts, cb) {
     if(value === undefined && !rule.required) {
       return cb();
     }
+
     opts.required();
-    if(rule.required || value !== undefined) {
-      opts.type();
-    }
+    opts.type();
+    opts.range();
   }
   cb(errors);
 }
 
-module.exports = object;
+module.exports = function() {
+  this.main.float = fraction;
+}

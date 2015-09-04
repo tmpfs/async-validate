@@ -28,7 +28,7 @@
   "scripts": {
     "browserify": "browserify -o async-validate.js -e ./lib/schema.js",
     "clean": "rm -rf coverage",
-    "test": "NODE_ENV=test mocha ${SPEC:-test/spec}",
-    "cover": "NODE_ENV=test istanbul cover _mocha -- ${SPEC:-test/spec}"
+    "test": "NODE_ENV=test mocha test/global ${SPEC:-test/spec}",
+    "cover": "NODE_ENV=test istanbul cover _mocha -- test/global ${SPEC:-test/spec}"
   }
 }
