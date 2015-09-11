@@ -47,9 +47,6 @@ function date(cb) {
     || (!this.rule.required && this.source.hasOwnProperty(this.rule.field)
           && this.source[this.rule.field]);
   if(validate) {
-    if(this.value === undefined && !this.rule.required) {
-      return cb();
-    }
     this.required();
     this.pattern();
     validator.call(this);

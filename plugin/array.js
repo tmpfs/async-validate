@@ -5,10 +5,6 @@
  */
 function array(cb) {
   if(this.shouldValidate()) {
-    if(this.value === undefined && !this.rule.required) {
-      return cb();
-    }
-
     this.required();
 
     if(this.rule.required || this.value !== undefined) {
