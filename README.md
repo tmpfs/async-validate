@@ -46,7 +46,7 @@ validator.validate(source, function(errors, fields) {
     // validation failed, errors is an array of all errors
     // fields is an object keyed by field name with an array of
     // errors per field
-    console.dir(errors)
+    return console.dir(errors)
   }
   // validation passed
 });
