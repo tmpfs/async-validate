@@ -199,7 +199,7 @@ It is often useful to test against multiple validation rules for a single field,
 var descriptor = {
   email: [
     {type: "string", required: true},
-    function(opts, cb) {
+    function(cb) {
       // test if email address already exists in a database
       // and add a validation error to the errors array if it does
       cb(this.errors);
