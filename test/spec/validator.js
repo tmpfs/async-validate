@@ -11,6 +11,7 @@ describe("async-validate:", function() {
 
   it("should use default message", function(done) {
     var v = Validator.Type({field: 'mock', rule: {}});
+    expect(v.reason()).to.eql(undefined);
     // trigger default message code path
     v.error();
     done();
