@@ -5,10 +5,6 @@ var format = require('../lib/format')
  *  Rule for validating a date against a format.
  */
 function validator() {
-  if(!this.rule.required
-     && (this.value === undefined || this.value === '')) {
-    return false;
-  }
   var mmt = this.rule.local ? moment : moment.utc;
   var dt = !this.rule.format
     ? mmt(new Date(this.value)) : mmt(this.value, this.rule.format);
