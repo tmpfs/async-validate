@@ -19,15 +19,15 @@ function validator() {
   //console.log('date valid %s', dt.isValid());
   if(!dt) {
     this.raise(
-      format(this.messages.date.parse, this.rule.field, this.value));
+      format(this.messages.date.parse, this.field, this.value));
   }else if(!dt.isValid()) {
     if(this.rule.format) {
       this.raise(
         format(this.messages.date.format,
-          this.rule.field, this.value, this.rule.format));
+          this.field, this.value, this.rule.format));
     }else{
       this.raise(
-        format(this.messages.date.invalid, this.rule.field, this.value));
+        format(this.messages.date.invalid, this.field, this.value));
     }
   }
 
@@ -41,8 +41,8 @@ function validator() {
  */
 function date(cb) {
   var validate = this.rule.required
-    || (!this.rule.required && this.source.hasOwnProperty(this.rule.field)
-          && this.source[this.rule.field]);
+    || (!this.rule.required && this.source.hasOwnProperty(this.field)
+          && this.source[this.field]);
   if(validate) {
     this.required();
     this.pattern();
