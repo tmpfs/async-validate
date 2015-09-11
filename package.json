@@ -40,7 +40,7 @@
     "require": "lib",
     "links": "links.md",
     "toc": "Table of Contents",
-    "base": "https://github.com/freeformsytems/async-validate",
+    "base": "https://github.com/freeformsystems/async-validate",
     "partial": [
       {
         "inc": [
