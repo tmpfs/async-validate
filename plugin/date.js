@@ -21,8 +21,6 @@ function validator() {
         format(this.messages.date.invalid, this.field, this.value));
     }
   }
-
-  return true;
 }
 
 /**
