@@ -28,8 +28,7 @@ Table of Contents
       * [Validate](#validate)
         * [Options](#options)
       * [Rules](#rules)
-        * [Options](#options-1)
-    * [Callback](#callback)
+        * [Scope](#scope)
   * [Developer](#developer)
     * [Test](#test)
     * [Cover](#cover)
@@ -404,15 +403,17 @@ In this instance when you only want the first error encountered use the `single`
 
 #### Rules
 
-Rules may be functions that perform validation.
+Rules are functions that perform validation. They are invoked in the scope of a [validator](https://github.com/freeformsystems/async-validate/blob/master/lib/validator.js) so you should not call `bind()` on validation rule functions.
 
 ```javascript
-function(opts, cb)
+function(cb)
 ```
 
-##### Options
+* `cb`: Callback function to invoke when validation completes, expects array of errors instances to be passed.
 
-The options object has the following fields:
+##### Scope
+
+The scope of the rule function exposes the fields:
 
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated. It is always assigned a `field` property with the name of the field being validated.
 * `value`: The value of the source object property being validated.
@@ -420,12 +421,6 @@ The options object has the following fields:
 * `options`: The options passed to `validate()`.
 * `messages`: Reference to the messages assigned to `options`.
 * `errors`: Array of errors for the field validation.
-
-The options passed to `validate` are passed on to the validation functions so that you may reference transient data (such as model references) in validation functions. However, some option names are reserved; if you use these properties of the options object they are overwritten. The reserved properties are `messages`.
-
-### Callback
-
-The callback function to invoke once validation is complete. It expects to be passed an array of `Error` instances to indicate validation failure.
 
 ## Developer
 
