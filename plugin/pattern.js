@@ -4,10 +4,9 @@
  *  Performs validation when a rule only contains
  *  a pattern property but is not declared as a string type.
  *
- *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function pattern(opts, cb) {
+function pattern(cb) {
   var validate = this.rule.required
     || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 

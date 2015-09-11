@@ -1,10 +1,9 @@
 /**
  *  Validates the regular expression type.
  *
- *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function regexp(opts, cb) {
+function regexp(cb) {
   var validate = this.rule.required
     || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 

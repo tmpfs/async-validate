@@ -1,10 +1,9 @@
 /**
  *  Validates an object.
  *
- *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function object(opts, cb) {
+function object(cb) {
   var validate = this.rule.required
     || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 

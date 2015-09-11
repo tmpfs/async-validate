@@ -1,10 +1,9 @@
 /**
  *  Validates an array.
  *
- *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function array(opts, cb) {
+function array(cb) {
   var validate = this.rule.required
     || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 

@@ -40,10 +40,9 @@ function validator() {
 /**
  *  Validates a date against the format property.
  *
- *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function date(opts, cb) {
+function date(cb) {
   var validate = this.rule.required
     || (!this.rule.required && this.source.hasOwnProperty(this.rule.field)
           && this.source[this.rule.field]);

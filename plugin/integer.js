@@ -1,10 +1,9 @@
 /**
  *  Validates a number is an integer.
  *
- *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function integer(opts, cb) {
+function integer(cb) {
   var validate = this.rule.required
         || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 

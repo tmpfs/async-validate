@@ -1,10 +1,9 @@
 /**
  *  Performs validation for string types.
  *
- *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function string(opts, cb) {
+function string(cb) {
   var validate = this.rule.required
     || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 

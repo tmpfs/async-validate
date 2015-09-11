@@ -1,10 +1,9 @@
 /**
  *  Validates a number is a floating point number.
  *
- *  @param opts The validation options.
  *  @param cb The callback function.
  */
-function fraction(opts, cb) {
+function fraction(cb) {
   var validate = this.rule.required
         || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 
