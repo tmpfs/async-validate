@@ -57,9 +57,9 @@
       {
         "inc": [
           "guide.md",
-          "transform.md",
           "messages.md",
-          "standard-rules.md"
+          "standard-rules.md",
+          "transform.md"
         ]
       },
       {

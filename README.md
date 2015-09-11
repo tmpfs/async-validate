@@ -17,13 +17,13 @@ Table of Contents
       * [Whitespace](#whitespace)
       * [Multiple Rules](#multiple-rules)
       * [Deep Rules](#deep-rules)
-    * [Transform](#transform)
     * [Messages](#messages)
     * [Standard Rules](#standard-rules)
       * [Field](#field)
       * [Email](#email)
       * [URL](#url)
       * [Hex](#hex)
+    * [Transform](#transform)
     * [API](#api)
       * [Validate](#validate)
         * [Options](#options)
@@ -269,12 +269,6 @@ var descriptor = {
 
 And supply a source object of `{roles: ["admin", "user"]}` then two errors will be created. One for the array length mismatch and one for the missing required array entry at index 2.
 
-### Transform
-
-Sometimes it is necessary to transform a value before validation, possibly to coerce the value or to sanitize it in some way. To do this add a `transform` function to the validation rule. The property is transformed prior to validation and re-assigned to the source object to mutate the value of the property in place.
-
-Without the `transform` function validation would fail due to the pattern not matching as the input contains leading and trailing whitespace, but by adding the transform function validation passes and the field value is sanitized at the same time.
-
 ### Messages
 
 Depending upon your application requirements, you may need i18n support or you may prefer different validation error messages.
@@ -359,6 +353,12 @@ A rule for hexadecimal color values with optional leading hash:
 ```javascript
 {type: "string", required: true, pattern: pattern.hex}
 ```
+
+### Transform
+
+Sometimes it is necessary to transform a value before validation, possibly to coerce the value or to sanitize it in some way. To do this add a `transform` function to the validation rule. The property is transformed prior to validation and re-assigned to the source object to mutate the value of the property in place.
+
+Without the `transform` function validation would fail due to the pattern not matching as the input contains leading and trailing whitespace, but by adding the transform function validation passes and the field value is sanitized at the same time.
 
 ```javascript
 var schema = require('..')
