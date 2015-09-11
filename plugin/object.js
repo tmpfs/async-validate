@@ -6,9 +6,7 @@
 function object(cb) {
   if(this.shouldValidate()) {
     this.required();
-    if(this.rule.required || this.value !== undefined) {
-      this.type();
-    }
+    this.type();
   }
   cb(this.errors);
 }
