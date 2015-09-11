@@ -43,6 +43,7 @@ The scope of the rule function exposes the fields:
 
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated. It is always assigned a `field` property with the name of the field being validated.
 * `value`: The value of the source object property being validated.
+* `field`: The name of the field being validated.
 * `source`: The source object that was passed to the `validate` method.
 * `options`: The options passed to `validate()`.
 * `messages`: Reference to the messages assigned to `options`.
