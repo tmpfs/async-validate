@@ -1,6 +1,6 @@
 # async-validate
 
-Asynchronous validation for [node](http://nodejs.org).
+Asynchronous validation for [node](http://nodejs.org) and the browser.
 
 ## Installation
 
