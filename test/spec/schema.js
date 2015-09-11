@@ -52,4 +52,16 @@ describe("async-validate:", function() {
     done();
   });
 
+
+  it("should error on validate with unknown type", function(done) {
+    var validator = new schema({name: {type: 'unknown-type'}}); 
+    function fn() {
+      validator.validate({}, function noop(){});
+    }
+    expect(fn).throws(Error);
+    expect(fn).throws(/unknown rule type/i);
+    done();
+  });
+
+
 });
