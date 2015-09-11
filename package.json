@@ -29,7 +29,7 @@
     "docs": "npm run readme",
     "readme": "mdp --force -v",
     "browserify": "browserify -o async-validate.js -e ./lib/schema.js",
-    "clean": "rm -rf coverage",
+    "clean": "rm -rf coverage ./async-validate.js",
     "test": "NODE_ENV=test mocha test/global ${SPEC:-test/spec}",
     "cover": "NODE_ENV=test istanbul cover _mocha -- test/global ${SPEC:-test/spec}"
   },
