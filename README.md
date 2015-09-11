@@ -21,7 +21,6 @@ Table of Contents
     * [Whitespace](#whitespace)
     * [Deep Rules](#deep-rules)
     * [Transform](#transform)
-  * [Register](#register)
   * [Messages](#messages)
   * [Standard Rules](#standard-rules)
     * [Field](#field)
@@ -342,33 +341,6 @@ validator.validate(source, function(errors, fields) {
 ```
 
 Without the `transform` function validation would fail due to the pattern not matching as the input contains leading and trailing whitespace, but by adding the transform function validation passes and the field value is sanitized at the same time.
-
-## Register
-
-To extend the recognised validation types you may `register` your own validation functions by type.
-
-```javascript
-function register(type, validator)
-```
-
-The `type` arguments should be a string indicating the `type` property of the validation rule and `validator` must be a function with the correct signature.
-
-```javascript
-var schema = require('async-validate');
-var ValidationError = schema.ValidationError;
-var validator = function(rule, value, callback, source, options) {
-  var errors = [];
-  var re = /^[^-][a-zA-Z0-9-]+$/;
-  if(!re.test(value)) {
-    errors.push(new ValidationError(
-      util.format("%s is not a valid identifier", rule.field)));
-  }
-  callback(errors);
-}
-schema.register('id', validator);
-```
-
-You can then use validation rules such as `{type: "id"}`.
 
 ## Messages
 
