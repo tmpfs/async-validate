@@ -37,10 +37,9 @@ describe("async-validate:", function() {
   it("should verify custom error message helper", function(done) {
     var descriptor = {
       name: function(opts ,cb) {
-        var errors =
-          opts.options.error(
-            opts.rule, "%s is a required field", opts.rule.field);
-
+        var errors = opts.errors;
+        opts.raise(
+          opts.rule, "%s is a required field", opts.rule.field);
         cb(errors);
       }
     }
