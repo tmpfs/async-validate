@@ -91,33 +91,39 @@ In this instance when you only want the first error encountered use the `single`
 Rules may be functions that perform validation.
 
 ```javascript
-function(rule, value, callback, source, options)
+function(opts, cb)
 ```
+
+### Options
+
+The options object has the following fields:
 
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated. It is always assigned a `field` property with the name of the field being validated.
 * `value`: The value of the source object property being validated.
-* `callback`: A callback function to invoke once validation is complete. It expects to be passed an array of `Error` instances to indicate validation failure.
 * `source`: The source object that was passed to the `validate` method.
-* `options`: Additional options.
-* `options.messages`: The object containing validation error messages.
-* `options.exception`: A reference to the ValidationError class.
-* `options.error`: A helper function for generating validation errors.
+* `options`: The options passed to `validate()`.
+* `messages`: Reference to the messages assigned to `options`.
+* `errors`: Array of errors for the field validation.
 
 The options passed to `validate` are passed on to the validation functions so that you may reference transient data (such as model references) in validation functions. However, some option names are reserved; if you use these properties of the options object they are overwritten. The reserved properties are `messages`, `exception` and `error`.
+
+### Callback
+
+The callback function to invoke once validation is complete. It expects to be passed an array of `Error` instances to indicate validation failure.
 
 ```javascript
 var schema = require('async-validate');
 var ValidationError = schema.ValidationError;
 var descriptor = {
-  name: function(rule, value, callback, source, options) {
-    var errors = [];
+  name: function(opts, cb) {
+    var errors = opts.errors;
     if(!/^[a-z0-9]+$/.test(value)) {
       errors.push(
         new ValidationError(
           util.format("%s must be lowercase alphanumeric characters",
-            rule.field)));
+            opts.rule.field)));
     }
-    callback(errors);
+    cb(errors);
   }
 }
 var validator = new schema(descriptor);
@@ -135,11 +141,11 @@ It is often useful to test against multiple validation rules for a single field,
 var descriptor = {
   email: [
     {type: "string", required: true, pattern: schema.pattern.email},
-    function(rule, value, callback, source, options) {
+    function(opts, cb) {
       var errors = [];
       // test if email address already exists in a database
       // and add a validation error to the errors array if it does
-      callback(errors);
+      cb(errors);
     }
   ]
 }
