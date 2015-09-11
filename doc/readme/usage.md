@@ -89,9 +89,10 @@ The options passed to `validate` are passed on to the validation functions so th
 
 The callback function to invoke once validation is complete. It expects to be passed an array of `Error` instances to indicate validation failure.
 
+## Example
+
 ```javascript
 var schema = require('async-validate');
-var ValidationError = schema.ValidationError;
 var descriptor = {
   name: function(opts, cb) {
     if(!/^[a-z0-9]+$/.test(opts.value)) {

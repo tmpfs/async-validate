@@ -38,7 +38,7 @@ describe("async-validate:", function() {
     var descriptor = {
       name: function(opts ,cb) {
         var errors = opts.errors;
-        opts.raise(
+        this.raise(
           opts.rule, "%s is a required field", opts.rule.field);
         cb(errors);
       }
