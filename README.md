@@ -107,7 +107,7 @@ The options passed to `validate` are passed on to the validation functions so th
 
 ```javascript
 var schema = require('async-validate');
-var ValidationError = schema.error;
+var ValidationError = schema.ValidationError;
 var descriptor = {
   name: function(rule, value, callback, source, options) {
     var errors = [];
@@ -318,7 +318,7 @@ The `type` arguments should be a string indicating the `type` property of the va
 
 ```javascript
 var schema = require('async-validate');
-var ValidationError = schema.error;
+var ValidationError = schema.ValidationError;
 var validator = function(rule, value, callback, source, options) {
   var errors = [];
   var re = /^[^-][a-zA-Z0-9-]+$/;
