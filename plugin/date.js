@@ -9,14 +9,9 @@ function validator() {
      && (this.value === undefined || this.value === '')) {
     return false;
   }
-
   var mmt = this.rule.local ? moment : moment.utc;
   var dt = !this.rule.format
     ? mmt(new Date(this.value)) : mmt(this.value, this.rule.format);
-  //console.log('value %s', value);
-  //console.log('format %s', rule.format);
-  //console.log('date %s', dt);
-  //console.log('date valid %s', dt.isValid());
   if(!dt) {
     this.raise(
       format(this.messages.date.parse, this.field, this.value));
