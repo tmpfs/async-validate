@@ -3,37 +3,38 @@ var format = require('../lib/format')
 
 /**
  *  Rule for validating a date against a format.
- *
- *  @param opts The validation options.
  */
-function validator(opts) {
-  var rule = opts.rule
-    , value = opts.value
-    , options = opts.options
-    , errors = opts.errors;
-
-  if(!rule.required
-     && (value === undefined || value === "")) {
+function validator() {
+  if(!this.rule.required
+     && (this.value === undefined || this.value === '')) {
     return false;
   }
-  var mmt = rule.local ? moment : moment.utc;
-  var dt = !rule.format ? mmt(new Date(value)) : mmt(value, rule.format);
+
+  var mmt = this.rule.local ? moment : moment.utc;
+  var dt = !this.rule.format
+    ? mmt(new Date(this.value)) : mmt(this.value, this.rule.format);
   //console.log('value %s', value);
   //console.log('format %s', rule.format);
   //console.log('date %s', dt);
   //console.log('date valid %s', dt.isValid());
   if(!dt) {
-    errors.push(opts.error(rule,
-      format(options.messages.date.parse, rule.field, value)));
+    this.raise(
+      this.rule,
+      format(this.messages.date.parse, this.rule.field, this.value));
   }else if(!dt.isValid()) {
-    if(rule.format) {
-      errors.push(opts.error(rule,
-        format(options.messages.date.format, rule.field, value, rule.format)));
+    if(this.rule.format) {
+      this.raise(
+        this.rule,
+        format(this.messages.date.format,
+          this.rule.field, this.value, this.rule.format));
     }else{
-      errors.push(opts.error(rule,
-        format(options.messages.date.invalid, rule.field, value)));
+      this.raise(
+        this.rule,
+        format(this.messages.date.invalid, this.rule.field, this.value));
     }
   }
+
+  return true;
 }
 
 /**
@@ -43,24 +44,18 @@ function validator(opts) {
  *  @param cb The callback function.
  */
 function date(opts, cb) {
-  var errors = opts.errors
-    , rule = opts.rule
-    , value = opts.value
-    , source = opts.source
-    , validate = rule.required
-        || (!rule.required && source.hasOwnProperty(rule.field)
-              && source[rule.field]);
-
+  var validate = this.rule.required
+    || (!this.rule.required && this.source.hasOwnProperty(this.rule.field)
+          && this.source[this.rule.field]);
   if(validate) {
-    if(value === undefined && !rule.required) {
+    if(this.value === undefined && !this.rule.required) {
       return cb();
     }
-    opts.required();
-    opts.pattern();
-
-    validator(opts);
+    this.required();
+    this.pattern();
+    validator.call(this);
   }
-  cb(errors);
+  cb(this.errors);
 }
 
 module.exports = function() {
