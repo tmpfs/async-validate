@@ -26,9 +26,32 @@
     "validator": "~4.0.1"
   },
   "scripts": {
+    "docs": "npm run readme",
+    "readme": "mdp --force -v",
     "browserify": "browserify -o async-validate.js -e ./lib/schema.js",
     "clean": "rm -rf coverage",
     "test": "NODE_ENV=test mocha test/global ${SPEC:-test/spec}",
     "cover": "NODE_ENV=test istanbul cover _mocha -- test/global ${SPEC:-test/spec}"
+  },
+  "mdp": {
+    "title": "Async Validate",
+    "pedantic": true,
+    "include": "doc/readme",
+    "require": "lib",
+    "links": "links.md",
+    "toc": "Table of Contents",
+    "base": "https://github.com/freeformsytems/async-validate",
+    "partial": [
+      {
+        "inc": [
+          "introduction.md",
+          "install.md",
+          "usage.md",
+          "developer.md",
+          "browser.md",
+          "license.md"
+        ]
+      }
+    ]
   }
 }
