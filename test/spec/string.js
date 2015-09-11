@@ -21,9 +21,8 @@ describe("async-validate:", function() {
       name: function(cb) {
         if(!/^[a-z0-9]+$/.test(this.value)) {
           this.raise(
-            this.rule,
             "%s must be lowercase alphanumeric characters",
-            this.rule.field);
+            this.field);
         }
         cb(this.errors);
       }

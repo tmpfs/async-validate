@@ -19,17 +19,14 @@ function validator() {
   //console.log('date valid %s', dt.isValid());
   if(!dt) {
     this.raise(
-      this.rule,
       format(this.messages.date.parse, this.rule.field, this.value));
   }else if(!dt.isValid()) {
     if(this.rule.format) {
       this.raise(
-        this.rule,
         format(this.messages.date.format,
           this.rule.field, this.value, this.rule.format));
     }else{
       this.raise(
-        this.rule,
         format(this.messages.date.invalid, this.rule.field, this.value));
     }
   }

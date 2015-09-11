@@ -37,8 +37,7 @@ describe("async-validate:", function() {
   it("should verify custom error message helper", function(done) {
     var descriptor = {
       name: function(cb) {
-        this.raise(
-          this.rule, "%s is a required field", this.rule.field);
+        this.raise("%s is a required field", this.field);
         cb(this.errors);
       }
     }
