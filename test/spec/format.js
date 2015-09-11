@@ -3,6 +3,13 @@ var expect = require('chai').expect
 
 describe("async-validate:", function() {
 
+  it("should use format string", function(done) {
+    var res = format('foo');
+    expect(res).to.eql('foo');
+    done();
+  });
+
+
   it("should format string (%s)", function(done) {
     var res = format('%s', 'foo');
     expect(res).to.eql('foo');
@@ -36,6 +43,12 @@ describe("async-validate:", function() {
   it("should format json array (%j)", function(done) {
     var res = format('%j', [1,2,3]);
     expect(res).to.eql('[1,2,3]');
+    done();
+  });
+
+  it("should format escaped string (%s)", function(done) {
+    var res = format('%%s', 'foo');
+    expect(res).to.eql('%s foo');
     done();
   });
 

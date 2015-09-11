@@ -7,7 +7,7 @@ describe("async-validate:", function() {
     iterator.mapSeries([], function noop(){}, done);
   });
 
-  it("should map multipe items", function(done) {
+  it("should map multiple items", function(done) {
     iterator.map([1,2,3],
       function multiply(num, cb) {
         cb(null, num * 10); 
