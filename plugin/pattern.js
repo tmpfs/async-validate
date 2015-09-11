@@ -8,20 +8,16 @@
  *  @param cb The callback function.
  */
 function pattern(opts, cb) {
-  var errors = opts.errors
-    , rule = opts.rule
-    , value = opts.value
-    , source = opts.source
-    , validate = rule.required
-        || (!rule.required && source.hasOwnProperty(rule.field));
+  var validate = this.rule.required
+    || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 
   if(validate) {
-    if(value === undefined && !rule.required) {
+    if(this.value === undefined && !this.rule.required) {
       return cb();
     }
-    opts.pattern();
+    this.pattern();
   }
-  cb(errors);
+  cb(this.errors);
 }
 
 module.exports = function() {

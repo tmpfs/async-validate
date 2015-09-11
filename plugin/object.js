@@ -5,23 +5,19 @@
  *  @param cb The callback function.
  */
 function object(opts, cb) {
-  var errors = opts.errors
-    , rule = opts.rule
-    , value = opts.value
-    , source = opts.source
-    , validate = rule.required
-        || (!rule.required && source.hasOwnProperty(rule.field));
+  var validate = this.rule.required
+    || (!this.rule.required && this.source.hasOwnProperty(this.rule.field));
 
   if(validate) {
-    if(value === undefined && !rule.required) {
+    if(this.value === undefined && !this.rule.required) {
       return cb();
     }
-    opts.required();
-    if(rule.required || value !== undefined) {
-      opts.type();
+    this.required();
+    if(this.rule.required || this.value !== undefined) {
+      this.type();
     }
   }
-  cb(errors);
+  cb(this.errors);
 }
 
 module.exports = function() {
