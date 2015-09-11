@@ -8,7 +8,6 @@ var messages = {
   whitespace: '%s cannot be empty',
   date: {
     format: "%s date %s is invalid for format %s",
-    parse: "%s date could not be parsed, %s is invalid ",
     invalid: "%s date %s is invalid"
   },
   types: {

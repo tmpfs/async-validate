@@ -57,6 +57,20 @@ describe("async-validate:", function(done) {
     });
   });
 
+  it("should error on invalid date parse without a format", function(done) {
+    var descriptor = {
+      active: {type: "date", local: true}
+    }
+    var validator = new schema(descriptor);
+    validator.validate({active: "foo"}, function(errors, fields) {
+      assert.equal(errors.length, 1);
+      console.dir(errors);
+      //assert.equal(errors[0].message,
+        //"active date 2013-06-50 is invalid for format YYYY-MM-DD");
+      done();
+    });
+  });
+
   it("should validate date value using a format", function(done) {
     var descriptor = {
       active: {type: "date", format: "YYYY-MM-DD"}

@@ -8,10 +8,7 @@ function validator() {
   var mmt = this.rule.local ? moment : moment.utc;
   var dt = !this.rule.format
     ? mmt(new Date(this.value)) : mmt(this.value, this.rule.format);
-  if(!dt) {
-    this.raise(
-      format(this.messages.date.parse, this.field, this.value));
-  }else if(!dt.isValid()) {
+  if(!dt.isValid()) {
     if(this.rule.format) {
       this.raise(
         format(this.messages.date.format,
