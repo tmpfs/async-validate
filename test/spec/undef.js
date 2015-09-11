@@ -121,6 +121,19 @@ describe("async-validate:", function() {
     });
   });
 
+  it("should allow undefined method field if not required", function(done) {
+    var descriptor = {
+      mock: {type: 'method', required: false}
+    }
+    var validator = new schema(descriptor);
+    var source = {mock: undefined};
+    var opts = {};
+    validator.validate(source, opts, function(errors, fields) {
+      expect(errors).to.eql(null);
+      done();
+    });
+  });
+
   it("should allow undefined number field if not required", function(done) {
     var descriptor = {
       mock: {type: 'number', required: false}
