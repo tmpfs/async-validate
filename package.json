@@ -46,7 +46,17 @@
         "inc": [
           "introduction.md",
           "install.md",
-          "usage.md",
+          "usage.md"
+        ]
+      },
+      {
+        "inc": "../usage.js",
+        "type": "code",
+        "language": "javascript"
+      },
+      {
+        "inc": [
+          "guide.md",
           "developer.md",
           "browser.md",
           "license.md"
