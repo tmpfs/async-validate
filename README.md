@@ -116,14 +116,10 @@ var schema = require('async-validate');
 var ValidationError = schema.ValidationError;
 var descriptor = {
   name: function(opts, cb) {
-    var errors = opts.errors;
-    if(!/^[a-z0-9]+$/.test(value)) {
-      errors.push(
-        new ValidationError(
-          util.format("%s must be lowercase alphanumeric characters",
-            opts.rule.field)));
+    if(!/^[a-z0-9]+$/.test(opts.value)) {
+      this.raise(opts.rule, '%s must be lowercase alphanumeric characters', opts.rule.field);
     }
-    cb(errors);
+    cb(opts.errors);
   }
 }
 var validator = new schema(descriptor);
@@ -142,7 +138,7 @@ var descriptor = {
   email: [
     {type: "string", required: true, pattern: schema.pattern.email},
     function(opts, cb) {
-      var errors = [];
+      var errors = opts.errors;
       // test if email address already exists in a database
       // and add a validation error to the errors array if it does
       cb(errors);
