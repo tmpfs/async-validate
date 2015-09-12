@@ -509,7 +509,7 @@ In this instance when you only want the first error encountered use the `single`
 function plugin(plugins)
 ```
 
-Static plugin loader method, accepts an array of plugin functions.
+Static plugin loader method; accepts an array of plugin functions.
 
 ##### Schema.clone
 
@@ -517,7 +517,7 @@ Static plugin loader method, accepts an array of plugin functions.
 function clone(source, [target])
 ```
 
-Static clone helper, deep copies simple objects and arrays, `RegExp` instances are passed by reference.
+Static clone; deep copies simple objects and arrays, `RegExp` instances are passed by reference.
 
 #### Reason
 
@@ -559,9 +559,7 @@ Determine if this validation is being performed against the root source object.
 function getReason(id, [opts])
 ```
 
-Create a reason for a validation error.
-
-Returns a `Reason` instance suitable for passing as the first argument to [raise](#raise).
+Create a reason for a validation error, returns a `Reason` instance suitable for passing as the first argument to [raise](#raise).
 
 ##### raise
 
@@ -597,9 +595,7 @@ Compare two arrays, return `false` if they are equal otherwise return an array t
 function required()
 ```
 
-Validate a required field, typically invoked from the validation rule function.
-
-Raises an error if a required field is not present.
+Validate a required field, typically invoked from the validation rule function, raises an error if a required field is not present.
 
 ##### pattern
 
@@ -607,9 +603,7 @@ Raises an error if a required field is not present.
 function pattern()
 ```
 
-Validate using a regexp pattern, typically invoked from the validation rule function.
-
-Raises an error if a value fails to match a rule regexp pattern.
+Validate using a regexp pattern, typically invoked from the validation rule function, raises an error if a value fails to match a rule regexp pattern.
 
 ## Developer
 
