@@ -216,11 +216,9 @@ The [plugin fixture](https://github.com/freeformsystems/async-validate/blob/mast
 
 A descriptor defines the validation rules as a map of fields to rules.
 
-This section describes the rule fields recognised by the module plugins, typically you would create a type plugin so that the type is reusable but you may also inline rule functions:
-
 #### Type Constants
 
-Indicates the `type` of validator to use. A type corresponds to a plugin function and the plugin should have been loaded.
+Indicates the `type` of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
 
 Recognised type values are:
 
