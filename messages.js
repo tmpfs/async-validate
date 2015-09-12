@@ -6,6 +6,7 @@ var messages = {
   required: '%s is required',
   enum: '%s must be one of %s',
   whitespace: '%s cannot be empty',
+  additional: 'extraneous fields (%s) found in %s',
   date: {
     format: "%s date %s is invalid for format %s",
     invalid: "%s date %s is invalid"
