@@ -13,6 +13,7 @@ Table of Contents
     * [Plugins](#plugins)
     * [Descriptor](#descriptor)
       * [Type Constants](#type-constants)
+      * [Fields](#fields)
       * [Message](#message)
       * [Required](#required)
       * [Pattern](#pattern)
@@ -236,6 +237,10 @@ Recognised type values are:
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
+
+#### Fields
+
+Rules of the `object` and `array` type may declare a `fields` object which declares a nested descriptor, see [deep rules](#deep-rules).
 
 #### Message
 

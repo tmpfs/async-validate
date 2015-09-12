@@ -147,6 +147,10 @@ Recognised type values are:
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
 
+#### Fields
+
+Rules of the `object` and `array` type may declare a `fields` object which declares a nested descriptor, see [deep rules](#deep-rules).
+
 #### Message
 
 The `message` rule property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
