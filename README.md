@@ -90,7 +90,7 @@ The rule function is assigned directly to the field:
 ```javascript
 var descriptor = {
   id: function(cb) {
-    // if has error condition call this.raise() 
+    // if this.value has error condition call this.raise() 
     cb(this.errors);
   }
 }
@@ -106,7 +106,7 @@ var descriptor = {
     foo: 'bar',
     validator: function(cb) {
       console.log(this.foo);
-      // if has error condition call this.raise() 
+      // if this.value has error condition call this.raise() 
       cb(this.errors);
     }
   }
@@ -120,7 +120,7 @@ Or as a plugin module that assigns the rule type as a static plugin method:
 ```javascript
 function plugin() {
   this.main.id = function(cb) {
-    // if has error condition call this.raise() 
+    // if this.value has error condition call this.raise() 
     cb(this.errors);
   }
 }
