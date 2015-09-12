@@ -44,7 +44,7 @@ var descriptor = {
 
 #### Plugin Rule
 
-Plugin function that assigns the rule function as a static method.
+Plugin that assigns the rule function as a static method.
 
 Create a plugin module:
 
@@ -248,6 +248,7 @@ If you need to validate deep object properties you may do so for validation rule
 
 ```javascript
 var descriptor = {
+  name: {type: "string", required: true},
   address: {
     type: "object",
     required: true,
@@ -256,12 +257,11 @@ var descriptor = {
       city: {type: "string", required: true},
       zip: {type: "string", required: true, len: 8, message: "invalid zip"}
     }
-  },
-  name: {type: "string", required: true}
+  }
 }
 var validator = new schema(descriptor);
 validator.validate({address: {}}, function(errors, fields) {
-  // errors for street, city, and zip
+  // errors for name, street, city, zip
 });
 ```
 
@@ -271,6 +271,7 @@ Deep rule validation creates a schema for the nested rules so you can also speci
 
 ```javascript
 var descriptor = {
+  name: {type: "string", required: true},
   address: {
     type: "object",
     required: true,
@@ -280,12 +281,11 @@ var descriptor = {
       city: {type: "string", required: true},
       zip: {type: "string", required: true, len: 8, message: "invalid zip"}
     }
-  },
-  name: {type: "string", required: true}
+  }
 }
 var validator = new schema(descriptor);
 validator.validate({address: {}}, function(errors, fields) {
-  // now only errors for street
+  // now only errors for name and street
 });
 ```
 
