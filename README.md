@@ -515,16 +515,6 @@ Options:
 * `field`: Field name for the root object, default is `source` when not specified.
 * `rules`: Rules to apply to the root source object, may be an array or a single rule object.
 
-Consider the rule:
-
-```javascript
-{name: {type: "string", required: true, min: 10, pattern: /^[^-].*$/}}
-```
-
-When supplied with a source object such as `{name: "-name"}` the validation rule would generate two errors, as the pattern does not match and the string length is less then the required minimum length for the field.
-
-In this instance when you only want the first error encountered use the `single` option.
-
 ##### Schema.plugin
 
 ```javascript
@@ -566,6 +556,7 @@ Encapsulates the data associated with a validation rule and the value to be vali
 * `options`: The options passed to `validate()`.
 * `messages`: Reference to the messages assigned to `options`.
 * `errors`: Array of errors for the field validation.
+* `reasons`: Map of default error reasons.
 
 ##### isRoot
 

@@ -37,16 +37,6 @@ Options:
 * `field`: Field name for the root object, default is `source` when not specified.
 * `rules`: Rules to apply to the root source object, may be an array or a single rule object.
 
-Consider the rule:
-
-```javascript
-{name: {type: "string", required: true, min: 10, pattern: /^[^-].*$/}}
-```
-
-When supplied with a source object such as `{name: "-name"}` the validation rule would generate two errors, as the pattern does not match and the string length is less then the required minimum length for the field.
-
-In this instance when you only want the first error encountered use the `single` option.
-
 ##### Schema.plugin
 
 ```javascript
