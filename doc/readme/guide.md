@@ -226,7 +226,7 @@ Recognised type values are:
 * `float`: Must be of type `number` and a floating point number.
 * `array`: Must be an array as determined by `Array.isArray`.
 * `object`: Must be of type `object` and not `Array.isArray`.
-* `enum`: Value must exist in the `enum`.
+* `enum`: Value must exist in the `list`.
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
@@ -271,11 +271,11 @@ Note that `values` is expanded to `fields`, see [deep rules](#deep-rules).
 
 #### Enumerable
 
-To validate a value from a list of possible values use the `enum` type with a `enum` property listing the valid values for the field, for example:
+To validate a value from a list of possible values use the `enum` type with a `list` property containing the valid values for the field, for example:
 
 ```javascript
 var descriptor = {
-  role: {type: "enum", enum: ['admin', 'user', 'guest']}
+  role: {type: "enum", list: ['admin', 'user', 'guest']}
 }
 ```
 
@@ -308,4 +308,3 @@ var descriptor = {
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
 
 You may wish to sanitize user input instead of testing for whitespace, see [transform](#transform) for an example that would allow you to strip whitespace.
-

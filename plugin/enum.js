@@ -6,7 +6,7 @@
 function enumerable(cb) {
   if(this.shouldValidate()) {
     this.required();
-    var list = this.rule.enum;
+    var list = this.rule.list;
     if(list.indexOf(this.value) === -1) {
       this.raise(
         this.reasons.enumerable,

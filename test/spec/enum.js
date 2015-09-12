@@ -5,7 +5,7 @@ var schema = require('../../index');
 describe("async-validate:", function() {
   it("should error on invalid enum value", function(done) {
     var descriptor = {
-      role: {type: "enum", enum: ['admin', 'user', 'guest']}
+      role: {type: "enum", list: ['admin', 'user', 'guest']}
     }
     var validator = new schema(descriptor);
     validator.validate({role: "manager"}, function(errors, fields) {
@@ -16,7 +16,7 @@ describe("async-validate:", function() {
   });
   it("should validate enum value", function(done) {
     var descriptor = {
-      role: {type: "enum", enum: ['admin', 'user', 'guest']}
+      role: {type: "enum", list: ['admin', 'user', 'guest']}
     }
     var validator = new schema(descriptor);
     validator.validate({role: "user"}, function(errors, fields) {
