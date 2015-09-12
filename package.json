@@ -58,7 +58,6 @@
         "inc": [
           "guide.md",
           "messages.md",
-          "standard-rules.md",
           "transform.md"
         ]
       },
@@ -69,6 +68,7 @@
       },
       {
         "inc": [
+          "standard-rules.md",
           "api.md",
           "developer.md",
           "browser.md",

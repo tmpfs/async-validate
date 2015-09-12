@@ -19,8 +19,8 @@ Table of Contents
       * [Multiple Rules](#multiple-rules)
       * [Deep Rules](#deep-rules)
     * [Messages](#messages)
-    * [Standard Rules](#standard-rules)
     * [Transform](#transform)
+    * [Standard Rules](#standard-rules)
     * [API](#api)
       * [Validate](#validate)
         * [Options](#options)
@@ -332,17 +332,6 @@ validator.messages(es); // ensure this schema uses the altered messages
 
 If you are defining your own validation functions it is better practice to assign the message strings to a messages object and then access the messages via the `this.messages` property within the validation function.
 
-### Standard Rules
-
-Some standard rules for common validation requirements are accessible, you may wish to reference these rules or copy and modify them.
-
-These rules must be required to be used: `require('async-validate/std-rules')`, see [std rules](https://github.com/freeformsystems/async-validate/blob/master/std-rules.js).
-
-* `field`: Typical required field.
-* `email`: Basic email validation rule using a pattern, note validating email addresses with a regular expression is [fraught with pitfalls](http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address/201378#201378), use this with caution.
-* `url`: Simple http(s) URL rule.
-* `hex`: Rule for hexadecimal color values with optional leading hash.
-
 ### Transform
 
 Sometimes it is necessary to transform a value before validation, possibly to coerce the value or to sanitize it in some way. To do this add a `transform` function to the validation rule. The property is transformed prior to validation and re-assigned to the source object to mutate the value of the property in place.
@@ -369,6 +358,17 @@ validator.validate(source, function(errors, fields) {
   console.dir(source.name);
 });
 ```
+
+### Standard Rules
+
+Some standard rules for common validation requirements are accessible, you may wish to reference these rules or copy and modify them.
+
+These rules must be required to be used: `require('async-validate/std-rules')`, see [std rules](https://github.com/freeformsystems/async-validate/blob/master/std-rules.js).
+
+* `field`: Typical required field.
+* `email`: Basic email validation rule using a pattern, note validating email addresses with a regular expression is [fraught with pitfalls](http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address/201378#201378), use this with caution.
+* `url`: Simple http(s) URL rule.
+* `hex`: Rule for hexadecimal color values with optional leading hash.
 
 ### API
 
