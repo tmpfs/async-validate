@@ -1,7 +1,7 @@
 {
   "name": "async-validate",
   "description": "Asynchronous validation for object properties.",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "author": "muji <noop@xpm.io>",
   "license": "MIT",
   "repository": {
