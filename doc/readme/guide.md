@@ -79,8 +79,8 @@ var descriptor = {
   email: [
     {type: "string", required: true},
     function(cb) {
-      // test if email address already exists in a database
-      // and add a validation error to the errors array if it does
+      // test if email address (this.value) already exists 
+      // in a database and call this.raise() if it does
       cb();
     }
   ]
