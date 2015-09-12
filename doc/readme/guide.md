@@ -119,7 +119,7 @@ As a shortcut you may use all available types with:
 require('async-validate/plugin/all');
 ```
 
-See [plugins](/plugins) for the type plugins that ship with this module and [zephyr][] for documentation on the plugin system.
+See [plugins](/plugin) for the type plugins that ship with this module and [zephyr][] for documentation on the plugin system.
 
 The [plugin fixture](/test/fixtures/plugin.js) and the [plugin test](/test/spec/plugin.js) provide an example of creating a type plugin.
 

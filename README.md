@@ -161,7 +161,7 @@ The static `id` method will then be invoked for every rule of type `id`, this is
 
 ### Errors
 
-To raise an error in a validation rule call [raise](#raise), the signature for raise is equivalent to `util.format` except that it may also accept a `Reason` as the first argument.
+To raise an error in a validation rule call [raise](#raise), the signature for raise is equivalent to `util.format` except that it may also accept a [Reason](#reason) as the first argument.
 
 ```javascript
 function id(cb) {
@@ -208,7 +208,7 @@ As a shortcut you may use all available types with:
 require('async-validate/plugin/all');
 ```
 
-See [plugins](https://github.com/freeformsystems/async-validate/blob/master/plugins) for the type plugins that ship with this module and [zephyr](https://github.com/socialally/zephyr) for documentation on the plugin system.
+See [plugins](https://github.com/freeformsystems/async-validate/blob/master/plugin) for the type plugins that ship with this module and [zephyr](https://github.com/socialally/zephyr) for documentation on the plugin system.
 
 The [plugin fixture](https://github.com/freeformsystems/async-validate/blob/master/test/fixtures/plugin.js) and the [plugin test](https://github.com/freeformsystems/async-validate/blob/master/test/spec/plugin.js) provide an example of creating a type plugin.
 
