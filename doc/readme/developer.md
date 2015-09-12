@@ -13,7 +13,7 @@ npm test
 Compile test specifications for the browser (open `test/index.html`):
 
 ```
-npm test
+npm run spec
 ```
 
 ### Cover
