@@ -20,4 +20,10 @@ describe("async-validate:", function() {
     done();
   });
 
+  it("should get reason instance", function(done) {
+    var v = Validator.Type({});
+    expect(v.getReason('mock-reason', {foo: 'bar'})).to.be.an('object');
+    done();
+  });
+
 });
