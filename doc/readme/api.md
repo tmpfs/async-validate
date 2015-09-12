@@ -37,7 +37,7 @@ Rules are functions that perform validation. They are invoked in the scope of a 
 function(cb)
 ```
 
-* `cb`: Callback function to invoke when validation completes, expects array of errors instances to be passed.
+* `cb`: Callback function to invoke when validation completes, expects an array of error instances to be passed.
 
 ##### Scope
 
