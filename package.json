@@ -70,7 +70,6 @@
       },
       {
         "inc": [
-          "standard-rules.md",
           "api.md",
           "developer.md",
           "license.md"

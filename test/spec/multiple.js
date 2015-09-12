@@ -1,13 +1,13 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
-var std = require('../../std-rules')
+var assert = require('chai').assert
+  , schema = require('../../index')
+  , email = /^.+@.+\..+/;
 
 describe("async-validate:", function(done) {
   it("should validate using multiple validation rules for a field", function(done) {
     var descriptor = {
       email: [
         {type: "string", required: true},
-        {pattern: std.pattern.email, required: true}
+        {pattern: email, required: true}
       ]
     }
     var validator = new schema(descriptor);
@@ -15,8 +15,7 @@ describe("async-validate:", function(done) {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "email is required");
       assert.equal(errors[1].message,
-        "email value undefined does not match pattern "
-        + std.pattern.email);
+        "email value undefined does not match pattern " + email);
       done();
     });
   });
@@ -24,22 +23,21 @@ describe("async-validate:", function(done) {
     var descriptor = {
       email: [
         {type: "string", required: true},
-        {pattern: std.pattern.email}
+        {pattern: email}
       ]
     }
     var validator = new schema(descriptor);
     validator.validate({email: "user@example"}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message,
-        "email value user@example does not match pattern "
-        + std.pattern.email);
+        "email value user@example does not match pattern " + email);
       done();
     });
   });
   it("should validate using multiple validation rules with a validation function", function(done) {
     var descriptor = {
       email: [
-        std.email,
+        {type: 'string', pattern: email, required: true},
         function(cb) {
           var email = "user@example.com";
           if(this.value === email) {
