@@ -12,6 +12,7 @@ Table of Contents
       * [Pattern](#pattern)
       * [Range](#range)
       * [Length](#length)
+      * [Values](#values)
       * [Enumerable](#enumerable)
       * [Date Format](#date-format)
       * [Whitespace](#whitespace)
@@ -150,6 +151,14 @@ A range is defined using the `min` and `max` properties. For `string` and `array
 To validate an exact length of a field specify the `len` property. For `string` and `array` types comparison is performed on the `length` property, for the `number` type this property indicates an exact match for the `number`, ie, it may only be strictly equal to `len`.
 
 If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
+
+#### Values
+
+Used with the `array` type as a shorthand for validating array values, may be an `object` or `array` containing validation rules.
+
+When `values` is an object it is applied to all array elements in the source array otherwise each `values` entry is compared against each source array entry which allows mixed types to be used in arrays.
+
+Note that `values` is expanded to `fields`, see [deep rules](#deep-rules).
 
 #### Enumerable
 

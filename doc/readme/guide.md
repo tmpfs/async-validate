@@ -75,6 +75,14 @@ To validate an exact length of a field specify the `len` property. For `string` 
 
 If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
 
+#### Values
+
+Used with the `array` type as a shorthand for validating array values, may be an `object` or `array` containing validation rules.
+
+When `values` is an object it is applied to all array elements in the source array otherwise each `values` entry is compared against each source array entry which allows mixed types to be used in arrays.
+
+Note that `values` is expanded to `fields`, see [deep rules](#deep-rules).
+
 #### Enumerable
 
 To validate a value from a list of possible values use the `enum` type with a `enum` property listing the valid values for the field, for example:
