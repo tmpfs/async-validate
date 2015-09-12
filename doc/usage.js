@@ -1,6 +1,6 @@
-var schema = require('..')
+var Schema = require('..')
   , descriptor = {name: {type: "string", required: true}}
-  , validator = new schema(descriptor)
+  , validator = new Schema(descriptor)
   , source = {};
 
 schema.plugin(

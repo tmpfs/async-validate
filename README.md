@@ -56,9 +56,9 @@ npm i async-validate
 Usage involves defining a descriptor, assigning it to a schema and passing the object to be validated and a callback function to `validate()`:
 
 ```javascript
-var schema = require('..')
+var Schema = require('..')
   , descriptor = {name: {type: "string", required: true}}
-  , validator = new schema(descriptor)
+  , validator = new Schema(descriptor)
   , source = {};
 
 schema.plugin(
