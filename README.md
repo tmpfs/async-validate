@@ -29,12 +29,14 @@ Table of Contents
     * [API](#api)
       * [Schema](#schema)
         * [validate](#validate)
-          * [Options](#options)
+        * [Schema.clone](#schemaclone)
       * [Reason](#reason)
       * [Validator](#validator)
         * [isRoot](#isroot)
         * [getReason](#getreason)
         * [raise](#raise)
+        * [shouldValidate](#shouldvalidate)
+        * [hasAdditionalFields](#hasadditionalfields)
         * [required](#required)
         * [pattern](#pattern)
   * [Developer](#developer)
@@ -472,7 +474,7 @@ Validates a source object against the rules in the descriptor associated with th
 * `options`: An object describing processing options for the validation (optional).
 * `cb`: Callback function to invoke when validation completes (required).
 
-###### Options
+Options:
 
 * `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
 * `single`: Only ever return a single error. Typically used in conjunction with `first` when a validation rule could generate multiple errors.
@@ -490,6 +492,14 @@ Consider the rule:
 When supplied with a source object such as `{name: "-name"}` the validation rule would generate two errors, as the pattern does not match and the string length is less then the required minimum length for the field.
 
 In this instance when you only want the first error encountered use the `single` option.
+
+##### Schema.clone
+
+```javascript
+function clone(source, [target])
+```
+
+Static clone helper, deep copies simple objects and arrays, `RegExp` instances are passed by reference.
 
 #### Reason
 
@@ -546,6 +556,22 @@ Adds an error message to the list of errors encountered during validation of a v
 The first argument may optionally be a `Reason` instance returned by `getReason()` allowing a user to associate an identifier with the validation error and optional additional information. A validation error generated with a `Reason` has a `reason` field referencing the supplied reason.
 
 When replacement parameters are supplied the behaviour is identical to `util.format`.
+
+##### shouldValidate
+
+```javascript
+function shouldValidate()
+```
+
+Returns a `boolean` derived from the rule `required` property and other factors to determine if the value should be subject to the validation rule, typically invoked within a rule validation function.
+
+##### hasAdditionalFields
+
+```javascript
+function hasAdditionalFields(expected, received)
+```
+
+Compare two arrays, return `false` if they are equal otherwise return an array that is the difference between the supplied arrays.
 
 ##### required
 

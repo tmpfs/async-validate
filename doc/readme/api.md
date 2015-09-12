@@ -20,7 +20,7 @@ Validates a source object against the rules in the descriptor associated with th
 * `options`: An object describing processing options for the validation (optional).
 * `cb`: Callback function to invoke when validation completes (required).
 
-###### Options
+Options:
 
 * `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
 * `single`: Only ever return a single error. Typically used in conjunction with `first` when a validation rule could generate multiple errors.
@@ -38,6 +38,14 @@ Consider the rule:
 When supplied with a source object such as `{name: "-name"}` the validation rule would generate two errors, as the pattern does not match and the string length is less then the required minimum length for the field.
 
 In this instance when you only want the first error encountered use the `single` option.
+
+##### Schema.clone
+
+```javascript
+function clone(source, [target])
+```
+
+Static clone helper, deep copies simple objects and arrays, `RegExp` instances are passed by reference.
 
 #### Reason
 
