@@ -454,6 +454,12 @@ These rules must be required to be used: `require('async-validate/std-rules')`, 
 
 #### Schema
 
+```javascript
+function Schema(descriptor, [opts])
+```
+
+Encapsulates the rules associated with a descriptor and the logic for performing validation.
+
 ##### validate
 
 ```javascript
@@ -497,7 +503,11 @@ You must supply a reason `id`; if `opts` are passed they are assigned as propert
 
 #### Validator
 
-The `Validator` class encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance which exposes the following public fields:
+```javascript
+function Validator(opts)
+```
+
+Encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance which exposes the following public fields:
 
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated.
 * `value`: The value of the source object property being validated.
