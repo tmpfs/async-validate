@@ -133,24 +133,31 @@ var descriptor = {
 
 #### Plugin Rule
 
-Plugin function that assigns the rule function as a static method:
+Plugin function that assigns the rule function as a static method.
+
+Create a plugin module:
 
 ```javascript
-function plugin() {
-  this.main.id = function(cb) {
+module.exports = function() {
+  // declare static rule function with name `id`
+  this.main.id = function id(cb) {
     // if this.value has error condition call this.raise() 
     cb();
   }
 }
+```
 
+Load and use the plugin:
+
+```javascript
 var Schema = require('async-validate');
-Schema.plugin([plugin]);
+Schema.plugin([require('./rule')]);
 var descriptor = {
   id: {type: 'id'}
 }
 ```
 
-The static `id` method will then be invoked for every rule of type `id`, this is the most portable method as it enables easily moving validation rules into modules and packages that may be shared.
+The static `id` method will then be invoked for every rule of type `id`, this is the most portable style as it enables easily moving validation rules into modules and packages that may be shared.
 
 ### Errors
 
