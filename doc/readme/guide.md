@@ -2,15 +2,17 @@
 
 ### Rules
 
-Rules are functions that perform validation of a value. They are invoked in the scope of a [validator](/lib/validator.js) so you should not call `bind()` on validation rule functions.
-
 ```javascript
 function rule(cb)
 ```
 
-* `cb`: Callback function to invoke when validation completes, expects an array of error instances to be passed.
+Rules are functions that perform validation of a value. They are invoked in the scope of a [validator](/lib/validator.js).
+
+A rule function can access all relevant fields using `this`, see the [validator docs](#validator) and should [raise](#raise) an error if `this.value` fails a validation test, see [errors](#errors).
 
 The [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular.
+
+***You should not call `bind()` on validation rule functions.***
 
 #### Inline Rule
 
