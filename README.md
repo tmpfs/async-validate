@@ -522,9 +522,9 @@ function validate(source, [options], cb)
 
 Validates a source object against the schema rules.
 
-* `source`: The object to validate (required).
-* `options`: An object describing processing options for the validation (optional).
-* `cb`: Callback function to invoke when validation completes (required).
+* `source`: The object to validate.
+* `options`: An object describing processing options for the validation.
+* `cb`: Callback function to invoke when validation completes.
 
 Options:
 
