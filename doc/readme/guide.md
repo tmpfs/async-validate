@@ -72,7 +72,7 @@ The static `id` method will then be invoked for every rule of type `id`, this is
 
 ### Errors
 
-To raise an error in a validation rule call [raise](#raise), the signature for raise is equivalent to `util.format` except that it may also accept a `Reason` as the first argument.
+To raise an error in a validation rule call [raise](#raise), the signature for raise is equivalent to `util.format` except that it may also accept a [Reason](#reason) as the first argument.
 
 ```javascript
 function id(cb) {

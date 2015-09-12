@@ -1,6 +1,5 @@
 var assert = require('chai').assert;
 var schema = require('../../index');
-var ValidationError = require('../../lib/error');
 
 describe("async-validate:", function() {
   it("should validate a required string field is valid", function(done) {
@@ -43,7 +42,6 @@ describe("async-validate:", function() {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "name is required");
       assert.equal(fields.name.length, 1);
-      assert.isTrue((fields.name[0] instanceof ValidationError));
       done();
     });
   });
@@ -56,7 +54,6 @@ describe("async-validate:", function() {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "name is required");
       assert.equal(fields.name.length, 1);
-      assert.isTrue((fields.name[0] instanceof ValidationError));
       done();
     });
   });
