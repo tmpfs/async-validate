@@ -1,4 +1,3 @@
-var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../../index');
 
