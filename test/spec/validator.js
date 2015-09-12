@@ -10,10 +10,13 @@ describe("async-validate:", function() {
   });
 
   it("should use default message", function(done) {
-    var v = Validator.Type({field: 'mock', rule: {}});
-    expect(v.reason()).to.eql(undefined);
+    var v = Validator.Type({field: 'mock', rule: {}, errors: []});
     // trigger default message code path
     v.error();
+
+    // trigger raise with no paramters
+    var err = v.raise('mock message');
+    expect(err.message).to.eql('mock message');
     done();
   });
 

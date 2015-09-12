@@ -29,7 +29,6 @@ describe("async-validate:", function() {
         message: function(message, parameters) {
           expect(message).to.be.a('string');
           expect(parameters).to.be.an('array');
-          expect(this.reason()).to.eql(this.reasons.required);
           return 'Name is required';
         }
       },

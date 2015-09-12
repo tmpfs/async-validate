@@ -22,8 +22,9 @@ function object(cb) {
         expected, Object.keys(this.value));
 
       if(additional) {
-        this.reason(this.reasons.additional);
-        this.raise(this.messages.additional, additional.join(', '), this.field);
+        this.raise(
+          this.reasons.additional,
+          this.messages.additional, additional.join(', '), this.field);
       }
     }
   }
