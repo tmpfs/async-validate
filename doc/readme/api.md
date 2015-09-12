@@ -88,6 +88,7 @@ Encapsulates the data associated with a validation rule and the value to be vali
 * `options`: The options passed to `validate()`.
 * `messages`: Reference to the messages assigned to `options`.
 * `errors`: Array of errors for the field validation.
+* `reasons`: Map of default error reasons.
 
 ##### isRoot
 
