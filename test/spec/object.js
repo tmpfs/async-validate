@@ -10,7 +10,6 @@ describe("async-validate:", function() {
     var validator = new schema(descriptor);
     validator.validate({address: []}, function(errors, fields) {
       assert.equal(errors.length, 1);
-      //console.log(errors[0].message);
       assert.equal(errors[0].message, "address is not an object");
       done();
     });
