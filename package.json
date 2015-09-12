@@ -24,13 +24,15 @@
     "chai": "~3.2.0",
     "istanbul": "~0.3.17",
     "mocha": "~2.3.2",
-    "moment": "~2.10.6"
+    "moment": "~2.10.6",
+    "require-dir": "~0.3.0"
   },
   "scripts": {
     "docs": "npm run readme",
     "readme": "mdp --force -v",
     "browserify": "browserify -o async-validate.js -e ./lib/schema.js",
     "clean": "rm -rf coverage ./async-validate.js",
+    "spec": "browserify -o test/spec.js -e test/index.js",
     "test": "NODE_ENV=test mocha test/global ${SPEC:-test/spec}",
     "cover": "NODE_ENV=test istanbul cover _mocha -- test/global ${SPEC:-test/spec}"
   },

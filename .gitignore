@@ -1,5 +1,6 @@
 .DS_Store
 /async-validate.js
+/test/spec.js
 *.bak
 node_modules
 coverage

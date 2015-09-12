@@ -48,6 +48,7 @@ Table of Contents
         * [range](#range)
   * [Developer](#developer)
     * [Test](#test)
+    * [Spec](#spec)
     * [Cover](#cover)
     * [Browserify](#browserify)
     * [Clean](#clean)
@@ -648,6 +649,14 @@ Validates that a value falls within a given range or is of a specific length, ty
 ### Test
 
 Run the test specifications:
+
+```
+npm test
+```
+
+### Spec
+
+Compile test specifications for the browser (open `test/index.html`):
 
 ```
 npm test
