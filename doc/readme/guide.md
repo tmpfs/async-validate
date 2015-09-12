@@ -72,7 +72,9 @@ The static `id` method will then be invoked for every rule of type `id`, this is
 
 ### Errors
 
-To raise an error in a validation rule call `raise()`:
+To raise an error in a validation rule call [raise](#raise).
+
+The signature for raise is equivalent to `util.format` except that it may also accept a `Reason` as the first argument, see [raise](#raise).
 
 ```javascript
 function id(cb) {
@@ -83,7 +85,21 @@ function id(cb) {
 }
 ```
 
-The signature for raise is equivalent to `util.format` except that it may also accept a `Reason` as the first argument, see [raise](#raise).
+Or decorate the error with a reason:
+
+```javascript
+function id(cb) {
+  var reason;
+  if(!/^[a-z0-9-]+$/i.test(this.value)) {
+    reason = this.getReason(
+      'id', {description: 'Field value failed pattern match'});
+    this.raise(reason, '%s is not a valid id', this.field); 
+  }
+  cb();
+}
+```
+
+Adding a reason allows associating an identifier with an error and optional meta data about the error reason.
 
 ### Plugins
 
