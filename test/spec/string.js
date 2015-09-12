@@ -24,7 +24,7 @@ describe("async-validate:", function() {
             "%s must be lowercase alphanumeric characters",
             this.field);
         }
-        cb(this.errors);
+        cb();
       }
     }
     var validator = new schema(descriptor);

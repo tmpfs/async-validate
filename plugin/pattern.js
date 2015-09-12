@@ -10,7 +10,7 @@ function pattern(cb) {
   if(this.shouldValidate()) {
     this.pattern();
   }
-  cb(this.errors);
+  cb();
 }
 
 module.exports = function() {

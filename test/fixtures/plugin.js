@@ -3,7 +3,7 @@ function id(cb) {
   if(!re.test(this.value)) {
     this.raise('%s is not a valid identifier', this.field);
   }
-  cb(this.errors);
+  cb();
 }
 
 module.exports = function() {

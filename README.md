@@ -91,7 +91,7 @@ The rule function is assigned directly to the field:
 var descriptor = {
   id: function(cb) {
     // if this.value has error condition call this.raise() 
-    cb(this.errors);
+    cb();
   }
 }
 ```
@@ -107,7 +107,7 @@ var descriptor = {
     validator: function(cb) {
       console.log(this.foo);
       // if this.value has error condition call this.raise() 
-      cb(this.errors);
+      cb();
     }
   }
 }
@@ -121,7 +121,7 @@ Or as a plugin module that assigns the rule type as a static plugin method:
 function plugin() {
   this.main.id = function(cb) {
     // if this.value has error condition call this.raise() 
-    cb(this.errors);
+    cb();
   }
 }
 
@@ -259,7 +259,7 @@ var descriptor = {
     function(cb) {
       // test if email address already exists in a database
       // and add a validation error to the errors array if it does
-      cb(this.errors);
+      cb();
     }
   ]
 }

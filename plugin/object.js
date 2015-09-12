@@ -28,8 +28,7 @@ function object(cb) {
       }
     }
   }
-
-  cb(this.errors);
+  cb();
 }
 
 module.exports = function() {

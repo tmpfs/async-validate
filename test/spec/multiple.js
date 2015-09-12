@@ -47,7 +47,7 @@ describe("async-validate:", function(done) {
           if(this.value === email) {
             this.raise("Email address %s already exists", email);
           }
-          cb(this.errors);
+          cb();
         }
       ]
     }

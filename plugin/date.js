@@ -33,7 +33,7 @@ function date(cb) {
     this.pattern();
     validator.call(this);
   }
-  cb(this.errors);
+  cb();
 }
 
 module.exports = function() {

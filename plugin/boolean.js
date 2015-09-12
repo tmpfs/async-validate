@@ -9,7 +9,7 @@ function bool(cb) {
     this.required();
     this.type();
   }
-  cb(this.errors);
+  cb();
 }
 
 module.exports = function() {

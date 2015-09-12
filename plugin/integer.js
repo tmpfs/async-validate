@@ -9,7 +9,7 @@ function integer(cb) {
     this.type();
     this.range();
   }
-  cb(this.errors);
+  cb();
 }
 
 module.exports = function() {

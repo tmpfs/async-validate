@@ -61,7 +61,7 @@ describe("async-validate:", function() {
     var descriptor = {
       name: function(cb) {
         this.raise("%s is a required field", this.field);
-        cb(this.errors);
+        cb();
       }
     }
     var validator = new schema(descriptor);

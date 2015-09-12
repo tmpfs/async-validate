@@ -33,7 +33,7 @@ describe("async-validate:", function() {
   });
 
   it("should error on validate with no source", function(done) {
-    var validator = new schema({name: function(cb){cb(this.errors)}}); 
+    var validator = new schema({name: function(cb){cb()}}); 
     function fn() {
       validator.validate();
     }
@@ -43,7 +43,7 @@ describe("async-validate:", function() {
   });
 
   it("should error on validate with no callback", function(done) {
-    var validator = new schema({name: function(cb){cb(this.errors)}}); 
+    var validator = new schema({name: function(cb){cb()}}); 
     function fn() {
       validator.validate({});
     }

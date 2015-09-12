@@ -8,7 +8,7 @@ function enumerable(cb) {
     this.required();
     this.enumerable();
   }
-  cb(this.errors);
+  cb();
 }
 
 module.exports = function() {

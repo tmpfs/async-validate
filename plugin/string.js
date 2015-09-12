@@ -14,7 +14,7 @@ function string(cb) {
       this.whitespace();
     }
   }
-  cb(this.errors);
+  cb();
 }
 
 module.exports = function() {
