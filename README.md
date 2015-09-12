@@ -97,7 +97,7 @@ function rule(cb)
 
 Rules are functions that perform validation of a value. They are invoked in the scope of a validator ([file](https://github.com/freeformsystems/async-validate/blob/master/lib/validator.js), [api docs](#validator)).
 
-A rule function can access all relevant fields using `this` and should [raise](#raise) an error if `this.value` fails a validation test, see [errors](#errors).
+A rule function can access all relevant properties and methods using `this` and should [raise](#raise) an error if `this.value` fails a validation test, see [errors](#errors).
 
 The [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular.
 
