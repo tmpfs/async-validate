@@ -41,6 +41,8 @@ Table of Contents
         * [hasAdditionalFields](#hasadditionalfields)
         * [required](#required)
         * [pattern](#pattern)
+        * [type](#type)
+        * [range](#range)
   * [Developer](#developer)
     * [Test](#test)
     * [Cover](#cover)
@@ -595,7 +597,7 @@ Compare two arrays, return `false` if they are equal otherwise return an array t
 function required()
 ```
 
-Validate a required field, typically invoked from the validation rule function, raises an error if a required field is not present.
+Validate a required field, typically invoked from a rule function, raises an error if a required field is not present.
 
 ##### pattern
 
@@ -603,7 +605,23 @@ Validate a required field, typically invoked from the validation rule function, 
 function pattern()
 ```
 
-Validate using a regexp pattern, typically invoked from the validation rule function, raises an error if a value fails to match a rule regexp pattern.
+Validate using a regexp pattern, typically invoked from a rule function, raises an error if a value fails to match a rule regexp pattern.
+
+##### type
+
+```javascript
+function type()
+```
+
+Validates the type of a value, typically invoked from a rule function, raises an error if a value is not of the correct type.
+
+##### range
+
+```javascript
+function range()
+```
+
+Validates that a value falls within a given range or is of a specific length, typically invoked from a rule function, raises an error if a value is out of bounds.
 
 ## Developer
 
