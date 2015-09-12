@@ -147,6 +147,10 @@ Recognised type values are:
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
 
+#### Additional
+
+When a rule is of the `object` type and `additional` is set to `false` an error is raised if the source object contains any properties not in the schema.
+
 #### Fields
 
 Rules of the `object` and `array` type may declare a `fields` object which declares a nested descriptor, see [deep rules](#deep-rules).

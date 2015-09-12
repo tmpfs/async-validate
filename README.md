@@ -13,6 +13,7 @@ Table of Contents
     * [Plugins](#plugins)
     * [Descriptor](#descriptor)
       * [Type Constants](#type-constants)
+      * [Additional](#additional)
       * [Fields](#fields)
       * [Message](#message)
       * [Required](#required)
@@ -237,6 +238,10 @@ Recognised type values are:
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
+
+#### Additional
+
+When a rule is of the `object` type and `additional` is set to `false` an error is raised if the source object contains any properties not in the schema.
 
 #### Fields
 
