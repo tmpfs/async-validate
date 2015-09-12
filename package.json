@@ -29,7 +29,7 @@
   "scripts": {
     "docs": "npm run readme",
     "readme": "mdp --force -v",
-    "browserify": "browserify -o async-validate.js -e ./lib/schema.js",
+    "browserify": "browserify -o async-validate.js -e ./lib/schema.js && du -bh async-validate.js",
     "clean": "rm -rf coverage ./async-validate.js",
     "spec": "browserify -o test/spec.js -e test/index.js",
     "test": "NODE_ENV=test mocha test/global ${SPEC:-test/spec}",
