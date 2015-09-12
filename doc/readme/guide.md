@@ -249,7 +249,8 @@ If you need to validate deep object properties you may do so for validation rule
 ```javascript
 var descriptor = {
   address: {
-    type: "object", required: true,
+    type: "object",
+    required: true,
     fields: {
       street: {type: "string", required: true},
       city: {type: "string", required: true},
@@ -259,8 +260,8 @@ var descriptor = {
   name: {type: "string", required: true}
 }
 var validator = new schema(descriptor);
-validator.validate({ address: {} }, function(errors, fields) {
-  // errors for street, city, zip and name
+validator.validate({address: {}}, function(errors, fields) {
+  // errors for street, city, and zip
 });
 ```
 
@@ -271,7 +272,9 @@ Deep rule validation creates a schema for the nested rules so you can also speci
 ```javascript
 var descriptor = {
   address: {
-    type: "object", required: true, options: {single: true, first: true},
+    type: "object",
+    required: true,
+    options: {single: true, first: true},
     fields: {
       street: {type: "string", required: true},
       city: {type: "string", required: true},
@@ -281,8 +284,8 @@ var descriptor = {
   name: {type: "string", required: true}
 }
 var validator = new schema(descriptor);
-validator.validate({ address: {} }, function(errors, fields) {
-  // now only errors for street and name
+validator.validate({address: {}}, function(errors, fields) {
+  // now only errors for street
 });
 ```
 
@@ -291,7 +294,9 @@ The parent rule is also validated so if you have a set of rules such as:
 ```javascript
 var descriptor = {
   roles: {
-    type: "array", required: true, len: 3,
+    type: "array",
+    required: true,
+    len: 3,
     fields: {
       0: {type: "string", required: true},
       1: {type: "string", required: true},
