@@ -4,6 +4,7 @@
   "version": "0.4.11",
   "author": "muji <noop@xpm.io>",
   "license": "MIT",
+  "browser": "./lib/schema.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/freeformsystems/async-validate.git"
