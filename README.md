@@ -282,8 +282,9 @@ The easiest way to achieve this is to assign a `message` to a rule:
 If you just want to change the default messages:
 
 ```javascript
-var schema = require('async-validate');
-schema.messages.required = "%s is a required field";  // change the message
+var schema = require('async-validate')
+  , messages = require('async-validate/messages');
+messages.required = "%s is a required field";  // change the message
 ...
 ```
 
@@ -303,8 +304,9 @@ validator.messages(es);
 Or you could clone a default messages instance and then assign language specific messages to the schema using the `messages` method.
 
 ```javascript
-var schema = require('async-validate');
-var es = schema.messages.clone();
+var schema = require('async-validate')
+  , messages = require('async-validate/messages')
+var es = schema.clone(messages);
 es.required = "%s es un campo obligatorio";  // change the message
 var descriptor = {name:{type: "string", required: true}};
 var validator = new schema(descriptor);
