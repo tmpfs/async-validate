@@ -1,6 +1,5 @@
-var util = require('util');
-var assert = require('chai').assert;
-var schema = require('../../index');
+var expect = require('chai').expect
+  , schema = require('../../index');
 
 describe("async-validate:", function() {
 
@@ -16,8 +15,8 @@ describe("async-validate:", function() {
     }
     var validator = new schema(descriptor);
     validator.validate({id: "-hyphen"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "id is not a valid identifier");
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql("id is not a valid identifier");
       done();
     });
   });
@@ -28,8 +27,7 @@ describe("async-validate:", function() {
     }
     var validator = new schema(descriptor);
     validator.validate({id: "my-valid-id"}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+      expect(errors).to.eql(null);
       done();
     });
   });
