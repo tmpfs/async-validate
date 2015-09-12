@@ -279,6 +279,20 @@ The easiest way to achieve this is to assign a `message` to a rule:
 {name:{type: "string", required: true, message: "Name is required"}}
 ```
 
+You may also use a function for the rule message, it is invoked in the scope of the rule validator and passed the original message and replacement parameters:
+
+```javascript
+var descriptor = {
+  name: {
+    type: "string",
+    required: true,
+    message: function(message, parameters) {
+      return this.field + ' is required';
+    }
+  }
+}
+```
+
 If you just want to change the default messages:
 
 ```javascript
