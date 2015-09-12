@@ -500,7 +500,7 @@ Get or set the messages associated with the schema.
 function validate(source, [options], cb)
 ```
 
-Validates a source object against the rules in the descriptor associated with the schema.
+Validates a source object against the schema rules.
 
 * `source`: The object to validate (required).
 * `options`: An object describing processing options for the validation (optional).
@@ -549,7 +549,7 @@ function Validator(opts)
 
 Encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance which exposes the following public fields:
 
-* `rule`: The validation rule in the source descriptor that corresponds to the field name being validated.
+* `rule`: The validation rule in the source descriptor.
 * `value`: The value of the source object property being validated.
 * `field`: The name of the field being validated.
 * `source`: The source object that was passed to `validate()`.
