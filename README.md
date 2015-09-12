@@ -12,7 +12,7 @@ Table of Contents
     * [Errors](#errors)
     * [Plugins](#plugins)
     * [Descriptor](#descriptor)
-      * [Type Constants](#type-constants)
+      * [Type Identifier](#type-identifier)
       * [Additional](#additional)
       * [Fields](#fields)
       * [Message](#message)
@@ -219,7 +219,7 @@ The [plugin fixture](https://github.com/freeformsystems/async-validate/blob/mast
 
 A descriptor defines the validation rules as a map of fields to rules, this section describes the recognised rule properties.
 
-#### Type Constants
+#### Type Identifier
 
 The `type` rule property indicates the type of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
 

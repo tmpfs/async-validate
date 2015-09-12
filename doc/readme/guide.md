@@ -127,7 +127,7 @@ The [plugin fixture](/test/fixtures/plugin.js) and the [plugin test](/test/spec/
 
 A descriptor defines the validation rules as a map of fields to rules, this section describes the recognised rule properties.
 
-#### Type Constants
+#### Type Identifier
 
 The `type` rule property indicates the type of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
 
