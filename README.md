@@ -79,9 +79,7 @@ validator.validate(source, function(errors, fields) {
 
 ### Rules
 
-A rule is a function that performs the validation of a value, the [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular and allow for easily reusing code.
-
-Rule functions may be declared in one of the following ways.
+A rule is a function that performs the validation of a value, the [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular.
 
 #### Inline Rule
 
