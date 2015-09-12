@@ -8,6 +8,8 @@
 function(source, [options], cb)
 ```
 
+Validates a source object against the rules in the descriptor associated with the schema.
+
 * `source`: The object to validate (required).
 * `options`: An object describing processing options for the validation (optional).
 * `cb`: Callback function to invoke when validation completes (required).
@@ -33,19 +35,17 @@ In this instance when you only want the first error encountered use the `single`
 
 #### Reason
 
-Represents the reason for a validation error, may be created using `getReason()`.
-
 ```javascript
 function Reason(id, [opts])
 ```
+
+Represents the reason for a validation error, may be created using `getReason()`.
 
 You must supply a reason `id`; if `opts` are passed they are assigned as properties of the reason instance. When `toString()` is called on a `Reason` instance the `id` is returned.
 
 #### Validator
 
-The `Validator` class encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance.
-
-##### Fields
+The `Validator` class encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance which exposes the following public fields:
 
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated.
 * `value`: The value of the source object property being validated.
@@ -57,29 +57,29 @@ The `Validator` class encapsulates the data associated with a validation rule an
 
 ##### isRoot
 
-Determine if this validation is being performed against the root source object.
-
 ```javascript
 function isRoot()
 ```
 
-##### getReason
+Determine if this validation is being performed against the root source object.
 
-Create a reason for a validation error.
+##### getReason
 
 ```javascript
 function getReason(id, [opts])
 ```
 
+Create a reason for a validation error.
+
 Returns a `Reason` instance suitable for passing as the first argument to [raise](#raise).
 
 ##### raise
 
-Adds an error message to the list of errors encountered during validation of a value.
-
 ```javascript
 function raise([reason], message, ...)
 ```
+
+Adds an error message to the list of errors encountered during validation of a value.
 
 The first argument may optionally be a `Reason` instance returned by `getReason()` allowing a user to associate an identifier with the validation error and optional additional information. A validation error generated with a `Reason` has a `reason` field referencing the supplied reason.
 
@@ -87,20 +87,20 @@ When replacement parameters are supplied the behaviour is identical to `util.for
 
 ##### required
 
-Validate a required field, typically invoked from the validation rule function.
-
-Raises an error if a required field is not present.
-
 ```javascript
 function required()
 ```
 
+Validate a required field, typically invoked from the validation rule function.
+
+Raises an error if a required field is not present.
+
 ##### pattern
-
-Validate using a regexp pattern, typically invoked from the validation rule function.
-
-Raises an error if a value fails to match a rule regexp pattern.
 
 ```javascript
 function pattern()
 ```
+
+Validate using a regexp pattern, typically invoked from the validation rule function.
+
+Raises an error if a value fails to match a rule regexp pattern.
