@@ -216,7 +216,7 @@ The [plugin fixture](https://github.com/freeformsystems/async-validate/blob/mast
 
 ### Descriptor
 
-A descriptor defines the validation rules as a map of fields to rules.
+A descriptor defines the validation rules as a map of fields to rules, this section describes the recognised rule properties.
 
 #### Type Constants
 

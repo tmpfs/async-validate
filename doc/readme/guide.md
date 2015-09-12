@@ -125,7 +125,7 @@ The [plugin fixture](/test/fixtures/plugin.js) and the [plugin test](/test/spec/
 
 ### Descriptor
 
-A descriptor defines the validation rules as a map of fields to rules.
+A descriptor defines the validation rules as a map of fields to rules, this section describes the recognised rule properties.
 
 #### Type Constants
 
