@@ -8,10 +8,18 @@ function Schema(descriptor, [opts])
 
 Encapsulates the rules associated with a descriptor and the logic for performing validation.
 
+##### messages
+
+```javascript
+function messages([messages])
+```
+
+Get or set the messages associated with the schema.
+
 ##### validate
 
 ```javascript
-function(source, [options], cb)
+function validate(source, [options], cb)
 ```
 
 Validates a source object against the rules in the descriptor associated with the schema.
@@ -38,6 +46,14 @@ Consider the rule:
 When supplied with a source object such as `{name: "-name"}` the validation rule would generate two errors, as the pattern does not match and the string length is less then the required minimum length for the field.
 
 In this instance when you only want the first error encountered use the `single` option.
+
+##### Schema.plugin
+
+```javascript
+function plugin(plugins)
+```
+
+Static plugin loader method, accepts an array of plugin functions.
 
 ##### Schema.clone
 
