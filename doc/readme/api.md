@@ -1,16 +1,18 @@
 ### API
 
-#### Validate
+#### Schema
+
+##### validate
 
 ```javascript
-function(source, [options], callback)
+function(source, [options], cb)
 ```
 
 * `source`: The object to validate (required).
 * `options`: An object describing processing options for the validation (optional).
-* `callback`: Callback function to invoke when validation completes (required).
+* `cb`: Callback function to invoke when validation completes (required).
 
-##### Options
+###### Options
 
 * `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
 * `single`: Only ever return a single error. Typically used in conjunction with `first` when a validation rule could generate multiple errors.
@@ -29,19 +31,11 @@ When supplied with a source object such as `{name: "-name"}` the validation rule
 
 In this instance when you only want the first error encountered use the `single` option.
 
-#### Rules
+#### Validator
 
-Rules are functions that perform validation. They are invoked in the scope of a [validator](/lib/validator.js) so you should not call `bind()` on validation rule functions.
+The `Validator` class encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance.
 
-```javascript
-function(cb)
-```
-
-* `cb`: Callback function to invoke when validation completes, expects an array of error instances to be passed.
-
-##### Scope
-
-The scope of the rule function exposes the fields:
+##### Fields
 
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated.
 * `value`: The value of the source object property being validated.
@@ -50,3 +44,11 @@ The scope of the rule function exposes the fields:
 * `options`: The options passed to `validate()`.
 * `messages`: Reference to the messages assigned to `options`.
 * `errors`: Array of errors for the field validation.
+
+##### raise
+
+Adds an error message to the list of errors encountered during validation of a value.
+
+```javascript
+function raise([reason], message, ...)
+```

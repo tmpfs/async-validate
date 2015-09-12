@@ -2,7 +2,15 @@
 
 ### Rules
 
-A rule is a function that performs the validation of a value, the [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular.
+Rules are functions that perform validation of a value. They are invoked in the scope of a [validator](/lib/validator.js) so you should not call `bind()` on validation rule functions.
+
+```javascript
+function rule(cb)
+```
+
+* `cb`: Callback function to invoke when validation completes, expects an array of error instances to be passed.
+
+The [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular.
 
 #### Inline Rule
 
@@ -52,6 +60,21 @@ var descriptor = {
   id: {type: 'id'}
 }
 ```
+
+### Errors
+
+To raise an error in a validation rule call `raise()`:
+
+```javascript
+function id(cb) {
+  if(!/^[a-z0-9-]+$/i.test(this.value)) {
+    this.raise('%s is not a valid id', this.field); 
+  }
+  cb();
+}
+```
+
+The signature for raise is equivalent to `util.format` except that it may also accept a `Reason` as the first argument, see [raise](#raise).
 
 ### Plugins
 
