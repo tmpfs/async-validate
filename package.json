@@ -70,8 +70,8 @@
         "inc": [
           "standard-rules.md",
           "api.md",
-          "developer.md",
           "browser.md",
+          "developer.md",
           "license.md"
         ]
       }

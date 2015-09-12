@@ -43,6 +43,7 @@ Table of Contents
         * [pattern](#pattern)
         * [type](#type)
         * [range](#range)
+  * [Browser Support](#browser-support)
   * [Developer](#developer)
     * [Test](#test)
     * [Cover](#cover)
@@ -50,7 +51,6 @@ Table of Contents
     * [Clean](#clean)
     * [Docs](#docs)
     * [Readme](#readme)
-  * [Browser Support](#browser-support)
   * [License](#license)
 
 Async Validate
@@ -623,6 +623,26 @@ function range()
 
 Validates that a value falls within a given range or is of a specific length, typically invoked from a rule function, raises an error if a value is out of bounds.
 
+## Browser Support
+
+<table>
+<thead>
+<tr>
+<th><img src="https://cloud.githubusercontent.com/assets/398893/3528328/23bc7bc4-078e-11e4-8752-ba2809bf5cce.png" alt="Chrome"></th>
+<th><img src="https://cloud.githubusercontent.com/assets/398893/3528329/26283ab0-078e-11e4-84d4-db2cf1009953.png" alt="Firefox"></th>
+<th><img src="https://cloud.githubusercontent.com/assets/398893/3528330/27ec9fa8-078e-11e4-95cb-709fd11dac16.png" alt="Opera"></th>
+<th><img src="https://cloud.githubusercontent.com/assets/398893/3528331/29df8618-078e-11e4-8e3e-ed8ac738693f.png" alt="Safari"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Latest ✔ (tested on 39)</td>
+<td>Latest ✔ (tested on 33)</td>
+<td>Latest ✔ (tested on 25)</td>
+<td>Latest ✔ (tested on 8)</td>
+</tr>
+</tbody>
+</table>
 ## Developer
 
 ### Test
@@ -673,26 +693,6 @@ Generate the project readme file [mdp](https://github.com/freeformsystems/mdp):
 npm run readme
 ```
 
-## Browser Support
-
-<table>
-<thead>
-<tr>
-<th><img src="https://cloud.githubusercontent.com/assets/398893/3528328/23bc7bc4-078e-11e4-8752-ba2809bf5cce.png" alt="Chrome"></th>
-<th><img src="https://cloud.githubusercontent.com/assets/398893/3528329/26283ab0-078e-11e4-84d4-db2cf1009953.png" alt="Firefox"></th>
-<th><img src="https://cloud.githubusercontent.com/assets/398893/3528330/27ec9fa8-078e-11e4-95cb-709fd11dac16.png" alt="Opera"></th>
-<th><img src="https://cloud.githubusercontent.com/assets/398893/3528331/29df8618-078e-11e4-8e3e-ed8ac738693f.png" alt="Safari"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Latest ✔ (tested on 39)</td>
-<td>Latest ✔ (tested on 33)</td>
-<td>Latest ✔ (tested on 25)</td>
-<td>Latest ✔ (tested on 8)</td>
-</tr>
-</tbody>
-</table>
 ## License
 
 Everything is [MIT](http://en.wikipedia.org/wiki/MIT_License). Read the [license](https://github.com/freeformsystems/async-validate/blob/master/LICENSE) if you feel inclined.
