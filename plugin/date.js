@@ -1,5 +1,4 @@
-var format = require('../lib/format')
-  , moment = require('moment');
+var moment = require('moment');
 
 /**
  *  Rule for validating a date against a format.
@@ -11,11 +10,11 @@ function validator() {
   if(!dt.isValid()) {
     if(this.rule.format) {
       this.raise(
-        format(this.messages.date.format,
-          this.field, this.value, this.rule.format));
+        this.messages.date.format,
+          this.field, this.value, this.rule.format);
     }else{
       this.raise(
-        format(this.messages.date.invalid, this.field, this.value));
+        this.messages.date.invalid, this.field, this.value);
     }
   }
 }
