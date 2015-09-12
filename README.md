@@ -130,6 +130,8 @@ Recognised type values are:
 * `enum`: Value must exist in the `enum`.
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
+When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
+
 #### Required
 
 The `required` rule property indicates that the field must exist on the source object being validated.
