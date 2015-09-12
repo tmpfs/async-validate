@@ -165,7 +165,7 @@ The `required` rule property indicates that the field must exist on the source o
 
 #### Pattern
 
-The `pattern` rule property indicates a regular expression that the value must match to pass validation.
+The `pattern` rule property is a regular expression that the value must match to pass validation.
 
 #### Range
 
