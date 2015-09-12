@@ -9,6 +9,8 @@ Table of Contents
       * [Inline Rule](#inline-rule)
       * [Assigned Rule](#assigned-rule)
       * [Plugin Rule](#plugin-rule)
+      * [Multiple Rules](#multiple-rules)
+      * [Deep Rules](#deep-rules)
     * [Errors](#errors)
     * [Plugins](#plugins)
     * [Descriptor](#descriptor)
@@ -24,8 +26,6 @@ Table of Contents
       * [Enumerable](#enumerable)
       * [Date Format](#date-format)
       * [Whitespace](#whitespace)
-      * [Multiple Rules](#multiple-rules)
-      * [Deep Rules](#deep-rules)
     * [Messages](#messages)
     * [Transform](#transform)
     * [Standard Rules](#standard-rules)
@@ -161,6 +161,89 @@ var descriptor = {
 ```
 
 The static `id` method will then be invoked for every rule of type `id`, this is the most portable style as it enables easily moving validation rules into modules and packages that may be shared.
+
+#### Multiple Rules
+
+It is often useful to test against multiple validation rules for a single field, to do so make the rule an array of objects, for example:
+
+```javascript
+var descriptor = {
+  email: [
+    {type: "string", required: true},
+    function(cb) {
+      // test if email address already exists in a database
+      // and add a validation error to the errors array if it does
+      cb();
+    }
+  ]
+}
+```
+
+#### Deep Rules
+
+If you need to validate deep object properties you may do so for validation rules that are of the `object` or `array` type by assigning nested rules to a `fields` property of the rule.
+
+```javascript
+var descriptor = {
+  name: {type: "string", required: true},
+  address: {
+    type: "object",
+    required: true,
+    fields: {
+      street: {type: "string", required: true},
+      city: {type: "string", required: true},
+      zip: {type: "string", required: true, len: 8, message: "invalid zip"}
+    }
+  }
+}
+var validator = new schema(descriptor);
+validator.validate({address: {}}, function(errors, fields) {
+  // errors for name, street, city, zip
+});
+```
+
+Note that if you do not specify the `required` property on the parent rule it is perfectly valid for the field not to be declared on the source object and the deep validation rules will not be executed as there is nothing to validate against.
+
+Deep rule validation creates a schema for the nested rules so you can also specify the `options` passed to the `schema.validate()` method.
+
+```javascript
+var descriptor = {
+  name: {type: "string", required: true},
+  address: {
+    type: "object",
+    required: true,
+    options: {single: true, first: true},
+    fields: {
+      street: {type: "string", required: true},
+      city: {type: "string", required: true},
+      zip: {type: "string", required: true, len: 8, message: "invalid zip"}
+    }
+  }
+}
+var validator = new schema(descriptor);
+validator.validate({address: {}}, function(errors, fields) {
+  // now only errors for name and street
+});
+```
+
+The parent rule is also validated so if you have a set of rules such as:
+
+```javascript
+var descriptor = {
+  roles: {
+    type: "array",
+    required: true,
+    len: 3,
+    fields: {
+      0: {type: "string", required: true},
+      1: {type: "string", required: true},
+      2: {type: "string", required: true}
+    }
+  }
+}
+```
+
+And supply a source object of `{roles: ["admin", "user"]}` then two errors will be created. One for the array length mismatch and one for the missing required array entry at index 2.
 
 ### Errors
 
@@ -316,89 +399,6 @@ var descriptor = {
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
 
 You may wish to sanitize user input instead of testing for whitespace, see [transform](#transform) for an example that would allow you to strip whitespace.
-
-#### Multiple Rules
-
-It is often useful to test against multiple validation rules for a single field, to do so make the rule an array of objects, for example:
-
-```javascript
-var descriptor = {
-  email: [
-    {type: "string", required: true},
-    function(cb) {
-      // test if email address already exists in a database
-      // and add a validation error to the errors array if it does
-      cb();
-    }
-  ]
-}
-```
-
-#### Deep Rules
-
-If you need to validate deep object properties you may do so for validation rules that are of the `object` or `array` type by assigning nested rules to a `fields` property of the rule.
-
-```javascript
-var descriptor = {
-  name: {type: "string", required: true},
-  address: {
-    type: "object",
-    required: true,
-    fields: {
-      street: {type: "string", required: true},
-      city: {type: "string", required: true},
-      zip: {type: "string", required: true, len: 8, message: "invalid zip"}
-    }
-  }
-}
-var validator = new schema(descriptor);
-validator.validate({address: {}}, function(errors, fields) {
-  // errors for name, street, city, zip
-});
-```
-
-Note that if you do not specify the `required` property on the parent rule it is perfectly valid for the field not to be declared on the source object and the deep validation rules will not be executed as there is nothing to validate against.
-
-Deep rule validation creates a schema for the nested rules so you can also specify the `options` passed to the `schema.validate()` method.
-
-```javascript
-var descriptor = {
-  name: {type: "string", required: true},
-  address: {
-    type: "object",
-    required: true,
-    options: {single: true, first: true},
-    fields: {
-      street: {type: "string", required: true},
-      city: {type: "string", required: true},
-      zip: {type: "string", required: true, len: 8, message: "invalid zip"}
-    }
-  }
-}
-var validator = new schema(descriptor);
-validator.validate({address: {}}, function(errors, fields) {
-  // now only errors for name and street
-});
-```
-
-The parent rule is also validated so if you have a set of rules such as:
-
-```javascript
-var descriptor = {
-  roles: {
-    type: "array",
-    required: true,
-    len: 3,
-    fields: {
-      0: {type: "string", required: true},
-      1: {type: "string", required: true},
-      2: {type: "string", required: true}
-    }
-  }
-}
-```
-
-And supply a source object of `{roles: ["admin", "user"]}` then two errors will be created. One for the array length mismatch and one for the missing required array entry at index 2.
 
 ### Messages
 
