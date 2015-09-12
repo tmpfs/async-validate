@@ -44,7 +44,7 @@ var descriptor = {
 
 #### Plugin Rule
 
-Or as a plugin module that assigns the rule type as a static plugin method:
+Plugin function that assigns the rule function as a static method:
 
 ```javascript
 function plugin() {
@@ -60,6 +60,8 @@ var descriptor = {
   id: {type: 'id'}
 }
 ```
+
+The static `id` method will then be invoked for every rule of type `id`, this is the most portable method as it enables easily moving validation rules into modules and packages that may be shared.
 
 ### Errors
 
