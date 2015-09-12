@@ -16,6 +16,8 @@ function(source, [options], callback)
 * `single`: Only ever return a single error. Typically used in conjunction with `first` when a validation rule could generate multiple errors.
 * `keys`: Specifies the keys on the source object to be validated. Use this option to validate fields in a determinate order or to validate a subset of the rules assigned to a schema.
 * `parallel`: A boolean indicating that the validation should be executed in parallel.
+* `field`: Field name for the root object, default is `source` when not specified.
+* `rules`: Rules to apply to the root source object, may be an array or a single rule object.
 
 Consider the rule:
 
@@ -41,7 +43,7 @@ function(cb)
 
 The scope of the rule function exposes the fields:
 
-* `rule`: The validation rule in the source descriptor that corresponds to the field name being validated. It is always assigned a `field` property with the name of the field being validated.
+* `rule`: The validation rule in the source descriptor that corresponds to the field name being validated.
 * `value`: The value of the source object property being validated.
 * `field`: The name of the field being validated.
 * `source`: The source object that was passed to the `validate` method.
