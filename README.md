@@ -96,7 +96,7 @@ schema.validate(source, function(errors, fields) {
 function rule(cb)
 ```
 
-Rules are functions that perform validation of a value. They are invoked in the scope of a validator ([file](https://github.com/freeformsystems/async-validate/blob/master/lib/validator.js), [api docs](#validator)).
+Rules are functions that perform validation of a value, they are invoked in the scope of a validator ([file](https://github.com/freeformsystems/async-validate/blob/master/lib/validator.js), [api docs](#validator)).
 
 A rule function can access all relevant properties and methods using `this` and should [raise](#raise) an error if `this.value` fails a validation test, see [errors](#errors).
 
@@ -554,12 +554,12 @@ function Validator(opts)
 
 Encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance which exposes the following public fields:
 
-* `rule`: The validation rule in the source descriptor.
+* `rule`: The validation rule in the schema descriptor.
 * `value`: The value of the source object property being validated.
 * `field`: The name of the field being validated.
 * `source`: The source object passed to `validate()`.
 * `options`: The options passed to `validate()`.
-* `messages`: Reference to the messages assigned to `options`.
+* `messages`: Reference to the schema messages.
 * `errors`: Array of errors for the field validation.
 * `reasons`: Map of default error reasons.
 
