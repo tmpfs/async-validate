@@ -1,12 +1,11 @@
 var Schema = require('..')
   , descriptor = {name: {type: "string", required: true}}
-  , validator = new Schema(descriptor)
+  , schema = new Schema(descriptor)
   , source = {};
 
-schema.plugin(
-  [require('../plugin/string')]);
+Schema.plugin([require('../plugin/string')]);
 
-validator.validate(source, function(errors, fields) {
+schema.validate(source, function(errors, fields) {
   if(errors) {
     // validation failed, errors is an array of all errors
     // fields is an object keyed by field name with an array of
