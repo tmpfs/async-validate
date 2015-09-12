@@ -84,7 +84,7 @@ Encapsulates the data associated with a validation rule and the value to be vali
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated.
 * `value`: The value of the source object property being validated.
 * `field`: The name of the field being validated.
-* `source`: The source object that was passed to the `validate` method.
+* `source`: The source object that was passed to `validate()`.
 * `options`: The options passed to `validate()`.
 * `messages`: Reference to the messages assigned to `options`.
 * `errors`: Array of errors for the field validation.
