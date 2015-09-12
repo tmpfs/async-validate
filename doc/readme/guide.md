@@ -40,7 +40,7 @@ var descriptor = {
 
 Or as a plugin module that assigns the rule type as a static plugin method:
 
-```
+```javascript
 function plugin() {
   this.main.id = function(cb) {
     // if has error condition call this.raise() 
