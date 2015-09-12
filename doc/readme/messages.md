@@ -43,4 +43,4 @@ validator.messages(es); // ensure this schema uses the altered messages
 ...
 ```
 
-If you are defining your own validation functions it is better practice to assign the message strings to a messages object and then access the messages via the `options.messages` property within the validation function.
+If you are defining your own validation functions it is better practice to assign the message strings to a messages object and then access the messages via the `this.messages` property within the validation function.
