@@ -5,6 +5,10 @@ Table of Contents
   * [Install](#install)
   * [Usage](#usage)
   * [Guide](#guide)
+    * [Rules](#rules)
+      * [Inline Rule](#inline-rule)
+      * [Assigned Rule](#assigned-rule)
+      * [Plugin Rule](#plugin-rule)
     * [Plugins](#plugins)
     * [Descriptor](#descriptor)
       * [Type](#type)
@@ -24,7 +28,7 @@ Table of Contents
     * [API](#api)
       * [Validate](#validate)
         * [Options](#options)
-      * [Rules](#rules)
+      * [Rules](#rules-1)
         * [Scope](#scope)
   * [Developer](#developer)
     * [Test](#test)
@@ -73,6 +77,59 @@ validator.validate(source, function(errors, fields) {
 
 ## Guide
 
+### Rules
+
+A rule is a function that performs the validation of a value, rule functions may be declared in one of the following ways.
+
+#### Inline Rule
+
+The rule function is assigned directly to the field:
+
+```javascript
+var descriptor = {
+  id: function(cb) {
+    // if has error condition call this.raise() 
+    cb(this.errors);
+  }
+}
+```
+
+#### Assigned Rule
+
+Assigned to the `validator` field so that you may pass data from the rule to the function:
+
+```javascript
+var descriptor = {
+  id: {
+    foo: 'bar',
+    validator: function(cb) {
+      console.log(this.foo);
+      // if has error condition call this.raise() 
+      cb(this.errors);
+    }
+  }
+}
+```
+
+#### Plugin Rule
+
+Or as a plugin module that assigns the rule type as a static plugin method:
+
+```
+function plugin() {
+  this.main.id = function(cb) {
+    // if has error condition call this.raise() 
+    cb(this.errors);
+  }
+}
+
+var Schema = require('async-validate');
+Schema.plugin([plugin]);
+var descriptor = {
+  id: {type: 'id'}
+}
+```
+
 ### Plugins
 
 To use schema types you should load plugins for the types you wish to validate:
@@ -102,15 +159,6 @@ The [plugin fixture](https://github.com/freeformsystems/async-validate/blob/mast
 A descriptor defines the validation rules as a map of fields to rules.
 
 This section describes the rule fields recognised by the module plugins, typically you would create a type plugin so that the type is reusable but you may also inline rule functions:
-
-```javascript
-var descriptor = {
-  name: function(cb) {
-    // if has error condition call this.raise() 
-    cb(this.errors);
-  }
-}
-```
 
 #### Type
 

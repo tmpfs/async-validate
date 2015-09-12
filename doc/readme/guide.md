@@ -1,5 +1,60 @@
 ## Guide
 
+### Rules
+
+A rule is a function that performs the validation of a value, the [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular and allow for easily reusing code.
+
+Rule functions may be declared in one of the following ways.
+
+#### Inline Rule
+
+The rule function is assigned directly to the field:
+
+```javascript
+var descriptor = {
+  id: function(cb) {
+    // if has error condition call this.raise() 
+    cb(this.errors);
+  }
+}
+```
+
+#### Assigned Rule
+
+Assigned to the `validator` field so that you may pass data from the rule to the function:
+
+```javascript
+var descriptor = {
+  id: {
+    foo: 'bar',
+    validator: function(cb) {
+      console.log(this.foo);
+      // if has error condition call this.raise() 
+      cb(this.errors);
+    }
+  }
+}
+```
+
+#### Plugin Rule
+
+Or as a plugin module that assigns the rule type as a static plugin method:
+
+```
+function plugin() {
+  this.main.id = function(cb) {
+    // if has error condition call this.raise() 
+    cb(this.errors);
+  }
+}
+
+var Schema = require('async-validate');
+Schema.plugin([plugin]);
+var descriptor = {
+  id: {type: 'id'}
+}
+```
+
 ### Plugins
 
 To use schema types you should load plugins for the types you wish to validate:
@@ -29,15 +84,6 @@ The [plugin fixture](/test/fixtures/plugin.js) and the [plugin test](/test/spec/
 A descriptor defines the validation rules as a map of fields to rules.
 
 This section describes the rule fields recognised by the module plugins, typically you would create a type plugin so that the type is reusable but you may also inline rule functions:
-
-```javascript
-var descriptor = {
-  name: function(cb) {
-    // if has error condition call this.raise() 
-    cb(this.errors);
-  }
-}
-```
 
 #### Type
 
