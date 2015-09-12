@@ -129,7 +129,7 @@ A descriptor defines the validation rules as a map of fields to rules.
 
 #### Type Constants
 
-Indicates the `type` of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
+The `type` rule property indicates the type of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
 
 Recognised type values are:
 
@@ -146,6 +146,10 @@ Recognised type values are:
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
+
+#### Message
+
+The `message` rule property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
 
 #### Required
 

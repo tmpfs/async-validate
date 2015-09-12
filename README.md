@@ -13,6 +13,7 @@ Table of Contents
     * [Plugins](#plugins)
     * [Descriptor](#descriptor)
       * [Type Constants](#type-constants)
+      * [Message](#message)
       * [Required](#required)
       * [Pattern](#pattern)
       * [Range](#range)
@@ -37,6 +38,7 @@ Table of Contents
         * [isRoot](#isroot)
         * [getReason](#getreason)
         * [raise](#raise)
+        * [format](#format)
         * [shouldValidate](#shouldvalidate)
         * [hasAdditionalFields](#hasadditionalfields)
         * [required](#required)
@@ -218,7 +220,7 @@ A descriptor defines the validation rules as a map of fields to rules.
 
 #### Type Constants
 
-Indicates the `type` of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
+The `type` rule property indicates the type of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
 
 Recognised type values are:
 
@@ -235,6 +237,10 @@ Recognised type values are:
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
+
+#### Message
+
+The `message` rule property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
 
 #### Required
 
@@ -585,6 +591,16 @@ Adds an error message to the list of errors encountered during validation of a v
 The first argument may optionally be a `Reason` instance returned by `getReason()` allowing a user to associate an identifier with the validation error and optional additional information. A validation error generated with a `Reason` has a `reason` field referencing the supplied reason.
 
 When replacement parameters are supplied the behaviour is identical to `util.format`.
+
+##### format
+
+```javascript
+function format(message, ...)
+```
+
+Format a message with replacement parameters like `util.format`.
+
+Useful when a rule declares `message` as a function and wishes to construct the error message with parameters.
 
 ##### shouldValidate
 

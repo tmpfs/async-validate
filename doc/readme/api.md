@@ -108,6 +108,16 @@ The first argument may optionally be a `Reason` instance returned by `getReason(
 
 When replacement parameters are supplied the behaviour is identical to `util.format`.
 
+##### format
+
+```javascript
+function format(message, ...)
+```
+
+Format a message with replacement parameters like `util.format`.
+
+Useful when a rule declares `message` as a function and wishes to construct the error message with parameters.
+
 ##### shouldValidate
 
 ```javascript
