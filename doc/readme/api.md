@@ -31,6 +31,16 @@ When supplied with a source object such as `{name: "-name"}` the validation rule
 
 In this instance when you only want the first error encountered use the `single` option.
 
+#### Reason
+
+Represents the reason for a validation error, may be created using `getReason()`.
+
+```javascript
+function Reason(id, [opts])
+```
+
+You must supply a reason `id`; if `opts` are passed they are assigned as properties of the reason instance. When `toString()` is called on a `Reason` instance the `id` is returned.
+
 #### Validator
 
 The `Validator` class encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance.
@@ -45,10 +55,52 @@ The `Validator` class encapsulates the data associated with a validation rule an
 * `messages`: Reference to the messages assigned to `options`.
 * `errors`: Array of errors for the field validation.
 
+##### isRoot
+
+Determine if this validation is being performed against the root source object.
+
+```javascript
+function isRoot()
+```
+
+##### getReason
+
+Create a reason for a validation error.
+
+```javascript
+function getReason(id, [opts])
+```
+
+Returns a `Reason` instance suitable for passing as the first argument to [raise](#raise).
+
 ##### raise
 
 Adds an error message to the list of errors encountered during validation of a value.
 
 ```javascript
 function raise([reason], message, ...)
+```
+
+The first argument may optionally be a `Reason` instance returned by `getReason()` allowing a user to associate an identifier with the validation error and optional additional information. A validation error generated with a `Reason` has a `reason` field referencing the supplied reason.
+
+When replacement parameters are supplied the behaviour is identical to `util.format`.
+
+##### required
+
+Validate a required field, typically invoked from the validation rule function.
+
+Raises an error if a required field is not present.
+
+```javascript
+function required()
+```
+
+##### pattern
+
+Validate using a regexp pattern, typically invoked from the validation rule function.
+
+Raises an error if a value fails to match a rule regexp pattern.
+
+```javascript
+function pattern()
 ```

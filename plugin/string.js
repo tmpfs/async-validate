@@ -11,7 +11,11 @@ function string(cb) {
     this.pattern();
 
     if(this.rule.whitespace === true) {
-      this.whitespace();
+      if(/^\s+$/.test(this.value) || this.value === '') {
+        this.raise(
+          this.reasons.whitespace,
+          this.messages.whitespace, this.field);
+      }
     }
   }
   cb();

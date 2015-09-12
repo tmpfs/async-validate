@@ -9,6 +9,7 @@ Table of Contents
       * [Inline Rule](#inline-rule)
       * [Assigned Rule](#assigned-rule)
       * [Plugin Rule](#plugin-rule)
+    * [Errors](#errors)
     * [Plugins](#plugins)
     * [Descriptor](#descriptor)
       * [Type](#type)
@@ -26,10 +27,17 @@ Table of Contents
     * [Transform](#transform)
     * [Standard Rules](#standard-rules)
     * [API](#api)
-      * [Validate](#validate)
-        * [Options](#options)
-      * [Rules](#rules-1)
-        * [Scope](#scope)
+      * [Schema](#schema)
+        * [validate](#validate)
+          * [Options](#options)
+      * [Reason](#reason)
+      * [Validator](#validator)
+        * [Fields](#fields)
+        * [isRoot](#isroot)
+        * [getReason](#getreason)
+        * [raise](#raise)
+        * [required](#required)
+        * [pattern](#pattern)
   * [Developer](#developer)
     * [Test](#test)
     * [Cover](#cover)
@@ -79,7 +87,15 @@ validator.validate(source, function(errors, fields) {
 
 ### Rules
 
-A rule is a function that performs the validation of a value, the [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular.
+Rules are functions that perform validation of a value. They are invoked in the scope of a [validator](https://github.com/freeformsystems/async-validate/blob/master/lib/validator.js) so you should not call `bind()` on validation rule functions.
+
+```javascript
+function rule(cb)
+```
+
+* `cb`: Callback function to invoke when validation completes, expects an array of error instances to be passed.
+
+The [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular.
 
 #### Inline Rule
 
@@ -129,6 +145,21 @@ var descriptor = {
   id: {type: 'id'}
 }
 ```
+
+### Errors
+
+To raise an error in a validation rule call `raise()`:
+
+```javascript
+function id(cb) {
+  if(!/^[a-z0-9-]+$/i.test(this.value)) {
+    this.raise('%s is not a valid id', this.field); 
+  }
+  cb();
+}
+```
+
+The signature for raise is equivalent to `util.format` except that it may also accept a `Reason` as the first argument, see [raise](#raise).
 
 ### Plugins
 
@@ -422,17 +453,19 @@ These rules must be required to be used: `require('async-validate/std-rules')`, 
 
 ### API
 
-#### Validate
+#### Schema
+
+##### validate
 
 ```javascript
-function(source, [options], callback)
+function(source, [options], cb)
 ```
 
 * `source`: The object to validate (required).
 * `options`: An object describing processing options for the validation (optional).
-* `callback`: Callback function to invoke when validation completes (required).
+* `cb`: Callback function to invoke when validation completes (required).
 
-##### Options
+###### Options
 
 * `first`: Invoke `callback` when the first validation rule generates an error, no more validation rules are processed. If your validation involves multiple asynchronous calls (for example, database queries) and you only need the first error use this option.
 * `single`: Only ever return a single error. Typically used in conjunction with `first` when a validation rule could generate multiple errors.
@@ -451,19 +484,21 @@ When supplied with a source object such as `{name: "-name"}` the validation rule
 
 In this instance when you only want the first error encountered use the `single` option.
 
-#### Rules
+#### Reason
 
-Rules are functions that perform validation. They are invoked in the scope of a [validator](https://github.com/freeformsystems/async-validate/blob/master/lib/validator.js) so you should not call `bind()` on validation rule functions.
+Represents the reason for a validation error, may be created using `getReason()`.
 
 ```javascript
-function(cb)
+function Reason(id, [opts])
 ```
 
-* `cb`: Callback function to invoke when validation completes, expects an array of error instances to be passed.
+You must supply a reason `id`; if `opts` are passed they are assigned as properties of the reason instance. When `toString()` is called on a `Reason` instance the `id` is returned.
 
-##### Scope
+#### Validator
 
-The scope of the rule function exposes the fields:
+The `Validator` class encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance.
+
+##### Fields
 
 * `rule`: The validation rule in the source descriptor that corresponds to the field name being validated.
 * `value`: The value of the source object property being validated.
@@ -472,6 +507,56 @@ The scope of the rule function exposes the fields:
 * `options`: The options passed to `validate()`.
 * `messages`: Reference to the messages assigned to `options`.
 * `errors`: Array of errors for the field validation.
+
+##### isRoot
+
+Determine if this validation is being performed against the root source object.
+
+```javascript
+function isRoot()
+```
+
+##### getReason
+
+Create a reason for a validation error.
+
+```javascript
+function getReason(id, [opts])
+```
+
+Returns a `Reason` instance suitable for passing as the first argument to [raise](#raise).
+
+##### raise
+
+Adds an error message to the list of errors encountered during validation of a value.
+
+```javascript
+function raise([reason], message, ...)
+```
+
+The first argument may optionally be a `Reason` instance returned by `getReason()` allowing a user to associate an identifier with the validation error and optional additional information. A validation error generated with a `Reason` has a `reason` field referencing the supplied reason.
+
+When replacement parameters are supplied the behaviour is identical to `util.format`.
+
+##### required
+
+Validate a required field, typically invoked from the validation rule function.
+
+Raises an error if a required field is not present.
+
+```javascript
+function required()
+```
+
+##### pattern
+
+Validate using a regexp pattern, typically invoked from the validation rule function.
+
+Raises an error if a value fails to match a rule regexp pattern.
+
+```javascript
+function pattern()
+```
 
 ## Developer
 
