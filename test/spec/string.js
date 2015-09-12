@@ -51,9 +51,9 @@ describe("async-validate:", function() {
     }
     var validator = new schema(descriptor);
     validator.validate({name: null}, function(errors, fields) {
-      assert.equal(errors.length, 1);
+      assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "name is required");
-      assert.equal(fields.name.length, 1);
+      assert.equal(fields.name.length, 2);
       done();
     });
   });

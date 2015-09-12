@@ -13,6 +13,7 @@ var messages = {
   },
   types: {
     string: '%s is not a %s',
+    null: '%s is not %s',
     method: '%s is not a %s (function)',
     array: '%s is not an %s',
     object: '%s is not an %s',

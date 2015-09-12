@@ -7,6 +7,7 @@ validator.plugin([
   require('./float'),
   require('./integer'),
   require('./method'),
+  require('./null'),
   require('./number'),
   require('./object'),
   require('./pattern'),
