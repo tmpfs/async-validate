@@ -1,7 +1,7 @@
 var util = require('util');
 var assert = require('chai').assert;
 var schema = require('../../index');
-var ValidationError = schema.ValidationError;
+var ValidationError = require('../../lib/error');
 
 describe("async-validate:", function() {
   it("should validate a required string field is valid", function(done) {
