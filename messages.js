@@ -42,11 +42,6 @@ var messages = {
   },
   pattern: {
     mismatch: '%s value %s does not match pattern %s'
-  },
-  clone: function() {
-    var cloned = JSON.parse(JSON.stringify(this));
-    cloned.clone = this.clone;
-    return cloned;
   }
 }
 module.exports = messages;
