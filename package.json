@@ -1,7 +1,7 @@
 {
   "name": "async-validate",
   "description": "Asynchronous validation for node and the browser",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "author": "muji <noop@xpm.io>",
   "license": "MIT",
   "browser": "./lib/schema.js",
