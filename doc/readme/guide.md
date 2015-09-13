@@ -206,8 +206,6 @@ Adding a reason allows associating an identifier with an error and optional meta
 
 Plugins are modules defining functions that allow users to only load functionality specific to the rule types being used which allows builds for the browser to be as lean as possible.
 
-Static plugins are mapped to [type identifiers](#type-identifiers) and instance plugins may be used to extend [Rule](#rule) which is useful for sharing functionality across rule plugins, see the [util plugins](/plugin/util).
-
 See [zephyr][] for plugin system documentation.
 
 #### Loading Plugins
@@ -232,6 +230,8 @@ Schema.plugin([
 ```
 
 #### Creating Plugins
+
+Static plugins are mapped to [type identifiers](#type-identifiers) and instance plugins may be used to extend [Rule](#rule) which is useful for sharing functionality across rule plugins, see the [util plugins](/plugin/util).
 
 See [plugin rule](#plugin-rule) for an example and [plugin](/plugin) contains the plugins that ship with this package.
 
