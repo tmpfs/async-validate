@@ -537,8 +537,9 @@ Validates a source object against the schema rules.
 
 Options:
 
-* `first`: Invoke callback when the first validation rule generates an error, no more validation rules are processed.
-* `single`: Only ever return a single error, typically used in conjunction with `first` when a validation rule could generate multiple errors.
+* `first`: Invoke callback when the first validation rule generates an error.
+* `single`: Only ever return a single error.
+* `bail`: Shorthand for `single` and `first`.
 * `keys`: Specifies the keys on the source object to be validated. Use this option to validate fields in a determinate order or to validate a subset of the rules assigned to a schema.
 * `parallel`: A boolean indicating that the validation should be executed in parallel.
 * `field`: Field name for the root object, default is `source` when not specified.

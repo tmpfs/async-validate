@@ -47,4 +47,12 @@ describe('async-validate:', function() {
     });
   });
 
+  it('should error on first error (bail)', function(done) {
+    var schema = new Schema(descriptor);
+    schema.validate({}, {bail: true}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      done();
+    });
+  });
+
 });
