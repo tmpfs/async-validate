@@ -18,11 +18,11 @@ describe("async-validate:", function() {
       address: {}
     }
     var validator = new schema(descriptor);
-    validator.validate(source, opts, function(errors, fields) {
+    validator.validate(source, opts, function(err, res) {
       // NOTE: `source` is the default field name for root object
       var expected = 'extraneous fields (name) found in source';
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql(expected);
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql(expected);
       done();
     });
   });
@@ -42,8 +42,9 @@ describe("async-validate:", function() {
       address: {}
     }
     var validator = new schema(descriptor);
-    validator.validate(source, opts, function(errors, fields) {
-      expect(errors).to.eql(null);
+    validator.validate(source, opts, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });

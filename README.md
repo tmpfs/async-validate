@@ -82,12 +82,16 @@ var Schema = require('..')
 
 Schema.plugin([require('../plugin/string')]);
 
-schema.validate(source, function(errors, fields) {
-  if(errors) {
+schema.validate(source, function(err, res) {
+  if(err) {
+    throw err; 
+  }
+
+  if(res) {
     // validation failed, errors is an array of all errors
     // fields is an object keyed by field name with an array of
     // errors per field
-    return console.dir(errors)
+    return console.dir(res.errors)
   }
   // validation passed
 });
@@ -220,8 +224,8 @@ var descriptor = {
   }
 }
 var validator = new schema(descriptor);
-validator.validate({address: {}}, function(errors, fields) {
-  // errors for name, street, city, zip
+validator.validate({address: {}}, function(err, res) {
+  // res.errors contains errors for name, street, city, zip
 });
 ```
 
@@ -244,8 +248,8 @@ var descriptor = {
   }
 }
 var validator = new schema(descriptor);
-validator.validate({address: {}}, function(errors, fields) {
-  // now only errors for name and street
+validator.validate({address: {}}, function(err, res) {
+  // now res.errors only contains errors for name and street
 });
 ```
 
@@ -494,7 +498,7 @@ var schema = require('..')
 
 schema.plugin([require('../plugin/string')]);
 
-validator.validate(source, function(errors, fields) {
+validator.validate(source, function(err, res) {
   console.dir(source.name);
 });
 ```

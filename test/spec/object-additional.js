@@ -1,18 +1,18 @@
 var expect = require('chai').expect
   , schema = require('../../index');
 
-describe("async-validate:", function() {
+describe('async-validate:', function() {
 
-  it("should error on invalid object (additional properties)", function(done) {
+  it('should error on invalid object (additional properties)', function(done) {
     var descriptor = {
       address: {
-        type: "object",
+        type: 'object',
         required: true,
         additional: false,
         fields: {
-          street: {type: "string", required: true},
-          city: {type: "string", required: true},
-          zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
+          street: {type: 'string', required: true},
+          city: {type: 'string', required: true},
+          zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
         }
       }
     }
@@ -25,24 +25,24 @@ describe("async-validate:", function() {
       }
     }
     var validator = new schema(descriptor);
-    validator.validate(source, function(errors, fields) {
+    validator.validate(source, function(err, res) {
       var expected = 'extraneous fields (name) found in address';
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql(expected);
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql(expected);
       done();
     });
   });
 
-  it("should validate with no additional properties", function(done) {
+  it('should validate with no additional properties', function(done) {
     var descriptor = {
       address: {
-        type: "object",
+        type: 'object',
         required: true,
         additional: false,
         fields: {
-          street: {type: "string", required: true},
-          city: {type: "string", required: true},
-          zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
+          street: {type: 'string', required: true},
+          city: {type: 'string', required: true},
+          zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
         }
       }
     }
@@ -54,8 +54,9 @@ describe("async-validate:", function() {
       }
     }
     var validator = new schema(descriptor);
-    validator.validate(source, function(errors, fields) {
-      expect(errors).to.eql(null);
+    validator.validate(source, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });

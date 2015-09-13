@@ -8,9 +8,9 @@ describe("async-validate:", function() {
       name: {type: "string", len: 10},
     }
     var schema = new Schema(descriptor);
-    schema.validate({name: "user"}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql('name must be exactly 10 characters');
+    schema.validate({name: "user"}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql('name must be exactly 10 characters');
       done();
     });
   });
@@ -20,9 +20,9 @@ describe("async-validate:", function() {
       port: {type: "number", len: 80},
     }
     var schema = new Schema(descriptor);
-    schema.validate({port: 8080}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql('port must equal 80');
+    schema.validate({port: 8080}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql('port must equal 80');
       done();
     });
   });
@@ -32,9 +32,9 @@ describe("async-validate:", function() {
       roles: {type: "array", len: 2},
     }
     var schema = new Schema(descriptor);
-    schema.validate({roles: ["user"]}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql('roles must be exactly 2 in length');
+    schema.validate({roles: ["user"]}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql('roles must be exactly 2 in length');
       done();
     });
   });
@@ -44,8 +44,9 @@ describe("async-validate:", function() {
       name: {type: "string", len: 8},
     }
     var schema = new Schema(descriptor);
-    schema.validate({name: "username"}, function(errors, fields) {
-      expect(errors).to.eql(null);
+    schema.validate({name: "username"}, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });
@@ -55,8 +56,9 @@ describe("async-validate:", function() {
       port: {type: "number", len: 80},
     }
     var schema = new Schema(descriptor);
-    schema.validate({port: 80}, function(errors, fields) {
-      expect(errors).to.eql(null);
+    schema.validate({port: 80}, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });
@@ -66,8 +68,9 @@ describe("async-validate:", function() {
       roles: {type: "array", len: 2},
     }
     var schema = new Schema(descriptor);
-    schema.validate({roles: ["user", "admin"]}, function(errors, fields) {
-      expect(errors).to.eql(null);
+    schema.validate({roles: ["user", "admin"]}, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });

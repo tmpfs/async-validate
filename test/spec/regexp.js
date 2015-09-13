@@ -12,9 +12,9 @@ describe("async-validate:", function() {
       var schema = new Schema(descriptor)
         , source = {re: "(?<=(category=))[a-z-]+"};
 
-      schema.validate(source, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql('re is not a valid regexp');
+      schema.validate(source, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql('re is not a valid regexp');
         done();
       });
     }
@@ -22,16 +22,18 @@ describe("async-validate:", function() {
 
   it("should validate valid regexp string", function(done) {
     var schema = new Schema(descriptor);
-    schema.validate({re: "^[a-z]+$"}, function(errors, fields) {
-      expect(errors).to.eql(null);
+    schema.validate({re: "^[a-z]+$"}, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });
 
   it("should validate native regexp instance", function(done) {
     var schema = new Schema(descriptor);
-    schema.validate({re: /^[a-z]+$/}, function(errors, fields) {
-      expect(errors).to.eql(null);
+    schema.validate({re: /^[a-z]+$/}, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });

@@ -1,22 +1,22 @@
 var expect = require('chai').expect
   , Schema = require('../../index');
 
-describe("async-validate:", function() {
+describe('async-validate:', function() {
 
   var descriptor = {
     address: {
-      type: "object",
+      type: 'object',
       required: true,
       additional: false,
       fields: {
-        street: {type: "string", required: true},
-        city: {type: "string", required: true},
-        zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
+        street: {type: 'string', required: true},
+        city: {type: 'string', required: true},
+        zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
       }
     }
   }
 
-  it("should error on invalid object (additional properties)", function(done) {
+  it('should error on invalid object (additional properties)', function(done) {
     var opts = {
       rules: {type: 'object', additional: false},
       // set root source object field name
@@ -33,17 +33,17 @@ describe("async-validate:", function() {
     }
 
     var validator = new Schema(descriptor);
-    validator.validate(source, opts, function(errors, fields) {
-      expect(errors.length).to.eql(2);
-      expect(errors[0].message).to.eql(
+    validator.validate(source, opts, function(err, res) {
+      expect(res.errors.length).to.eql(2);
+      expect(res.errors[0].message).to.eql(
         'extraneous fields (name) found in root');
-      expect(errors[1].message).to.eql(
+      expect(res.errors[1].message).to.eql(
         'extraneous fields (name) found in address');
       done();
     });
   });
 
-  it("should validate with no additional properties", function(done) {
+  it('should validate with no additional properties', function(done) {
     var opts = {
       rules: {type: 'object', additional: false}
     }
@@ -55,8 +55,9 @@ describe("async-validate:", function() {
       }
     }
     var validator = new Schema(descriptor);
-    validator.validate(source, opts, function(errors, fields) {
-      expect(errors).to.eql(null);
+    validator.validate(source, opts, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });

@@ -1,11 +1,11 @@
 var expect = require('chai').expect
   , Schema = require('../../index');
 
-describe("async-validate:", function() {
+describe('async-validate:', function() {
 
   var descriptor = {
     name: {
-      type: "string",
+      type: 'string',
       required: true, pattern: /^[a-z]+$/,
       transform: function(value) {
         return value.trim();
@@ -13,13 +13,13 @@ describe("async-validate:", function() {
     }
   }
 
-  it("should transform by stripping whitespace", function(done) {
+  it('should transform by stripping whitespace', function(done) {
     var schema = new Schema(descriptor)
-      , source = {name: " user  "};
+      , source = {name: ' user  '};
 
-    schema.validate(source, function(errors, fields) {
-      expect(errors).to.eql(null);
-      expect(fields).to.eql(null);
+    schema.validate(source, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       expect(source.name).to.eql('user');
       done();
     });

@@ -125,8 +125,8 @@ var descriptor = {
   }
 }
 var validator = new schema(descriptor);
-validator.validate({address: {}}, function(errors, fields) {
-  // errors for name, street, city, zip
+validator.validate({address: {}}, function(err, res) {
+  // res.errors contains errors for name, street, city, zip
 });
 ```
 
@@ -149,8 +149,8 @@ var descriptor = {
   }
 }
 var validator = new schema(descriptor);
-validator.validate({address: {}}, function(errors, fields) {
-  // now only errors for name and street
+validator.validate({address: {}}, function(err, res) {
+  // now res.errors only contains errors for name and street
 });
 ```
 

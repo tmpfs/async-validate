@@ -1,204 +1,207 @@
 var expect = require('chai').expect
   , Schema = require('../../index');
 
-describe("async-validate:", function() {
+describe('async-validate:', function() {
 
-  it("should error on a custom schema function", function(done) {
+  it('should error on a custom schema function', function(done) {
     var descriptor = {
       name: function(cb) {
         if(!/^[a-z0-9]+$/.test(this.value)) {
           this.raise(
-            "%s must be lowercase alphanumeric characters",
+            '%s must be lowercase alphanumeric characters',
             this.field);
         }
         cb();
       }
     }
     var schema = new Schema(descriptor);
-    schema.validate({name: "Firstname"}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql(
+    schema.validate({name: 'Firstname'}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql(
         'name must be lowercase alphanumeric characters');
       done();
     });
   });
 
-  it("should error on required string field", function(done) {
+  it('should error on required string field', function(done) {
     var descriptor = {
-      name: {type: "string", required: true}
+      name: {type: 'string', required: true}
     }
     var schema = new Schema(descriptor);
-    schema.validate({noname: "field"}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(fields.name.length).to.eql(1);
-      expect(errors[0].message).to.eql('name is required');
+    schema.validate({noname: 'field'}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      expect(res.fields.name.length).to.eql(1);
+      expect(res.errors[0].message).to.eql('name is required');
       done();
     });
   });
 
-  it("should error on required string field (null)", function(done) {
+  it('should error on required string field (null)', function(done) {
     var descriptor = {
-      name: {type: "string", required: true}
+      name: {type: 'string', required: true}
     }
     var schema = new Schema(descriptor);
-    schema.validate({name: null}, function(errors, fields) {
-      expect(errors.length).to.eql(2);
-      expect(fields.name.length).to.eql(2);
-      expect(errors[0].message).to.eql('name is required');
+    schema.validate({name: null}, function(err, res) {
+      expect(res.errors.length).to.eql(2);
+      expect(res.fields.name.length).to.eql(2);
+      expect(res.errors[0].message).to.eql('name is required');
       done();
     });
   });
 
-  it("should error on non-string type", function(done) {
+  it('should error on non-string type', function(done) {
     var descriptor = {
-      name: {type: "string"}
+      name: {type: 'string'}
     }
     var schema = new Schema(descriptor);
-    schema.validate({name: 10}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql('name is not a string');
+    schema.validate({name: 10}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql('name is not a string');
       done();
     });
   });
 
-  it("should error on required string field with minimum length",
+  it('should error on required string field with minimum length',
     function(done) {
       var descriptor = {
-        name: {type: "string", required: true, min: 8}
+        name: {type: 'string', required: true, min: 8}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: "field"}, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql(
+      schema.validate({name: 'field'}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql(
           'name must be at least 8 characters');
         done();
       });
     }
   );
 
-  it("should error on required string field with maximum length",
+  it('should error on required string field with maximum length',
     function(done) {
       var descriptor = {
-        name: {type: "string", required: true, max: 2}
+        name: {type: 'string', required: true, max: 2}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: "field"}, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql(
+      schema.validate({name: 'field'}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql(
           'name cannot be longer than 2 characters');
         done();
       });
     }
   );
 
-  it("should error on required string field is less than a length range",
+  it('should error on required string field is less than a length range',
     function(done) {
       var descriptor = {
-        name: {type: "string", required: true, min: 6, max: 8}
+        name: {type: 'string', required: true, min: 6, max: 8}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: "field"}, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql(
+      schema.validate({name: 'field'}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql(
           'name must be between 6 and 8 characters');
         done();
       });
     }
   );
 
-  it("should error on required string field is greater than a length range",
+  it('should error on required string field is greater than a length range',
     function(done) {
       var descriptor = {
-        name: {type: "string", required: true, min: 2, max: 4}
+        name: {type: 'string', required: true, min: 2, max: 4}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: "field"}, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql(
+      schema.validate({name: 'field'}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql(
           'name must be between 2 and 4 characters');
         done();
       });
     }
   );
-  it("should error on regular expression pattern mismatch",
+  it('should error on regular expression pattern mismatch',
     function(done) {
       var descriptor = {
         name: {pattern: /^[0-9]+$/}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: "alpha"}, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql(
+      schema.validate({name: 'alpha'}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql(
           'name value alpha does not match pattern /^[0-9]+$/');
         done();
       });
     }
   );
 
-  it("should error on string consisting of whitespace",
+  it('should error on string consisting of whitespace',
     function(done) {
       var descriptor = {
-        name: {type: "string", whitespace: true}
+        name: {type: 'string', whitespace: true}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: "   "}, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql('name cannot be empty');
+      schema.validate({name: '   '}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql('name cannot be empty');
         done();
       });
     }
   );
 
-  it("should error on empty string",
+  it('should error on empty string',
     function(done) {
       var descriptor = {
-        name: {type: "string", required: true, whitespace: true}
+        name: {type: 'string', required: true, whitespace: true}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: ""}, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql('name cannot be empty');
+      schema.validate({name: ''}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql('name cannot be empty');
         done();
       });
     }
   );
 
-  it("should validate on required string field", function(done) {
+  it('should validate on required string field', function(done) {
     var descriptor = {
-      name: {type: "string", required: true}
+      name: {type: 'string', required: true}
     }
     var schema = new Schema(descriptor);
-    schema.validate({name: "field"}, function(errors, fields) {
-      expect(errors).to.eql(null);
+    schema.validate({name: 'field'}, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });
 
 
-  it("should validate on required string field in range",
+  it('should validate on required string field in range',
     function(done) {
       var descriptor = {
-        name: {type: "string", required: true, min: 6, max: 20}
+        name: {type: 'string', required: true, min: 6, max: 20}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: "valid field"}, function(errors, fields) {
-        expect(errors).to.eql(null);
+      schema.validate({name: 'valid field'}, function(err, res) {
+        expect(err).to.eql(null);
+        expect(res).to.eql(null);
         done();
       });
     }
   );
 
-  it("should validate after failure",
+  it('should validate after failure',
     function(done) {
       var descriptor = {
-        name: {type: "string", required: true, whitespace: true}
+        name: {type: 'string', required: true, whitespace: true}
       }
       var schema = new Schema(descriptor);
-      schema.validate({name: ""}, function(errors, fields) {
-        expect(errors.length).to.eql(1);
-        expect(errors[0].message).to.eql('name cannot be empty');
-        schema.validate({name: "user"}, function(errors, fields) {
-          expect(errors).to.eql(null);
+      schema.validate({name: ''}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql('name cannot be empty');
+        schema.validate({name: 'user'}, function(err, res) {
+          expect(err).to.eql(null);
+          expect(res).to.eql(null);
           done();
         });
       });

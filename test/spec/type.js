@@ -17,9 +17,9 @@ describe("async-validate:", function() {
       }
     }
     var validator = new schema(descriptor);
-    validator.validate({instance: new Array()}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql('instance is not a Component');
+    validator.validate({instance: new Array()}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql('instance is not a Component');
       done();
     });
   });
@@ -36,8 +36,9 @@ describe("async-validate:", function() {
       }
     }
     var validator = new schema(descriptor);
-    validator.validate({instance: new Component()}, function(errors, fields) {
-      expect(errors).to.eql(null);
+    validator.validate({instance: new Component()}, function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });
