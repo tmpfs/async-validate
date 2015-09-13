@@ -352,7 +352,7 @@ Static plugins are mapped to [type identifiers](#type-identifiers) and instance 
 
 See [plugin rule](#plugin-rule) for an example and [plugin](https://github.com/freeformsystems/async-validate/blob/master/plugin) contains the plugins that ship with this package.
 
-The important point to remember is that for helper methods assign to `this` and for static rule functions (located by `type`) assign to `main` in the plugin.
+The important point to remember is that for helper methods assign to `this` and for static rule functions (located by `type`) assign to `this.main` in the plugin.
 
 Helper method:
 
