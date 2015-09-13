@@ -27,9 +27,9 @@ describe("async-validate:", function() {
     done();
   });
 
-  it("should error with rules as array", function(done) {
+  it("should error with rules as null", function(done) {
     function fn() {
-      var schema = new Schema([]); 
+      var schema = new Schema(null); 
     }
     expect(fn).throws(Error);
     expect(fn).throws(/rules must be an object/i);

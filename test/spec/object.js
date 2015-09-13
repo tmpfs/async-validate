@@ -16,14 +16,16 @@ describe("async-validate:", function() {
     });
   });
 
-  it("should error on invalid object (required but not specified)", function(done) {
-    var schema = new Schema(descriptor);
-    schema.validate({}, function(err, res) {
-      expect(res.errors.length).to.eql(2);
-      expect(res.errors[0].message).to.eql('address is required');
-      done();
-    });
-  });
+  it("should error on invalid object (required but not specified)",
+    function(done) {
+      var schema = new Schema(descriptor);
+      schema.validate({}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql('address is required');
+        done();
+      });
+    }
+  );
 
   it("should validate object (empty object)", function(done) {
     var schema = new Schema(descriptor);

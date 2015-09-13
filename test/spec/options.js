@@ -27,7 +27,7 @@ describe('async-validate:', function() {
   it('should error on first error', function(done) {
     var schema = new Schema(descriptor);
     schema.validate({}, {first: true}, function(err, res) {
-      expect(res.errors.length).to.eql(1);
+      expect(res.errors.length).to.eql(2);
       done();
     });
   });

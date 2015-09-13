@@ -6,6 +6,11 @@ describe("async-validate:", function() {
   var descriptor = {
     type: 'object',
     additional: false,
+    // trigger code path whereby transform cannot assign inline
+    // on root object as there is no parent object to assign to
+    transform: function(value) {
+      return value; 
+    },
     fields: {
       address: {
         type: "object",
@@ -36,7 +41,7 @@ describe("async-validate:", function() {
       address: {}
     }
     var validator = new schema(descriptor);
-    validator.validate(source, opts, function(err, res) {
+    validator.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();

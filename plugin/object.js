@@ -30,8 +30,7 @@ module.exports = function() {
 
         // NOTE: Object.keys() will throw if you declare `additional`
         // NOTE: for the `object` type but do not declare nested `fields` object
-        expected = Array.isArray(this.rule.keys)
-          ? this.rule.keys : Object.keys(this.rule.fields);
+        expected = Object.keys(this.rule.fields);
 
         additional = this.diff(
           expected, Object.keys(this.value));
