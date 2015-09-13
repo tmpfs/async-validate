@@ -1,16 +1,25 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
+var expect = require('chai').expect
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
 
-  it("should validate a value is a function", function(done) {
-    var descriptor = {
-      mock: {type: "method"},
-    }
-    var validator = new schema(descriptor);
-    validator.validate({mock: 80}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "mock is not a method");
+  var descriptor = {
+    mock: {type: "method"},
+  }
+
+  it("should error on value that is not a function", function(done) {
+    var schema = new Schema(descriptor);
+    schema.validate({mock: 80}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql('mock is not a method');
+      done();
+    });
+  });
+
+  it("should validate function type", function(done) {
+    var schema = new Schema(descriptor);
+    schema.validate({mock: function(){}}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
