@@ -8,6 +8,7 @@ module.exports = function() {
   this.main.method = function method(cb) {
     if(this.shouldValidate()) {
       this.required();
+      this.range();
       if(typeof this.value !== 'function') {
         this.raise(
           this.reasons.type,

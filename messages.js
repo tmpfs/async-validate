@@ -23,6 +23,12 @@ var messages = {
     float: '%s is not a %s',
     regexp: '%s is not a valid %s'
   },
+  function: {
+    len: '%s must have exactly %s arguments',
+    min: '%s must have at least %s arguments',
+    max: '%s cannot have more than %s arguments',
+    range: '%s must have arguments length between %s and %s'
+  },
   string: {
     len: '%s must be exactly %s characters',
     min: '%s must be at least %s characters',

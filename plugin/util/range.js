@@ -5,44 +5,49 @@ module.exports = function() {
    */
   this.range = function range() {
     var rule = this.rule
-      , value = this.value;
+      , value = this.value
+      , val = value
+      , key = null
+      , arr = Array.isArray(value)
+      , len = typeof rule.len === 'number'
+      , min = typeof rule.min === 'number'
+      , max = typeof rule.max === 'number'
+      , num = typeof(value) === 'number'
+      , str = typeof(value) === 'string'
+      , fun = typeof(value) === 'function';
 
-    var len = typeof rule.len === 'number';
-    var min = typeof rule.min === 'number';
-    var max = typeof rule.max === 'number';
-    var val = value;
-    var key = null;
-    var num = typeof(value) === 'number';
-    var str = typeof(value) === 'string';
-    var arr = Array.isArray(value);
-    if(num) {
-      key = 'number';
-    }else if(str) {
-      key = 'string';
+    if(num || str || fun) {
+      key = typeof(value);
     }else if(arr) {
       key = 'array';
     }
-    // if the value is not of a supported type for range validation
-    // the validation rule rule should use the
-    // type property to also test for a particular type
+
+    // if the value is not a supported range type ignore validation
     if(!key) {
       return false;
     }
-    if(str || arr) {
+
+    // use `length` property of `value`
+    if(str || arr || fun) {
       val = value.length;
     }
+
+    // length equality test
     if(len && (val !== rule.len)) {
       this.raise(
         this.reasons.length,
         this.messages[key].len, this.field, rule.len);
+    // minimum value 
     }else if(min && !max && val < rule.min ) {
       this.raise(
         this.reasons.min,
         this.messages[key].min, this.field, rule.min);
+    // maximum value 
     }else if( max && !min && val > rule.max ) {
       this.raise(
         this.reasons.max,
         this.messages[key].max, this.field, rule.max);
+    // range test
     }else if(min && max && (val < rule.min || val > rule.max) ) {
       this.raise(
         val < rule.min ? this.reasons.min : this.reasons.max,
