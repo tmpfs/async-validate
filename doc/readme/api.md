@@ -150,14 +150,6 @@ function pattern()
 
 Validate using a regexp pattern, typically invoked from a rule function, raises an error if a value fails to match a rule regexp pattern.
 
-##### type
-
-```javascript
-function type()
-```
-
-Validates the type of a value, typically invoked from a rule function, raises an error if a value is not of the correct type.
-
 ##### range
 
 ```javascript

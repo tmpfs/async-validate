@@ -44,7 +44,6 @@ Table of Contents
         * [hasAdditionalFields](#hasadditionalfields)
         * [required](#required)
         * [pattern](#pattern)
-        * [type](#type)
         * [range](#range)
   * [Developer](#developer)
     * [Test](#test)
@@ -627,14 +626,6 @@ function pattern()
 ```
 
 Validate using a regexp pattern, typically invoked from a rule function, raises an error if a value fails to match a rule regexp pattern.
-
-##### type
-
-```javascript
-function type()
-```
-
-Validates the type of a value, typically invoked from a rule function, raises an error if a value is not of the correct type.
 
 ##### range
 
