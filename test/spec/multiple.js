@@ -47,7 +47,9 @@ describe('async-validate:', function(done) {
           {type: 'string', pattern: email, required: true},
           function(cb) {
             var email = 'user@example.com';
+            console.dir('email func called: ' + this.value);
             if(this.value === email) {
+              console.dir('raising error');
               this.raise('Email address %s already exists', email);
             }
             cb();
