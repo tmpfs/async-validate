@@ -85,9 +85,7 @@ Schema.plugin([require('../plugin/string')]);
 schema.validate(source, function(err, res) {
   if(err) {
     throw err; 
-  }
-
-  if(res) {
+  }else if(res) {
     // validation failed, errors is an array of all errors
     // fields is an object keyed by field name with an array of
     // errors per field
