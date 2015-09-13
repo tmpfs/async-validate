@@ -6,7 +6,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.null = function validate(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
       if(this.value !== null) {
         this.raise(

@@ -6,7 +6,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.enum = function enumerable(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
       var list = this.rule.list;
       if(!~list.indexOf(this.value)) {

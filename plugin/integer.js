@@ -6,7 +6,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.integer = function integer(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
 
       if(typeof(this.value) !== 'number'

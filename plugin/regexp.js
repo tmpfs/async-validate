@@ -17,7 +17,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.regexp = function regexp(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
       if(!isRegExp(this.value)) {
         this.raise(

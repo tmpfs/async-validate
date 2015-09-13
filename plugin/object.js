@@ -15,7 +15,7 @@ module.exports = function() {
   this.main.object = function object(cb) {
     var expected, additional;
 
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
 
       if(!isObject(this.value, this.rule.Type)) {

@@ -6,7 +6,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.string = function string(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
 
       // if value is required and value is undefined

@@ -6,7 +6,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.array = function array(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
       if(!Array.isArray(this.value)) {
         this.raise(

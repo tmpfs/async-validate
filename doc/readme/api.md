@@ -119,10 +119,10 @@ Format a message with replacement parameters like `util.format`.
 
 Useful when a rule declares `message` as a function and wishes to construct the error message with parameters.
 
-##### shouldValidate
+##### validates
 
 ```javascript
-function shouldValidate()
+function validates()
 ```
 
 Returns a `boolean` derived from the rule `required` property and other factors to determine if the value should be subject to the validation rule, typically invoked within a rule validation function.

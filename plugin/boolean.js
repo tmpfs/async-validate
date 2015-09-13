@@ -6,7 +6,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.boolean = function bool(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
 
       // straight typeof check

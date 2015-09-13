@@ -9,7 +9,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.pattern = function pattern(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.pattern();
     }
     cb();

@@ -6,7 +6,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.number = function number(cb) {
-    if(this.shouldValidate()) {
+    if(this.validates()) {
       this.required();
       // straight typeof check
       if(typeof(this.value) !== this.rule.type) {

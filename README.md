@@ -44,7 +44,7 @@ Table of Contents
         * [getReason](#getreason)
         * [raise](#raise)
         * [format](#format)
-        * [shouldValidate](#shouldvalidate)
+        * [validates](#validates)
         * [diff](#diff)
         * [required](#required)
         * [pattern](#pattern)
@@ -81,7 +81,7 @@ var Schema = require('..')
   , source = {};
 
 Schema.plugin([
-  require('../plugin/util/required'),
+  require('../plugin/util'),
   require('../plugin/string')]);
 
 schema.validate(source, function(err, res) {
@@ -497,7 +497,7 @@ var Schema = require('..')
   , source = {name: " user  "};
 
 Schema.plugin([
-  require('../plugin/util/required'),
+  require('../plugin/util'),
   require('../plugin/string')]);
 
 schema.validate(source, function(err, res) {
@@ -626,10 +626,10 @@ Format a message with replacement parameters like `util.format`.
 
 Useful when a rule declares `message` as a function and wishes to construct the error message with parameters.
 
-##### shouldValidate
+##### validates
 
 ```javascript
-function shouldValidate()
+function validates()
 ```
 
 Returns a `boolean` derived from the rule `required` property and other factors to determine if the value should be subject to the validation rule, typically invoked within a rule validation function.
