@@ -1,6 +1,5 @@
 var rule = require('../lib/rule');
 rule.plugin([
-  require('./util'),
   require('./array'),
   require('./boolean'),
   require('./date'),
@@ -13,5 +12,6 @@ rule.plugin([
   require('./object'),
   require('./pattern'),
   require('./regexp'),
-  require('./string')
+  require('./string'),
+  require('./util')
 ]);
