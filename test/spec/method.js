@@ -10,7 +10,7 @@ describe("async-validate:", function() {
     var validator = new schema(descriptor);
     validator.validate({mock: 80}, function(errors, fields) {
       assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "mock is not a method (function)");
+      assert.equal(errors[0].message, "mock is not a method");
       done();
     });
   });

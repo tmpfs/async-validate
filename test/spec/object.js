@@ -19,7 +19,7 @@ describe("async-validate:", function() {
     }
     var validator = new schema(descriptor);
     validator.validate({}, function(errors, fields) {
-      assert.equal(errors.length, 1);
+      assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "address is required");
       done();
     });

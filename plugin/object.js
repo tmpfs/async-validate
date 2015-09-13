@@ -1,3 +1,10 @@
+function isObject(value, Type) {
+  if(typeof Type === 'function') {
+    return (value instanceof Type);
+  }
+  return typeof(value) === 'object' && !Array.isArray(value);
+}
+
 /**
  *  Validates an object.
  *
@@ -8,7 +15,13 @@ function object(cb) {
 
   if(this.shouldValidate()) {
     this.required();
-    this.type();
+
+    if(!isObject(this.value, this.rule.Type)) {
+      this.raise(
+        this.reasons.type,
+        this.messages.types[this.rule.type],
+        this.field, this.rule.type);
+    }
 
     // nested deep properties
     if(this.rule.additional === false) {

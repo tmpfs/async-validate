@@ -28,11 +28,13 @@ function date(cb) {
   var validate = this.rule.required
     || (!this.rule.required && this.source.hasOwnProperty(this.field)
           && this.source[this.field]);
+
   if(validate) {
     this.required();
     this.pattern();
     validator.call(this);
   }
+
   cb();
 }
 

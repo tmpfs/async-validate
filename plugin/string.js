@@ -6,7 +6,20 @@
 function string(cb) {
   if(this.shouldValidate()) {
     this.required();
-    this.type();
+
+    // if value is required and value is undefined
+    // no need to add this error message
+    if(this.rule.required && this.value === undefined) {
+      return cb();    
+    }
+
+    if(typeof this.value !== 'string') {
+      this.raise(
+        this.reasons.type,
+        this.messages.types[this.rule.type],
+        this.field, this.rule.type);
+    }
+
     this.range();
     this.pattern();
 

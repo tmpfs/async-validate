@@ -6,7 +6,12 @@
 function array(cb) {
   if(this.shouldValidate()) {
     this.required();
-    this.type();
+    if(!Array.isArray(this.value)) {
+      this.raise(
+        this.reasons.type,
+        this.messages.types[this.rule.type],
+        this.field, this.rule.type);
+    }
     this.range();
   }
   cb();

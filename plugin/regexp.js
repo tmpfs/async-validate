@@ -1,3 +1,15 @@
+
+function isRegExp(value) {
+  if(value instanceof RegExp) {
+    return true;
+  }
+  try {
+    new RegExp(value);
+    return true;
+  }catch(e) {}
+  return false;
+}
+
 /**
  *  Validates the regular expression type.
  *
@@ -6,7 +18,11 @@
 function regexp(cb) {
   if(this.shouldValidate()) {
     this.required();
-    this.type();
+    if(!isRegExp(this.value)) {
+      this.raise(
+        this.reasons.type,
+        this.messages.types[this.rule.type], this.field, this.rule.type);
+    }
   }
   cb();
 }

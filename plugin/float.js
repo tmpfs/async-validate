@@ -6,7 +6,15 @@
 function fraction(cb) {
   if(this.shouldValidate()) {
     this.required();
-    this.type();
+
+    if(typeof(this.value) !== 'number'
+      || Number(this.value) === parseInt(this.value)) {
+      this.raise(
+        this.reasons.type,
+        this.messages.types[this.rule.type],
+        this.field, this.rule.type);
+    }
+
     this.range();
   }
   cb();
