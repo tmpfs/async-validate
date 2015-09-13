@@ -1,16 +1,23 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
+var expect = require('chai').expect
+  , Schema = require('../../index');
 
 describe("async-validate:", function(done) {
+
+  var date = {
+    type: "date",
+    pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/,
+    format: "YYYY-MM-DD"
+  }
+
   it("should error on invalid date value using a format", function(done) {
     var descriptor = {
       active: {type: "date", format: "YYYY-MM-DD"}
     }
-    var validator = new schema(descriptor);
-    validator.validate({active: "2013-06-50"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message,
-        "active date 2013-06-50 is invalid for format YYYY-MM-DD");
+    var schema = new Schema(descriptor);
+    schema.validate({active: "2013-06-50"}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql(
+        'active date 2013-06-50 is invalid for format YYYY-MM-DD');
       done();
     });
   });
@@ -18,11 +25,11 @@ describe("async-validate:", function(done) {
     var descriptor = {
       active: {type: "date"}
     }
-    var validator = new schema(descriptor);
-    validator.validate({active: "2011-10-10T10:20:90"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message,
-        "active date 2011-10-10T10:20:90 is invalid");
+    var schema = new Schema(descriptor);
+    schema.validate({active: "2011-10-10T10:20:90"}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql(
+        'active date 2011-10-10T10:20:90 is invalid');
       done();
     });
   });
@@ -30,11 +37,11 @@ describe("async-validate:", function(done) {
     var descriptor = {
       active: {type: "date"}
     }
-    var validator = new schema(descriptor);
-    validator.validate({active: "not a date"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message,
-        "active date not a date is invalid");
+    var schema = new Schema(descriptor);
+    schema.validate({active: "not a date"}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql(
+        'active date not a date is invalid');
       done();
     });
   });
@@ -47,11 +54,11 @@ describe("async-validate:", function(done) {
         pattern: ptn
       }
     }
-    var validator = new schema(descriptor);
-    validator.validate({active: "13-06-24"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message,
-        "active value 13-06-24 does not match pattern " + ptn);
+    var schema = new Schema(descriptor);
+    schema.validate({active: "13-06-24"}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql(
+        'active value 13-06-24 does not match pattern ' + ptn);
       done();
     });
   });
@@ -60,10 +67,9 @@ describe("async-validate:", function(done) {
     var descriptor = {
       active: {type: "date", format: "YYYY-MM-DD"}
     }
-    var validator = new schema(descriptor);
-    validator.validate({active: "2013-06-24"}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+    var schema = new Schema(descriptor);
+    schema.validate({active: "2013-06-24"}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
@@ -72,10 +78,9 @@ describe("async-validate:", function(done) {
     var descriptor = {
       active: {type: "date", format: "YYYY-MM-DD", local: true}
     }
-    var validator = new schema(descriptor);
-    validator.validate({active: "2013-06-24"}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+    var schema = new Schema(descriptor);
+    schema.validate({active: "2013-06-24"}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
@@ -84,28 +89,23 @@ describe("async-validate:", function(done) {
     var descriptor = {
       active: {type: "date"}
     }
-    var validator = new schema(descriptor);
-    validator.validate({active: "2011-10-10T10:20:30"}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+    var schema = new Schema(descriptor);
+    schema.validate({active: "2011-10-10T10:20:30"}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
-  var date = {
-    type: "date",
-    pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/,
-    format: "YYYY-MM-DD"
-  }
+
   it("should validate optional date range reference", function(done) {
     var descriptor = {
       start: date,
       end: date
     }
-    var validator = new schema(descriptor);
-    validator.validate({start: "", end: "2013-06-24"}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+    var schema = new Schema(descriptor);
+    schema.validate({start: "", end: "2013-06-24"}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
+
 });
