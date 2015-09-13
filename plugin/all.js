@@ -1,5 +1,5 @@
-var validator = require('../lib/validator');
-validator.plugin([
+var rule = require('../lib/rule');
+rule.plugin([
   require('./array'),
   require('./boolean'),
   require('./date'),

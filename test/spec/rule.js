@@ -1,5 +1,5 @@
 var expect = require('chai').expect
-  , Validator = require('../../lib/validator');
+  , Validator = require('../../lib/rule');
 
 describe("async-validate:", function() {
 
