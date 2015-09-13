@@ -1,27 +1,27 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
+var expect = require('chai').expect
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
+
+  var descriptor = {
+    role: {type: "enum", list: ['admin', 'user', 'guest']}
+  }
+
   it("should error on invalid enum value", function(done) {
-    var descriptor = {
-      role: {type: "enum", list: ['admin', 'user', 'guest']}
-    }
-    var validator = new schema(descriptor);
-    validator.validate({role: "manager"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "role must be one of admin, user, guest");
+    var schema = new Schema(descriptor);
+    schema.validate({role: "manager"}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql('role must be one of admin, user, guest');
       done();
     });
   });
+
   it("should validate enum value", function(done) {
-    var descriptor = {
-      role: {type: "enum", list: ['admin', 'user', 'guest']}
-    }
-    var validator = new schema(descriptor);
-    validator.validate({role: "user"}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+    var schema = new Schema(descriptor);
+    schema.validate({role: "user"}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
+
 });
