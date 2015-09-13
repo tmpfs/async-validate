@@ -1,7 +1,5 @@
-var assert = require('chai').assert
-  , expect = require('chai').expect;
-
-var schema = require('../../index');
+var expect = require('chai').expect
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
 
@@ -10,12 +8,11 @@ describe("async-validate:", function() {
       name: {type: 'string'},
       age: {type: 'integer', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {age: undefined, name : "User"};
     var opts = {first : false, single: true};
-    validator.validate(source, opts, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+    schema.validate(source, opts, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
@@ -26,12 +23,11 @@ describe("async-validate:", function() {
         name: {type: 'string'},
         age: {type: 'integer', required: false}
       }
-      var validator = new schema(descriptor);
+      var schema = new Schema(descriptor);
       var source = {age: undefined, name : "User"};
       var opts = {first : true, single: true};
-      validator.validate(source, opts, function(errors, fields) {
-        assert.isNull(errors);
-        assert.isNull(fields);
+      schema.validate(source, opts, function(errors, fields) {
+        expect(errors).to.eql(null);
         done();
       });
     }
@@ -43,13 +39,13 @@ describe("async-validate:", function() {
         name: {type: 'string'},
         age: {type: 'integer', required: false}
       }
-      var validator = new schema(descriptor);
+      var schema = new Schema(descriptor);
       var source = {age: 'abc', name : "User"};
       var opts = {first : true, single: true};
-      validator.validate(source, opts, function(errors, fields) {
-        assert.equal(errors.length, 1);
-        assert.equal(errors[0].message, "age is not an integer");
-        assert.equal(errors[0].field, 'age');
+      schema.validate(source, opts, function(errors, fields) {
+        expect(errors.length).to.eql(1);
+        expect(errors[0].message).to.eql('age is not an integer');
+        expect(errors[0].field).to.eql('age');
         done();
       });
     }
@@ -60,10 +56,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'array', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -73,10 +69,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'boolean', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -86,10 +82,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'date', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -99,10 +95,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'enum', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -112,10 +108,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'float', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -125,10 +121,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'method', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -138,10 +134,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'number', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -151,10 +147,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'object', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -164,10 +160,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'pattern', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -177,10 +173,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'regexp', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
@@ -190,10 +186,10 @@ describe("async-validate:", function() {
     var descriptor = {
       mock: {type: 'string', required: false}
     }
-    var validator = new schema(descriptor);
+    var schema = new Schema(descriptor);
     var source = {mock: undefined};
     var opts = {};
-    validator.validate(source, opts, function(errors, fields) {
+    schema.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
     });
