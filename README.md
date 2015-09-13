@@ -81,7 +81,7 @@ var Schema = require('..')
   , source = {};
 
 Schema.plugin([
-  require('../plugin/core'),
+  require('../plugin/util/required'),
   require('../plugin/string')]);
 
 schema.validate(source, function(err, res) {
@@ -497,7 +497,7 @@ var Schema = require('..')
   , source = {name: " user  "};
 
 Schema.plugin([
-  require('../plugin/core'),
+  require('../plugin/util/required'),
   require('../plugin/string')]);
 
 schema.validate(source, function(err, res) {

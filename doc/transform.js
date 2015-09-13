@@ -12,7 +12,7 @@ var Schema = require('..')
   , source = {name: " user  "};
 
 Schema.plugin([
-  require('../plugin/core'),
+  require('../plugin/util'),
   require('../plugin/string')]);
 
 schema.validate(source, function(err, res) {

@@ -1,33 +1,5 @@
 module.exports = function() {
 
-  //console.dir(this === this.main.Type.prototype);
-
-  /**
-   *  Rule for validating required fields.
-   */
-  this.required = function required() {
-    if(this.rule.required
-       && (!this.source.hasOwnProperty(this.field)
-          || this.value === undefined || this.value === null)) {
-      this.raise(
-        this.reasons.required,
-        this.messages.required, this.field);
-    }
-  }
-
-  /**
-   *  Rule for validating a regular expression pattern.
-   */
-  this.pattern = function pattern() {
-    if((this.rule.pattern instanceof RegExp)
-      && (!this.rule.pattern.test(this.value))) {
-      this.raise(
-        this.reasons.pattern,
-        this.messages.pattern.mismatch,
-        this.field, this.value, this.rule.pattern);
-    }
-  }
-
   /**
    *  Rule for validating minimum and maximum allowed values.
    */
