@@ -322,8 +322,8 @@ require('async-validate/plugin/all');
 It is preferable to only use plugins for the types you are using:
 
 ```javascript
-var schema = require('async-validate');
-schema.plugin([
+var Schema = require('async-validate');
+Schema.plugin([
   require('async-validate/plugin/util'),
   require('async-validate/plugin/array'),
   require('async-validate/plugin/boolean'),
@@ -338,7 +338,7 @@ See [plugin rule](#plugin-rule) for an example and [plugin](https://github.com/f
 
 ### Rule Properties
 
-This section describes the recognised rule properties and their behaviour, if you are using an [assigned rule](#assigned-rule) or [plugin rule](#plugin-rule) you can define properties on the rule object and they are available to the rule function via `this.rule`.
+This section describes the recognised rule properties and their behaviour, if you are using an [assigned rule](#assigned-rule) or [plugin rule](#plugin-rule) you can define properties on the rule object and they are available to the rule function via `this`.
 
 #### Type Identifier
 
@@ -351,7 +351,7 @@ Recognised type values are:
 * `boolean`: Must be of type `boolean`.
 * `method`: Must be of type `function`.
 * `null`: Must strictly equal `null`.
-* `regexp`: Must be an instance of `RegExp` or a string that does not generate an exception when creating a new `RegExp`.
+* `regexp`: Must be an instance of `RegExp` or a valid string regexp.
 * `integer`: Must be of type `number` and an integer.
 * `float`: Must be of type `number` and a floating point number.
 * `array`: Must be an array as determined by `Array.isArray`.
