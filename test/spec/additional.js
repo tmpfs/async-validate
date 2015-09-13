@@ -3,23 +3,24 @@ var expect = require('chai').expect
 
 describe("async-validate:", function() {
 
+  var descriptor = {
+    address: {
+      type: "object",
+      required: true,
+      additional: false,
+      fields: {
+        street: {type: "string", required: true},
+        city: {type: "string", required: true},
+        zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
+      }
+    }
+  }
+
   it("should error on invalid object (additional properties)", function(done) {
     var opts = {
       rules: {type: 'object', additional: false},
       // set root source object field name
       field: 'root'
-    }
-    var descriptor = {
-      address: {
-        type: "object",
-        required: true,
-        additional: false,
-        fields: {
-          street: {type: "string", required: true},
-          city: {type: "string", required: true},
-          zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
-        }
-      }
     }
     var source = {
       name: 'Opps',
@@ -44,18 +45,6 @@ describe("async-validate:", function() {
   it("should validate with no additional properties", function(done) {
     var opts = {
       rules: {type: 'object', additional: false}
-    }
-    var descriptor = {
-      address: {
-        type: "object",
-        required: true,
-        additional: false,
-        fields: {
-          street: {type: "string", required: true},
-          city: {type: "string", required: true},
-          zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
-        }
-      }
     }
     var source = {
       address: {
