@@ -338,6 +338,33 @@ Static plugins are mapped to [type identifiers](#type-identifiers) and instance 
 
 See [plugin rule](#plugin-rule) for an example and [plugin](https://github.com/freeformsystems/async-validate/blob/master/plugin) contains the plugins that ship with this package.
 
+The important point to remember is that for helper methods assign to `this` and for static rule functions (located by `type`) assign to `main` in the plugin.
+
+Helper method:
+
+```javascript
+module.exports = function() {
+  // create a helper method on the prototype
+  // of the class used for static function scope
+  this.helper = function(value) {
+    return value;
+  }
+}
+```
+
+Static method:
+
+```javascript
+module.exports = function() {
+  this.main.id = function id(cb) {
+    // use helper method
+    var val = this.helper(this.value);
+    // implement validation for `id` type
+    cb();
+  }
+}
+```
+
 ### Rule Properties
 
 This section describes the recognised rule properties and their behaviour, if you are using an [assigned rule](#assigned-rule) or [plugin rule](#plugin-rule) you can define properties on the rule object and they are available to the rule function via `this`.
