@@ -1,4 +1,4 @@
-var assert = require('chai').assert
+var expect = require('chai').expect
   , Schema = require('../../index');
 
 describe("async-validate:", function() {
@@ -37,23 +37,12 @@ describe("async-validate:", function() {
     }
   }
 
-  it("should validate deep rule (not required/no matching property)",
-    function(done) {
-      var schema = new Schema(descriptor);
-      schema.validate({}, function(errors, fields) {
-        assert.isNull(errors);
-        assert.isNull(fields);
-        done();
-      });
-    }
-  );
-
   it("should error on invalid deep rule (required/no matching property)",
     function(done) {
       var schema = new Schema(required);
       schema.validate({}, function(errors, fields) {
-        assert.equal(errors.length, 1);
-        assert.equal(errors[0].message, "address is required");
+        expect(errors.length).to.eql(1);
+        expect(errors[0].message).to.eql('address is required');
         done();
       });
     }
@@ -63,11 +52,11 @@ describe("async-validate:", function() {
     function(done) {
       var schema = new Schema(details);
       schema.validate({ address: {} }, function(errors, fields) {
-        assert.equal(errors.length, 4);
-        assert.equal(errors[0].message, "name is required");
-        assert.equal(errors[1].message, "street is required");
-        assert.equal(errors[2].message, "city is required");
-        assert.equal(errors[3].message, "invalid zip");
+        expect(errors.length).to.eql(4);
+        expect(errors[0].message).to.eql('name is required');
+        expect(errors[1].message).to.eql('street is required');
+        expect(errors[2].message).to.eql('city is required');
+        expect(errors[3].message).to.eql('invalid zip');
         done();
       });
     }
@@ -86,9 +75,9 @@ describe("async-validate:", function() {
     }
     var schema = new Schema(descriptor);
     schema.validate({ address: {} }, function(errors, fields) {
-      assert.equal(errors.length, 2);
-      assert.equal(errors[0].message, "street is required");
-      assert.equal(errors[1].message, "name is required");
+      expect(errors.length).to.eql(2);
+      expect(errors[0].message).to.eql('street is required');
+      expect(errors[1].message).to.eql('name is required');
       done();
     });
   });
@@ -106,29 +95,9 @@ describe("async-validate:", function() {
     }
     var schema = new Schema(descriptor);
     schema.validate({ roles: ["admin", "user"] }, function(errors, fields) {
-      assert.equal(errors.length, 2);
-      assert.equal(errors[0].message, "roles must be exactly 3 in length");
-      assert.equal(errors[1].message, "2 is required");
-      done();
-    });
-  });
-
-  it("should validate deep rule (array type)", function(done) {
-    var descriptor = {
-      roles: {
-        type: "array", required: true, len: 3,
-        fields: {
-          0: {type: "string", required: true},
-          1: {type: "string", required: true},
-          2: {type: "string", required: true}
-        }
-      }
-    }
-    var schema = new Schema(descriptor)
-      , source = {roles: ["admin", "user", "guest"]};
-    schema.validate(source, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+      expect(errors.length).to.eql(2);
+      expect(errors[0].message).to.eql('roles must be exactly 3 in length');
+      expect(errors[1].message).to.eql('2 is required');
       done();
     });
   });
@@ -152,11 +121,41 @@ describe("async-validate:", function() {
 
     var schema = new Schema(descriptor);
     schema.validate({ address: {house: {}} }, function(errors, fields) {
-      assert.equal(errors.length, 2);
-      assert.equal(errors[0].message, "name is required");
-      assert.equal(errors[1].message, "number is required");
+      expect(errors.length).to.eql(2);
+      expect(errors[0].message).to.eql('name is required');
+      expect(errors[1].message).to.eql('number is required');
       done();
     });
   });
+
+  it("should validate deep rule (not required/no matching property)",
+    function(done) {
+      var schema = new Schema(descriptor);
+      schema.validate({}, function(errors, fields) {
+        expect(errors).to.eql(null);
+        done();
+      });
+    }
+  );
+
+  it("should validate deep rule (array type)", function(done) {
+    var descriptor = {
+      roles: {
+        type: "array", required: true, len: 3,
+        fields: {
+          0: {type: "string", required: true},
+          1: {type: "string", required: true},
+          2: {type: "string", required: true}
+        }
+      }
+    }
+    var schema = new Schema(descriptor)
+      , source = {roles: ["admin", "user", "guest"]};
+    schema.validate(source, function(errors, fields) {
+      expect(errors).to.eql(null);
+      done();
+    });
+  });
+
 
 });
