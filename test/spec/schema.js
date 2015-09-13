@@ -1,11 +1,25 @@
 var expect = require('chai').expect
-  , schema = require('../../index');
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
 
+  it("should define with fields", function(done) {
+    var schema = new Schema({fields: {name: {type: 'string'}}}); 
+    expect(schema.rules).to.be.an('object');
+    expect(schema.rules.fields).to.be.an('object');
+    done();
+  });
+
+  it("should define without fields", function(done) {
+    var schema = new Schema({name: {type: 'string'}}); 
+    expect(schema.rules).to.be.an('object');
+    expect(schema.rules.fields).to.be.an('object');
+    done();
+  });
+
   it("should error with no rules", function(done) {
     function fn() {
-      var validator = new schema(); 
+      var schema = new Schema(); 
     }
     expect(fn).throws(Error);
     expect(fn).throws(/cannot configure/i);
@@ -15,27 +29,27 @@ describe("async-validate:", function() {
 
   it("should error with rules as array", function(done) {
     function fn() {
-      var validator = new schema([]); 
+      var schema = new Schema([]); 
     }
     expect(fn).throws(Error);
     expect(fn).throws(/rules must be an object/i);
     done();
   });
 
-  it("should error on validate with no rules", function(done) {
-    var validator = new schema({}); 
-    function fn() {
-      validator.validate({});
-    }
-    expect(fn).throws(Error);
-    expect(fn).throws(/cannot validate with no rules/i);
-    done();
-  });
+  //it("should error on validate with no rules", function(done) {
+    //var schema = new Schema({}); 
+    //function fn() {
+      //schema.validate({});
+    //}
+    //expect(fn).throws(Error);
+    //expect(fn).throws(/cannot validate with no rules/i);
+    //done();
+  //});
 
   it("should error on validate with no source", function(done) {
-    var validator = new schema({name: function(cb){cb()}}); 
+    var schema = new Schema({name: function(cb){cb()}}); 
     function fn() {
-      validator.validate();
+      schema.validate();
     }
     expect(fn).throws(Error);
     expect(fn).throws(/cannot validate with no source/i);
@@ -43,9 +57,9 @@ describe("async-validate:", function() {
   });
 
   it("should error on validate with no callback", function(done) {
-    var validator = new schema({name: function(cb){cb()}}); 
+    var schema = new Schema({name: function(cb){cb()}}); 
     function fn() {
-      validator.validate({});
+      schema.validate({});
     }
     expect(fn).throws(Error);
     expect(fn).throws(/cannot validate with no callback/i);
@@ -54,9 +68,9 @@ describe("async-validate:", function() {
 
 
   it("should error on validate with unknown type", function(done) {
-    var validator = new schema({name: {type: 'unknown-type'}}); 
+    var schema = new Schema({name: {type: 'unknown-type'}}); 
     function fn() {
-      validator.validate({}, function noop(){});
+      schema.validate({}, function noop(){});
     }
     expect(fn).throws(Error);
     expect(fn).throws(/unknown rule type/i);

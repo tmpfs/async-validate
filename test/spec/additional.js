@@ -4,26 +4,29 @@ var expect = require('chai').expect
 describe('async-validate:', function() {
 
   var descriptor = {
-    address: {
-      type: 'object',
-      required: true,
-      additional: false,
-      fields: {
-        street: {type: 'string', required: true},
-        city: {type: 'string', required: true},
-        zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
+    type: 'object',
+    additional: false,
+    fields: {
+      address: {
+        type: 'object',
+        required: true,
+        additional: false,
+        fields: {
+          street: {type: 'string', required: true},
+          city: {type: 'string', required: true},
+          zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
+        }
       }
     }
   }
 
   it('should error on invalid object (additional properties)', function(done) {
     var opts = {
-      rules: {type: 'object', additional: false},
       // set root source object field name
       field: 'root'
     }
     var source = {
-      name: 'Opps',
+      name: 'Oops',
       address: {
         name: 'Oops',
         street: 'Mock St',
@@ -44,9 +47,6 @@ describe('async-validate:', function() {
   });
 
   it('should validate with no additional properties', function(done) {
-    var opts = {
-      rules: {type: 'object', additional: false}
-    }
     var source = {
       address: {
         street: 'Mock St',
@@ -55,7 +55,7 @@ describe('async-validate:', function() {
       }
     }
     var validator = new Schema(descriptor);
-    validator.validate(source, opts, function(err, res) {
+    validator.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();

@@ -3,41 +3,35 @@ var expect = require('chai').expect
 
 describe("async-validate:", function() {
 
-  it("should error on invalid source object (additional properties)", function(done) {
-    var opts = {
-      rules: {type: 'object', additional: false}
-    }
-    var descriptor = {
+  var descriptor = {
+    type: 'object',
+    additional: false,
+    fields: {
       address: {
         type: "object",
         required: true
       }
     }
-    var source = {
-      name: 'Oops',
-      address: {}
+  }
+
+  it("should error on invalid source object (additional properties)",
+    function(done) {
+      var source = {
+        name: 'Oops',
+        address: {}
+      }
+      var validator = new schema(descriptor);
+      validator.validate(source, function(err, res) {
+        // NOTE: `source` is the default field name for root object
+        var expected = 'extraneous fields (name) found in source';
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql(expected);
+        done();
+      });
     }
-    var validator = new schema(descriptor);
-    validator.validate(source, opts, function(err, res) {
-      // NOTE: `source` is the default field name for root object
-      var expected = 'extraneous fields (name) found in source';
-      expect(res.errors.length).to.eql(1);
-      expect(res.errors[0].message).to.eql(expected);
-      done();
-    });
-  });
+  );
 
   it("should validate with no additional properties", function(done) {
-    var opts = {
-      // NOTE: use array of rules to trigger code path
-      rules: [{type: 'object', additional: false}]
-    }
-    var descriptor = {
-      address: {
-        type: "object",
-        required: true
-      }
-    }
     var source = {
       address: {}
     }
