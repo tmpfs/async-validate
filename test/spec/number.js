@@ -1,51 +1,58 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
+var expect = require('chai').expect
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
 
-  it("should validate a value is a number", function(done) {
+  it("should error on not a number", function(done) {
     var descriptor = {
       port: {type: "number"},
     }
-    var validator = new schema(descriptor);
-    validator.validate({port: "80"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "port is not a number");
+    var schema = new Schema(descriptor);
+    schema.validate({port: "80"}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql('port is not a number');
       done();
     });
   });
-  it("should validate a number is greater than a minimum value", function(done) {
+
+  it("should error on number greater than a minimum value", function(done) {
     var descriptor = {
       port: {type: "number", min: 8080},
     }
-    var validator = new schema(descriptor);
-    validator.validate({port: 80}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "port cannot be less than 8080");
+    var schema = new Schema(descriptor);
+    schema.validate({port: 80}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql('port cannot be less than 8080');
       done();
     });
   });
-  it("should validate a number is greater than a minimum value", function(done) {
-    var descriptor = {
-      port: {type: "number", max: 80},
+
+  it("should error on number number greater than a minimum value",
+    function(done) {
+      var descriptor = {
+        port: {type: "number", max: 80},
+      }
+      var schema = new Schema(descriptor);
+      schema.validate({port: 8080}, function(errors, fields) {
+        expect(errors.length).to.eql(1);
+        expect(errors[0].message).to.eql('port cannot be greater than 80');
+        done();
+      });
     }
-    var validator = new schema(descriptor);
-    validator.validate({port: 8080}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "port cannot be greater than 80");
-      done();
-    });
-  });
-  it("should validate a number is greater than a minimum value", function(done) {
-    var descriptor = {
-      port: {type: "number", min: 80, max: 1024},
+  );
+
+  it("should error on number out of range",
+    function(done) {
+      var descriptor = {
+        port: {type: "number", min: 80, max: 1024},
+      }
+      var schema = new Schema(descriptor);
+      schema.validate({port: 8080}, function(errors, fields) {
+        expect(errors.length).to.eql(1);
+        expect(errors[0].message).to.eql('port must be between 80 and 1024');
+        done();
+      });
     }
-    var validator = new schema(descriptor);
-    validator.validate({port: 8080}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "port must be between 80 and 1024");
-      done();
-    });
-  });
+  );
 
 });
