@@ -323,11 +323,11 @@ The `pattern` rule property is a regular expression that the value must match to
 
 #### Range
 
-A range is defined using the `min` and `max` properties. For `string` and `array` types comparison is performed against the `length`, for `number` types the number must not be less than `min` nor greater than `max`.
+A range is defined using the `min` and `max` properties. For `string`, `function` and `array` types comparison is performed against the `length`, for `number` types the number must not be less than `min` nor greater than `max`.
 
 #### Length
 
-To validate an exact length of a field specify the `len` property. For `string` and `array` types comparison is performed on the `length` property, for the `number` type this property indicates an exact match for the `number`, ie, it may only be strictly equal to `len`.
+To validate an exact length of a field specify the `len` property. For `string`, `function` and `array` types comparison is performed on the `length` property, for the `number` type this property indicates an exact match for the `number`, ie, it may only be strictly equal to `len`.
 
 If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
 
