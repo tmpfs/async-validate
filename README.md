@@ -17,6 +17,8 @@ Table of Contents
       * [Deep Rules](#deep-rules)
     * [Errors](#errors)
     * [Plugins](#plugins)
+      * [Loading Plugins](#loading-plugins)
+      * [Creating Plugins](#creating-plugins)
     * [Rule Properties](#rule-properties)
       * [Type Identifier](#type-identifier)
       * [Additional](#additional)
@@ -299,15 +301,30 @@ function id(cb) {
 }
 ```
 
-Adding a reason allows associating an identifier with an error and optional meta data about the error reason.
+Adding a reason allows associating an identifier with an error and optional meta data about the error.
 
 ### Plugins
 
-To use schema types you should load plugins for the types you wish to validate:
+Plugins are modules defining functions that allow users to only load functionality specific to the rule types being used which allows builds for the browser to be as lean as possible.
+
+Static plugins are mapped to [type identifiers](#type-identifiers) and instance plugins may be used to extend [Rule](#rule) which is useful for sharing functionality across rule plugins, see the [util plugins](https://github.com/freeformsystems/async-validate/blob/master/plugin/util).
+
+See [zephyr](https://github.com/socialally/zephyr) for plugin system documentation.
+
+#### Loading Plugins
+
+To load all plugins:
+
+```javascript
+require('async-validate/plugin/all');
+```
+
+It is preferable to only use plugins for the types you are using:
 
 ```javascript
 var schema = require('async-validate');
 schema.plugin([
+  require('async-validate/plugin/util'),
   require('async-validate/plugin/array'),
   require('async-validate/plugin/boolean'),
   require('async-validate/plugin/number'),
@@ -315,15 +332,9 @@ schema.plugin([
 ])
 ```
 
-As a shortcut you may use all available types with:
+#### Creating Plugins
 
-```javascript
-require('async-validate/plugin/all');
-```
-
-See [plugins](https://github.com/freeformsystems/async-validate/blob/master/plugin) for the type plugins that ship with this module and [zephyr](https://github.com/socialally/zephyr) for documentation on the plugin system.
-
-The [plugin fixture](https://github.com/freeformsystems/async-validate/blob/master/test/fixtures/plugin.js) and the [plugin test](https://github.com/freeformsystems/async-validate/blob/master/test/spec/plugin.js) provide an example of creating a type plugin.
+See [plugin rule](#plugin-rule) for an example and [plugin](https://github.com/freeformsystems/async-validate/blob/master/plugin) contains the plugins that ship with this package.
 
 ### Rule Properties
 
