@@ -1,27 +1,27 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
+var expect = require('chai').expect
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
-  it("should validate boolean type", function(done) {
-    var descriptor = {
-      flag: {type: "boolean"},
-    }
-    var validator = new schema(descriptor);
-    validator.validate({flag: "false"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "flag is not a boolean");
+
+  var descriptor = {
+    flag: {type: "boolean"},
+  }
+
+  it("should error on non-boolean type", function(done) {
+    var schema = new Schema(descriptor);
+    schema.validate({flag: "false"}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql('flag is not a boolean');
       done();
     });
   });
+
   it("should validate boolean pass", function(done) {
-    var descriptor = {
-      flag: {type: "boolean"},
-    }
-    var validator = new schema(descriptor);
-    validator.validate({flag: true}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+    var schema = new Schema(descriptor);
+    schema.validate({flag: true}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
+
 });
