@@ -1,38 +1,39 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
+var expect = require('chai').expect
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
-  it("should validate regexp type (positive lookbehind unsupported)", function(done) {
-    var descriptor = {
-      re: {type: "regexp"},
+
+  var descriptor = {
+    re: {type: "regexp"},
+  }
+
+  it("should error on regexp string (positive lookbehind unsupported)",
+    function(done) {
+      var schema = new Schema(descriptor)
+        , source = {re: "(?<=(category=))[a-z-]+"};
+
+      schema.validate(source, function(errors, fields) {
+        expect(errors.length).to.eql(1);
+        expect(errors[0].message).to.eql('re is not a valid regexp');
+        done();
+      });
     }
-    var validator = new schema(descriptor);
-    validator.validate({re: "(?<=(category=))[a-z-]+"}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "re is not a valid regexp");
+  );
+
+  it("should validate valid regexp string", function(done) {
+    var schema = new Schema(descriptor);
+    schema.validate({re: "^[a-z]+$"}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
-  it("should validate regexp pass", function(done) {
-    var descriptor = {
-      re: {type: "regexp"},
-    }
-    var validator = new schema(descriptor);
-    validator.validate({re: "^[a-z]+$"}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+
+  it("should validate native regexp instance", function(done) {
+    var schema = new Schema(descriptor);
+    schema.validate({re: /^[a-z]+$/}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
-  it("should validate native regexp pass", function(done) {
-    var descriptor = {
-      re: {type: "regexp"},
-    }
-    var validator = new schema(descriptor);
-    validator.validate({re: /^[a-z]+$/}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
-      done();
-    });
-  });
+
 });

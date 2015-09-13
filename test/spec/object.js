@@ -1,38 +1,36 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
+var expect = require('chai').expect
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
+
+  var descriptor = {
+    address: {type: "object", required: true}
+  }
+
   it("should error on invalid object (array specified)", function(done) {
-    var descriptor = {
-      address: {type: "object", required: true}
-    }
-    var validator = new schema(descriptor);
-    validator.validate({address: []}, function(errors, fields) {
-      assert.equal(errors.length, 1);
-      assert.equal(errors[0].message, "address is not an object");
+    var schema = new Schema(descriptor);
+    schema.validate({address: []}, function(errors, fields) {
+      expect(errors.length).to.eql(1);
+      expect(errors[0].message).to.eql('address is not an object');
       done();
     });
   });
+
   it("should error on invalid object (required but not specified)", function(done) {
-    var descriptor = {
-      address: {type: "object", required: true}
-    }
-    var validator = new schema(descriptor);
-    validator.validate({}, function(errors, fields) {
-      assert.equal(errors.length, 2);
-      assert.equal(errors[0].message, "address is required");
+    var schema = new Schema(descriptor);
+    schema.validate({}, function(errors, fields) {
+      expect(errors.length).to.eql(2);
+      expect(errors[0].message).to.eql('address is required');
       done();
     });
   });
+
   it("should validate object (empty object)", function(done) {
-    var descriptor = {
-      address: {type: "object", required: true}
-    }
-    var validator = new schema(descriptor);
-    validator.validate({address: {}}, function(errors, fields) {
-      assert.isNull(errors);
-      assert.isNull(fields);
+    var schema = new Schema(descriptor);
+    schema.validate({address: {}}, function(errors, fields) {
+      expect(errors).to.eql(null);
       done();
     });
   });
+
 });

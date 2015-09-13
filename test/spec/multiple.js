@@ -3,6 +3,7 @@ var assert = require('chai').assert
   , email = /^.+@.+\..+/;
 
 describe("async-validate:", function(done) {
+
   it("should validate using multiple validation rules for a field", function(done) {
     var descriptor = {
       email: [
@@ -55,4 +56,5 @@ describe("async-validate:", function(done) {
       done();
     });
   });
+
 });
