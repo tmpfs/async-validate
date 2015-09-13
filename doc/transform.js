@@ -12,8 +12,10 @@ var Schema = require('..')
   , source = {name: " user  "};
 
 Schema.plugin([
-  require('../plugin/util'),
-  require('../plugin/string')]);
+  require('../plugin/object'),
+  require('../plugin/string'),
+  require('../plugin/util')
+]);
 
 schema.validate(source, function(err, res) {
   console.dir(source.name);

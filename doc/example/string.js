@@ -6,8 +6,10 @@ var Schema = require('../../')
   , schema;
 
 Schema.plugin([
-  require('../../plugin/util'),
-  require('../../plugin/string')]);
+  require('../../plugin/object'),
+  require('../../plugin/string'),
+  require('../../plugin/util')
+]);
 
 var schema = new Schema(descriptor);
 schema.validate(source, function(err, res) {
