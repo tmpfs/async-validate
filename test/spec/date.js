@@ -21,47 +21,53 @@ describe("async-validate:", function(done) {
       done();
     });
   });
-  it("should error on invalid date value no format (ISO 8601)", function(done) {
-    var descriptor = {
-      active: {type: "date"}
-    }
-    var schema = new Schema(descriptor);
-    schema.validate({active: "2011-10-10T10:20:90"}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql(
-        'active date 2011-10-10T10:20:90 is invalid');
-      done();
-    });
-  });
-  it("should error on invalid date value no format (bad input)", function(done) {
-    var descriptor = {
-      active: {type: "date"}
-    }
-    var schema = new Schema(descriptor);
-    schema.validate({active: "not a date"}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql(
-        'active date not a date is invalid');
-      done();
-    });
-  });
-  var ptn = /^([\d]{4})-([\d]{2})-([\d]{2})$/;
-  it("should error on invalid date value using a format and pattern", function(done) {
-    var descriptor = {
-      active: {
-        type: "date",
-        format: "YYYY-MM-DD",
-        pattern: ptn
+  it("should error on invalid date value no format (ISO 8601)",
+    function(done) {
+      var descriptor = {
+        active: {type: "date"}
       }
+      var schema = new Schema(descriptor);
+      schema.validate({active: "2011-10-10T10:20:90"}, function(errors, fields) {
+        expect(errors.length).to.eql(1);
+        expect(errors[0].message).to.eql(
+          'active date 2011-10-10T10:20:90 is invalid');
+        done();
+      });
     }
-    var schema = new Schema(descriptor);
-    schema.validate({active: "13-06-24"}, function(errors, fields) {
-      expect(errors.length).to.eql(1);
-      expect(errors[0].message).to.eql(
-        'active value 13-06-24 does not match pattern ' + ptn);
-      done();
-    });
-  });
+  );
+  it("should error on invalid date value no format (bad input)",
+    function(done) {
+      var descriptor = {
+        active: {type: "date"}
+      }
+      var schema = new Schema(descriptor);
+      schema.validate({active: "not a date"}, function(errors, fields) {
+        expect(errors.length).to.eql(1);
+        expect(errors[0].message).to.eql(
+          'active date not a date is invalid');
+        done();
+      });
+    }
+  );
+  var ptn = /^([\d]{4})-([\d]{2})-([\d]{2})$/;
+  it("should error on invalid date value using a format and pattern",
+    function(done) {
+      var descriptor = {
+        active: {
+          type: "date",
+          format: "YYYY-MM-DD",
+          pattern: ptn
+        }
+      }
+      var schema = new Schema(descriptor);
+      schema.validate({active: "13-06-24"}, function(errors, fields) {
+        expect(errors.length).to.eql(1);
+        expect(errors[0].message).to.eql(
+          'active value 13-06-24 does not match pattern ' + ptn);
+        done();
+      });
+    }
+  );
 
   it("should validate date value using a format", function(done) {
     var descriptor = {

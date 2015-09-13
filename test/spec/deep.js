@@ -1,62 +1,68 @@
-var assert = require('chai').assert;
-var schema = require('../../index');
+var assert = require('chai').assert
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
-  it("should validate deep rule (not required/no matching property)", function(done) {
-    var descriptor = {
-      address: {
-        type: "object",
-        fields: {
-          street: {type: "string", required: true},
-          city: {type: "string", required: true},
-          zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
-        }
+
+  var descriptor = {
+    address: {
+      type: "object",
+      fields: {
+        street: {type: "string", required: true},
+        city: {type: "string", required: true},
+        zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
       }
     }
-    var validator = new schema(descriptor);
-    validator.validate({}, function(errors, fields) {
+  }
+
+  var required = {
+    address: {
+      type: "object", required: true,
+      fields: {
+        street: {type: "string", required: true},
+        city: {type: "string", required: true},
+        zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
+      }
+    }
+  }
+
+  var details = {
+    name: {type: "string", required: true},
+    address: {
+      type: "object", required: true,
+      fields: {
+        street: {type: "string", required: true},
+        city: {type: "string", required: true},
+        zip: {type: "string", required: true, len: 8, message: "invalid zip"}
+      }
+    }
+  }
+
+  it("should validate deep rule (not required/no matching property)", function(done) {
+    var schema = new Schema(descriptor);
+    schema.validate({}, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
       done();
     });
   });
+
   it("should error on invalid deep rule (required/no matching property)", function(done) {
-    var descriptor = {
-      address: {
-        type: "object", required: true,
-        fields: {
-          street: {type: "string", required: true},
-          city: {type: "string", required: true},
-          zip: {type: "string", required: true, len: 8, message: "Invalid zip"}
-        }
-      }
-    }
-    var validator = new schema(descriptor);
-    validator.validate({}, function(errors, fields) {
+    var schema = new Schema(required);
+    schema.validate({}, function(errors, fields) {
       assert.equal(errors.length, 1);
       assert.equal(errors[0].message, "address is required");
       done();
     });
   });
+
   it("should error on invalid deep rule (required and validation failure on deep rule)", function(done) {
-    var descriptor = {
-      address: {
-        type: "object", required: true,
-        fields: {
-          street: {type: "string", required: true},
-          city: {type: "string", required: true},
-          zip: {type: "string", required: true, len: 8, message: "invalid zip"}
-        }
-      },
-      name: {type: "string", required: true}
-    }
-    var validator = new schema(descriptor);
-    validator.validate({ address: {} }, function(errors, fields) {
+    var schema = new Schema(details);
+    schema.validate({ address: {} }, function(errors, fields) {
       assert.equal(errors.length, 4);
-      assert.equal(errors[0].message, "street is required");
-      assert.equal(errors[1].message, "city is required");
-      assert.equal(errors[2].message, "invalid zip");
-      assert.equal(errors[3].message, "name is required");
+      assert.equal(errors[0].message, "name is required");
+      assert.equal(errors[1].message, "street is required");
+      assert.equal(errors[2].message, "city is required");
+      assert.equal(errors[3].message, "invalid zip");
       done();
     });
   });
@@ -72,8 +78,8 @@ describe("async-validate:", function() {
       },
       name: {type: "string", required: true}
     }
-    var validator = new schema(descriptor);
-    validator.validate({ address: {} }, function(errors, fields) {
+    var schema = new Schema(descriptor);
+    schema.validate({ address: {} }, function(errors, fields) {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "street is required");
       assert.equal(errors[1].message, "name is required");
@@ -92,8 +98,8 @@ describe("async-validate:", function() {
         }
       }
     }
-    var validator = new schema(descriptor);
-    validator.validate({ roles: ["admin", "user"] }, function(errors, fields) {
+    var schema = new Schema(descriptor);
+    schema.validate({ roles: ["admin", "user"] }, function(errors, fields) {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "roles must be exactly 3 in length");
       assert.equal(errors[1].message, "2 is required");
@@ -112,14 +118,16 @@ describe("async-validate:", function() {
         }
       }
     }
-    var validator = new schema(descriptor);
-    validator.validate({ roles: ["admin", "user", "guest"] }, function(errors, fields) {
+    var schema = new Schema(descriptor);
+    schema.validate({ roles: ["admin", "user", "guest"] }, function(errors, fields) {
       assert.isNull(errors);
       assert.isNull(fields);
       done();
     });
   });
+
   it("should error on invalid multiple deep rule", function(done) {
+
     var descriptor = {
       address: {
         type: "object", required: true,
@@ -134,12 +142,14 @@ describe("async-validate:", function() {
         }
       }
     }
-    var validator = new schema(descriptor);
-    validator.validate({ address: {house: {}} }, function(errors, fields) {
+
+    var schema = new Schema(descriptor);
+    schema.validate({ address: {house: {}} }, function(errors, fields) {
       assert.equal(errors.length, 2);
       assert.equal(errors[0].message, "name is required");
       assert.equal(errors[1].message, "number is required");
       done();
     });
   });
+
 });
