@@ -45,7 +45,7 @@ Table of Contents
         * [raise](#raise)
         * [format](#format)
         * [shouldValidate](#shouldvalidate)
-        * [diff](#hasadditionalfields)
+        * [diff](#diff)
         * [required](#required)
         * [pattern](#pattern)
         * [range](#range)
