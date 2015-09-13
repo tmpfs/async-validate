@@ -1,6 +1,6 @@
 {
   "name": "async-validate",
-  "description": "Asynchronous validation node and the browser",
+  "description": "Asynchronous validation for node and the browser",
   "version": "0.5.6",
   "author": "muji <noop@xpm.io>",
   "license": "MIT",
