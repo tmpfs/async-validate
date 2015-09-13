@@ -19,4 +19,32 @@ describe("async-validate:", function() {
       });
   });
 
+  it("should callback with error (mapSeries)", function(done) {
+    iterator.mapSeries([1,2,3],
+      function multiply(num, cb) {
+        cb(new Error('mock error')); 
+      }, 
+      function complete(err, results) {
+        function fn() {
+          throw err;
+        }
+        expect(fn).throws(Error);
+        done();
+      });
+  });
+
+  it("should callback with error (map)", function(done) {
+    iterator.map([1,2,3],
+      function multiply(num, cb) {
+        cb(new Error('mock error')); 
+      }, 
+      function complete(err, results) {
+        function fn() {
+          throw err;
+        }
+        expect(fn).throws(Error);
+        done();
+      });
+  });
+
 });
