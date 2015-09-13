@@ -5,6 +5,10 @@ Table of Contents
   * [Install](#install)
   * [Usage](#usage)
   * [Guide](#guide)
+    * [Descriptor](#descriptor)
+      * [Object Definition](#object-definition)
+      * [Array Definition](#array-definition)
+      * [Function Definition](#function-definition)
     * [Rules](#rules)
       * [Inline Rule](#inline-rule)
       * [Assigned Rule](#assigned-rule)
@@ -13,7 +17,7 @@ Table of Contents
       * [Deep Rules](#deep-rules)
     * [Errors](#errors)
     * [Plugins](#plugins)
-    * [Descriptor](#descriptor)
+    * [Rule Properties](#rule-properties)
       * [Type Identifier](#type-identifier)
       * [Additional](#additional)
       * [Fields](#fields)
@@ -90,6 +94,26 @@ schema.validate(source, function(errors, fields) {
 ```
 
 ## Guide
+
+### Descriptor
+
+A descriptor is a collection of validation rules as a map of fields to rules, rules may be declared as an `object`, `array` or `function`.
+
+#### Object Definition
+
+```javascript
+var descriptor = {
+  name: {type: 'string', required: true}
+}
+```
+
+#### Array Definition
+
+You may declare an `array` to use multiple validation rules per field, see [multiple rules](#multiple-rules).
+
+#### Function Definition
+
+Use an inline function definition for application specific rules, see [inline rule](#inline-rule).
 
 ### Rules
 
@@ -297,9 +321,9 @@ See [plugins](https://github.com/freeformsystems/async-validate/blob/master/plug
 
 The [plugin fixture](https://github.com/freeformsystems/async-validate/blob/master/test/fixtures/plugin.js) and the [plugin test](https://github.com/freeformsystems/async-validate/blob/master/test/spec/plugin.js) provide an example of creating a type plugin.
 
-### Descriptor
+### Rule Properties
 
-A descriptor defines the validation rules as a map of fields to rules, this section describes the recognised rule properties.
+This section describes the recognised rule properties and their behaviour, if you are using an [assigned rule](#assigned-rule) or [plugin rule](#plugin-rule) you can define properties on the rule object and they are available to the rule function via `this.rule`.
 
 #### Type Identifier
 

@@ -1,5 +1,25 @@
 ## Guide
 
+### Descriptor
+
+A descriptor is a collection of validation rules as a map of fields to rules, rules may be declared as an `object`, `array` or `function`.
+
+#### Object Definition
+
+```javascript
+var descriptor = {
+  name: {type: 'string', required: true}
+}
+```
+
+#### Array Definition
+
+You may declare an `array` to use multiple validation rules per field, see [multiple rules](#multiple-rules).
+
+#### Function Definition
+
+Use an inline function definition for application specific rules, see [inline rule](#inline-rule).
+
 ### Rules
 
 ```javascript
@@ -206,9 +226,9 @@ See [plugins](/plugin) for the type plugins that ship with this module and [zeph
 
 The [plugin fixture](/test/fixtures/plugin.js) and the [plugin test](/test/spec/plugin.js) provide an example of creating a type plugin.
 
-### Descriptor
+### Rule Properties
 
-A descriptor defines the validation rules as a map of fields to rules, this section describes the recognised rule properties.
+This section describes the recognised rule properties and their behaviour, if you are using an [assigned rule](#assigned-rule) or [plugin rule](#plugin-rule) you can define properties on the rule object and they are available to the rule function via `this.rule`.
 
 #### Type Identifier
 
