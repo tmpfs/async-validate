@@ -8,7 +8,7 @@ var Schema = require('../../')
 Schema.plugin([require('../../plugin/string')]);
 
 var schema = new Schema(descriptor);
-schema.validate(source, function(errors, fields) {
+schema.validate(source, function(err, res) {
   // error on name field
-  console.dir(errors);
+  console.dir(res.errors);
 });

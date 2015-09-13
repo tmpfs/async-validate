@@ -13,6 +13,6 @@ var schema = require('..')
 
 schema.plugin([require('../plugin/string')]);
 
-validator.validate(source, function(errors, fields) {
+validator.validate(source, function(err, res) {
   console.dir(source.name);
 });
