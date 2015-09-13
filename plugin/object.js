@@ -33,7 +33,7 @@ module.exports = function() {
         expected = Array.isArray(this.rule.keys)
           ? this.rule.keys : Object.keys(this.rule.fields);
 
-        additional = this.hasAdditionalFields(
+        additional = this.diff(
           expected, Object.keys(this.value));
 
         if(additional) {

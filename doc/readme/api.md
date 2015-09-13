@@ -126,10 +126,10 @@ function shouldValidate()
 
 Returns a `boolean` derived from the rule `required` property and other factors to determine if the value should be subject to the validation rule, typically invoked within a rule validation function.
 
-##### hasAdditionalFields
+##### diff
 
 ```javascript
-function hasAdditionalFields(expected, received)
+function diff(expected, received)
 ```
 
 Compare two arrays, return `false` if they are equal otherwise return an array that is the difference between the supplied arrays.
