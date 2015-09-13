@@ -39,7 +39,7 @@ Table of Contents
         * [Schema.plugin](#schemaplugin)
         * [Schema.clone](#schemaclone)
       * [Reason](#reason)
-      * [Validator](#validator)
+      * [Rule](#rule)
         * [isRoot](#isroot)
         * [getReason](#getreason)
         * [raise](#raise)
@@ -125,7 +125,7 @@ Use an inline function definition for application specific rules, see [inline ru
 function rule(cb)
 ```
 
-Rules are functions that perform validation of a value, they are invoked in the scope of a validator ([file](https://github.com/freeformsystems/async-validate/blob/master/lib/validator.js), [api docs](#validator)).
+Rules are functions that perform validation of a value, they are invoked in the scope of a rule instance ([file](https://github.com/freeformsystems/async-validate/blob/master/lib/rule.js), [api docs](#rule)).
 
 A rule function can access all relevant properties and methods using `this` and should [raise](#raise) an error if `this.value` fails a validation test, see [errors](#errors).
 
@@ -331,7 +331,7 @@ This section describes the recognised rule properties and their behaviour, if yo
 
 #### Type Identifier
 
-The `type` rule property indicates the type of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
+The `type` property indicates the type of rule to use, a type corresponds to a plugin function and the plugin should have been loaded.
 
 Recognised type values are:
 
@@ -568,13 +568,13 @@ Represents the reason for a validation error, may be created using `getReason()`
 
 You must supply a reason `id`; if `opts` are passed they are assigned as properties of the reason instance. When `toString()` is called on a `Reason` instance the `id` is returned.
 
-#### Validator
+#### Rule
 
 ```javascript
-function Validator(opts)
+function Rule(opts)
 ```
 
-Encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance which exposes the following public fields:
+Encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Rule` instance which exposes the following public fields:
 
 * `rule`: The validation rule in the schema descriptor.
 * `value`: The value of the source object property being validated.

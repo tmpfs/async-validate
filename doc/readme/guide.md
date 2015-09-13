@@ -26,7 +26,7 @@ Use an inline function definition for application specific rules, see [inline ru
 function rule(cb)
 ```
 
-Rules are functions that perform validation of a value, they are invoked in the scope of a validator ([file](/lib/validator.js), [api docs](#validator)).
+Rules are functions that perform validation of a value, they are invoked in the scope of a rule instance ([file](/lib/rule.js), [api docs](#rule)).
 
 A rule function can access all relevant properties and methods using `this` and should [raise](#raise) an error if `this.value` fails a validation test, see [errors](#errors).
 
@@ -232,7 +232,7 @@ This section describes the recognised rule properties and their behaviour, if yo
 
 #### Type Identifier
 
-The `type` rule property indicates the type of validator to use, a type corresponds to a plugin function and the plugin should have been loaded.
+The `type` property indicates the type of rule to use, a type corresponds to a plugin function and the plugin should have been loaded.
 
 Recognised type values are:
 

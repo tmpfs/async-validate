@@ -63,13 +63,13 @@ Represents the reason for a validation error, may be created using `getReason()`
 
 You must supply a reason `id`; if `opts` are passed they are assigned as properties of the reason instance. When `toString()` is called on a `Reason` instance the `id` is returned.
 
-#### Validator
+#### Rule
 
 ```javascript
-function Validator(opts)
+function Rule(opts)
 ```
 
-Encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Validator` instance which exposes the following public fields:
+Encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Rule` instance which exposes the following public fields:
 
 * `rule`: The validation rule in the schema descriptor.
 * `value`: The value of the source object property being validated.
