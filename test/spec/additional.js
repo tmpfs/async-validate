@@ -1,5 +1,5 @@
 var expect = require('chai').expect
-  , schema = require('../../index');
+  , Schema = require('../../index');
 
 describe("async-validate:", function() {
 
@@ -31,7 +31,8 @@ describe("async-validate:", function() {
         zip: '12345678',
       }
     }
-    var validator = new schema(descriptor);
+
+    var validator = new Schema(descriptor);
     validator.validate(source, opts, function(errors, fields) {
       expect(errors.length).to.eql(2);
       expect(errors[0].message).to.eql(
@@ -53,7 +54,7 @@ describe("async-validate:", function() {
         zip: '12345678',
       }
     }
-    var validator = new schema(descriptor);
+    var validator = new Schema(descriptor);
     validator.validate(source, opts, function(errors, fields) {
       expect(errors).to.eql(null);
       done();
