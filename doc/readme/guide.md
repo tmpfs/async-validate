@@ -202,6 +202,20 @@ function id(cb) {
 
 Adding a reason allows associating an identifier with an error and optional meta data about the error.
 
+To signal that an internal processing error has occured pass an Error to the callback, for example:
+
+```javascript
+function id(cb) {
+  this.model.findById(this.value, function(err, id) {
+    if(err) {
+      return cb(err); 
+    }
+    // validate id for error conditions
+    cb();
+  });
+}
+```
+
 ### Plugins
 
 Plugins are modules defining functions that allow users to only load functionality specific to the rule types being used which allows builds for the browser to be as lean as possible.
