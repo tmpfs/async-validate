@@ -6,6 +6,7 @@ describe('async-validate:', function() {
   var descriptor = {
     address: {
       type: 'object',
+      required: true,
       fields: {
         street: {type: 'string', required: true},
         city: {type: 'string', required: true},
