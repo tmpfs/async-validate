@@ -1,4 +1,4 @@
-var schema = require('..')
+var Schema = require('..')
   , descriptor = {
     name: {
       type: "string",
@@ -8,11 +8,13 @@ var schema = require('..')
       }
     }
   }
-  , validator = new schema(descriptor)
+  , schema = new Schema(descriptor)
   , source = {name: " user  "};
 
-schema.plugin([require('../plugin/string')]);
+Schema.plugin([
+  require('../plugin/core'),
+  require('../plugin/string')]);
 
-validator.validate(source, function(err, res) {
+schema.validate(source, function(err, res) {
   console.dir(source.name);
 });

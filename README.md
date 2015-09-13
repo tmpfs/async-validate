@@ -80,7 +80,9 @@ var Schema = require('..')
   , schema = new Schema(descriptor)
   , source = {};
 
-Schema.plugin([require('../plugin/string')]);
+Schema.plugin([
+  require('../plugin/core'),
+  require('../plugin/string')]);
 
 schema.validate(source, function(err, res) {
   if(err) {
@@ -481,7 +483,7 @@ Sometimes it is necessary to transform a value before validation, possibly to co
 Without the `transform` function validation would fail due to the pattern not matching as the input contains leading and trailing whitespace, but by adding the transform function validation passes and the field value is sanitized at the same time.
 
 ```javascript
-var schema = require('..')
+var Schema = require('..')
   , descriptor = {
     name: {
       type: "string",
@@ -491,12 +493,14 @@ var schema = require('..')
       }
     }
   }
-  , validator = new schema(descriptor)
+  , schema = new Schema(descriptor)
   , source = {name: " user  "};
 
-schema.plugin([require('../plugin/string')]);
+Schema.plugin([
+  require('../plugin/core'),
+  require('../plugin/string')]);
 
-validator.validate(source, function(err, res) {
+schema.validate(source, function(err, res) {
   console.dir(source.name);
 });
 ```

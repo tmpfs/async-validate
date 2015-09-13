@@ -3,7 +3,9 @@ var Schema = require('..')
   , schema = new Schema(descriptor)
   , source = {};
 
-Schema.plugin([require('../plugin/string')]);
+Schema.plugin([
+  require('../plugin/core'),
+  require('../plugin/string')]);
 
 schema.validate(source, function(err, res) {
   if(err) {
