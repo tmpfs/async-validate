@@ -1,9 +1,8 @@
-var moment = require('moment');
-
 /**
  *  Rule for validating a date against a format.
  */
 function validator() {
+  var moment = require('moment');
   var mmt = this.rule.local ? moment : moment.utc;
   var dt = !this.rule.format
     ? mmt(new Date(this.value)) : mmt(this.value, this.rule.format);
@@ -19,25 +18,25 @@ function validator() {
   }
 }
 
-/**
- *  Validates a date against the format property.
- *
- *  @param cb The callback function.
- */
-function date(cb) {
-  var validate = this.rule.required
-    || (!this.rule.required && this.source.hasOwnProperty(this.field)
-          && this.source[this.field]);
+module.exports = function() {
 
-  if(validate) {
-    this.required();
-    this.pattern();
-    validator.call(this);
+  /**
+   *  Validates a date against the format property.
+   *
+   *  @param cb The callback function.
+   */
+  this.main.date = function date(cb) {
+    var validate = this.rule.required
+      || (!this.rule.required && this.source.hasOwnProperty(this.field)
+            && this.source[this.field]);
+
+    if(validate) {
+      this.required();
+      this.pattern();
+      validator.call(this);
+    }
+
+    cb();
   }
 
-  cb();
-}
-
-module.exports = function() {
-  this.main.date = date;
 }

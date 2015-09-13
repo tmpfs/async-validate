@@ -1,39 +1,39 @@
-/**
- *  Performs validation for string types.
- *
- *  @param cb The callback function.
- */
-function string(cb) {
-  if(this.shouldValidate()) {
-    this.required();
+module.exports = function() {
 
-    // if value is required and value is undefined
-    // no need to add this error message
-    if(this.rule.required && this.value === undefined) {
-      return cb();    
-    }
+  /**
+   *  Performs validation for string types.
+   *
+   *  @param cb The callback function.
+   */
+  this.main.string = function string(cb) {
+    if(this.shouldValidate()) {
+      this.required();
 
-    if(typeof this.value !== 'string') {
-      this.raise(
-        this.reasons.type,
-        this.messages.types[this.rule.type],
-        this.field, this.rule.type);
-    }
+      // if value is required and value is undefined
+      // no need to add this error message
+      if(this.rule.required && this.value === undefined) {
+        return cb();    
+      }
 
-    this.range();
-    this.pattern();
-
-    if(this.rule.whitespace === true) {
-      if(/^\s+$/.test(this.value) || this.value === '') {
+      if(typeof this.value !== 'string') {
         this.raise(
-          this.reasons.whitespace,
-          this.messages.whitespace, this.field);
+          this.reasons.type,
+          this.messages.types[this.rule.type],
+          this.field, this.rule.type);
+      }
+
+      this.range();
+      this.pattern();
+
+      if(this.rule.whitespace === true) {
+        if(/^\s+$/.test(this.value) || this.value === '') {
+          this.raise(
+            this.reasons.whitespace,
+            this.messages.whitespace, this.field);
+        }
       }
     }
+    cb();
   }
-  cb();
-}
 
-module.exports = function() {
-  this.main.string = string;
 }
