@@ -352,7 +352,7 @@ When a rule is of the `object` type and `additional` is set to `false` an error 
 
 #### Fields
 
-Rules of the `object` and `array` type may declare a `fields` object which declares a nested descriptor, see [deep rules](#deep-rules).
+Rules of the `object` and `array` type may declare a `fields` object which declares a nested schema, see [deep rules](#deep-rules).
 
 #### Message
 
