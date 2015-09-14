@@ -45,7 +45,7 @@ Table of Contents
       * [Reason](#reason)
       * [Rule](#rule)
         * [isRoot](#isroot)
-        * [getReason](#getreason)
+        * [reason](#reason)
         * [raise](#raise)
         * [format](#format)
         * [validates](#validates)
@@ -295,11 +295,12 @@ Decorate the error with a reason:
 
 ```javascript
 function id(cb) {
-  var reason;
   if(!/^[a-z0-9-]+$/i.test(this.value)) {
-    reason = this.getReason(
-      'id', {description: 'Field value failed pattern match'});
-    this.raise(reason, '%s is not a valid id', this.field); 
+    this.raise(
+      this.reason(
+        'id', {description: 'Field value failed pattern match'}),
+      '%s is not a valid id',
+      this.field); 
   }
   cb();
 }
@@ -638,7 +639,7 @@ Static clone; deep copies simple objects and arrays, `RegExp` instances are pass
 function Reason(id, [opts])
 ```
 
-Represents the reason for a validation error, may be created using `getReason()`.
+Represents the reason for a validation error, may be created using `reason()`.
 
 You must supply a reason `id`; if `opts` are passed they are assigned as properties of the reason instance. When `toString()` is called on a `Reason` instance the `id` is returned.
 
@@ -666,10 +667,10 @@ function isRoot()
 
 Determine if this validation is being performed against the root source object.
 
-##### getReason
+##### reason
 
 ```javascript
-function getReason(id, [opts])
+function reason(id, [opts])
 ```
 
 Create a reason for a validation error, returns a `Reason` instance suitable for passing as the first argument to [raise](#raise).
@@ -682,7 +683,7 @@ function raise([reason], message, ...)
 
 Adds an error message to the list of errors encountered during validation of a value.
 
-The first argument may optionally be a `Reason` instance returned by `getReason()` allowing a user to associate an identifier with the validation error and optional additional information. A validation error generated with a `Reason` has a `reason` field referencing the supplied reason.
+The first argument may optionally be a `Reason` instance returned by `reason()` allowing a user to associate an identifier with the validation error and optional additional information. A validation error generated with a `Reason` has a `reason` field referencing the supplied reason.
 
 When replacement parameters are supplied the behaviour is identical to `util.format`.
 

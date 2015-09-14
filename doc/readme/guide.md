@@ -190,11 +190,12 @@ Decorate the error with a reason:
 
 ```javascript
 function id(cb) {
-  var reason;
   if(!/^[a-z0-9-]+$/i.test(this.value)) {
-    reason = this.getReason(
-      'id', {description: 'Field value failed pattern match'});
-    this.raise(reason, '%s is not a valid id', this.field); 
+    this.raise(
+      this.reason(
+        'id', {description: 'Field value failed pattern match'}),
+      '%s is not a valid id',
+      this.field); 
   }
   cb();
 }
