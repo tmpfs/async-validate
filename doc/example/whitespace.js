@@ -5,14 +5,9 @@ var Schema = require('../../')
   , source = {name: '  '}
   , schema;
 
-Schema.plugin([
-  require('../../plugin/object'),
-  require('../../plugin/string'),
-  require('../../plugin/util')
-]);
+require('../../plugin/all');
 
-var schema = new Schema(descriptor);
+schema = new Schema(descriptor);
 schema.validate(source, function(err, res) {
-  // error on name field
   console.dir(res.errors);
 });

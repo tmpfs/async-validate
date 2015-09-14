@@ -1,22 +1,26 @@
 var Schema = require('../../')
   , descriptor = {
     id: {
-      foo: 'bar',
+      expected: 'foo',
       validator: function(cb) {
-        console.log(this.foo);
-        // if this.value has error condition call this.raise() 
+        if(this.value !== this.expected) {
+          this.raise(
+            this.reason('unexpected-id'),
+            'id expects %s, got %s',
+            this.expected,
+            this.value
+          ) 
+        }
         cb();
       }
     }
   }
-  , source = {}
+  , source = {id: 'qux'}
   , schema;
 
-Schema.plugin([
-  require('../../plugin/object'),
-  require('../../plugin/string'),
-  require('../../plugin/util')
-]);
+require('../../plugin/all');
 
-var schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {});
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
