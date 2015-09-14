@@ -414,6 +414,14 @@ You may wish to sanitize user input instead of testing for whitespace, see [tran
 
 ### Validation
 
+This section describes using the processing options available when calling [validate](#validate).
+
+#### Bail
+
+To callback early on the first value that generates a validation error and only report a single error use the `bail` option. This is useful when a user interface only needs to show the first error condition or if continuing processing would add unnecessary overhead.
+
+Remember that a rule can generate multiple validation errors so if you need more fine grained control you can use the `single` and `first` options.
+
 #### Variables
 
 Sometimes it is useful to pass existing data into all rule functions as transient data so that your rule functions may reference existing code for performing async operations. A common use case would be using a model class to query a database and then validate on the returned data.

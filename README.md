@@ -37,6 +37,7 @@ Table of Contents
       * [Date Format](#date-format)
       * [Whitespace](#whitespace)
     * [Validation](#validation)
+      * [Bail](#bail)
       * [Variables](#variables)
     * [Messages](#messages)
     * [Transform](#transform)
@@ -519,6 +520,14 @@ It is typical to treat required fields that only contain whitespace as errors. T
 You may wish to sanitize user input instead of testing for whitespace, see [transform](#transform) for an example that would allow you to strip whitespace.
 
 ### Validation
+
+This section describes using the processing options available when calling [validate](#validate).
+
+#### Bail
+
+To callback early on the first value that generates a validation error and only report a single error use the `bail` option. This is useful when a user interface only needs to show the first error condition or if continuing processing would add unnecessary overhead.
+
+Remember that a rule can generate multiple validation errors so if you need more fine grained control you can use the `single` and `first` options.
 
 #### Variables
 
