@@ -628,8 +628,6 @@ schema.validate(source, function(err, res) {
 
 #### [assigned-rule](/doc/example/assigned-rule.js)
 
-Source.
-
 ```javascript
 var Schema = require('../../')
   , descriptor = {
@@ -659,15 +657,11 @@ schema.validate(source, function(err, res) {
 });
 ```
 
-Result.
-
 ```
 [ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
 ```
 
 #### [string](/doc/example/string.js)
-
-Source.
 
 ```javascript
 var Schema = require('../../')
@@ -685,15 +679,11 @@ schema.validate(source, function(err, res) {
 });
 ```
 
-Result.
-
 ```
 [ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
 ```
 
 #### [whitespace](/doc/example/whitespace.js)
-
-Source.
 
 ```javascript
 var Schema = require('../../')
@@ -710,8 +700,6 @@ schema.validate(source, function(err, res) {
   console.dir(res.errors);
 });
 ```
-
-Result.
 
 ```
 [ { [Error: name cannot be empty] field: 'name', reason: { id: 'whitespace' } } ]

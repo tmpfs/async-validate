@@ -19,10 +19,7 @@ async.eachSeries(contents, function(file, cb) {
 
   console.log('#### [%s](%s)\n', name, '/doc/example/' + name + '.js');
 
-  console.log('Source\n');
   console.log('```javascript\n%s\n```\n', js);
-
-  console.log('Result\n');
   console.log('```\n%s\n```\n', res);
 
   cb();
