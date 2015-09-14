@@ -42,9 +42,9 @@ Table of Contents
     * [Messages](#messages)
     * [Transform](#transform)
     * [Examples](#examples)
-      * [[assigned-rule](/doc/assigned-rule.js)](#assigned-ruledocassigned-rulejs)
-      * [[string](/doc/string.js)](#stringdocstringjs)
-      * [[whitespace](/doc/whitespace.js)](#whitespacedocwhitespacejs)
+      * [[assigned-rule](/doc/example/assigned-rule.js)](#assigned-ruledocexampleassigned-rulejs)
+      * [[string](/doc/example/string.js)](#stringdocexamplestringjs)
+      * [[whitespace](/doc/example/whitespace.js)](#whitespacedocexamplewhitespacejs)
     * [API](#api)
       * [Schema](#schema)
         * [messages](#messages)
@@ -626,7 +626,7 @@ schema.validate(source, function(err, res) {
 
 ### Examples
 
-#### [assigned-rule](/doc/assigned-rule.js)
+#### [assigned-rule](/doc/example/assigned-rule.js)
 
 Source:
 
@@ -665,7 +665,7 @@ Result:
 [ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
 ```
 
-#### [string](/doc/string.js)
+#### [string](/doc/example/string.js)
 
 Source:
 
@@ -691,7 +691,7 @@ Result:
 [ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
 ```
 
-#### [whitespace](/doc/whitespace.js)
+#### [whitespace](/doc/example/whitespace.js)
 
 Source:
 
