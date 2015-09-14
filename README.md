@@ -43,6 +43,7 @@ Table of Contents
     * [Transform](#transform)
     * [Examples](#examples)
       * [[assigned-rule](/doc/example/assigned-rule.js)](#assigned-ruledocexampleassigned-rulejs)
+      * [[deep](/doc/example/deep.js)](#deepdocexampledeepjs)
       * [[inline-rule](/doc/example/inline-rule.js)](#inline-ruledocexampleinline-rulejs)
       * [[required](/doc/example/required.js)](#requireddocexamplerequiredjs)
       * [[source-root](/doc/example/source-root.js)](#source-rootdocexamplesource-rootjs)
@@ -662,6 +663,37 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
+```
+
+#### [deep](/doc/example/deep.js)
+
+```javascript
+// validate properties of a nested object
+var Schema = require('async-validate')
+  , descriptor = {
+      address: {
+        type: 'object',
+        fields: {
+          number: {type: 'string', required: true},
+          street: {type: 'string', required: true},
+          city: {type: 'string', required: true},
+          zip: {type: 'string', required: true}
+        }
+      }
+    }
+  , source = {address: {number: '1', street: 'Mock St', city: 'Mock City'}}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: zip is required] field: 'zip', reason: { id: 'required' } } ]
 ```
 
 #### [inline-rule](/doc/example/inline-rule.js)
