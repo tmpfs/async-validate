@@ -43,7 +43,8 @@ Table of Contents
     * [Transform](#transform)
     * [Examples](#examples)
       * [[assigned-rule](/doc/example/assigned-rule.js)](#assigned-ruledocexampleassigned-rulejs)
-      * [[string](/doc/example/string.js)](#stringdocexamplestringjs)
+      * [[required](/doc/example/required.js)](#requireddocexamplerequiredjs)
+      * [[source-root](/doc/example/source-root.js)](#source-rootdocexamplesource-rootjs)
       * [[whitespace](/doc/example/whitespace.js)](#whitespacedocexamplewhitespacejs)
     * [API](#api)
       * [Schema](#schema)
@@ -629,6 +630,7 @@ schema.validate(source, function(err, res) {
 #### [assigned-rule](/doc/example/assigned-rule.js)
 
 ```javascript
+// assign a rule function to a rule
 var Schema = require('async-validate')
   , descriptor = {
     id: {
@@ -661,9 +663,10 @@ schema.validate(source, function(err, res) {
 [ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
 ```
 
-#### [string](/doc/example/string.js)
+#### [required](/doc/example/required.js)
 
 ```javascript
+// validate a field as required
 var Schema = require('async-validate')
   , descriptor = {
     name: {type: 'string', required: true}
@@ -683,9 +686,31 @@ schema.validate(source, function(err, res) {
 [ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
 ```
 
+#### [source-root](/doc/example/source-root.js)
+
+```javascript
+// validate the type of the source object
+var Schema = require('async-validate')
+  , descriptor = {type: 'object'}
+  , source = 'foo'
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: source is not an object] field: 'source', reason: { id: 'type' } } ]
+```
+
 #### [whitespace](/doc/example/whitespace.js)
 
 ```javascript
+// validate a field as whitespace
 var Schema = require('async-validate')
   , descriptor = {
     name: {type: 'string', required: true, whitespace: true}

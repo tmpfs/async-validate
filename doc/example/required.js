@@ -1,9 +1,9 @@
-// validate a field as whitespace
+// validate a field as required
 var Schema = require('../..')
   , descriptor = {
-    name: {type: 'string', required: true, whitespace: true}
+    name: {type: 'string', required: true}
   }
-  , source = {name: '  '}
+  , source = {}
   , schema;
 
 require('../../plugin/all');

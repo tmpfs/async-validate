@@ -1,3 +1,4 @@
+// assign a rule function to a rule
 var Schema = require('../..')
   , descriptor = {
     id: {

@@ -1,8 +1,7 @@
+// validate the type of the source object
 var Schema = require('../..')
-  , descriptor = {
-    name: {type: 'string', required: true}
-  }
-  , source = {}
+  , descriptor = {type: 'object'}
+  , source = 'foo'
   , schema;
 
 require('../../plugin/all');
