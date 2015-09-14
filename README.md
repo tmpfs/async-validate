@@ -43,6 +43,7 @@ Table of Contents
     * [Transform](#transform)
     * [Examples](#examples)
       * [[assigned-rule](/doc/example/assigned-rule.js)](#assigned-ruledocexampleassigned-rulejs)
+      * [[inline-rule](/doc/example/inline-rule.js)](#inline-ruledocexampleinline-rulejs)
       * [[required](/doc/example/required.js)](#requireddocexamplerequiredjs)
       * [[source-root](/doc/example/source-root.js)](#source-rootdocexamplesource-rootjs)
       * [[whitespace](/doc/example/whitespace.js)](#whitespacedocexamplewhitespacejs)
@@ -630,24 +631,24 @@ schema.validate(source, function(err, res) {
 #### [assigned-rule](/doc/example/assigned-rule.js)
 
 ```javascript
-// assign a rule function to a rule
+// assign a function to a rule
 var Schema = require('async-validate')
   , descriptor = {
-    id: {
-      expected: 'foo',
-      validator: function(cb) {
-        if(this.value !== this.expected) {
-          this.raise(
-            this.reason('unexpected-id'),
-            'id expects %s, got %s',
-            this.expected,
-            this.value
-          ) 
+      id: {
+        expected: 'foo',
+        validator: function(cb) {
+          if(this.value !== this.expected) {
+            this.raise(
+              this.reason('unexpected-id'),
+              'id expects %s, got %s',
+              this.expected,
+              this.value
+            ) 
+          }
+          cb();
         }
-        cb();
       }
     }
-  }
   , source = {id: 'qux'}
   , schema;
 
@@ -661,6 +662,35 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
+```
+
+#### [inline-rule](/doc/example/inline-rule.js)
+
+```javascript
+// assign a function as a rule
+var Schema = require('async-validate')
+  , reserved = ['foo']
+  , descriptor = {
+      id: function(cb) {
+        if(~reserved.indexOf(this.value)) {
+          this.raise('%s is a reserved id', this.value); 
+        }
+        cb();
+      }
+    }
+  , source = {id: 'foo'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: foo is a reserved id] field: 'id' } ]
 ```
 
 #### [required](/doc/example/required.js)
@@ -713,8 +743,8 @@ schema.validate(source, function(err, res) {
 // validate a field as whitespace
 var Schema = require('async-validate')
   , descriptor = {
-    name: {type: 'string', required: true, whitespace: true}
-  }
+      name: {type: 'string', required: true, whitespace: true}
+    }
   , source = {name: '  '}
   , schema;
 

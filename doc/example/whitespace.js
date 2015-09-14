@@ -1,8 +1,8 @@
 // validate a field as whitespace
 var Schema = require('../..')
   , descriptor = {
-    name: {type: 'string', required: true, whitespace: true}
-  }
+      name: {type: 'string', required: true, whitespace: true}
+    }
   , source = {name: '  '}
   , schema;
 

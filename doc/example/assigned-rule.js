@@ -1,21 +1,21 @@
-// assign a rule function to a rule
+// assign a function to a rule
 var Schema = require('../..')
   , descriptor = {
-    id: {
-      expected: 'foo',
-      validator: function(cb) {
-        if(this.value !== this.expected) {
-          this.raise(
-            this.reason('unexpected-id'),
-            'id expects %s, got %s',
-            this.expected,
-            this.value
-          ) 
+      id: {
+        expected: 'foo',
+        validator: function(cb) {
+          if(this.value !== this.expected) {
+            this.raise(
+              this.reason('unexpected-id'),
+              'id expects %s, got %s',
+              this.expected,
+              this.value
+            ) 
+          }
+          cb();
         }
-        cb();
       }
     }
-  }
   , source = {id: 'qux'}
   , schema;
 
