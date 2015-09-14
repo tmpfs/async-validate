@@ -277,6 +277,38 @@ module.exports = function() {
 }
 ```
 
+#### Helper Plugins
+
+The following helper plugins ship with this package, you can use them all with:
+
+```javascript
+Schema.plugin([require('async-validate/plugin/util')]);
+```
+
+##### required
+
+```javascript
+function required()
+```
+
+Validate a required field, typically invoked from a rule function, raises an error if a required field is not present.
+
+##### pattern
+
+```javascript
+function pattern()
+```
+
+Validate using a regexp pattern, typically invoked from a rule function, raises an error if a value fails to match a rule regexp pattern.
+
+##### range
+
+```javascript
+function range()
+```
+
+Validates that a value falls within a given range or is of a specific length, typically invoked from a rule function, raises an error if a value is out of bounds.
+
 ### Rule Properties
 
 This section describes the recognised rule properties and their behaviour, if you are using an [assigned rule](#assigned-rule) or [plugin rule](#plugin-rule) you can define properties on the rule object and they are available to the rule function via `this`.
