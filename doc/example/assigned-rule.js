@@ -1,4 +1,4 @@
-var Schema = require('../../')
+var Schema = require('../..')
   , descriptor = {
     id: {
       expected: 'foo',

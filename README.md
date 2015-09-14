@@ -629,7 +629,7 @@ schema.validate(source, function(err, res) {
 #### [assigned-rule](/doc/example/assigned-rule.js)
 
 ```javascript
-var Schema = require('../../')
+var Schema = require('async-validate')
   , descriptor = {
     id: {
       expected: 'foo',
@@ -649,7 +649,7 @@ var Schema = require('../../')
   , source = {id: 'qux'}
   , schema;
 
-require('../../plugin/all');
+require('async-validate/plugin/all');
 
 schema = new Schema(descriptor);
 schema.validate(source, function(err, res) {
@@ -664,14 +664,14 @@ schema.validate(source, function(err, res) {
 #### [string](/doc/example/string.js)
 
 ```javascript
-var Schema = require('../../')
+var Schema = require('async-validate')
   , descriptor = {
     name: {type: 'string', required: true}
   }
   , source = {}
   , schema;
 
-require('../../plugin/all');
+require('async-validate/plugin/all');
 
 schema = new Schema(descriptor);
 schema.validate(source, function(err, res) {
@@ -686,14 +686,14 @@ schema.validate(source, function(err, res) {
 #### [whitespace](/doc/example/whitespace.js)
 
 ```javascript
-var Schema = require('../../')
+var Schema = require('async-validate')
   , descriptor = {
     name: {type: 'string', required: true, whitespace: true}
   }
   , source = {name: '  '}
   , schema;
 
-require('../../plugin/all');
+require('async-validate/plugin/all');
 
 schema = new Schema(descriptor);
 schema.validate(source, function(err, res) {

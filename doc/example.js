@@ -4,7 +4,8 @@ var fs = require('fs')
   , async = require('async')
   , exec = require('child_process').execSync
   , dir = path.join(__dirname, 'example')
-  , contents = fs.readdirSync(dir);
+  , contents = fs.readdirSync(dir)
+  , pkg = require('../package.json');
 
 contents = contents.map(function(file) {
   return path.join(dir, file);
@@ -13,9 +14,11 @@ contents = contents.map(function(file) {
 console.log('### Examples\n');
 async.eachSeries(contents, function(file, cb) {
   var name = path.basename(file, '.js')
-    , js = fs.readFileSync(file)
+    , js = '' + fs.readFileSync(file)
     , cmd = 'node ' + file
     , res = exec(cmd);
+
+  js = js.replace(/\.\.\/\.\./g, pkg.name);
 
   console.log('#### [%s](%s)\n', name, '/doc/example/' + name + '.js');
 

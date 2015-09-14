@@ -1,4 +1,4 @@
-var Schema = require('../../')
+var Schema = require('../..')
   , descriptor = {
     name: {type: 'string', required: true, whitespace: true}
   }
