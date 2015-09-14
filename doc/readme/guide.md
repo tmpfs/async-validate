@@ -173,6 +173,109 @@ var descriptor = {
 
 And supply a source object of `{roles: ["admin", "user"]}` then two errors will be created. One for the array length mismatch and one for the missing required array entry at index 2.
 
+#### Properties
+
+This section describes the recognised rule properties and their behaviour, if you are using an [assigned rule](#assigned-rule) or [plugin rule](#plugin-rule) you can define properties on the rule object and they are available to the rule function via `this`.
+
+##### Type Identifier
+
+The `type` property indicates the type of rule to use, a type corresponds to a plugin function and the plugin should have been loaded.
+
+Recognised type values are:
+
+* `string`: Must be of type `string`.
+* `number`: Must be of type `number`.
+* `boolean`: Must be of type `boolean`.
+* `method`: Must be of type `function`.
+* `null`: Must strictly equal `null`.
+* `regexp`: Must be an instance of `RegExp` or a valid string regexp.
+* `integer`: Must be of type `number` and an integer.
+* `float`: Must be of type `number` and a floating point number.
+* `array`: Must be an array as determined by `Array.isArray`.
+* `object`: Must be of type `object` and not `Array.isArray`.
+* `enum`: Value must exist in the `list`.
+* `date`: Value must be valid as determined by `moment().isValid()`.
+
+When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
+
+##### Additional
+
+When a rule is of the `object` type and `additional` is set to `false` an error is raised if the source object contains any properties not in the schema.
+
+##### Fields
+
+Rules of the `object` and `array` type may declare a `fields` object which declares a nested schema, see [deep rules](#deep-rules).
+
+##### Message
+
+The `message` rule property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
+
+##### Required
+
+The `required` rule property indicates that the field must exist on the source object being validated.
+
+##### Pattern
+
+The `pattern` rule property is a regular expression that the value must match to pass validation.
+
+##### Range
+
+A range is defined using the `min` and `max` properties. For `string`, `function` and `array` types comparison is performed against the `length`, for `number` types the number must not be less than `min` nor greater than `max`.
+
+##### Length
+
+To validate an exact length of a field specify the `len` property. For `string`, `function` and `array` types comparison is performed on the `length` property, for the `number` type this property indicates an exact match for the `number`, ie, it may only be strictly equal to `len`.
+
+If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
+
+##### Values
+
+Used with the `array` type as a shorthand for validating array values, may be an `object` or `array` containing validation rules.
+
+When `values` is an object it is applied to all array elements in the source array otherwise each `values` entry is compared against each source array entry which allows mixed types to be used in arrays.
+
+Note that `values` is expanded to `fields`, see [deep rules](#deep-rules).
+
+##### Enumerable
+
+To validate a value from a list of possible values use the `enum` type with a `list` property containing the valid values for the field, for example:
+
+```javascript
+var descriptor = {
+  role: {type: "enum", list: ['admin', 'user', 'guest']}
+}
+```
+
+##### Date Format
+
+Validating dates can be complex but using [moment](http://momentjs.com/) date validation is substantially easier.
+
+If no `format` is specified for a rule that is a `date` type then it is assumed the date is ISO 8601. If a format is specified then the date is validated according to the specified format.
+
+It is recommended you read the [moment documentation](http://momentjs.com/docs/#/parsing/is-valid/) on the `isValid` method to understand what validation is performed.
+
+The important part is:
+
+> Note: It is not intended to be used to validate that the input string matches the format string. Because the strictness of format matching can vary depending on the application and business requirements, this sort of validation is not included in Moment.js.
+
+This limitation may be overcome by combining a `pattern` in a date rule, for example:
+
+```javascript
+var descriptor = {
+  active: {
+    type: "date",
+    format: "YYYY-MM-DD",
+    pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/
+  }
+}
+```
+
+##### Whitespace
+
+It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
+
+You may wish to sanitize user input instead of testing for whitespace, see [transform](#transform) for an example that would allow you to strip whitespace.
+
 ### Errors
 
 To raise an error in a validation rule call [raise](#raise), the signature for raise is equivalent to `util.format` except that it may also accept a [Reason](#reason) as the first argument.
@@ -308,109 +411,6 @@ function range()
 ```
 
 Validates that a value falls within a given range or is of a specific length, typically invoked from a rule function, raises an error if a value is out of bounds.
-
-### Rule Properties
-
-This section describes the recognised rule properties and their behaviour, if you are using an [assigned rule](#assigned-rule) or [plugin rule](#plugin-rule) you can define properties on the rule object and they are available to the rule function via `this`.
-
-#### Type Identifier
-
-The `type` property indicates the type of rule to use, a type corresponds to a plugin function and the plugin should have been loaded.
-
-Recognised type values are:
-
-* `string`: Must be of type `string`.
-* `number`: Must be of type `number`.
-* `boolean`: Must be of type `boolean`.
-* `method`: Must be of type `function`.
-* `null`: Must strictly equal `null`.
-* `regexp`: Must be an instance of `RegExp` or a valid string regexp.
-* `integer`: Must be of type `number` and an integer.
-* `float`: Must be of type `number` and a floating point number.
-* `array`: Must be an array as determined by `Array.isArray`.
-* `object`: Must be of type `object` and not `Array.isArray`.
-* `enum`: Value must exist in the `list`.
-* `date`: Value must be valid as determined by `moment().isValid()`.
-
-When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
-
-#### Additional
-
-When a rule is of the `object` type and `additional` is set to `false` an error is raised if the source object contains any properties not in the schema.
-
-#### Fields
-
-Rules of the `object` and `array` type may declare a `fields` object which declares a nested schema, see [deep rules](#deep-rules).
-
-#### Message
-
-The `message` rule property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
-
-#### Required
-
-The `required` rule property indicates that the field must exist on the source object being validated.
-
-#### Pattern
-
-The `pattern` rule property is a regular expression that the value must match to pass validation.
-
-#### Range
-
-A range is defined using the `min` and `max` properties. For `string`, `function` and `array` types comparison is performed against the `length`, for `number` types the number must not be less than `min` nor greater than `max`.
-
-#### Length
-
-To validate an exact length of a field specify the `len` property. For `string`, `function` and `array` types comparison is performed on the `length` property, for the `number` type this property indicates an exact match for the `number`, ie, it may only be strictly equal to `len`.
-
-If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
-
-#### Values
-
-Used with the `array` type as a shorthand for validating array values, may be an `object` or `array` containing validation rules.
-
-When `values` is an object it is applied to all array elements in the source array otherwise each `values` entry is compared against each source array entry which allows mixed types to be used in arrays.
-
-Note that `values` is expanded to `fields`, see [deep rules](#deep-rules).
-
-#### Enumerable
-
-To validate a value from a list of possible values use the `enum` type with a `list` property containing the valid values for the field, for example:
-
-```javascript
-var descriptor = {
-  role: {type: "enum", list: ['admin', 'user', 'guest']}
-}
-```
-
-#### Date Format
-
-Validating dates can be complex but using [moment](http://momentjs.com/) date validation is substantially easier.
-
-If no `format` is specified for a rule that is a `date` type then it is assumed the date is ISO 8601. If a format is specified then the date is validated according to the specified format.
-
-It is recommended you read the [moment documentation](http://momentjs.com/docs/#/parsing/is-valid/) on the `isValid` method to understand what validation is performed.
-
-The important part is:
-
-> Note: It is not intended to be used to validate that the input string matches the format string. Because the strictness of format matching can vary depending on the application and business requirements, this sort of validation is not included in Moment.js.
-
-This limitation may be overcome by combining a `pattern` in a date rule, for example:
-
-```javascript
-var descriptor = {
-  active: {
-    type: "date",
-    format: "YYYY-MM-DD",
-    pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/
-  }
-}
-```
-
-#### Whitespace
-
-It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
-
-You may wish to sanitize user input instead of testing for whitespace, see [transform](#transform) for an example that would allow you to strip whitespace.
 
 ### Validation
 
