@@ -20,7 +20,8 @@ async.eachSeries(contents, function(file, cb) {
 
   js = js.replace(/\.\.\/\.\./g, pkg.name);
 
-  console.log('#### [%s](%s)\n', name, '/doc/example/' + name + '.js');
+  console.log('#### %s\n', name);
+  console.log('- [doc/example/%s](%s)\n', name, '/doc/example/' + name + '.js');
 
   console.log('```javascript\n%s\n```\n', js);
   console.log('```\n%s\n```\n', res);

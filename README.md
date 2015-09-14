@@ -56,13 +56,13 @@ Table of Contents
         * [validates](#validates)
         * [diff](#diff)
     * [Examples](#examples)
-      * [[assigned-rule](/doc/example/assigned-rule.js)](#assigned-ruledocexampleassigned-rulejs)
-      * [[deep](/doc/example/deep.js)](#deepdocexampledeepjs)
-      * [[inline-rule](/doc/example/inline-rule.js)](#inline-ruledocexampleinline-rulejs)
-      * [[message](/doc/example/message.js)](#messagedocexamplemessagejs)
-      * [[required](/doc/example/required.js)](#requireddocexamplerequiredjs)
-      * [[source-root](/doc/example/source-root.js)](#source-rootdocexamplesource-rootjs)
-      * [[whitespace](/doc/example/whitespace.js)](#whitespacedocexamplewhitespacejs)
+      * [assigned-rule](#assigned-rule)
+      * [deep](#deep)
+      * [inline-rule](#inline-rule)
+      * [message](#message)
+      * [required](#required-1)
+      * [source-root](#source-root)
+      * [whitespace](#whitespace)
   * [Developer](#developer)
     * [Test](#test)
     * [Spec](#spec)
@@ -765,7 +765,9 @@ Compare two arrays, return `false` if they are equal otherwise return an array t
 
 ### Examples
 
-#### [assigned-rule](/doc/example/assigned-rule.js)
+#### assigned-rule
+
+* [doc/example/assigned-rule](https://github.com/freeformsystems/async-validate/blob/master/doc/example/assigned-rule.js).
 
 ```javascript
 // assign a function to a rule
@@ -801,7 +803,9 @@ schema.validate(source, function(err, res) {
 [ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
 ```
 
-#### [deep](/doc/example/deep.js)
+#### deep
+
+* [doc/example/deep](https://github.com/freeformsystems/async-validate/blob/master/doc/example/deep.js).
 
 ```javascript
 // validate properties of a nested object
@@ -832,7 +836,9 @@ schema.validate(source, function(err, res) {
 [ { [Error: zip is required] field: 'zip', reason: { id: 'required' } } ]
 ```
 
-#### [inline-rule](/doc/example/inline-rule.js)
+#### inline-rule
+
+* [doc/example/inline-rule](https://github.com/freeformsystems/async-validate/blob/master/doc/example/inline-rule.js).
 
 ```javascript
 // assign a function as a rule
@@ -861,7 +867,9 @@ schema.validate(source, function(err, res) {
 [ { [Error: foo is a reserved id] field: 'id' } ]
 ```
 
-#### [message](/doc/example/message.js)
+#### message
+
+* [doc/example/message](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message.js).
 
 ```javascript
 // override error message
@@ -888,7 +896,9 @@ schema.validate(source, function(err, res) {
 [ { [Error: name must be specified] field: 'name', reason: { id: 'required' } } ]
 ```
 
-#### [required](/doc/example/required.js)
+#### required
+
+* [doc/example/required](https://github.com/freeformsystems/async-validate/blob/master/doc/example/required.js).
 
 ```javascript
 // validate a field as required
@@ -911,7 +921,9 @@ schema.validate(source, function(err, res) {
 [ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
 ```
 
-#### [source-root](/doc/example/source-root.js)
+#### source-root
+
+* [doc/example/source-root](https://github.com/freeformsystems/async-validate/blob/master/doc/example/source-root.js).
 
 ```javascript
 // validate the type of the source object
@@ -932,7 +944,9 @@ schema.validate(source, function(err, res) {
 [ { [Error: source is not an object] field: 'source', reason: { id: 'type' } } ]
 ```
 
-#### [whitespace](/doc/example/whitespace.js)
+#### whitespace
+
+* [doc/example/whitespace](https://github.com/freeformsystems/async-validate/blob/master/doc/example/whitespace.js).
 
 ```javascript
 // validate a field as whitespace
