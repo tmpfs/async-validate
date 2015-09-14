@@ -539,7 +539,7 @@ The value should be an Object; each property of the `vars` object is passed into
 
 Be aware that if you use a built in field (see [Rule](#rule)) it will be overwritten.
 
-See the [vars test fixture](https://github.com/freeformsystems/async-validate/blob/master/test/spec/vars.js) and [model fixtures](https://github.com/freeformsystems/async-validate/blob/master/test/fixtures/model.js) for an example.
+See the [vars test fixture](https://github.com/freeformsystems/async-validate/blob/master/test/spec/vars.js) and [model fixture](https://github.com/freeformsystems/async-validate/blob/master/test/fixtures/model.js) for an example.
 
 ### Messages
 
