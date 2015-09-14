@@ -70,11 +70,13 @@
         "language": "javascript"
       },
       {
+        "inc": "api.md"
+      },
+      {
         "bin": "node doc/example.js"
       },
       {
         "inc": [
-          "api.md",
           "developer.md",
           "license.md"
         ]

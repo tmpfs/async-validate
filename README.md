@@ -41,14 +41,6 @@ Table of Contents
       * [Variables](#variables)
     * [Messages](#messages)
     * [Transform](#transform)
-    * [Examples](#examples)
-      * [[assigned-rule](/doc/example/assigned-rule.js)](#assigned-ruledocexampleassigned-rulejs)
-      * [[deep](/doc/example/deep.js)](#deepdocexampledeepjs)
-      * [[inline-rule](/doc/example/inline-rule.js)](#inline-ruledocexampleinline-rulejs)
-      * [[message](/doc/example/message.js)](#messagedocexamplemessagejs)
-      * [[required](/doc/example/required.js)](#requireddocexamplerequiredjs)
-      * [[source-root](/doc/example/source-root.js)](#source-rootdocexamplesource-rootjs)
-      * [[whitespace](/doc/example/whitespace.js)](#whitespacedocexamplewhitespacejs)
     * [API](#api)
       * [Schema](#schema)
         * [messages](#messages)
@@ -63,6 +55,14 @@ Table of Contents
         * [format](#format)
         * [validates](#validates)
         * [diff](#diff)
+    * [Examples](#examples)
+      * [[assigned-rule](/doc/example/assigned-rule.js)](#assigned-ruledocexampleassigned-rulejs)
+      * [[deep](/doc/example/deep.js)](#deepdocexampledeepjs)
+      * [[inline-rule](/doc/example/inline-rule.js)](#inline-ruledocexampleinline-rulejs)
+      * [[message](/doc/example/message.js)](#messagedocexamplemessagejs)
+      * [[required](/doc/example/required.js)](#requireddocexamplerequiredjs)
+      * [[source-root](/doc/example/source-root.js)](#source-rootdocexamplesource-rootjs)
+      * [[whitespace](/doc/example/whitespace.js)](#whitespacedocexamplewhitespacejs)
   * [Developer](#developer)
     * [Test](#test)
     * [Spec](#spec)
@@ -628,194 +628,6 @@ schema.validate(source, function(err, res) {
 });
 ```
 
-### Examples
-
-#### [assigned-rule](/doc/example/assigned-rule.js)
-
-```javascript
-// assign a function to a rule
-var Schema = require('async-validate')
-  , descriptor = {
-      id: {
-        expected: 'foo',
-        validator: function(cb) {
-          if(this.value !== this.expected) {
-            this.raise(
-              this.reason('unexpected-id'),
-              'id expects %s, got %s',
-              this.expected,
-              this.value
-            ) 
-          }
-          cb();
-        }
-      }
-    }
-  , source = {id: 'qux'}
-  , schema;
-
-require('async-validate/plugin/all');
-
-schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
-  console.dir(res.errors);
-});
-```
-
-```
-[ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
-```
-
-#### [deep](/doc/example/deep.js)
-
-```javascript
-// validate properties of a nested object
-var Schema = require('async-validate')
-  , descriptor = {
-      address: {
-        type: 'object',
-        fields: {
-          name: {type: 'string', required: true},
-          street: {type: 'string', required: true},
-          city: {type: 'string', required: true},
-          zip: {type: 'string', required: true}
-        }
-      }
-    }
-  , source = {address: {name: '1024c', street: 'Mock St', city: 'Mock City'}}
-  , schema;
-
-require('async-validate/plugin/all');
-
-schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
-  console.dir(res.errors);
-});
-```
-
-```
-[ { [Error: zip is required] field: 'zip', reason: { id: 'required' } } ]
-```
-
-#### [inline-rule](/doc/example/inline-rule.js)
-
-```javascript
-// assign a function as a rule
-var Schema = require('async-validate')
-  , reserved = ['foo']
-  , descriptor = {
-      id: function(cb) {
-        if(~reserved.indexOf(this.value)) {
-          this.raise('%s is a reserved id', this.value); 
-        }
-        cb();
-      }
-    }
-  , source = {id: 'foo'}
-  , schema;
-
-require('async-validate/plugin/all');
-
-schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
-  console.dir(res.errors);
-});
-```
-
-```
-[ { [Error: foo is a reserved id] field: 'id' } ]
-```
-
-#### [message](/doc/example/message.js)
-
-```javascript
-// override error message
-var Schema = require('async-validate')
-  , descriptor = {
-    name: {type: 'string', required: true, message: 'name must be specified'}
-  }
-  , source = {}
-  , schema;
-
-require('async-validate/plugin/all');
-
-schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
-  console.dir(res.errors);
-});
-```
-
-```
-[ { [Error: name must be specified] field: 'name', reason: { id: 'required' } } ]
-```
-
-#### [required](/doc/example/required.js)
-
-```javascript
-// validate a field as required
-var Schema = require('async-validate')
-  , descriptor = {
-    name: {type: 'string', required: true}
-  }
-  , source = {}
-  , schema;
-
-require('async-validate/plugin/all');
-
-schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
-  console.dir(res.errors);
-});
-```
-
-```
-[ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
-```
-
-#### [source-root](/doc/example/source-root.js)
-
-```javascript
-// validate the type of the source object
-var Schema = require('async-validate')
-  , descriptor = {type: 'object'}
-  , source = 'foo'
-  , schema;
-
-require('async-validate/plugin/all');
-
-schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
-  console.dir(res.errors);
-});
-```
-
-```
-[ { [Error: source is not an object] field: 'source', reason: { id: 'type' } } ]
-```
-
-#### [whitespace](/doc/example/whitespace.js)
-
-```javascript
-// validate a field as whitespace
-var Schema = require('async-validate')
-  , descriptor = {
-      name: {type: 'string', required: true, whitespace: true}
-    }
-  , source = {name: '  '}
-  , schema;
-
-require('async-validate/plugin/all');
-
-schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
-  console.dir(res.errors);
-});
-```
-
-```
-[ { [Error: name cannot be empty] field: 'name', reason: { id: 'whitespace' } } ]
-```
-
 ### API
 
 #### Schema
@@ -950,6 +762,198 @@ function diff(expected, received)
 ```
 
 Compare two arrays, return `false` if they are equal otherwise return an array that is the difference between the supplied arrays.
+
+### Examples
+
+#### [assigned-rule](/doc/example/assigned-rule.js)
+
+```javascript
+// assign a function to a rule
+var Schema = require('async-validate')
+  , descriptor = {
+      id: {
+        expected: 'foo',
+        validator: function(cb) {
+          if(this.value !== this.expected) {
+            this.raise(
+              this.reason('unexpected-id'),
+              'id expects %s, got %s',
+              this.expected,
+              this.value
+            ) 
+          }
+          cb();
+        }
+      }
+    }
+  , source = {id: 'qux'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
+```
+
+#### [deep](/doc/example/deep.js)
+
+```javascript
+// validate properties of a nested object
+var Schema = require('async-validate')
+  , descriptor = {
+      address: {
+        type: 'object',
+        fields: {
+          name: {type: 'string', required: true},
+          street: {type: 'string', required: true},
+          city: {type: 'string', required: true},
+          zip: {type: 'string', required: true}
+        }
+      }
+    }
+  , source = {address: {name: '1024c', street: 'Mock St', city: 'Mock City'}}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: zip is required] field: 'zip', reason: { id: 'required' } } ]
+```
+
+#### [inline-rule](/doc/example/inline-rule.js)
+
+```javascript
+// assign a function as a rule
+var Schema = require('async-validate')
+  , reserved = ['foo']
+  , descriptor = {
+      id: function(cb) {
+        if(~reserved.indexOf(this.value)) {
+          this.raise('%s is a reserved id', this.value); 
+        }
+        cb();
+      }
+    }
+  , source = {id: 'foo'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: foo is a reserved id] field: 'id' } ]
+```
+
+#### [message](/doc/example/message.js)
+
+```javascript
+// override error message
+var Schema = require('async-validate')
+  , descriptor = {
+      name: {
+        type: 'string',
+        required: true,
+        message: 'name must be specified'
+      }
+    }
+  , source = {}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: name must be specified] field: 'name', reason: { id: 'required' } } ]
+```
+
+#### [required](/doc/example/required.js)
+
+```javascript
+// validate a field as required
+var Schema = require('async-validate')
+  , descriptor = {
+      name: {type: 'string', required: true}
+    }
+  , source = {}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
+```
+
+#### [source-root](/doc/example/source-root.js)
+
+```javascript
+// validate the type of the source object
+var Schema = require('async-validate')
+  , descriptor = {type: 'object'}
+  , source = 'foo'
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: source is not an object] field: 'source', reason: { id: 'type' } } ]
+```
+
+#### [whitespace](/doc/example/whitespace.js)
+
+```javascript
+// validate a field as whitespace
+var Schema = require('async-validate')
+  , descriptor = {
+      name: {type: 'string', required: true, whitespace: true}
+    }
+  , source = {name: '  '}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: name cannot be empty] field: 'name', reason: { id: 'whitespace' } } ]
+```
 
 ## Developer
 
