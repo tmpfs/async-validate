@@ -41,6 +41,10 @@ Table of Contents
       * [Variables](#variables)
     * [Messages](#messages)
     * [Transform](#transform)
+    * [Examples](#examples)
+      * [[assigned-rule](/doc/assigned-rule.js)](#assigned-ruledocassigned-rulejs)
+      * [[string](/doc/string.js)](#stringdocstringjs)
+      * [[whitespace](/doc/whitespace.js)](#whitespacedocwhitespacejs)
     * [API](#api)
       * [Schema](#schema)
         * [messages](#messages)
@@ -618,6 +622,99 @@ Schema.plugin([
 schema.validate(source, function(err, res) {
   console.dir(source.name);
 });
+```
+
+### Examples
+
+#### [assigned-rule](/doc/assigned-rule.js)
+
+Source:
+
+```javascript
+var Schema = require('../../')
+  , descriptor = {
+    id: {
+      expected: 'foo',
+      validator: function(cb) {
+        if(this.value !== this.expected) {
+          this.raise(
+            this.reason('unexpected-id'),
+            'id expects %s, got %s',
+            this.expected,
+            this.value
+          ) 
+        }
+        cb();
+      }
+    }
+  }
+  , source = {id: 'qux'}
+  , schema;
+
+require('../../plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+Result:
+
+```
+[ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
+```
+
+#### [string](/doc/string.js)
+
+Source:
+
+```javascript
+var Schema = require('../../')
+  , descriptor = {
+    name: {type: 'string', required: true}
+  }
+  , source = {}
+  , schema;
+
+require('../../plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+Result:
+
+```
+[ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
+```
+
+#### [whitespace](/doc/whitespace.js)
+
+Source:
+
+```javascript
+var Schema = require('../../')
+  , descriptor = {
+    name: {type: 'string', required: true, whitespace: true}
+  }
+  , source = {name: '  '}
+  , schema;
+
+require('../../plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+Result:
+
+```
+[ { [Error: name cannot be empty] field: 'name', reason: { id: 'whitespace' } } ]
 ```
 
 ### API

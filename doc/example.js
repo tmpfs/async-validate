@@ -17,10 +17,12 @@ async.eachSeries(contents, function(file, cb) {
     , cmd = 'node ' + file
     , res = exec(cmd);
 
-  console.log('#### %s\n', name);
+  console.log('#### [%s](%s)\n', name, '/doc/' + name + '.js');
+
+  console.log('Source:\n');
   console.log('```javascript\n%s\n```\n', js);
 
-
+  console.log('Result:\n');
   console.log('```\n%s\n```\n', res);
 
   cb();
