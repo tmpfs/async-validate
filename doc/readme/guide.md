@@ -378,3 +378,17 @@ var descriptor = {
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
 
 You may wish to sanitize user input instead of testing for whitespace, see [transform](#transform) for an example that would allow you to strip whitespace.
+
+### Validation
+
+#### Variables
+
+Sometimes it is useful to pass existing data into all rule functions as transient data so that your rule functions may reference existing code for performing async operations. A common use case would be using a model class to query a database and then validate on the returned data.
+
+To do this you may use the `vars` processing option when calling [validate](#validate).
+
+The value should be an Object; each property of the `vars` object is passed into the [Rule](#rule) scope so that they are available via `this`.
+
+Be aware that if you use a built in field (see [Rule](#rule)) it will be overwritten.
+
+See the [vars test fixture](/test/spec/vars.js) for an example.

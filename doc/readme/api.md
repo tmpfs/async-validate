@@ -35,6 +35,7 @@ Options:
 * `bail`: Shorthand for `single` and `first`.
 * `parallel`: A boolean indicating that the validation should be executed in parallel.
 * `field`: Field name for the source object, default is `source` when not specified.
+* `vars`: Object map of variables to assign to each rule.
 
 ##### Schema.plugin
 
