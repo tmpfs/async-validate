@@ -28,7 +28,7 @@ function rule(cb)
 
 Rules are functions that perform validation of a value, they are invoked in the scope of a rule instance ([file](/lib/rule.js), [api docs](#rule)).
 
-A rule function can access all relevant properties and methods using `this` and should [raise](#raise) an error if `this.value` fails a validation test, see [errors](#errors).
+A rule function can access all relevant properties and methods using `this` and should [raise](#raise) an error if `this.value` fails a validation test, see [errors](#errors). Rules functions may raise multiple errors for different validation failures.
 
 The [plugin rule](#plugin-rule) method of declaring rule functions is preferred as it is the most modular.
 
