@@ -4,14 +4,14 @@ var Schema = require('../..')
       address: {
         type: 'object',
         fields: {
-          number: {type: 'string', required: true},
+          name: {type: 'string', required: true},
           street: {type: 'string', required: true},
           city: {type: 'string', required: true},
           zip: {type: 'string', required: true}
         }
       }
     }
-  , source = {address: {number: '1', street: 'Mock St', city: 'Mock City'}}
+  , source = {address: {name: '1024c', street: 'Mock St', city: 'Mock City'}}
   , schema;
 
 require('../../plugin/all');
