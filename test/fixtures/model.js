@@ -4,9 +4,7 @@ var data = {
 }
 
 // mock model class (vars)
-function Model() {
-
-}
+function Model() {}
 
 function findUserById(id, cb) {
   // normally find in a database
