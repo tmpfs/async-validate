@@ -45,6 +45,7 @@ Table of Contents
       * [[assigned-rule](/doc/example/assigned-rule.js)](#assigned-ruledocexampleassigned-rulejs)
       * [[deep](/doc/example/deep.js)](#deepdocexampledeepjs)
       * [[inline-rule](/doc/example/inline-rule.js)](#inline-ruledocexampleinline-rulejs)
+      * [[message](/doc/example/message.js)](#messagedocexamplemessagejs)
       * [[required](/doc/example/required.js)](#requireddocexamplerequiredjs)
       * [[source-root](/doc/example/source-root.js)](#source-rootdocexamplesource-rootjs)
       * [[whitespace](/doc/example/whitespace.js)](#whitespacedocexamplewhitespacejs)
@@ -723,6 +724,29 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: foo is a reserved id] field: 'id' } ]
+```
+
+#### [message](/doc/example/message.js)
+
+```javascript
+// override error message
+var Schema = require('async-validate')
+  , descriptor = {
+    name: {type: 'string', required: true, message: 'name must be specified'}
+  }
+  , source = {}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: name must be specified] field: 'name', reason: { id: 'required' } } ]
 ```
 
 #### [required](/doc/example/required.js)

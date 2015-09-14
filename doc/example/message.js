@@ -1,7 +1,11 @@
-// validate a field as required
+// override error message
 var Schema = require('../..')
   , descriptor = {
-      name: {type: 'string', required: true}
+      name: {
+        type: 'string',
+        required: true,
+        message: 'name must be specified'
+      }
     }
   , source = {}
   , schema;
