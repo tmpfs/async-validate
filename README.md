@@ -64,6 +64,7 @@ Table of Contents
       * [instanceof](#instanceof)
       * [len](#len)
       * [max](#max)
+      * [message-function](#message-function)
       * [message](#message)
       * [min](#min)
       * [multiple](#multiple)
@@ -1035,6 +1036,37 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: func cannot have more than 1 arguments] field: 'func', reason: { id: 'max' } } ]
+```
+
+#### message-function
+
+* [doc/example/message-function](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message-function.js).
+
+```javascript
+// override error message with function
+var Schema = require('async-validate')
+  , descriptor = {
+      name: {
+        type: 'string',
+        required: true,
+        message: function(msg, parameters) {
+          return this.error('name must be specified (field: %s)', this.field);
+        }
+      }
+    }
+  , source = {}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: name must be specified (field: name)] field: 'name', reason: { id: 'required' } } ]
 ```
 
 #### message
