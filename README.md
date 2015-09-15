@@ -57,11 +57,18 @@ Table of Contents
         * [diff](#diff)
     * [Examples](#examples)
       * [assigned-rule](#assigned-rule)
+      * [bail](#bail)
       * [deep](#deep)
       * [inline-rule](#inline-rule)
+      * [len](#len)
+      * [max](#max)
       * [message](#message)
+      * [min](#min)
+      * [pattern](#pattern-1)
+      * [range](#range-1)
       * [required](#required-1)
       * [source-root](#source-root)
+      * [type](#type)
       * [whitespace](#whitespace)
   * [Developer](#developer)
     * [Test](#test)
@@ -803,6 +810,39 @@ schema.validate(source, function(err, res) {
 [ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
 ```
 
+#### bail
+
+* [doc/example/bail](https://github.com/freeformsystems/async-validate/blob/master/doc/example/bail.js).
+
+```javascript
+// bail on first error encountered
+var Schema = require('async-validate')
+  , descriptor = {
+      address: {
+        type: 'object',
+        fields: {
+          name: {type: 'string', required: true},
+          street: {type: 'string', required: true},
+          city: {type: 'string', required: true},
+          zip: {type: 'string', required: true}
+        }
+      }
+    }
+  , source = {address: {name: '1024c'}}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, {bail: true}, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: street is required] field: 'street', reason: { id: 'required' } } ]
+```
+
 #### deep
 
 * [doc/example/deep](https://github.com/freeformsystems/async-validate/blob/master/doc/example/deep.js).
@@ -867,6 +907,56 @@ schema.validate(source, function(err, res) {
 [ { [Error: foo is a reserved id] field: 'id' } ]
 ```
 
+#### len
+
+* [doc/example/len](https://github.com/freeformsystems/async-validate/blob/master/doc/example/len.js).
+
+```javascript
+// validate a field length
+var Schema = require('async-validate')
+  , descriptor = {
+      func: {type: 'method', required: true, len: 1}
+    }
+  , source = {func: function noop(){}}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: func must have exactly 1 arguments] field: 'func', reason: { id: 'length' } } ]
+```
+
+#### max
+
+* [doc/example/max](https://github.com/freeformsystems/async-validate/blob/master/doc/example/max.js).
+
+```javascript
+// validate a field has a maximum length
+var Schema = require('async-validate')
+  , descriptor = {
+      func: {type: 'method', required: true, max: 1}
+    }
+  , source = {func: function noop(foo, bar){}}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: func cannot have more than 1 arguments] field: 'func', reason: { id: 'max' } } ]
+```
+
 #### message
 
 * [doc/example/message](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message.js).
@@ -894,6 +984,81 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: name must be specified] field: 'name', reason: { id: 'required' } } ]
+```
+
+#### min
+
+* [doc/example/min](https://github.com/freeformsystems/async-validate/blob/master/doc/example/min.js).
+
+```javascript
+// validate a field has a minimum length
+var Schema = require('async-validate')
+  , descriptor = {
+      func: {type: 'method', required: true, min: 1}
+    }
+  , source = {func: function noop(){}}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: func must have at least 1 arguments] field: 'func', reason: { id: 'min' } } ]
+```
+
+#### pattern
+
+* [doc/example/pattern](https://github.com/freeformsystems/async-validate/blob/master/doc/example/pattern.js).
+
+```javascript
+// validate a field as matching a pattern
+var Schema = require('async-validate')
+  , descriptor = {
+    name: {type: 'string', required: true, pattern: /^[a-z0-9-]$/i}
+    }
+  , source = {name: '-name'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: name value -name does not match pattern /^[a-z0-9-]$/i] field: 'name', reason: { id: 'pattern' } } ]
+```
+
+#### range
+
+* [doc/example/range](https://github.com/freeformsystems/async-validate/blob/master/doc/example/range.js).
+
+```javascript
+// validate a field has a length within a range
+var Schema = require('async-validate')
+  , descriptor = {
+      func: {type: 'method', required: true, min: 1, max: 2}
+    }
+  , source = {func: function noop(foo, bar, qux){}}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: func must have arguments length between 1 and 2] field: 'func', reason: { id: 'max' } } ]
 ```
 
 #### required
@@ -942,6 +1107,31 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: source is not an object] field: 'source', reason: { id: 'type' } } ]
+```
+
+#### type
+
+* [doc/example/type](https://github.com/freeformsystems/async-validate/blob/master/doc/example/type.js).
+
+```javascript
+// validate a field type
+var Schema = require('async-validate')
+  , descriptor = {
+      flag: {type: 'boolean', required: true}
+    }
+  , source = {flag: 'foo'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: flag is not a boolean] field: 'flag', reason: { id: 'type' } } ]
 ```
 
 #### whitespace
