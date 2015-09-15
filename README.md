@@ -65,6 +65,7 @@ Table of Contents
       * [max](#max)
       * [message](#message)
       * [min](#min)
+      * [multiple](#multiple)
       * [pattern](#pattern-1)
       * [plugin-rule](#plugin-rule)
       * [range](#range-1)
@@ -1037,6 +1038,42 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: func must have at least 1 arguments] field: 'func', reason: { id: 'min' } } ]
+```
+
+#### multiple
+
+* [doc/example/multiple](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple.js).
+
+```javascript
+// validate a field with multiple rules
+var Schema = require('async-validate')
+  , data = {bar: 'qux'}
+  , descriptor = {
+      id: [
+        {type: 'string', required: true},
+        function exists(cb) {
+          if(!data[this.value]) {
+            this.raise(
+              this.reason('missing-id'),
+              'user %s does not exist', this.value);
+          }
+          cb();
+        }
+      ]
+    }
+  , source = {id: 'foo'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: user foo does not exist] field: 'id', reason: { id: 'missing-id' } } ]
 ```
 
 #### pattern
