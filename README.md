@@ -60,11 +60,13 @@ Table of Contents
       * [bail](#bail)
       * [deep](#deep)
       * [inline-rule](#inline-rule)
+      * [instanceof](#instanceof)
       * [len](#len)
       * [max](#max)
       * [message](#message)
       * [min](#min)
       * [pattern](#pattern-1)
+      * [plugin-rule](#plugin-rule)
       * [range](#range-1)
       * [required](#required-1)
       * [source-root](#source-root)
@@ -907,6 +909,32 @@ schema.validate(source, function(err, res) {
 [ { [Error: foo is a reserved id] field: 'id' } ]
 ```
 
+#### instanceof
+
+* [doc/example/instanceof](https://github.com/freeformsystems/async-validate/blob/master/doc/example/instanceof.js).
+
+```javascript
+// validate a field is an instanceof a function
+var Schema = require('async-validate')
+  , Component = function Component(){}
+  , descriptor = {
+      comp: {type: Component, required: true}
+    }
+  , source = {comp: {}}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: comp is not an instance of Component] field: 'comp', reason: { id: 'instanceof' } } ]
+```
+
 #### len
 
 * [doc/example/len](https://github.com/freeformsystems/async-validate/blob/master/doc/example/len.js).
@@ -1034,6 +1062,46 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: name value -name does not match pattern /^[a-z0-9-]$/i] field: 'name', reason: { id: 'pattern' } } ]
+```
+
+#### plugin-rule
+
+* [doc/example/plugin-rule](https://github.com/freeformsystems/async-validate/blob/master/doc/example/plugin-rule.js).
+
+```javascript
+// validate a field with a plugin rule
+var Schema = require('async-validate')
+  , descriptor = {
+      id: {type: 'id', required: true}
+    }
+  , source = {id: '-foo'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+// create plugin function
+function plugin() {
+  var pattern = /^[a-z0-9-]$/i;
+  // create static rule function
+  this.main.id = function id(cb) {
+    if(!pattern.test(this.value)) {
+      this.raise(this.reason('id'), 'invalid id %s', this.value);
+    }
+    cb();
+  }
+}
+
+// use plugin
+Schema.plugin([plugin]);
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: invalid id -foo] field: 'id', reason: { id: 'id' } } ]
 ```
 
 #### range
