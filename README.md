@@ -72,7 +72,7 @@ Table of Contents
       * [plugin-rule](#plugin-rule)
       * [range](#range-1)
       * [required](#required-1)
-      * [source-root](#source-root)
+      * [source-type](#source-type)
       * [type](#type)
       * [whitespace](#whitespace)
   * [Developer](#developer)
@@ -1167,7 +1167,7 @@ schema.validate(source, function(err, res) {
 // validate a field as matching a pattern
 var Schema = require('async-validate')
   , descriptor = {
-    name: {type: 'string', required: true, pattern: /^[a-z0-9-]$/i}
+    name: {type: 'string', required: true, pattern: /^[a-z0-9]+$/i}
     }
   , source = {name: '-name'}
   , schema;
@@ -1181,7 +1181,7 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: name value -name does not match pattern /^[a-z0-9-]$/i] field: 'name', reason: { id: 'pattern' } } ]
+[ { [Error: name value -name does not match pattern /^[a-z0-9]+$/i] field: 'name', reason: { id: 'pattern' } } ]
 ```
 
 #### plugin-rule
@@ -1274,9 +1274,9 @@ schema.validate(source, function(err, res) {
 [ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
 ```
 
-#### source-root
+#### source-type
 
-* [doc/example/source-root](https://github.com/freeformsystems/async-validate/blob/master/doc/example/source-root.js).
+* [doc/example/source-type](https://github.com/freeformsystems/async-validate/blob/master/doc/example/source-type.js).
 
 ```javascript
 // validate the type of the source object
