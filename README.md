@@ -786,21 +786,21 @@ Compare two arrays, return `false` if they are equal otherwise return an array t
 var Schema = require('async-validate')
   , opts = {field: 'root'}
   , descriptor = {
-    type: 'object',
-    additional: false,
-    fields: {
-      address: {
-        type: 'object',
-        required: true,
-        additional: false,
-        fields: {
-          street: {type: 'string', required: true},
-          city: {type: 'string', required: true},
-          zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
+      type: 'object',
+      additional: false,
+      fields: {
+        address: {
+          type: 'object',
+          required: true,
+          additional: false,
+          fields: {
+            street: {type: 'string', required: true},
+            city: {type: 'string', required: true},
+            zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
+          }
         }
       }
     }
-  }
   , source = {
       id: 'unknown-field',
       name: 'unknown-field',
