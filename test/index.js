@@ -1,7 +1,5 @@
 require('./global');
 require('./spec/additional');
-
-require('./spec/additional');
 require('./spec/array-values');
 require('./spec/array');
 require('./spec/assigned-rule');
@@ -36,4 +34,3 @@ require('./spec/string');
 require('./spec/transform');
 require('./spec/undef');
 require('./spec/vars');
-
