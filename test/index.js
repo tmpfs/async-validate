@@ -1,14 +1,19 @@
 require('./global');
 require('./spec/additional');
 
+require('./spec/additional');
 require('./spec/array-values');
 require('./spec/array');
+require('./spec/assigned-rule');
 require('./spec/boolean');
+require('./spec/clone');
 require('./spec/date');
 require('./spec/deep');
 require('./spec/enum');
 require('./spec/float');
+require('./spec/instanceof');
 require('./spec/integer');
+require('./spec/internal-error');
 require('./spec/iterator');
 require('./spec/length');
 require('./spec/message-object');
@@ -23,11 +28,12 @@ require('./spec/options');
 require('./spec/parallel');
 require('./spec/plugin');
 require('./spec/regexp');
+require('./spec/rule');
 require('./spec/schema');
 require('./spec/source-additional');
+require('./spec/source');
 require('./spec/string');
 require('./spec/transform');
-require('./spec/type');
 require('./spec/undef');
-require('./spec/validator');
+require('./spec/vars');
 
