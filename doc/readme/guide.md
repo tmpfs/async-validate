@@ -410,4 +410,4 @@ The value should be an Object; each property of the `vars` object is passed into
 
 Be aware that if you use a built in field (see [Rule](#rule)) it will be overwritten.
 
-See the [vars test fixture](/test/spec/vars.js) and [model fixture](/test/fixtures/model.js) for an example.
+See the [vars test](/test/spec/vars.js) and [model fixture](/test/fixtures/model.js) for an example.
