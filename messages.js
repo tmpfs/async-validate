@@ -15,6 +15,7 @@ var messages = {
     string: '%s is not a %s',
     null: '%s is not %s',
     method: '%s is not a %s',
+    instance: '%s is not an instance of %s',
     array: '%s is not an %s',
     object: '%s is not an %s',
     number: '%s is not a %s',

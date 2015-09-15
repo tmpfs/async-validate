@@ -1,10 +1,3 @@
-function isObject(value, Type) {
-  if(typeof Type === 'function') {
-    return (value instanceof Type);
-  }
-  return typeof(value) === 'object' && !Array.isArray(value);
-}
-
 module.exports = function() {
 
   /**
@@ -13,12 +6,22 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.object = function object(cb) {
-    var expected, additional;
+    var expected
+      , additional
+      , Type = this.rule.Type;
 
     if(this.validates()) {
       this.required();
 
-      if(!isObject(this.value, this.rule.Type)) {
+      // instanceof comparison on `type` as function
+      if(typeof Type === 'function'
+        && !(this.value instanceof Type)) {
+        this.raise(
+          this.reasons.instance,
+          this.messages.types.instance,
+          this.field, Type.name || 'function (anonymous)');
+      // plain object
+      }else if(typeof(this.value) !== 'object' || Array.isArray(this.value)) {
         this.raise(
           this.reasons.type,
           this.messages.types[this.rule.type],
