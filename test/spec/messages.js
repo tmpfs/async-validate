@@ -41,6 +41,28 @@ describe('async-validate:', function() {
     });
   });
 
+  it('should validate using an message function (returns Error)',
+    function(done) {
+      var descriptor = {
+        name: {
+          type: 'string',
+          required: true,
+          message: function(message, parameters) {
+            expect(message).to.be.a('string');
+            expect(parameters).to.be.an('array');
+            return new Error('Name is required');
+          }
+        },
+      }
+      var validator = new schema(descriptor);
+      validator.validate({}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql('Name is required');
+        done();
+      });
+    }
+  );
+
   it('should validate using custom messages', function(done) {
     var descriptor = {
       name: {type: 'string', required: true},

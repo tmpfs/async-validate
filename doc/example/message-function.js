@@ -5,7 +5,8 @@ var Schema = require('../..')
         type: 'string',
         required: true,
         message: function(msg, parameters) {
-          return this.error('name must be specified (field: %s)', this.field);
+          return this.format(
+            'name must be specified (field: %s)', this.field);
         }
       }
     }
