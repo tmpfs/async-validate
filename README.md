@@ -101,7 +101,7 @@ npm i async-validate
 Define validation rules, assign them to a schema using the necessary plugins and call validate:
 
 ```javascript
-var Schema = require('..')
+var Schema = require('async-validate')
   , descriptor = {name: {type: "string", required: true}}
   , schema = new Schema(descriptor)
   , source = {};

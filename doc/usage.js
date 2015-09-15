@@ -1,4 +1,4 @@
-var Schema = require('..')
+var Schema = require('async-validate')
   , descriptor = {name: {type: "string", required: true}}
   , schema = new Schema(descriptor)
   , source = {};
