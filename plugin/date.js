@@ -26,7 +26,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.date = function date(cb) {
-    var validate = this.rule.required
+    var validate = this.isRoot() || this.rule.required
       || (!this.rule.required && this.source.hasOwnProperty(this.field)
             && this.source[this.field]);
 
