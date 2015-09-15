@@ -56,6 +56,7 @@ Table of Contents
         * [validates](#validates)
         * [diff](#diff)
     * [Examples](#examples)
+      * [additional](#additional)
       * [assigned-rule](#assigned-rule)
       * [bail](#bail)
       * [deep](#deep)
@@ -775,6 +776,55 @@ Compare two arrays, return `false` if they are equal otherwise return an array t
 
 ### Examples
 
+#### additional
+
+* [doc/example/additional](https://github.com/freeformsystems/async-validate/blob/master/doc/example/additional.js).
+
+```javascript
+// generate errors when additional fields are present
+var Schema = require('async-validate')
+  , opts = {field: 'root'}
+  , descriptor = {
+    type: 'object',
+    additional: false,
+    fields: {
+      address: {
+        type: 'object',
+        required: true,
+        additional: false,
+        fields: {
+          street: {type: 'string', required: true},
+          city: {type: 'string', required: true},
+          zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
+        }
+      }
+    }
+  }
+  , source = {
+      id: 'unknown-field',
+      name: 'unknown-field',
+      address: {
+        name: 'unknown-field',
+        street: 'Mock St',
+        city: 'Mock City',
+        zip: '12345678',
+      }
+    }
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, opts, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: extraneous fields (id, name) found in root] field: 'root', reason: { id: 'additional' } },
+  { [Error: extraneous fields (name) found in address] field: 'address', reason: { id: 'additional' } } ]
+```
+
 #### assigned-rule
 
 * [doc/example/assigned-rule](https://github.com/freeformsystems/async-validate/blob/master/doc/example/assigned-rule.js).
@@ -820,6 +870,7 @@ schema.validate(source, function(err, res) {
 ```javascript
 // bail on first error encountered
 var Schema = require('async-validate')
+  , opts = {bail: true}
   , descriptor = {
       address: {
         type: 'object',
@@ -837,7 +888,7 @@ var Schema = require('async-validate')
 require('async-validate/plugin/all');
 
 schema = new Schema(descriptor);
-schema.validate(source, {bail: true}, function(err, res) {
+schema.validate(source, opts, function(err, res) {
   console.dir(res.errors);
 });
 ```
@@ -1055,7 +1106,7 @@ var Schema = require('async-validate')
           if(!data[this.value]) {
             this.raise(
               this.reason('missing-id'),
-              'user %s does not exist', this.value);
+              'id %s does not exist', this.value);
           }
           cb();
         }
@@ -1073,7 +1124,7 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: user foo does not exist] field: 'id', reason: { id: 'missing-id' } } ]
+[ { [Error: id foo does not exist] field: 'id', reason: { id: 'missing-id' } } ]
 ```
 
 #### pattern

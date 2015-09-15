@@ -8,7 +8,7 @@ var Schema = require('../..')
           if(!data[this.value]) {
             this.raise(
               this.reason('missing-id'),
-              'user %s does not exist', this.value);
+              'id %s does not exist', this.value);
           }
           cb();
         }

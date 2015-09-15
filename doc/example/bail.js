@@ -1,5 +1,6 @@
 // bail on first error encountered
 var Schema = require('../..')
+  , opts = {bail: true}
   , descriptor = {
       address: {
         type: 'object',
@@ -17,6 +18,6 @@ var Schema = require('../..')
 require('../../plugin/all');
 
 schema = new Schema(descriptor);
-schema.validate(source, {bail: true}, function(err, res) {
+schema.validate(source, opts, function(err, res) {
   console.dir(res.errors);
 });
