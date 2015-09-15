@@ -132,28 +132,6 @@ validator.validate({address: {}}, function(err, res) {
 
 Note that if you do not specify the `required` property on the parent rule it is perfectly valid for the field not to be declared on the source object and the deep validation rules will not be executed as there is nothing to validate against.
 
-Deep rule validation creates a schema for the nested rules so you can also specify the `options` passed to the `schema.validate()` method.
-
-```javascript
-var descriptor = {
-  name: {type: "string", required: true},
-  address: {
-    type: "object",
-    required: true,
-    options: {single: true, first: true},
-    fields: {
-      street: {type: "string", required: true},
-      city: {type: "string", required: true},
-      zip: {type: "string", required: true, len: 8, message: "invalid zip"}
-    }
-  }
-}
-var validator = new schema(descriptor);
-validator.validate({address: {}}, function(err, res) {
-  // now res.errors only contains errors for name and street
-});
-```
-
 The parent rule is also validated so if you have a set of rules such as:
 
 ```javascript
