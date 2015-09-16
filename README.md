@@ -94,9 +94,9 @@ var Schema = require('async-validate')
   , source = {};
 
 Schema.plugin([
-  require('../plugin/object'),
-  require('../plugin/string'),
-  require('../plugin/util')
+  require('async-validate/plugin/object'),
+  require('async-validate/plugin/string'),
+  require('async-validate/plugin/util')
 ]);
 
 schema.validate(source, function(err, res) {
