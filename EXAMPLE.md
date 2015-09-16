@@ -12,6 +12,7 @@ Table of Contents
       * [len](#len)
       * [max](#max)
       * [message-function](#message-function)
+      * [message-override](#message-override)
       * [message](#message)
       * [min](#min)
       * [multiple](#multiple)
@@ -322,6 +323,38 @@ schema.validate(source, function(err, res) {
 [ { [Error: name must be specified (field: name)] field: 'name', reason: { id: 'required' } } ]
 ```
 
+#### message-override
+
+* [doc/example/message-override](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message-override.js).
+
+```javascript
+// override default error message
+var Schema = require('async-validate')
+  , messages = require('async-validate/messages')
+  , descriptor = {
+      name: {
+        type: 'string',
+        required: true
+      }
+    }
+  , source = {}
+  , schema;
+
+require('async-validate/plugin/all');
+
+// change message
+messages.required = '%s is a required field';
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: name is a required field] field: 'name', reason: { id: 'required' } } ]
+```
+
 #### message
 
 * [doc/example/message](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message.js).
@@ -602,7 +635,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442378343796.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442381379549.com] field: 'email' } ]
 ```
 
 #### type
