@@ -2,7 +2,7 @@
  *  Default validation error messages.
  */
 var messages = {
-  default: 'Validation error on field %s',
+  default: 'error on field %s',
   required: '%s is required',
   enum: '%s must be one of %s',
   whitespace: '%s cannot be empty',
