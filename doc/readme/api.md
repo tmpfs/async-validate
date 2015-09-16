@@ -3,10 +3,17 @@
 #### Schema
 
 ```javascript
-function Schema(descriptor, [opts])
+function Schema(rules, [opts])
 ```
 
 Encapsulates the rules associated with a descriptor and the logic for performing validation.
+
+* `rules`: The schema rules.
+* `opts`: Configuration options.
+
+Options
+
+* `messages`: An alternative messages object for the schema.
 
 ##### messages
 
