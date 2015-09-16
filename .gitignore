@@ -3,6 +3,7 @@
 /test/spec.js
 /test/index.js
 *.bak
+*.log
 node_modules
 coverage
 target
