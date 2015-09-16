@@ -658,7 +658,7 @@ Encapsulates the rules associated with a descriptor and the logic for performing
 * `rules`: The schema rules.
 * `opts`: Configuration options.
 
-Options.
+Options:
 
 * `messages`: An alternative messages object for the schema.
 
