@@ -156,8 +156,8 @@ var descriptor = {
     }
   }
 }
-var validator = new schema(descriptor);
-validator.validate({address: {}}, function(err, res) {
+var schema = new Schema(descriptor);
+schema.validate({address: {}}, function(err, res) {
   // res.errors contains errors for name, street, city, zip
 });
 ```

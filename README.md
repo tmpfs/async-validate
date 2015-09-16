@@ -269,8 +269,8 @@ var descriptor = {
     }
   }
 }
-var validator = new schema(descriptor);
-validator.validate({address: {}}, function(err, res) {
+var schema = new Schema(descriptor);
+schema.validate({address: {}}, function(err, res) {
   // res.errors contains errors for name, street, city, zip
 });
 ```
@@ -576,7 +576,7 @@ The easiest way to achieve this is to assign a `message` to a rule:
 {name:{type: "string", required: true, message: "Name is required"}}
 ```
 
-You may also use a function for the rule message, it is invoked in the scope of the [validator](#validator) and passed the original message and replacement parameters:
+You may also use a function for the rule message, it is invoked in the scope of the [Rule](#rule) and passed the original message and replacement parameters:
 
 ```javascript
 var descriptor = {
