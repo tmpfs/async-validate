@@ -687,6 +687,7 @@ Options:
 * `first`: Invoke callback when the first validation rule generates an error.
 * `single`: Only ever return a single error.
 * `bail`: Shorthand for `single` and `first`.
+* `messages`: Overrides the schema messages.
 * `parallel`: A boolean indicating that the validation should be executed in parallel.
 * `field`: Field name for the source object, default is `source` when not specified.
 * `state`: Object to be used as the initial user data state.
