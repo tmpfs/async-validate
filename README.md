@@ -17,6 +17,7 @@ Table of Contents
       * [Deep Rules](#deep-rules)
       * [Properties](#properties)
         * [Type Identifier](#type-identifier)
+        * [Test](#test)
         * [Additional](#additional)
         * [Fields](#fields)
         * [Message](#message)
@@ -76,7 +77,7 @@ Table of Contents
       * [type](#type)
       * [whitespace](#whitespace)
   * [Developer](#developer)
-    * [Test](#test)
+    * [Test](#test-1)
     * [Spec](#spec)
     * [Cover](#cover)
     * [Browserify](#browserify)
@@ -180,7 +181,7 @@ Assigned to the `validator` field so that you may pass data from the rule to the
 var descriptor = {
   id: {
     foo: 'bar',
-    validator: function(cb) {
+    test: function(cb) {
       console.log(this.foo);
       // if this.value has error condition call this.raise() 
       cb();
@@ -302,6 +303,10 @@ Recognised type values are:
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
+
+##### Test
+
+The test function to use for rule validation.
 
 ##### Additional
 
@@ -814,7 +819,7 @@ var Schema = require('async-validate')
   , descriptor = {
       id: {
         expected: 'foo',
-        validator: function(cb) {
+        test: function(cb) {
           if(this.value !== this.expected) {
             this.raise(
               this.reason('unexpected-id'),

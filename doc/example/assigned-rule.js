@@ -3,7 +3,7 @@ var Schema = require('../..')
   , descriptor = {
       id: {
         expected: 'foo',
-        validator: function(cb) {
+        test: function(cb) {
           if(this.value !== this.expected) {
             this.raise(
               this.reason('unexpected-id'),

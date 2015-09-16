@@ -10,7 +10,7 @@ describe('async-validate:', function() {
   var descriptor = {
     id: {
       foo: 'bar',
-      validator: function(cb) {
+      test: function(cb) {
         expect(this.foo).to.eql('bar');
         cb();
       }

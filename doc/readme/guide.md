@@ -53,7 +53,7 @@ Assigned to the `validator` field so that you may pass data from the rule to the
 var descriptor = {
   id: {
     foo: 'bar',
-    validator: function(cb) {
+    test: function(cb) {
       console.log(this.foo);
       // if this.value has error condition call this.raise() 
       cb();
@@ -175,6 +175,10 @@ Recognised type values are:
 * `date`: Value must be valid as determined by `moment().isValid()`.
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
+
+##### Test
+
+The test function to use for rule validation.
 
 ##### Additional
 
