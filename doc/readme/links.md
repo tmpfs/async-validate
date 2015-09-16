@@ -2,4 +2,5 @@
 [npm]: http://www.npmjs.org
 [mdp]: https://github.com/freeformsystems/mdp
 [browserify]: http://browserify.org/
+[jshint]: http://jshint.com/
 [zephyr]: https://github.com/socialally/zephyr

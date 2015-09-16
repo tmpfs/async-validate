@@ -1,6 +1,6 @@
 ## Developer
 
-Clone the repository, run `npm i` and install [mdp][] globally.
+Clone the repository, run `npm i` and install [mdp][] and [jshint][] globally.
 
 ### Test
 
@@ -24,6 +24,14 @@ Generate code coverage:
 
 ```
 npm run cover
+```
+
+### Lint
+
+Run the source tree through [jshint][]:
+
+```
+npm run lint
 ```
 
 ### Browser
