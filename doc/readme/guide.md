@@ -79,7 +79,7 @@ var descriptor = {
 
 #### Assigned Rule
 
-Assigned to the `validator` field so that you may pass data from the rule to the function:
+Assigned to the `test` field so that you may pass data from the rule to the function:
 
 ```javascript
 var descriptor = {
