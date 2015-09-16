@@ -31,7 +31,7 @@
     "docs": "npm run example && npm run readme",
     "readme": "mdp --force -v",
     "example": "mdp --force -v -i doc/example.json -o EXAMPLE.md",
-    "browserify": "browserify -o async-validate.js -e ./lib/schema.js && du -bh async-validate.js",
+    "browser": "browserify -o async-validate.js -e ./lib/schema.js && du -bh async-validate.js",
     "clean": "rm -rf coverage ./async-validate.js ./test/spec.js",
     "spec": "node test/build.js > test/index.js && browserify -o test/spec.js -e test/index.js",
     "test": "NODE_ENV=test mocha test/global ${SPEC:-test/spec}",

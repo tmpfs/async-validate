@@ -26,12 +26,12 @@ Generate code coverage:
 npm run cover
 ```
 
-### Browserify
+### Browser
 
-Create a standalone browserify build:
+Create a standalone [browserify][] build:
 
 ```
-npm run browserify
+npm run browser
 ```
 
 ### Clean
