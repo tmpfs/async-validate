@@ -232,6 +232,10 @@ The `required` rule property indicates that the field must exist on the source o
 
 The `pattern` rule property is a regular expression that the value must match to pass validation.
 
+##### Placeholder
+
+A `function` that may return a default value for a field, it is invoked when the field value is `undefined` and the return value is assigned to the field.
+
 ##### Range
 
 A range is defined using the `min` and `max` properties. For `string`, `function` and `array` types comparison is performed against the `length`, for `number` types the number must not be less than `min` nor greater than `max`.

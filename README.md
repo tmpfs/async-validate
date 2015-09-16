@@ -24,6 +24,7 @@ Table of Contents
         * [Message](#message)
         * [Required](#required)
         * [Pattern](#pattern)
+        * [Placeholder](#placeholder)
         * [Range](#range)
         * [Length](#length)
         * [Values](#values)
@@ -345,6 +346,10 @@ The `required` rule property indicates that the field must exist on the source o
 ##### Pattern
 
 The `pattern` rule property is a regular expression that the value must match to pass validation.
+
+##### Placeholder
+
+A `function` that may return a default value for a field, it is invoked when the field value is `undefined` and the return value is assigned to the field.
 
 ##### Range
 
