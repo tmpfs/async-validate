@@ -73,7 +73,7 @@ Async Validate
 
 Asynchronous validation for [node](http://nodejs.org) and the browser.
 
-Comprehensive examples are in [EXAMPLE](https://github.com/freeformsystems/async-validate/blob/master/EXAMPLE.md) and the [example directory](https://github.com/freeformsystems/async-validate/blob/master/doc/example).
+Examples are in [EXAMPLE](https://github.com/freeformsystems/async-validate/blob/master/EXAMPLE.md) and the [example directory](https://github.com/freeformsystems/async-validate/blob/master/doc/example).
 
 ## Install
 
