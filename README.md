@@ -148,7 +148,7 @@ module.exports = {
 }
 ```
 
-Muliple objects containing an `address` field that needs the same validation rules:
+Muliple objects containing an `address` field that need the same validation rules:
 
 ```javascript
 var address = require('./address')
@@ -679,7 +679,7 @@ function validate(source, [opts], cb)
 Validates a source object against the schema rules.
 
 * `source`: The object to validate.
-* `opts`: An object describing processing options for the validation.
+* `opts`: Map of processing options for the validation.
 * `cb`: Callback function to invoke when validation completes.
 
 Options:

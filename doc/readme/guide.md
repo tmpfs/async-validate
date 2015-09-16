@@ -35,7 +35,7 @@ module.exports = {
 }
 ```
 
-Muliple objects containing an `address` field that needs the same validation rules:
+Muliple objects containing an `address` field that need the same validation rules:
 
 ```javascript
 var address = require('./address')
