@@ -728,7 +728,7 @@ function raise([reason], message, ...)
 
 Adds an error message to the list of errors encountered during validation of a value.
 
-The first argument may optionally be a `Reason` instance returned by `reason()` allowing a user to associate an identifier with the validation error and optional additional information. A validation error generated with a `Reason` has a `reason` field referencing the supplied reason.
+The first argument may optionally be a `Reason` instance returned by `reason()` allowing a user to associate an identifier with the validation error and optional meta data. An error raised with a `Reason` has a `reason` field referencing the supplied reason.
 
 When replacement parameters are supplied the behaviour is identical to `util.format`.
 
