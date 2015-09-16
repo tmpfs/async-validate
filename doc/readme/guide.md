@@ -415,3 +415,9 @@ The value should be an Object; each property of the `vars` object is passed into
 Be aware that if you use a built in field (see [Rule](#rule)) it will be overwritten.
 
 See the [vars test](/test/spec/vars.js) and [model fixture](/test/fixtures/model.js) for an example.
+
+#### State
+
+To pass state information use `this.state` in test functions, set the `state` option to specify an alternative object to use for the initial state. When no state is given the empty object is used.
+
+See the [state example](/doc/example/state.js).

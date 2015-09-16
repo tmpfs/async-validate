@@ -40,6 +40,7 @@ Table of Contents
     * [Validation](#validation)
       * [Bail](#bail)
       * [Variables](#variables)
+      * [State](#state)
     * [Messages](#messages)
     * [Transform](#transform)
     * [API](#api)
@@ -74,6 +75,7 @@ Table of Contents
       * [range](#range-1)
       * [required](#required-1)
       * [source-type](#source-type)
+      * [state](#state)
       * [type](#type)
       * [whitespace](#whitespace)
   * [Developer](#developer)
@@ -544,6 +546,12 @@ Be aware that if you use a built in field (see [Rule](#rule)) it will be overwri
 
 See the [vars test](https://github.com/freeformsystems/async-validate/blob/master/test/spec/vars.js) and [model fixture](https://github.com/freeformsystems/async-validate/blob/master/test/fixtures/model.js) for an example.
 
+#### State
+
+To pass state information use `this.state` in test functions, set the `state` option to specify an alternative object to use for the initial state. When no state is given the empty object is used.
+
+See the [state example](https://github.com/freeformsystems/async-validate/blob/master/doc/example/state.js).
+
 ### Messages
 
 Depending upon your application requirements, you may need i18n support or you may prefer different validation error messages.
@@ -660,6 +668,7 @@ Options:
 * `bail`: Shorthand for `single` and `first`.
 * `parallel`: A boolean indicating that the validation should be executed in parallel.
 * `field`: Field name for the source object, default is `source` when not specified.
+* `state`: Object to be used as the initial user data state.
 * `vars`: Object map of variables to assign to each rule.
 
 ##### Schema.plugin
@@ -702,6 +711,7 @@ Encapsulates the data associated with a validation rule and the value to be vali
 * `source`: The source object passed to `validate()`.
 * `messages`: Reference to the schema messages.
 * `errors`: Array of errors for the field validation.
+* `state`: User data for validation state.
 * `reasons`: Map of default error reasons.
 
 ##### isRoot
@@ -1279,6 +1289,61 @@ schema.validate(source, function(err, res) {
 
 ```
 [ { [Error: source is not an object] field: 'source', reason: { id: 'type' } } ]
+```
+
+#### state
+
+* [doc/example/state](https://github.com/freeformsystems/async-validate/blob/master/doc/example/state.js).
+
+```javascript
+// pass state information between rule test functions
+var Schema = require('async-validate')
+  , url = require('url')
+  , dns = require('dns')
+  , state = {}
+  , opts = {state: state}
+  , descriptor = {
+      email: [
+        {type: 'string', required: true, pattern: /^.+@.+\..+/},
+        function parse(cb) {
+          var at = this.value.indexOf('@')
+            , user = this.value.substr(0, at)
+            , domain = this.value.substr(at + 1);
+          // assign to validation state
+          this.state.email = {user: user, domain: domain};
+          cb(); 
+        },
+        function lookup(cb) {
+          function resolve(err, addr) {
+            if(err && err.code === 'ENOTFOUND') {
+              this.raise(
+                '%s: could not resolve dns for domain %s',
+                this.field,
+                this.state.email.domain);
+            }else if(err) {
+              return cb(err); 
+            }
+            this.state.addr = addr;
+            cb(); 
+          }
+          dns.resolve(this.state.email.domain, resolve.bind(this));
+        }
+      ]
+    }
+  // force dns failure with random domain
+  , source = {email: 'foo@' + Date.now() + '.com'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, opts, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: email: could not resolve dns for domain 1442374919947.com] field: 'email' } ]
 ```
 
 #### type

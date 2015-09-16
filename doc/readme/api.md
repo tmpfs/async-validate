@@ -35,6 +35,7 @@ Options:
 * `bail`: Shorthand for `single` and `first`.
 * `parallel`: A boolean indicating that the validation should be executed in parallel.
 * `field`: Field name for the source object, default is `source` when not specified.
+* `state`: Object to be used as the initial user data state.
 * `vars`: Object map of variables to assign to each rule.
 
 ##### Schema.plugin
@@ -77,6 +78,7 @@ Encapsulates the data associated with a validation rule and the value to be vali
 * `source`: The source object passed to `validate()`.
 * `messages`: Reference to the schema messages.
 * `errors`: Array of errors for the field validation.
+* `state`: User data for validation state.
 * `reasons`: Map of default error reasons.
 
 ##### isRoot
