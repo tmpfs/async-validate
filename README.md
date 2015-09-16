@@ -422,8 +422,7 @@ Decorate the error with a reason:
 function id(cb) {
   if(!/^[a-z0-9-]+$/i.test(this.value)) {
     this.raise(
-      this.reason(
-        'id', {description: 'Field value failed pattern match'}),
+      this.reason('id', {level: 'warn'}),
       '%s is not a valid id',
       this.field); 
   }
