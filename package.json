@@ -24,10 +24,13 @@
     "browserify": "~11.1.0",
     "chai": "~3.2.0",
     "istanbul": "~0.3.17",
+    "jscs": "^2.1.1",
+    "jshint": "^2.8.0",
     "mocha": "~2.3.2",
     "moment": "~2.10.6"
   },
   "scripts": {
+    "lint": "jshint . && jscs .",
     "docs": "npm run example && npm run readme",
     "readme": "mdp --force -v",
     "example": "mdp --force -v -i doc/example.json -o EXAMPLE.md",
