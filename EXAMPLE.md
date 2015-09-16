@@ -533,7 +533,7 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-{}
+{ list: [] }
 ```
 
 #### plugin-rule
@@ -701,7 +701,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442393544861.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442394138490.com] field: 'email' } ]
 ```
 
 #### type

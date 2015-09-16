@@ -1,8 +1,6 @@
 var expect = require('chai').expect
   , schema = require('../../index');
 
-function Component(){}
-
 describe("async-validate:", function() {
   var descriptor = {
     value: {
