@@ -1,6 +1,6 @@
-// override default error message
+// clone default messages
 var Schema = require('../..')
-  , messages = require('../../messages')
+  , messages = Schema.clone(require('../../messages'))
   , descriptor = {
       name: {
         type: 'string',
@@ -12,10 +12,11 @@ var Schema = require('../..')
 
 require('../../plugin/all');
 
-// change default message in place
+// change message in place
 messages.required = '%s is a required field';
 
-schema = new Schema(descriptor);
+// pass messages as constructor option
+schema = new Schema(descriptor, {messages: messages});
 schema.validate(source, function(err, res) {
   console.dir(res.errors);
 });

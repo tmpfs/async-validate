@@ -11,6 +11,7 @@ Table of Contents
       * [instanceof](#instanceof)
       * [len](#len)
       * [max](#max)
+      * [message-clone](#message-clone)
       * [message-function](#message-function)
       * [message-override](#message-override)
       * [message](#message)
@@ -291,6 +292,39 @@ schema.validate(source, function(err, res) {
 [ { [Error: func cannot have more than 1 arguments] field: 'func', reason: { id: 'max' } } ]
 ```
 
+#### message-clone
+
+* [doc/example/message-clone](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message-clone.js).
+
+```javascript
+// clone default messages
+var Schema = require('async-validate')
+  , messages = Schema.clone(require('async-validate/messages'))
+  , descriptor = {
+      name: {
+        type: 'string',
+        required: true
+      }
+    }
+  , source = {}
+  , schema;
+
+require('async-validate/plugin/all');
+
+// change message in place
+messages.required = '%s is a required field';
+
+// pass messages as constructor option
+schema = new Schema(descriptor, {messages: messages});
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: name is a required field] field: 'name', reason: { id: 'required' } } ]
+```
+
 #### message-function
 
 * [doc/example/message-function](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message-function.js).
@@ -342,7 +376,7 @@ var Schema = require('async-validate')
 
 require('async-validate/plugin/all');
 
-// change message
+// change default message in place
 messages.required = '%s is a required field';
 
 schema = new Schema(descriptor);
@@ -635,7 +669,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442381379549.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442381544255.com] field: 'email' } ]
 ```
 
 #### type
