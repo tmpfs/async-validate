@@ -10,7 +10,6 @@ rule.plugin([
   require('./null'),
   require('./number'),
   require('./object'),
-  require('./pattern'),
   require('./regexp'),
   require('./string'),
   require('./util')

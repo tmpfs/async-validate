@@ -165,20 +165,6 @@ describe('async-validate:', function() {
     });
   });
 
-  it('should allow undefined pattern field if not required', function(done) {
-    var descriptor = {
-      mock: {type: 'pattern', required: false}
-    }
-    var schema = new Schema(descriptor);
-    var source = {mock: undefined};
-    var opts = {};
-    schema.validate(source, opts, function(err, res) {
-      expect(err).to.eql(null);
-      expect(res).to.eql(null);
-      done();
-    });
-  });
-
   it('should allow undefined regexp field if not required', function(done) {
     var descriptor = {
       mock: {type: 'regexp', required: false}
