@@ -317,7 +317,7 @@ function id(cb) {
 }
 ```
 
-Adding a reason allows associating an identifier with an error and optional meta data about the error.
+Adding a reason allows associating an identifier with an error and optional meta data about the error which can be useful if you need to associate a *severity* with errors to distinguish between error types.
 
 To signal that an internal processing error has occured pass an Error to the callback, for example:
 
