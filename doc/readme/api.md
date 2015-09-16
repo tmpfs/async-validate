@@ -43,6 +43,7 @@ Options:
 * `messages`: Overrides the schema messages.
 * `parallel`: A boolean indicating that the validation should be executed in parallel.
 * `field`: Field name for the source object, default is `source` when not specified.
+* `parent`: Parent object for the `source` value.
 * `state`: Object to be used as the initial user data state.
 * `vars`: Object map of variables to assign to each rule.
 
