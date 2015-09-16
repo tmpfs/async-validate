@@ -1,5 +1,7 @@
 ## Developer
 
+Clone the repository, run `npm i` and install [mdp][] globally.
+
 ### Test
 
 Run the test specifications:

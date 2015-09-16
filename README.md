@@ -1328,6 +1328,8 @@ schema.validate(source, function(err, res) {
 
 ## Developer
 
+Clone the repository, run `npm i` and install [mdp](https://github.com/freeformsystems/mdp) globally.
+
 ### Test
 
 Run the test specifications:
