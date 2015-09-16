@@ -28,8 +28,9 @@
     "moment": "~2.10.6"
   },
   "scripts": {
-    "docs": "npm run readme",
+    "docs": "npm run example && npm run readme",
     "readme": "mdp --force -v",
+    "example": "mdp --force -v -i doc/example.json -o EXAMPLE.md",
     "browserify": "browserify -o async-validate.js -e ./lib/schema.js && du -bh async-validate.js",
     "clean": "rm -rf coverage ./async-validate.js ./test/spec.js",
     "spec": "browserify -o test/spec.js -e test/index.js",
@@ -70,13 +71,8 @@
         "language": "javascript"
       },
       {
-        "inc": "api.md"
-      },
-      {
-        "bin": "node doc/example.js"
-      },
-      {
         "inc": [
+          "api.md",
           "developer.md",
           "license.md"
         ]

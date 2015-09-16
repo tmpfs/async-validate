@@ -1,0 +1,14 @@
+{
+  "title": "Async Validate",
+  "pedantic": true,
+  "include": "doc/readme",
+  "require": "lib",
+  "links": "links.md",
+  "toc": "Table of Contents",
+  "base": "https://github.com/freeformsystems/async-validate",
+  "partial": [
+    {
+      "bin": "node doc/example.js"
+    }
+  ]
+}

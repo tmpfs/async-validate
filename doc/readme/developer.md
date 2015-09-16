@@ -50,9 +50,17 @@ To generate all documentation:
 npm run docs
 ```
 
+### Example
+
+Generate [EXAMPLE](/EXAMPLE.md) (requires [mdp][]):
+
+```
+npm run example 
+```
+
 ### Readme
 
-Generate the project readme file (requires [mdp][]):
+Generate the readme file (requires [mdp][]):
 
 ```
 npm run readme
