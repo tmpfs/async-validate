@@ -47,7 +47,6 @@ var address = require('./address')
       type: 'object',
       bill: {
         type: 'object',
-        name: {type: 'string', required: true},
         address: address
       }
     }
