@@ -85,7 +85,7 @@ Encapsulates the data associated with a validation rule and the value to be vali
 function isRoot()
 ```
 
-Determine if this validation is being performed against the root source object.
+Determine if validation is being performed against the root source object.
 
 ##### reason
 
