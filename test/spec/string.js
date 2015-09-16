@@ -123,7 +123,7 @@ describe('async-validate:', function() {
   it('should error on regular expression pattern mismatch',
     function(done) {
       var descriptor = {
-        name: {pattern: /^[0-9]+$/}
+        name: {type: 'string', pattern: /^[0-9]+$/}
       }
       var schema = new Schema(descriptor);
       schema.validate({name: 'alpha'}, function(err, res) {

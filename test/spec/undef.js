@@ -195,7 +195,7 @@ describe('async-validate:', function() {
 
   it('should allow undefined string field if not required', function(done) {
     var descriptor = {
-      mock: {type: 'string', required: false}
+      mock: {type: 'string'}
     }
     var schema = new Schema(descriptor);
     var source = {mock: undefined};

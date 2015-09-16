@@ -6,7 +6,7 @@ module.exports = function() {
    *  @param cb The callback function.
    */
   this.main.string = function string(cb) {
-    if(this.validates()) {
+    if(this.pattern || this.validates()) {
       this.required();
 
       // if value is required and value is undefined
@@ -15,7 +15,7 @@ module.exports = function() {
         return cb();    
       }
 
-      if(typeof this.value !== 'string') {
+      if(typeof this.value !== 'string' && this.validates()) {
         this.raise(
           this.reasons.type,
           this.messages.types[this.rule.type],
@@ -35,5 +35,4 @@ module.exports = function() {
     }
     cb();
   }
-
 }

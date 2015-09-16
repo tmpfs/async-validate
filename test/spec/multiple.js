@@ -9,7 +9,7 @@ describe('async-validate:', function(done) {
       var descriptor = {
         email: [
           {type: 'string', required: true},
-          {pattern: email, required: true}
+          {type: 'string', pattern: email}
         ]
       }
       var schema = new Schema(descriptor);
@@ -27,7 +27,7 @@ describe('async-validate:', function(done) {
       var descriptor = {
         email: [
           {type: 'string', required: true},
-          {pattern: email}
+          {type: 'string', pattern: email}
         ]
       }
       var schema = new Schema(descriptor);

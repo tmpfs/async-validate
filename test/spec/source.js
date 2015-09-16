@@ -265,7 +265,7 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as pattern type", function(done) {
-    var descriptor = {pattern: /^foo$/}
+    var descriptor = {type: 'string', pattern: /^foo$/}
       , validator = new schema(descriptor)
       , source = 'bar';
 
@@ -279,7 +279,7 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as pattern type", function(done) {
-    var descriptor = {pattern: /^foo$/}
+    var descriptor = {type: 'string', pattern: /^foo$/}
       , validator = new schema(descriptor)
       , source = 'foo';
 
