@@ -9,6 +9,7 @@ Table of Contents
       * [Object Definition](#object-definition)
       * [Array Definition](#array-definition)
       * [Function Definition](#function-definition)
+      * [Composite Definition](#composite-definition)
     * [Rules](#rules)
       * [Inline Rule](#inline-rule)
       * [Assigned Rule](#assigned-rule)
@@ -131,6 +132,39 @@ You may declare an `array` to use multiple validation rules per field, see [mult
 #### Function Definition
 
 Use an inline function definition for application specific rules, see [inline rule](#inline-rule).
+
+#### Composite Definition
+
+To share common fields across different schemas move them to a module and require them.
+
+Module to represent an `address` field:
+
+```javascript
+module.exports = {
+  name: {type: 'string', required: true},
+  street: {type: 'string', required: true},
+  city: {type: 'string', required: true},
+  zip: {type: 'string', required: true}
+}
+```
+
+Muliple objects containing an `address` field that needs the same validation rules:
+
+```javascript
+var address = require('./address')
+  , user = {
+      type: 'object',
+      address: address
+    }
+  , invoice = {
+      type: 'object',
+      bill: {
+        type: 'object',
+        name: {type: 'string', required: true},
+        address: address
+      }
+    }
+```
 
 ### Rules
 
