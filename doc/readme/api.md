@@ -26,13 +26,13 @@ Get or set the messages associated with the schema.
 ##### validate
 
 ```javascript
-function validate(source, [options], cb)
+function validate(source, [opts], cb)
 ```
 
 Validates a source object against the schema rules.
 
 * `source`: The object to validate.
-* `options`: An object describing processing options for the validation.
+* `opts`: Map of processing options for the validation.
 * `cb`: Callback function to invoke when validation completes.
 
 Options:
