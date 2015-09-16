@@ -1343,7 +1343,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442374919947.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442375494041.com] field: 'email' } ]
 ```
 
 #### type
@@ -1450,7 +1450,7 @@ npm run docs
 
 ### Readme
 
-Generate the project readme file [mdp](https://github.com/freeformsystems/mdp):
+Generate the project readme file (requires [mdp](https://github.com/freeformsystems/mdp)):
 
 ```
 npm run readme

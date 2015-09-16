@@ -52,7 +52,7 @@ npm run docs
 
 ### Readme
 
-Generate the project readme file [mdp][]:
+Generate the project readme file (requires [mdp][]):
 
 ```
 npm run readme
