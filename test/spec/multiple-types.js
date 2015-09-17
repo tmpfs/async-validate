@@ -9,6 +9,10 @@ describe('async-validate:', function() {
     prop: {type: [Boolean, 'string', Component, function(){}]},
   }
 
+  var required = {
+    prop: {type: [Boolean, 'string', Component, function(){}], required: true},
+  }
+
   it('should error on invalid type with multiple types array', function(done) {
     var schema = new Schema(descriptor);
     schema.validate({prop: []}, function(err, res) {
@@ -28,5 +32,16 @@ describe('async-validate:', function() {
       done();
     });
   });
+
+  it('should error on required with multiple types array',
+    function(done) {
+      var schema = new Schema(required);
+      schema.validate({}, function(err, res) {
+        expect(res.errors.length).to.eql(1);
+        expect(res.errors[0].message).to.eql('prop is required');
+        done();
+      });
+    }
+  );
 
 });
