@@ -1,7 +1,5 @@
 {
-    "preset": "google",
     "fileExtensions": [".js", "jscs"],
-
     "requireSemicolons": false,
     "requireParenthesesAroundIIFE": true,
     "maximumLineLength": 80,
@@ -13,20 +11,7 @@
     "disallowSpaceAfterKeywords": false,
     "disallowSpaceBeforeBlockStatements": false,
     "disallowSpacesInsideObjectBrackets": null,
-    "disallowImplicitTypeConversion": ["string"],
     "safeContextKeyword": "_this",
-    "jsDoc": {
-      "checkAnnotations": "closurecompiler",
-      "checkParamNames": true,
-      "requireParamTypes": true,
-      "checkRedundantParams": true,
-      "checkReturnTypes": true,
-      "checkRedundantReturns": true,
-      "requireReturnTypes": true,
-      "checkTypes": "capitalizedNativeCase",
-      "checkRedundantAccess": true,
-      "requireNewlineAfterDescription": true
-    },
     "excludeFiles": [
       "test/**",
       "node_modules",
