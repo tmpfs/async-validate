@@ -10,22 +10,16 @@ module.exports = function() {
       this.required();
 
       // if value is required and value is undefined
-      // no need to add this error message
+      // no need to add other error messages
       if(this.rule.required && this.value === undefined) {
-        return cb();    
+        return cb();
       }
 
-      if(typeof this.value !== 'string' && this.validates()) {
-        this.raise(
-          this.reasons.type,
-          this.messages.types[this.rule.type],
-          this.field, this.rule.type);
-      }
-
+      this.type();
       this.range();
       this.pattern();
 
-      if(this.rule.whitespace === true) {
+      if(this.rule.whitespace) {
         if(/^\s+$/.test(this.value) || this.value === '') {
           this.raise(
             this.reasons.whitespace,

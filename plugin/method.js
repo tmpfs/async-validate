@@ -8,13 +8,8 @@ module.exports = function() {
   this.main.method = function method(cb) {
     if(this.validates()) {
       this.required();
+      this.type();
       this.range();
-      if(typeof this.value !== 'function') {
-        this.raise(
-          this.reasons.type,
-          this.messages.types[this.rule.type],
-          this.field, this.rule.type);
-      }
     }
     cb();
   }
