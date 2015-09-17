@@ -62,4 +62,53 @@ module.exports = function() {
         this.field, this.rule.type);
     }
   }
+
+  /**
+   *  Validate an array of types using logical or.
+   *
+   *  @param cb Callback function.
+   */
+  function types(cb) {
+    var types = this.rule.type.slice(0)
+      , i
+      , type
+      , length = this.errors.length
+      , invalid;
+
+    if(this.validates()) {
+      this.required();
+
+      for(i = 0;i < types.length;i++) {
+        type = types[i];
+        delete this.rule.Type;
+        if(typeof type === 'function') {
+          this.rule.Type = type; 
+        }
+        this.rule.type = type;
+        this.type();
+      }
+
+      invalid = (this.errors.length - length) === types.length;
+      // remove raised errors
+      this.errors = this.errors.slice(0, length);
+
+      // all of the type tests failed
+      if(invalid) {
+        this.raise(
+          this.reasons.type,
+          this.messages.types.multiple,
+          this.field,
+          types.map(function(type) {
+            if(typeof(type) === 'function') {
+              return type.name || 'function (anonymous)';
+            }
+            return type;
+          }).join(', ')
+        )
+      }
+    }
+    cb(); 
+  }
+
+  this.main.types = types;
 }
