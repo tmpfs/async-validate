@@ -324,9 +324,15 @@ Recognised type values are:
 
 When the `object` plugin has been loaded the `type` field may be a function in which case the value must be an `instanceof` the function assigned to `type`.
 
+To allow a field to be of multiple types you may declare an array of valid type identifiers, for example:
+
+```javascript
+{type: ['string', String, Number], required: true}
+```
+
 ##### Test
 
-The test function to use for rule validation.
+The function to use for rule validation.
 
 ##### Additional
 
