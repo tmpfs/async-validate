@@ -2,3 +2,4 @@ node_modules
 test
 coverage
 doc
+async-validate.js

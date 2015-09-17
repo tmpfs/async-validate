@@ -16,10 +16,8 @@ module.exports = function() {
           this.messages.types.instance,
           this.field, Type.name || 'function (anonymous)');
       }
-    // null type
     }else if(id === 'null') {
       invalid = this.value !== null;
-    // regexp as RegExp or valid string expression
     }else if(id === 'regexp') {
       if(!(this.value instanceof RegExp)) {
         try {
@@ -28,28 +26,19 @@ module.exports = function() {
           invalid = true;
         }
       }
-    // string type
     }else if(id === 'string') {
       invalid = typeof this.value !== 'string' && this.validates();
-    // object type
     }else if(id === 'object') {
       invalid = (typeof(this.value) !== 'object'
         || Array.isArray(this.value));
-    // array type
     }else if(id === 'array') {
       invalid = !Array.isArray(this.value);
-    // float type
     }else if(id === 'float') {
       invalid = typeof(this.value) !== 'number'
         || Number(this.value) === parseInt(this.value);
-    // integer type
     }else if(id === 'integer') {
       invalid = typeof(this.value) !== 'number'
         || Number(this.value) !== parseInt(this.value);
-    // TODO: rename method -> function so that it can share the 
-    // TODO: conditional below
-    }else if(id === 'method') {
-      invalid = typeof(this.value) !== 'function';
     // straight typeof test
     }else{
       invalid = typeof(this.value) !== id;
@@ -69,7 +58,7 @@ module.exports = function() {
    *  @param cb Callback function.
    */
   function types(cb) {
-    var types = this.rule.type.slice(0)
+    var list = this.rule.type.slice(0)
       , i
       , type
       , length = this.errors.length
@@ -78,8 +67,8 @@ module.exports = function() {
     if(this.validates()) {
       this.required();
 
-      for(i = 0;i < types.length;i++) {
-        type = types[i];
+      for(i = 0;i < list.length;i++) {
+        type = list[i];
         delete this.rule.Type;
         if(typeof type === 'function') {
           this.rule.Type = type; 

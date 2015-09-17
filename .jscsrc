@@ -16,6 +16,7 @@
       "test/**",
       "node_modules",
       "coverage",
-      "doc"
+      "doc",
+      "async-validate.js"
     ]
 }
