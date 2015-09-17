@@ -17,7 +17,6 @@ describe('async-validate:', function() {
   it('should error on invalid expanded property (match)', function(done) {
     var schema = new Schema(descriptor);
     schema.validate(source, function(err, res) {
-      console.dir(res);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql('address3 is not a string');
       done();
