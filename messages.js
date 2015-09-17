@@ -8,8 +8,8 @@ var messages = {
   whitespace: '%s cannot be empty',
   additional: 'extraneous fields (%s) found in %s',
   date: {
-    format: "%s date %s is invalid for format %s",
-    invalid: "%s date %s is invalid"
+    format: '%s date %s is invalid for format %s',
+    invalid: '%s date %s is invalid'
   },
   types: {
     string: '%s is not a %s',
@@ -51,5 +51,6 @@ var messages = {
   pattern: {
     mismatch: '%s value %s does not match pattern %s'
   }
-}
+};
+
 module.exports = messages;
