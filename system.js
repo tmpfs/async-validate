@@ -2,25 +2,23 @@
 var schema = {
   type: 'object',
   required: true,
-  fields: {
-    all: {
-      match: /./,
-      fields: {
-        additional: {type: 'boolean'},
-        list: {type: 'array'},
-        fields: {type: ['object', 'array']},
-        format: {type: 'string'},
-        len: {type: 'integer'},
-        min: {type: 'integer'},
-        max: {type: 'integer'},
-        pattern: {type: 'regexp'},
-        placeholder: {type: 'function'},
-        required: {type: 'boolean'},
-        test: {type: 'function'},
-        type: {type: ['string', 'function'], required: true},
-        values: {type: ['object', 'array']},
-        whitespace: {type: 'boolean'}
-      }
+  all: {
+    match: /./,
+    fields: {
+      additional: {type: 'boolean'},
+      list: {type: 'array'},
+      fields: {type: ['object', 'array']},
+      format: {type: 'string'},
+      len: {type: 'integer'},
+      min: {type: 'integer'},
+      max: {type: 'integer'},
+      pattern: {type: 'regexp'},
+      placeholder: {type: 'function'},
+      required: {type: 'boolean'},
+      test: {type: 'function'},
+      type: {type: ['string', 'function'], required: true},
+      values: {type: ['object', 'array']},
+      whitespace: {type: 'boolean'}
     }
   }
 }

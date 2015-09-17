@@ -3,11 +3,9 @@ var Schema = require('../..')
   , descriptor = {
       type: 'object',
       required: true,
-      fields: {
-        all: {
-          match: /./,
-          type: 'string'
-        }
+      all: {
+        match: /./,
+        type: 'string'
       }
     }
   , source = {address1: 'foo', address2: 'bar', address3: false}

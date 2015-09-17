@@ -37,6 +37,7 @@ describe('async-validate:', function() {
 
     var validator = new Schema(descriptor);
     validator.validate(source, opts, function(err, res) {
+      //console.dir(res);
       expect(res.errors.length).to.eql(2);
       expect(res.errors[0].message).to.eql(
         'extraneous fields (name) found in root');
