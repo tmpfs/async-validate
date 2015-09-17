@@ -44,4 +44,15 @@ describe('async-validate:', function() {
     }
   );
 
+  it('should bypass validation with optional field',
+    function(done) {
+      var schema = new Schema(descriptor);
+      schema.validate({prop: undefined}, function(err, res) {
+        expect(err).to.eql(null);
+        expect(res).to.eql(null);
+        done();
+      });
+    }
+  );
+
 });
