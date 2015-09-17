@@ -77,7 +77,7 @@ module.exports = function() {
         this.type();
       }
 
-      invalid = (this.errors.length - length) === types.length;
+      invalid = (this.errors.length - length) === list.length;
       // remove raised errors
       this.errors = this.errors.slice(0, length);
 
@@ -87,7 +87,7 @@ module.exports = function() {
           this.reasons.type,
           this.messages.types.multiple,
           this.field,
-          types.map(function(type) {
+          list.map(function(type) {
             if(typeof(type) === 'function') {
               return type.name || 'function (anonymous)';
             }

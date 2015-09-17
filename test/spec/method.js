@@ -4,21 +4,21 @@ var expect = require('chai').expect
 describe('async-validate:', function() {
 
   var descriptor = {
-    mock: {type: 'method'},
+    mock: {type: 'function'},
   }
 
   it('should error on value that is not a function', function(done) {
     var schema = new Schema(descriptor);
     schema.validate({mock: 80}, function(err, res) {
       expect(res.errors.length).to.eql(1);
-      expect(res.errors[0].message).to.eql('mock is not a method');
+      expect(res.errors[0].message).to.eql('mock is not a function');
       done();
     });
   });
 
   it('should error on invalid arity (len: 1)', function(done) {
     var descriptor = {
-      mock: {type: 'method', len: 1},
+      mock: {type: 'function', len: 1},
     }
     var schema = new Schema(descriptor);
     schema.validate({mock: function(){}}, function(err, res) {
@@ -32,7 +32,7 @@ describe('async-validate:', function() {
 
   it('should error on invalid arity (min: 1)', function(done) {
     var descriptor = {
-      mock: {type: 'method', min: 1},
+      mock: {type: 'function', min: 1},
     }
     var schema = new Schema(descriptor);
     schema.validate({mock: function(){}}, function(err, res) {
@@ -45,7 +45,7 @@ describe('async-validate:', function() {
 
   it('should error on invalid arity (max: 0)', function(done) {
     var descriptor = {
-      mock: {type: 'method', max: 0},
+      mock: {type: 'function', max: 0},
     }
     var schema = new Schema(descriptor);
     schema.validate({mock: function(foo){}}, function(err, res) {
@@ -58,7 +58,7 @@ describe('async-validate:', function() {
 
   it('should error on invalid arity (min: 0, max: 1)', function(done) {
     var descriptor = {
-      mock: {type: 'method', min: 0, max: 1},
+      mock: {type: 'function', min: 0, max: 1},
     }
     var schema = new Schema(descriptor);
     schema.validate({mock: function(foo, bar){}}, function(err, res) {
@@ -68,7 +68,6 @@ describe('async-validate:', function() {
       done();
     });
   });
-
 
   it('should validate function type', function(done) {
     var schema = new Schema(descriptor);

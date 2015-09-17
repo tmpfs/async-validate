@@ -6,7 +6,7 @@ rule.plugin([
   require('./enum'),
   require('./float'),
   require('./integer'),
-  require('./method'),
+  require('./function'),
   require('./null'),
   require('./number'),
   require('./object'),

@@ -312,7 +312,7 @@ Recognised type values are:
 * `string`: Must be of type `string`.
 * `number`: Must be of type `number`.
 * `boolean`: Must be of type `boolean`.
-* `method`: Must be of type `function`.
+* `function`: Must be of type `function`.
 * `null`: Must strictly equal `null`.
 * `regexp`: Must be an instance of `RegExp` or a valid string regexp.
 * `integer`: Must be of type `number` and an integer.

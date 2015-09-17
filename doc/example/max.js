@@ -1,7 +1,7 @@
 // validate a field has a maximum length
 var Schema = require('../..')
   , descriptor = {
-      func: {type: 'method', required: true, max: 1}
+      func: {type: 'function', required: true, max: 1}
     }
   , source = {func: function noop(foo, bar){}}
   , schema;

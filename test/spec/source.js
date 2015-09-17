@@ -160,8 +160,8 @@ describe("async-validate:", function() {
     });
   });
 
-  it("should error on source as method type", function(done) {
-    var descriptor = {type: 'method'}
+  it("should error on source as function type", function(done) {
+    var descriptor = {type: 'function'}
       , validator = new schema(descriptor)
       , source = 'foo';
 
@@ -169,13 +169,13 @@ describe("async-validate:", function() {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
-        'source is not a method');
+        'source is not a function');
       done();
     });
   });
 
-  it("should validate on source as method type", function(done) {
-    var descriptor = {type: 'method'}
+  it("should validate on source as function type", function(done) {
+    var descriptor = {type: 'function'}
       , validator = new schema(descriptor)
       , source = function noop(){};
 

@@ -5,7 +5,7 @@ module.exports = function() {
    *
    *  @param cb The callback function.
    */
-  this.main.method = function method(cb) {
+  this.main.function = function method(cb) {
     if(this.validates()) {
       this.required();
       this.type();

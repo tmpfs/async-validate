@@ -1,7 +1,7 @@
 // validate a field has a minimum length
 var Schema = require('../..')
   , descriptor = {
-      func: {type: 'method', required: true, min: 1}
+      func: {type: 'function', required: true, min: 1}
     }
   , source = {func: function noop(){}}
   , schema;

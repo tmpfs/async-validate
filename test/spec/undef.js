@@ -123,9 +123,9 @@ describe('async-validate:', function() {
     });
   });
 
-  it('should allow undefined method field if not required', function(done) {
+  it('should allow undefined function field if not required', function(done) {
     var descriptor = {
-      mock: {type: 'method', required: false}
+      mock: {type: 'function', required: false}
     }
     var schema = new Schema(descriptor);
     var source = {mock: undefined};
