@@ -51,7 +51,7 @@ module.exports = function() {
     }else if(id === 'method') {
       invalid = typeof(this.value) !== 'function';
     // straight typeof test
-    }else if(id === 'boolean' || id === 'number') {
+    }else{
       invalid = typeof(this.value) !== id;
     }
 
