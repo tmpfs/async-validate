@@ -3,7 +3,8 @@ module.exports = function() {
     [
       require('./util/pattern'),
       require('./util/range'),
-      require('./util/required')
+      require('./util/required'),
+      require('./util/type')
     ]
   )
 }
