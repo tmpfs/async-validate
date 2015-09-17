@@ -1,6 +1,6 @@
 ## Developer
 
-Clone the repository, install project and global dependencies ([mdp][], [jshint][] and [jscs][]) globally:
+Clone the repository, install project and global dependencies ([mdp][], [jshint][] and [jscs][]):
 
 ```
 npm i && npm i -g mdp jshint jscs

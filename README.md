@@ -814,7 +814,7 @@ Compare two arrays, return `false` if they are equal otherwise return an array t
 
 ## Developer
 
-Clone the repository, install project and global dependencies ([mdp](https://github.com/freeformsystems/mdp), [jshint](http://jshint.com/) and [jscs](http://jscs.info/)) globally:
+Clone the repository, install project and global dependencies ([mdp](https://github.com/freeformsystems/mdp), [jshint](http://jshint.com/) and [jscs](http://jscs.info/)):
 
 ```
 npm i && npm i -g mdp jshint jscs
