@@ -405,14 +405,6 @@ The following helper plugins ship with this package, you can use them all with:
 Schema.plugin([require('async-validate/plugin/util')]);
 ```
 
-##### required
-
-```javascript
-function required()
-```
-
-Validate a required field, typically invoked from a rule function, raises an error if a required field is not present.
-
 ##### pattern
 
 ```javascript
@@ -428,6 +420,22 @@ function range()
 ```
 
 Validates that a value falls within a given range or is of a specific length, typically invoked from a rule function, raises an error if a value is out of bounds.
+
+##### required
+
+```javascript
+function required()
+```
+
+Validate a required field, typically invoked from a rule function, raises an error if a required field is not present.
+
+##### type
+
+```javascript
+function type()
+```
+
+Validate a value is one of the expected type(s), typically invoked from a rule function, raises an error if the value is not one of the declared types.
 
 ### Validation
 
