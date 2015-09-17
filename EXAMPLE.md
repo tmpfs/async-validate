@@ -16,6 +16,7 @@ Table of Contents
       * [message-override](#message-override)
       * [message](#message)
       * [min](#min)
+      * [multiple-types](#multiple-types)
       * [multiple](#multiple)
       * [pattern](#pattern)
       * [placeholder](#placeholder)
@@ -444,6 +445,31 @@ schema.validate(source, function(err, res) {
 [ { [Error: func must have at least 1 arguments] field: 'func', reason: { id: 'min' } } ]
 ```
 
+#### multiple-types
+
+* [doc/example/multiple-types](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple-types.js).
+
+```javascript
+// validate a field as one of multiple types
+var Schema = require('async-validate')
+  , descriptor = {
+      flag: {type: ['boolean', Boolean], required: true}
+    }
+  , source = {flag: 'foo'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: flag is not one of the allowed types boolean, Boolean] field: 'flag', reason: { id: 'type' } } ]
+```
+
 #### multiple
 
 * [doc/example/multiple](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple.js).
@@ -701,7 +727,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442468604548.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442469859410.com] field: 'email' } ]
 ```
 
 #### type
