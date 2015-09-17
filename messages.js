@@ -22,7 +22,8 @@ var messages = {
     boolean: '%s is not a %s',
     integer: '%s is not an %s',
     float: '%s is not a %s',
-    regexp: '%s is not a valid %s'
+    regexp: '%s is not a valid %s',
+    multiple: '%s is not one of the allowed types %s'
   },
   function: {
     len: '%s must have exactly %s arguments',

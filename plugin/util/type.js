@@ -8,10 +8,8 @@ module.exports = function() {
       , Type = this.rule.Type
       , invalid = false;
 
-    if(Array.isArray(id)) {
-      console.log('compare multiple types with logical or'); 
     // instanceof comparison on `type` as function
-    }else if(typeof(Type) === 'function') {
+    if(typeof(Type) === 'function') {
       if(!(this.value instanceof Type)) {
         this.raise(
           this.reasons.instance,
@@ -48,6 +46,8 @@ module.exports = function() {
     }else if(id === 'integer') {
       invalid = typeof(this.value) !== 'number'
         || Number(this.value) !== parseInt(this.value);
+    // TODO: rename method -> function so that it can share the 
+    // TODO: conditional below
     }else if(id === 'method') {
       invalid = typeof(this.value) !== 'function';
     // straight typeof test
