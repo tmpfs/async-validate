@@ -1,10 +1,9 @@
 // schema for a schema definition
 var schema = {
   type: 'object',
-  required: true,
   fields: {
     additional: {type: 'boolean'},
-    fields: {type: ['object', 'array']},
+    fields: {type: 'object'},
     format: {type: 'string'},
     len: {type: 'integer'},
     list: {type: 'array'},
