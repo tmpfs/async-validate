@@ -3,7 +3,7 @@ var schema = {
   required: true,
   fields: {
     all: {
-      match: /./,
+      match: /^address[1-3]$/,
       type: 'string'
     }
   }

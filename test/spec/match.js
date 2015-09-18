@@ -1,7 +1,12 @@
 var expect = require('chai').expect
   , Schema = require('../../index')
   , descriptor = require('../fixtures/schema/match')
-  , source = {address1: 'foo', address2: 'bar', address3: false};
+  , source = {
+      nonmatch: 'foo',
+      address1: 'foo',
+      address2: 'bar',
+      address3: false
+    };
 
 describe('async-validate:', function() {
 
