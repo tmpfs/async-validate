@@ -1,14 +1,27 @@
 var expect = require('chai').expect
-  , schema = require('../../index');
+  , Schema = require('../../index')
+  , arr = {type: 'array'}
+  , bool = {type: 'boolean'}
+  , float = {type: 'float'}
+  , integer = {type: 'integer'}
+  , number = {type: 'number'}
+  , object = {type: 'object'}
+  , date = {type: 'date'}
+  , regexp = {type: 'regexp'}
+  , nil = {type: 'null'}
+  , func = {type: 'function'}
+  , string = {type: 'string'}
+  , pattern = {type: 'string', pattern: /^foo$/}
+  , dateFormat = {type: 'date', format: 'YYYY-MM-DD'}
+  , enumerable = {type: 'enum', list: ['foo', 'bar']}
 
 describe("async-validate:", function() {
 
   it("should error on source as array type", function(done) {
-    var descriptor = {type: 'array'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(arr)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -18,11 +31,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as array type", function(done) {
-    var descriptor = {type: 'array'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(arr)
       , source = [];
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -30,11 +42,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as boolean type", function(done) {
-    var descriptor = {type: 'boolean'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(bool)
       , source = {};
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -44,11 +55,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as boolean type", function(done) {
-    var descriptor = {type: 'boolean'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(bool)
       , source = true;
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -56,11 +66,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as date type", function(done) {
-    var descriptor = {type: 'date', format: 'YYYY-MM-DD'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(dateFormat)
       , source = '2013-06-50';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -70,11 +79,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as date type", function(done) {
-    var descriptor = {type: 'date'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(date)
       , source = true;
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -83,11 +91,10 @@ describe("async-validate:", function() {
 
 
   it("should error on source as enum type", function(done) {
-    var descriptor = {type: 'enum', list: ['foo', 'bar']}
-      , validator = new schema(descriptor)
+    var schema = new Schema(enumerable)
       , source = 'qux';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -97,11 +104,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as enum type", function(done) {
-    var descriptor = {type: 'enum', list: ['foo', 'bar']}
-      , validator = new schema(descriptor)
+    var schema = new Schema(enumerable)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -109,11 +115,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as float type", function(done) {
-    var descriptor = {type: 'float'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(float)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -123,11 +128,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as float type", function(done) {
-    var descriptor = {type: 'float'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(float)
       , source = 1.667;
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -135,11 +139,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as integer type", function(done) {
-    var descriptor = {type: 'integer'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(integer)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -149,11 +152,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as integer type", function(done) {
-    var descriptor = {type: 'integer'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(integer)
       , source = 1024;
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -161,11 +163,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as function type", function(done) {
-    var descriptor = {type: 'function'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(func)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -175,11 +176,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as function type", function(done) {
-    var descriptor = {type: 'function'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(func)
       , source = function noop(){};
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -187,11 +187,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as null type", function(done) {
-    var descriptor = {type: 'null'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(nil)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -201,11 +200,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as null type", function(done) {
-    var descriptor = {type: 'null'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(nil)
       , source = null;
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -213,11 +211,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as number type", function(done) {
-    var descriptor = {type: 'number'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(number)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -227,11 +224,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as number type", function(done) {
-    var descriptor = {type: 'number'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(number)
       , source = 3;
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -239,11 +235,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as object type", function(done) {
-    var descriptor = {type: 'object'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(object)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -253,11 +248,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as object type", function(done) {
-    var descriptor = {type: 'object'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(object)
       , source = {};
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -265,11 +259,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as pattern type", function(done) {
-    var descriptor = {type: 'string', pattern: /^foo$/}
-      , validator = new schema(descriptor)
+    var schema = new Schema(pattern)
       , source = 'bar';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -279,11 +272,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as pattern type", function(done) {
-    var descriptor = {type: 'string', pattern: /^foo$/}
-      , validator = new schema(descriptor)
+    var schema = new Schema(pattern)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
@@ -291,11 +283,10 @@ describe("async-validate:", function() {
   });
 
   it("should error on source as regexp type", function(done) {
-    var descriptor = {type: 'regexp'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(regexp)
       , source = '+';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -305,24 +296,21 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as regexp type", function(done) {
-    var descriptor = {type: 'regexp'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(regexp)
       , source = /^foo$/;
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
     });
   });
 
-
   it("should error on source as string type", function(done) {
-    var descriptor = {type: 'string'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(string)
       , source = {};
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -332,11 +320,10 @@ describe("async-validate:", function() {
   });
 
   it("should validate on source as string type", function(done) {
-    var descriptor = {type: 'string'}
-      , validator = new schema(descriptor)
+    var schema = new Schema(string)
       , source = 'foo';
 
-    validator.validate(source, function(err, res) {
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();
