@@ -261,19 +261,19 @@ Rules of the `object` and `array` type may declare a `fields` object which decla
 
 * `message <string|function>`: Custom error message.
 
-The `message` rule property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
+The `message` property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
 
 ##### Required
 
 * `required <boolean>`: Field is required flag.
 
-The `required` rule property indicates that the field must exist on the source object being validated.
+The `required` property indicates that the field must exist on the source object being validated.
 
 ##### Pattern
 
 * `pattern <regexp>`: Regular expression.
 
-The `pattern` rule property is a regular expression that the value must match to pass validation.
+The `pattern` property is a regular expression that the value must match to pass validation.
 
 ##### Placeholder
 
