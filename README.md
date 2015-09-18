@@ -91,7 +91,12 @@ Define validation rules, assign them to a schema using the necessary plugins and
 
 ```javascript
 var Schema = require('async-validate')
-  , descriptor = {name: {type: "string", required: true}}
+  , descriptor = {
+      type: 'object',
+      fields: {
+        name: {type: "string", required: true}
+      }
+    }
   , schema = new Schema(descriptor)
   , source = {};
 
@@ -693,14 +698,17 @@ Without the `transform` function validation would fail due to the pattern not ma
 ```javascript
 var Schema = require('..')
   , descriptor = {
-    name: {
-      type: "string",
-      required: true, pattern: /^[a-z]+$/,
-      transform: function(value) {
-        return value.trim();
+      type: 'object',
+      fields: {
+        name: {
+          type: "string",
+          required: true, pattern: /^[a-z]+$/,
+          transform: function(value) {
+            return value.trim();
+          }
+        }
       }
     }
-  }
   , schema = new Schema(descriptor)
   , source = {name: " user  "};
 

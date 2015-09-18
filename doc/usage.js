@@ -1,5 +1,10 @@
 var Schema = require('async-validate')
-  , descriptor = {name: {type: "string", required: true}}
+  , descriptor = {
+      type: 'object',
+      fields: {
+        name: {type: "string", required: true}
+      }
+    }
   , schema = new Schema(descriptor)
   , source = {};
 

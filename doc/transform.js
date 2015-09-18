@@ -1,13 +1,16 @@
 var Schema = require('..')
   , descriptor = {
-    name: {
-      type: "string",
-      required: true, pattern: /^[a-z]+$/,
-      transform: function(value) {
-        return value.trim();
+      type: 'object',
+      fields: {
+        name: {
+          type: "string",
+          required: true, pattern: /^[a-z]+$/,
+          transform: function(value) {
+            return value.trim();
+          }
+        }
       }
     }
-  }
   , schema = new Schema(descriptor)
   , source = {name: " user  "};
 
