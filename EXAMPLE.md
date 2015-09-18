@@ -96,6 +96,7 @@ schema.validate(source, opts, function(err, res) {
 // assign a function to a rule
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         id: {
           expected: 'foo',
@@ -137,6 +138,7 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , opts = {bail: true}
   , descriptor = {
+      type: 'object',
       fields: {
         address: {
           type: 'object',
@@ -172,6 +174,7 @@ schema.validate(source, opts, function(err, res) {
 // validate properties of a nested object
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         address: {
           type: 'object',
@@ -208,6 +211,7 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , reserved = ['foo']
   , descriptor = {
+      type: 'object',
       fields: {
         id: function(cb) {
           if(~reserved.indexOf(this.value)) {
@@ -241,6 +245,7 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , Component = function Component(){}
   , descriptor = {
+      type: 'object',
       fields: {
         comp: {type: Component, required: true}
       }
@@ -268,6 +273,7 @@ schema.validate(source, function(err, res) {
 // validate a field length
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         func: {type: 'function', required: true, len: 1}
       }
@@ -327,6 +333,7 @@ schema.validate(source, function(err, res) {
 // validate a field has a maximum length
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         func: {type: 'function', required: true, max: 1}
       }
@@ -360,6 +367,7 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , messages = Schema.clone(require('async-validate/messages'))
   , descriptor = {
+      type: 'object',
       fields: {
         name: {
           type: 'string',
@@ -394,6 +402,7 @@ schema.validate(source, function(err, res) {
 // override error message with function
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {
           type: 'string',
@@ -429,6 +438,7 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , messages = require('async-validate/messages')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {
           type: 'string',
@@ -462,6 +472,7 @@ schema.validate(source, function(err, res) {
 // override error message
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {
           type: 'string',
@@ -493,6 +504,7 @@ schema.validate(source, function(err, res) {
 // validate a field has a minimum length
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         func: {type: 'function', required: true, min: 1}
       }
@@ -521,6 +533,7 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , data = {bar: 'qux'}
   , descriptor = {
+      type: 'object',
       fields: {
         id: [
           {type: 'string', required: true},
@@ -558,6 +571,7 @@ schema.validate(source, function(err, res) {
 // validate a field as one of multiple types
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         flag: {type: ['boolean', Boolean], required: true}
       }
@@ -585,6 +599,7 @@ schema.validate(source, function(err, res) {
 // validate a field as matching a pattern
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {type: 'string', required: true, pattern: /^[a-z0-9]+$/i}
       }
@@ -612,6 +627,7 @@ schema.validate(source, function(err, res) {
 // use a placeholder to set a default value
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         list: {
           type: 'array',
@@ -645,6 +661,7 @@ schema.validate(source, function() {
 // validate a field with a plugin rule
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         id: {type: 'id', required: true}
       }
@@ -687,6 +704,7 @@ schema.validate(source, function(err, res) {
 // validate a field has a length within a range
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         func: {type: 'function', required: true, min: 1, max: 2}
       }
@@ -720,6 +738,7 @@ schema.validate(source, function(err, res) {
 // validate a field as required
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {type: 'string', required: true}
       }
@@ -773,6 +792,7 @@ var Schema = require('async-validate')
   , state = {}
   , opts = {state: state}
   , descriptor = {
+      type: 'object',
       fields: {
         email: [
           {type: 'string', required: true, pattern: /^.+@.+\..+/},
@@ -815,7 +835,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442560140154.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442566773189.com] field: 'email' } ]
 ```
 
 #### type
@@ -826,6 +846,7 @@ schema.validate(source, opts, function(err, res) {
 // validate a field type
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         flag: {type: 'boolean', required: true}
       }
@@ -853,6 +874,7 @@ schema.validate(source, function(err, res) {
 // validate a field as whitespace
 var Schema = require('async-validate')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {type: 'string', required: true, whitespace: true}
       }

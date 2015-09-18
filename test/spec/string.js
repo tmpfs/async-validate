@@ -177,7 +177,7 @@ describe('async-validate:', function() {
     var descriptor = {
       type: 'object',
       fields: {
-        name: {type: 'string', required: true}
+        name: {type: 'string', required: true, whitespace: true}
       }
     }
     var schema = new Schema(descriptor);

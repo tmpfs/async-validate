@@ -2,6 +2,7 @@
 var Schema = require('../..')
   , reserved = ['foo']
   , descriptor = {
+      type: 'object',
       fields: {
         id: function(cb) {
           if(~reserved.indexOf(this.value)) {

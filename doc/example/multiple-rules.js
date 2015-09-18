@@ -2,6 +2,7 @@
 var Schema = require('../..')
   , data = {bar: 'qux'}
   , descriptor = {
+      type: 'object',
       fields: {
         id: [
           {type: 'string', required: true},

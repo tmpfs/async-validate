@@ -1,6 +1,7 @@
 // override error message
 var Schema = require('../..')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {
           type: 'string',

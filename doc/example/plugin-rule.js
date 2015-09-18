@@ -1,6 +1,7 @@
 // validate a field with a plugin rule
 var Schema = require('../..')
   , descriptor = {
+      type: 'object',
       fields: {
         id: {type: 'id', required: true}
       }

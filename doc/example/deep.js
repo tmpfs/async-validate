@@ -1,6 +1,7 @@
 // validate properties of a nested object
 var Schema = require('../..')
   , descriptor = {
+      type: 'object',
       fields: {
         address: {
           type: 'object',

@@ -2,6 +2,7 @@
 var Schema = require('../..')
   , opts = {bail: true}
   , descriptor = {
+      type: 'object',
       fields: {
         address: {
           type: 'object',

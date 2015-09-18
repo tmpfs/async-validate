@@ -1,6 +1,7 @@
 // use a placeholder to set a default value
 var Schema = require('../..')
   , descriptor = {
+      type: 'object',
       fields: {
         list: {
           type: 'array',

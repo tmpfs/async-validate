@@ -1,6 +1,7 @@
 // validate a field has a maximum length
 var Schema = require('../..')
   , descriptor = {
+      type: 'object',
       fields: {
         func: {type: 'function', required: true, max: 1}
       }

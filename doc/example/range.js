@@ -1,6 +1,7 @@
 // validate a field has a length within a range
 var Schema = require('../..')
   , descriptor = {
+      type: 'object',
       fields: {
         func: {type: 'function', required: true, min: 1, max: 2}
       }

@@ -1,6 +1,7 @@
 // validate a field as matching a pattern
 var Schema = require('../..')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {type: 'string', required: true, pattern: /^[a-z0-9]+$/i}
       }

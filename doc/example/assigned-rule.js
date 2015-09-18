@@ -1,6 +1,7 @@
 // assign a function to a rule
 var Schema = require('../..')
   , descriptor = {
+      type: 'object',
       fields: {
         id: {
           expected: 'foo',

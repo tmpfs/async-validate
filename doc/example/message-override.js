@@ -2,6 +2,7 @@
 var Schema = require('../..')
   , messages = require('../../messages')
   , descriptor = {
+      type: 'object',
       fields: {
         name: {
           type: 'string',

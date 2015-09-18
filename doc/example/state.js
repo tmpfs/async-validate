@@ -4,6 +4,7 @@ var Schema = require('../..')
   , state = {}
   , opts = {state: state}
   , descriptor = {
+      type: 'object',
       fields: {
         email: [
           {type: 'string', required: true, pattern: /^.+@.+\..+/},

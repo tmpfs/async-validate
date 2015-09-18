@@ -78,4 +78,25 @@ describe("async-validate:", function() {
     done();
   });
 
+  it("should error with no rule type", function(done) {
+    function fn() {
+      var schema = new Schema({}); 
+      schema.validate({}, function noop(){});
+    }
+    expect(fn).throws(Error);
+    expect(fn).throws(/type property must be string or function/i);
+    done();
+  });
+
+  it("should error with no rule type (multiple types)", function(done) {
+    var descriptor = {type: [{}]};
+    function fn() {
+      var schema = new Schema(descriptor); 
+      schema.validate({}, function noop(){});
+    }
+    expect(fn).throws(Error);
+    expect(fn).throws(/type property must be string or function/i);
+    done();
+  });
+
 });
