@@ -1,11 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/float');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    ratio: {type: 'float'}
-  }
 
   it('should error when a number is not a float', function(done) {
     var schema = new Schema(descriptor);

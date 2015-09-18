@@ -1,11 +1,12 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/function')
+  , length = require('../fixtures/schema/function-length')
+  , min = require('../fixtures/schema/function-min')
+  , max = require('../fixtures/schema/function-max')
+  , range = require('../fixtures/schema/function-range');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    mock: {type: 'function'}
-  }
 
   it('should error on value that is not a function', function(done) {
     var schema = new Schema(descriptor);
@@ -17,10 +18,7 @@ describe('async-validate:', function() {
   });
 
   it('should error on invalid arity (len: 1)', function(done) {
-    var descriptor = {
-      mock: {type: 'function', len: 1}
-    }
-    var schema = new Schema(descriptor);
+    var schema = new Schema(length);
     schema.validate({mock: function(){}}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -29,12 +27,8 @@ describe('async-validate:', function() {
     });
   });
 
-
   it('should error on invalid arity (min: 1)', function(done) {
-    var descriptor = {
-      mock: {type: 'function', min: 1}
-    }
-    var schema = new Schema(descriptor);
+    var schema = new Schema(min);
     schema.validate({mock: function(){}}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -44,10 +38,7 @@ describe('async-validate:', function() {
   });
 
   it('should error on invalid arity (max: 0)', function(done) {
-    var descriptor = {
-      mock: {type: 'function', max: 0}
-    }
-    var schema = new Schema(descriptor);
+    var schema = new Schema(max);
     schema.validate({mock: function(foo){foo();}}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -57,10 +48,7 @@ describe('async-validate:', function() {
   });
 
   it('should error on invalid arity (min: 0, max: 1)', function(done) {
-    var descriptor = {
-      mock: {type: 'function', min: 0, max: 1}
-    }
-    var schema = new Schema(descriptor)
+    var schema = new Schema(range)
       , source = {mock: function(foo, bar){foo();bar()}};
 
     schema.validate(source, function(err, res) {
