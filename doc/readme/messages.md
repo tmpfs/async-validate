@@ -12,11 +12,14 @@ You may also use a function for the rule message, it is invoked in the scope of 
 
 ```javascript
 var descriptor = {
-  name: {
-    type: "string",
-    required: true,
-    message: function(message, parameters) {
-      return this.field + ' is required';
+  type: 'object',
+  fields: {
+    name: {
+      type: "string",
+      required: true,
+      message: function(message, parameters) {
+        return this.field + ' is required';
+      }
     }
   }
 }
@@ -27,7 +30,12 @@ If you just want to change the default messages:
 ```javascript
 var Schema = require('async-validate')
   , messages = require('async-validate/messages')
-  , descriptor = {name:{type: "string", required: true}}
+  , descriptor = {
+      type: 'object',
+      fields: {
+        name:{type: "string", required: true}}
+      }
+    }
   , schema;
 messages.required = "%s is a required field";
 schema = new Schema(descriptor, {messages: messages});
@@ -40,7 +48,12 @@ In this scenario you could just require your own messages file for the language 
 ```javascript
 var Schema = require('async-validate')
   , messages = require('messages-es')
-  , descriptor = {name:{type: "string", required: true}}
+  , descriptor = {
+      type: 'object',
+      fields: {
+        name:{type: "string", required: true}}
+      }
+    }
   , schema = new Schema(descriptor, {messages: messages});
 ```
 

@@ -124,7 +124,10 @@ A descriptor is a collection of validation rules as a map of fields to rules, ru
 
 ```javascript
 var descriptor = {
-  name: {type: 'string', required: true}
+  type: 'object',
+  fields: {
+    name: {type: 'string', required: true}
+  }
 }
 ```
 
@@ -144,10 +147,13 @@ Module to represent an `address` field:
 
 ```javascript
 module.exports = {
-  name: {type: 'string', required: true},
-  street: {type: 'string', required: true},
-  city: {type: 'string', required: true},
-  zip: {type: 'string', required: true}
+  type: 'object',
+  fields: {
+    name: {type: 'string', required: true},
+    street: {type: 'string', required: true},
+    city: {type: 'string', required: true},
+    zip: {type: 'string', required: true}
+  }
 }
 ```
 
@@ -157,13 +163,19 @@ Muliple objects containing an `address` field that need the same validation rule
 var address = require('./address')
   , user = {
       type: 'object',
-      address: address
+      fields: {
+        address: address
+      }
     }
   , invoice = {
       type: 'object',
-      bill: {
-        type: 'object',
-        address: address
+      fields: {
+        bill: {
+          type: 'object',
+          fields: {
+            address: address
+          }
+        }
       }
     }
 ```
@@ -186,9 +198,12 @@ The rule function is assigned directly to the field:
 
 ```javascript
 var descriptor = {
-  id: function(cb) {
-    // if this.value has error condition call this.raise() 
-    cb();
+  type: 'object',
+  fields: {
+    id: function(cb) {
+      // if this.value has error condition call this.raise() 
+      cb();
+    }
   }
 }
 ```
@@ -199,12 +214,15 @@ Assigned to the `test` field so that you may pass data from the rule to the func
 
 ```javascript
 var descriptor = {
-  id: {
-    foo: 'bar',
-    test: function(cb) {
-      console.log(this.foo);
-      // if this.value has error condition call this.raise() 
-      cb();
+  type: 'object',
+  fields: {
+    id: {
+      foo: 'bar',
+      test: function(cb) {
+        console.log(this.foo);
+        // if this.value has error condition call this.raise() 
+        cb();
+      }
     }
   }
 }
@@ -232,7 +250,10 @@ Load and use the plugin:
 var Schema = require('async-validate');
 Schema.plugin([require('./rule')]);
 var descriptor = {
-  id: {type: 'id'}
+  type: 'object',
+  fields: {
+    id: {type: 'id'}
+  }
 }
 ```
 
@@ -244,14 +265,17 @@ It is often useful to test against multiple validation rules for a single field,
 
 ```javascript
 var descriptor = {
-  email: [
-    {type: "string", required: true},
-    function(cb) {
-      // test if email address (this.value) already exists 
-      // in a database and call this.raise() if it does
-      cb();
-    }
-  ]
+  type: 'object',
+  fields: {
+    email: [
+      {type: "string", required: true},
+      function(cb) {
+        // test if email address (this.value) already exists 
+        // in a database and call this.raise() if it does
+        cb();
+      }
+    ]
+  }
 }
 ```
 
@@ -261,14 +285,17 @@ If you need to validate deep object properties you may do so for validation rule
 
 ```javascript
 var descriptor = {
-  name: {type: "string", required: true},
-  address: {
-    type: "object",
-    required: true,
-    fields: {
-      street: {type: "string", required: true},
-      city: {type: "string", required: true},
-      zip: {type: "string", required: true, len: 8, message: "invalid zip"}
+  type: 'object',
+  fields: {
+    name: {type: "string", required: true},
+    address: {
+      type: "object",
+      required: true,
+      fields: {
+        street: {type: "string", required: true},
+        city: {type: "string", required: true},
+        zip: {type: "string", required: true, len: 8, message: "invalid zip"}
+      }
     }
   }
 }
@@ -284,14 +311,17 @@ The parent rule is also validated so if you have a set of rules such as:
 
 ```javascript
 var descriptor = {
-  roles: {
-    type: "array",
-    required: true,
-    len: 3,
-    fields: {
-      0: {type: "string", required: true},
-      1: {type: "string", required: true},
-      2: {type: "string", required: true}
+  type: 'object',
+  fields: {
+    roles: {
+      type: "array",
+      required: true,
+      len: 3,
+      fields: {
+        0: {type: "string", required: true},
+        1: {type: "string", required: true},
+        2: {type: "string", required: true}
+      }
     }
   }
 }
@@ -382,7 +412,10 @@ To validate a value from a list of possible values use the `enum` type with a `l
 
 ```javascript
 var descriptor = {
-  role: {type: "enum", list: ['admin', 'user', 'guest']}
+  type: 'object',
+  fields: {
+    role: {type: "enum", list: ['admin', 'user', 'guest']}
+  }
 }
 ```
 
@@ -402,10 +435,13 @@ This limitation may be overcome by combining a `pattern` in a date rule, for exa
 
 ```javascript
 var descriptor = {
-  active: {
-    type: "date",
-    format: "YYYY-MM-DD",
-    pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/
+  type: 'object',
+  fields: {
+    active: {
+      type: "date",
+      format: "YYYY-MM-DD",
+      pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/
+    }
   }
 }
 ```
@@ -601,11 +637,14 @@ You may also use a function for the rule message, it is invoked in the scope of 
 
 ```javascript
 var descriptor = {
-  name: {
-    type: "string",
-    required: true,
-    message: function(message, parameters) {
-      return this.field + ' is required';
+  type: 'object',
+  fields: {
+    name: {
+      type: "string",
+      required: true,
+      message: function(message, parameters) {
+        return this.field + ' is required';
+      }
     }
   }
 }
@@ -616,7 +655,12 @@ If you just want to change the default messages:
 ```javascript
 var Schema = require('async-validate')
   , messages = require('async-validate/messages')
-  , descriptor = {name:{type: "string", required: true}}
+  , descriptor = {
+      type: 'object',
+      fields: {
+        name:{type: "string", required: true}}
+      }
+    }
   , schema;
 messages.required = "%s is a required field";
 schema = new Schema(descriptor, {messages: messages});
@@ -629,7 +673,12 @@ In this scenario you could just require your own messages file for the language 
 ```javascript
 var Schema = require('async-validate')
   , messages = require('messages-es')
-  , descriptor = {name:{type: "string", required: true}}
+  , descriptor = {
+      type: 'object',
+      fields: {
+        name:{type: "string", required: true}}
+      }
+    }
   , schema = new Schema(descriptor, {messages: messages});
 ```
 
