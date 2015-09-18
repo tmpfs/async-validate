@@ -1,17 +1,14 @@
 var expect = require('chai').expect
-  , schema = require('../../index');
-
-function Component(){}
+  , Schema = require('../../index')
+  , Component = require('../fixtures/component')
+  , descriptor = require('../fixtures/schema/instanceof')
+  , anonymous = require('../fixtures/schema/instanceof-anonymous')
+  , message = require('../fixtures/schema/instanceof-message')
 
 describe("async-validate:", function() {
 
   it("should error on type as class (instanceof)", function(done) {
-    var descriptor = {
-      instance: {
-        type: Component
-      }
-    }
-    var validator = new schema(descriptor);
+    var validator = new Schema(descriptor);
     validator.validate({instance: []}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -21,12 +18,7 @@ describe("async-validate:", function() {
   });
 
   it("should error on type as class (instanceof) anonymous", function(done) {
-    var descriptor = {
-      instance: {
-        type: function(){}
-      }
-    }
-    var validator = new schema(descriptor);
+    var validator = new Schema(anonymous);
     validator.validate({instance: []}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
@@ -36,17 +28,7 @@ describe("async-validate:", function() {
   });
 
   it("should error on type as class (instanceof) w/ message", function(done) {
-    var descriptor = {
-      instance: {
-        type: Component,
-        message: function(message, parameters) {
-          message = '%s is not a %s';
-          parameters[1] = this.rule.Type.name;  
-          return this.format.apply(this, [message].concat(parameters));
-        }
-      }
-    }
-    var validator = new schema(descriptor);
+    var validator = new Schema(message);
     validator.validate({instance: []}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql('instance is not a Component');
@@ -55,17 +37,7 @@ describe("async-validate:", function() {
   });
 
   it("should validate on type as class (instanceof)", function(done) {
-    var descriptor = {
-      instance: {
-        type: Component,
-        message: function(message, parameters) {
-          message = '%s is not a %s';
-          parameters[1] = this.rule.Type.name;  
-          return this.format.apply(this, [message].concat(parameters));
-        }
-      }
-    }
-    var validator = new schema(descriptor);
+    var validator = new Schema(message);
     validator.validate({instance: new Component()}, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
