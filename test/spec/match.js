@@ -1,18 +1,9 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/match')
+  , source = {address1: 'foo', address2: 'bar', address3: false};
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-      type: 'object',
-      required: true,
-      name: {type: 'string', required: true},
-      all: {
-        match: /./,
-        type: 'string'
-      }
-    }
-  , source = {address1: 'foo', address2: 'bar', address3: false};
 
   it('should error on invalid expanded property (match)', function(done) {
     var schema = new Schema(descriptor);

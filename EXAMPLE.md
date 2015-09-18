@@ -53,7 +53,12 @@ var Schema = require('async-validate')
           fields: {
             street: {type: 'string', required: true},
             city: {type: 'string', required: true},
-            zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
+            zip: {
+              type: 'string',
+              required: true,
+              len: 8,
+              message: 'Invalid zip'
+            }
           }
         }
       }
@@ -65,7 +70,7 @@ var Schema = require('async-validate')
         name: 'unknown-field',
         street: 'Mock St',
         city: 'Mock City',
-        zip: '12345678',
+        zip: '12345678'
       }
     }
   , schema;
@@ -292,12 +297,12 @@ var Schema = require('async-validate')
   , descriptor = {
       type: 'object',
       required: true,
-      //fields: {
+      fields: {
         all: {
           match: /./,
           type: 'string'
         }
-      //}
+      }
     }
   , source = {address1: 'foo', address2: 'bar', address3: false}
   , schema;
@@ -326,7 +331,12 @@ var Schema = require('async-validate')
         func: {type: 'function', required: true, max: 1}
       }
     }
-  , source = {func: function noop(foo, bar){}}
+  , source = {
+      func: function noop(foo, bar){
+        foo();
+        bar();
+      }
+    }
   , schema;
 
 require('async-validate/plugin/all');
@@ -388,7 +398,7 @@ var Schema = require('async-validate')
         name: {
           type: 'string',
           required: true,
-          message: function(msg, parameters) {
+          message: function() {
             return this.format(
               'name must be specified (field: %s)', this.field);
           }
@@ -618,7 +628,7 @@ var Schema = require('async-validate')
 require('async-validate/plugin/all');
 
 schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
+schema.validate(source, function() {
   console.dir(source);
 });
 ```
@@ -681,7 +691,13 @@ var Schema = require('async-validate')
         func: {type: 'function', required: true, min: 1, max: 2}
       }
     }
-  , source = {func: function noop(foo, bar, qux){}}
+  , source = {
+      func: function noop(foo, bar, qux){
+        foo();
+        bar();
+        qux();
+      }
+    }
   , schema;
 
 require('async-validate/plugin/all');
@@ -753,7 +769,6 @@ schema.validate(source, function(err, res) {
 ```javascript
 // pass state information between rule test functions
 var Schema = require('async-validate')
-  , url = require('url')
   , dns = require('dns')
   , state = {}
   , opts = {state: state}
@@ -800,7 +815,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442542446886.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442550249478.com] field: 'email' } ]
 ```
 
 #### type
