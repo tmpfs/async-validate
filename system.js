@@ -16,7 +16,10 @@ var schema = {
     placeholder: {type: 'function'},
     required: {type: 'boolean'},
     test: {type: 'function'},
-    type: {type: ['string', 'function'], required: true},
+    type: {
+      type: ['string', 'function'],
+      required: true
+    },
     values: {type: ['object', 'array']},
     whitespace: {type: 'boolean'}
   }
