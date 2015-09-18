@@ -1,15 +1,16 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/parallel');
 
 describe('async-validate:', function() {
 
-  var descriptor = {
-    name: {type: 'string', len: 8}
-  }
+  //var descriptor = {
+    //name: {type: 'string', len: 8}
+  //}
 
   it('should use default series iteration', function(done) {
     var schema = new Schema(descriptor);
-    schema.validate({name: 'username', surname: 'foo'},
+    schema.validate({},
       function(err, res) {
         expect(err).to.eql(null);
         expect(res).to.eql(null);
@@ -20,9 +21,7 @@ describe('async-validate:', function() {
 
   it('should use parallel iteration', function(done) {
     var schema = new Schema(descriptor)
-      , source = {name: 'username', surname: 'foo'};
-
-    schema.validate(source, {parallel: true},
+    schema.validate({}, {parallel: true},
       function(err, res) {
         expect(err).to.eql(null);
         expect(res).to.eql(null);
