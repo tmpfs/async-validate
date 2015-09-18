@@ -245,67 +245,6 @@ To allow a field to be of multiple types you may declare an array of valid type 
 {type: ['string', String, Number], required: true}
 ```
 
-##### Additional
-
-* `additional <boolean>`: Determines if additional properties are allowed.
-
-When a rule is of the `object` type and `additional` is set to `false` an error is raised if the source object contains any properties not in the schema.
-
-##### Fields
-
-* `fields <object>`: Map containing rules for object properties.
-
-Rules of the `object` and `array` type may declare a `fields` object which declares a nested schema, see [deep rules](#deep-rules).
-
-##### Message
-
-* `message <string|function>`: Custom error message.
-
-The `message` property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
-
-##### Required
-
-* `required <boolean>`: Field is required flag.
-
-The `required` property indicates that the field must exist on the source object being validated.
-
-##### Pattern
-
-* `pattern <regexp>`: Regular expression.
-
-The `pattern` property is a regular expression that the value must match to pass validation.
-
-##### Placeholder
-
-* `placeholder <function>`: Placeholder function.
-
-A `function` that may return a default value for a field, it is invoked when the field value is `undefined` and the return value is assigned to the field.
-
-##### Range
-
-* `min <integer>`: Minimum length value.
-* `max <integer>`: Maximum length value.
-
-A range is defined using the `min` and `max` properties. For `string`, `function` and `array` types comparison is performed against the `length`, for `number` types the number must not be less than `min` nor greater than `max`.
-
-##### Length
-
-* `len <integer>`: Length constraint.
-
-To validate an exact length of a field specify the `len` property. For `string`, `function` and `array` types comparison is performed on the `length` property, for the `number` type this property indicates an exact match for the `number`, ie, it may only be strictly equal to `len`.
-
-If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
-
-##### Values
-
-* `values <array>`: Array of rules for array types.
-
-Used with the `array` type as a shorthand for validating array values, may be an `object` or `array` containing validation rules.
-
-When `values` is an object it is applied to all array elements in the source array otherwise each `values` entry is compared against each source array entry which allows mixed types to be used in arrays.
-
-Note that `values` is expanded to `fields`, see [deep rules](#deep-rules).
-
 ##### Enumerable
 
 * `list <array>`: The list of enumerable values.
@@ -349,6 +288,82 @@ var descriptor = {
     }
   }
 }
+```
+
+##### Message
+
+* `message <string|function>`: Custom error message.
+
+The `message` property defines the error message when validation fails, it overrides any default message. The property may be a `string` or `function`, see [messages](#messages).
+
+##### Required
+
+* `required <boolean>`: Field is required flag.
+
+The `required` property indicates that the field must exist on the source object being validated.
+
+##### Additional
+
+* `additional <boolean>`: Determines if additional properties are allowed.
+
+When a rule is of the `object` type and `additional` is set to `false` an error is raised if the source object contains any properties not in the schema.
+
+##### Fields
+
+* `fields <object>`: Map containing rules for object properties.
+
+Rules of the `object` and `array` type may declare a `fields` object which creates a nested schema, see [deep rules](#deep-rules).
+
+
+##### Pattern
+
+* `pattern <regexp>`: Pattern match regular expression.
+
+The `pattern` property is a regular expression that the value must match to pass validation.
+
+##### Placeholder
+
+* `placeholder <function>`: Placeholder function.
+
+A `function` that may return a default value for a field, it is invoked when the field value is `undefined` and the return value is assigned to the property.
+
+##### Range
+
+* `min <integer>`: Minimum length value.
+* `max <integer>`: Maximum length value.
+
+A range is defined using the `min` and `max` properties. For `string`, `function` and `array` types comparison is performed against the `length`, for `number` types the number must not be less than `min` nor greater than `max`.
+
+##### Length
+
+* `len <integer>`: Length constraint.
+
+To validate an exact length of a field specify the `len` property. For `string`, `function` and `array` types comparison is performed on the `length` property, for the `number` type this property indicates an exact match for the `number`, ie, it may only be strictly equal to `len`.
+
+If the `len` property is combined with the `min` and `max` range properties, `len` takes precedence.
+
+##### Values
+
+* `values <array>`: Array of rules for array types.
+
+Used with the `array` type as a shorthand for validating array values, may be an `object` or `array` containing validation rules.
+
+When `values` is an object it is applied to all array elements in the source array otherwise each `values` entry is compared against each source array entry which allows mixed types to be used in arrays.
+
+Note that `values` is expanded to `fields`, see [deep rules](#deep-rules).
+
+##### Match
+
+* `match <regexp>`: Expands a rule to multiple properties.
+
+The `match` property may be used to apply a rule to multiple properties of the same object, the rule is cloned for each property name that matches the regular expression and applied to the matched property.
+
+In this scenario specifying `required` on the match rule would be a non-operation.
+
+This is useful when you have a sequence of properties that share the same rules:
+
+```javascript
+{match: /^address[1-3]$/, type: 'string'}
 ```
 
 ##### Test
