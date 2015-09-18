@@ -1,13 +1,8 @@
 var expect = require('chai').expect
-  , schema = require('../../index');
+  , schema = require('../../index')
+  , descriptor = require('../fixtures/schema/null');
 
 describe("async-validate:", function() {
-  var descriptor = {
-    value: {
-      type: 'null'
-    }
-  }
-
   it("should error on non-null value", function(done) {
     var validator = new schema(descriptor);
     validator.validate({value: true}, function(err, res) {
