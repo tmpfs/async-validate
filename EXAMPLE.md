@@ -815,7 +815,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442554014708.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442560140154.com] field: 'email' } ]
 ```
 
 #### type

@@ -54,12 +54,7 @@ var address = require('./address')
   , invoice = {
       type: 'object',
       fields: {
-        bill: {
-          type: 'object',
-          fields: {
-            address: address
-          }
-        }
+        bill: address
       }
     }
 ```
