@@ -265,7 +265,7 @@ The `message` rule property defines the error message when validation fails, it 
 
 ##### Required
 
-* `required <boolean>`: Field required flag.
+* `required <boolean>`: Field is required flag.
 
 The `required` rule property indicates that the field must exist on the source object being validated.
 
@@ -359,7 +359,7 @@ The function to use for rule validation.
 
 ##### Whitespace
 
-* `whitepace <boolean>`: Determines if whitespace input should be an error.
+* `whitespace <boolean>`: Determines if whitespace input should be an error.
 
 It is typical to treat required fields that only contain whitespace as errors. To add an additional test for a string that consists solely of whitespace add a `whitespace` property to a rule with a value of `true`. The rule must be a `string` type.
 
