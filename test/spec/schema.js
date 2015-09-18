@@ -10,12 +10,12 @@ describe("async-validate:", function() {
     done();
   });
 
-  it("should define without fields", function(done) {
-    var schema = new Schema({name: {type: 'string'}}); 
-    expect(schema.rules).to.be.an('object');
-    expect(schema.rules.fields).to.be.an('object');
-    done();
-  });
+  //it("should define without fields", function(done) {
+    //var schema = new Schema({name: {type: 'string'}}); 
+    //expect(schema.rules).to.be.an('object');
+    //expect(schema.rules.fields).to.be.an('object');
+    //done();
+  //});
 
   it("should error with no rules", function(done) {
     function fn() {
