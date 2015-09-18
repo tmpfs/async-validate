@@ -5,7 +5,10 @@ describe('async-validate:', function() {
 
   it('should error on required string field', function(done) {
     var descriptor = {
-      name: {type: 'string', required: true}
+      type: 'object',
+      fields: {
+        name: {type: 'string', required: true}
+      }
     }
     var schema = new Schema(descriptor);
     schema.validate({noname: 'field'}, function(err, res) {
@@ -18,7 +21,10 @@ describe('async-validate:', function() {
 
   it('should error on required string field (null)', function(done) {
     var descriptor = {
-      name: {type: 'string', required: true}
+      type: 'object',
+      fields: {
+        name: {type: 'string', required: true}
+      }
     }
     var schema = new Schema(descriptor);
     schema.validate({name: null}, function(err, res) {
@@ -31,7 +37,10 @@ describe('async-validate:', function() {
 
   it('should error on non-string type', function(done) {
     var descriptor = {
-      name: {type: 'string'}
+      type: 'object',
+      fields: {
+        name: {type: 'string'}
+      }
     }
     var schema = new Schema(descriptor);
     schema.validate({name: 10}, function(err, res) {
@@ -44,7 +53,10 @@ describe('async-validate:', function() {
   it('should error on required string field with minimum length',
     function(done) {
       var descriptor = {
-        name: {type: 'string', required: true, min: 8}
+        type: 'object',
+        fields: {
+          name: {type: 'string', required: true, min: 8}
+        }
       }
       var schema = new Schema(descriptor);
       schema.validate({name: 'field'}, function(err, res) {
@@ -59,7 +71,10 @@ describe('async-validate:', function() {
   it('should error on required string field with maximum length',
     function(done) {
       var descriptor = {
-        name: {type: 'string', required: true, max: 2}
+        type: 'object',
+        fields: {
+          name: {type: 'string', required: true, max: 2}
+        }
       }
       var schema = new Schema(descriptor);
       schema.validate({name: 'field'}, function(err, res) {
@@ -74,7 +89,10 @@ describe('async-validate:', function() {
   it('should error on required string field is less than a length range',
     function(done) {
       var descriptor = {
-        name: {type: 'string', required: true, min: 6, max: 8}
+        type: 'object',
+        fields: {
+          name: {type: 'string', required: true, min: 6, max: 8}
+        }
       }
       var schema = new Schema(descriptor);
       schema.validate({name: 'field'}, function(err, res) {
@@ -89,7 +107,10 @@ describe('async-validate:', function() {
   it('should error on required string field is greater than a length range',
     function(done) {
       var descriptor = {
-        name: {type: 'string', required: true, min: 2, max: 4}
+        type: 'object',
+        fields: {
+          name: {type: 'string', required: true, min: 2, max: 4}
+        }
       }
       var schema = new Schema(descriptor);
       schema.validate({name: 'field'}, function(err, res) {
@@ -103,7 +124,10 @@ describe('async-validate:', function() {
   it('should error on regular expression pattern mismatch',
     function(done) {
       var descriptor = {
-        name: {type: 'string', pattern: /^[0-9]+$/}
+        type: 'object',
+        fields: {
+          name: {type: 'string', pattern: /^[0-9]+$/}
+        }
       }
       var schema = new Schema(descriptor);
       schema.validate({name: 'alpha'}, function(err, res) {
@@ -118,7 +142,10 @@ describe('async-validate:', function() {
   it('should error on string consisting of whitespace',
     function(done) {
       var descriptor = {
-        name: {type: 'string', whitespace: true}
+        type: 'object',
+        fields: {
+          name: {type: 'string', whitespace: true}
+        }
       }
       var schema = new Schema(descriptor);
       schema.validate({name: '   '}, function(err, res) {
@@ -132,7 +159,10 @@ describe('async-validate:', function() {
   it('should error on empty string',
     function(done) {
       var descriptor = {
-        name: {type: 'string', required: true, whitespace: true}
+        type: 'object',
+        fields: {
+          name: {type: 'string', required: true, whitespace: true}
+        }
       }
       var schema = new Schema(descriptor);
       schema.validate({name: ''}, function(err, res) {
@@ -145,7 +175,10 @@ describe('async-validate:', function() {
 
   it('should validate on required string field', function(done) {
     var descriptor = {
-      name: {type: 'string', required: true}
+      type: 'object',
+      fields: {
+        name: {type: 'string', required: true}
+      }
     }
     var schema = new Schema(descriptor);
     schema.validate({name: 'field'}, function(err, res) {
@@ -159,7 +192,10 @@ describe('async-validate:', function() {
   it('should validate on required string field in range',
     function(done) {
       var descriptor = {
-        name: {type: 'string', required: true, min: 6, max: 20}
+        type: 'object',
+        fields: {
+          name: {type: 'string', required: true, min: 6, max: 20}
+        }
       }
       var schema = new Schema(descriptor);
       schema.validate({name: 'valid field'}, function(err, res) {

@@ -1,5 +1,8 @@
 var schema = {
-  id: {type: 'id'}
+  type: 'object',
+  fields: {
+    id: {type: 'id'}
+  }
 }
 
 module.exports = schema;

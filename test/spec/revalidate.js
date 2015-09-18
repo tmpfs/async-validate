@@ -3,15 +3,19 @@ var expect = require('chai').expect
 
 describe('async-validate:', function() {
 
+  var descriptor = {
+    type: 'object',
+    fields: {
+      name: {type: 'string', required: true}
+    }
+  }
+
   it('should validate after failure',
     function(done) {
-      var descriptor = {
-        name: {type: 'string', required: true, whitespace: true}
-      }
       var schema = new Schema(descriptor);
-      schema.validate({name: ''}, function(err, res) {
+      schema.validate({}, function(err, res) {
         expect(res.errors.length).to.eql(1);
-        expect(res.errors[0].message).to.eql('name cannot be empty');
+        expect(res.errors[0].message).to.eql('name is required');
         schema.validate({name: 'user'}, function(err, res) {
           expect(err).to.eql(null);
           expect(res).to.eql(null);

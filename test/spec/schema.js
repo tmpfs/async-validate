@@ -57,7 +57,15 @@ describe("async-validate:", function() {
   });
 
   it("should error on validate with unknown type", function(done) {
-    var schema = new Schema({name: {type: 'unknown-type'}}); 
+    var descriptor = {
+          fields: {
+            name: {
+              type: 'unknown-type'
+            }
+          }
+        }
+      , schema = new Schema(descriptor); 
+
     function fn() {
       schema.validate({}, function noop(){});
     }
