@@ -3,26 +3,6 @@ var expect = require('chai').expect
 
 describe('async-validate:', function() {
 
-  it('should error on a custom schema function', function(done) {
-    var descriptor = {
-      name: function(cb) {
-        if(!/^[a-z0-9]+$/.test(this.value)) {
-          this.raise(
-            '%s must be lowercase alphanumeric characters',
-            this.field);
-        }
-        cb();
-      }
-    }
-    var schema = new Schema(descriptor);
-    schema.validate({name: 'Firstname'}, function(err, res) {
-      expect(res.errors.length).to.eql(1);
-      expect(res.errors[0].message).to.eql(
-        'name must be lowercase alphanumeric characters');
-      done();
-    });
-  });
-
   it('should error on required string field', function(done) {
     var descriptor = {
       name: {type: 'string', required: true}
