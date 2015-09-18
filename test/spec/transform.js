@@ -1,17 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/transform');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    name: {
-      type: 'string',
-      required: true, pattern: /^[a-z]+$/,
-      transform: function(value) {
-        return value.trim();
-      }
-    }
-  }
 
   it('should transform by stripping whitespace', function(done) {
     var schema = new Schema(descriptor)

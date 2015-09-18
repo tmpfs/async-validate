@@ -1,12 +1,9 @@
 var expect = require('chai').expect
   , Schema = require('../../index')
-  , Model = require('../fixtures/model');
+  , Model = require('../fixtures/model')
+  , descriptor = require('../fixtures/schema/vars');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    id: {type: 'id'}
-  }
 
   before(function(done) {
     // load plugin definition
@@ -18,7 +15,6 @@ describe('async-validate:', function() {
     var schema = new Schema(descriptor)
       , opts = {vars: {model: new Model()}}
       , source = {id: 'qux'};
-
     schema.validate(source, opts, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
