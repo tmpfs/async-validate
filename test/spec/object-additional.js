@@ -1,21 +1,10 @@
 var expect = require('chai').expect
-  , schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/object-additional');
 
 describe('async-validate:', function() {
 
   it('should error on invalid object (additional properties)', function(done) {
-    var descriptor = {
-      address: {
-        type: 'object',
-        required: true,
-        additional: false,
-        fields: {
-          street: {type: 'string', required: true},
-          city: {type: 'string', required: true},
-          zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
-        }
-      }
-    }
     var source = {
       address: {
         name: 'Oops',
@@ -24,8 +13,8 @@ describe('async-validate:', function() {
         zip: '12345678'
       }
     }
-    var validator = new schema(descriptor);
-    validator.validate(source, function(err, res) {
+    var schema = new Schema(descriptor);
+    schema.validate(source, function(err, res) {
       var expected = 'extraneous fields (name) found in address';
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(expected);
@@ -34,18 +23,6 @@ describe('async-validate:', function() {
   });
 
   it('should validate with no additional properties', function(done) {
-    var descriptor = {
-      address: {
-        type: 'object',
-        required: true,
-        additional: false,
-        fields: {
-          street: {type: 'string', required: true},
-          city: {type: 'string', required: true},
-          zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
-        }
-      }
-    }
     var source = {
       address: {
         street: 'Mock St',
@@ -53,8 +30,8 @@ describe('async-validate:', function() {
         zip: '12345678'
       }
     }
-    var validator = new schema(descriptor);
-    validator.validate(source, function(err, res) {
+    var schema = new Schema(descriptor);
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();

@@ -661,7 +661,7 @@ Schema.plugin([
   require('../plugin/util')
 ]);
 
-schema.validate(source, function(err, res) {
+schema.validate(source, function() {
   console.dir(source.name);
 });
 ```
