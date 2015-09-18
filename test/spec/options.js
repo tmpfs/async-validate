@@ -1,12 +1,9 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/options')
+  , pattern = require('../fixtures/schema/options-pattern');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    firstname: {type: 'string', required: true},
-    surname: {type: 'string', required: true}
-  }
 
   it('should error with multiple errors', function(done) {
     var schema = new Schema(descriptor);
@@ -33,10 +30,7 @@ describe('async-validate:', function() {
   });
 
   it('should error with single option', function(done) {
-    var descriptor = {
-      name: {type: 'string', required: true, min: 10, pattern: /^[^-].*$/}
-    }
-    var schema = new Schema(descriptor)
+    var schema = new Schema(pattern)
       , source = {name: '-name'}
       , opts = {first: true, single: true};
 
