@@ -1,11 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/object');
 
 describe("async-validate:", function() {
-
-  var descriptor = {
-    address: {type: "object", required: true}
-  }
 
   it("should error on invalid object (array specified)", function(done) {
     var schema = new Schema(descriptor);
