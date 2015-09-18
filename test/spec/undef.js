@@ -40,13 +40,6 @@ describe('async-validate:', function() {
     }
   }
 
-  //var integer = {
-    //type: 'object',
-    //fields: {
-      //mock: {type: 'integer', required: false}
-    //}
-  //}
-
   var number = {
     type: 'object',
     fields: {
@@ -60,13 +53,6 @@ describe('async-validate:', function() {
       mock: {type: 'object', required: false}
     }
   }
-
-  //var nil = {
-    //type: 'object',
-    //fields: {
-      //mock: {type: 'null', required: false}
-    //}
-  //}
 
   var arr = {
     type: 'object',
