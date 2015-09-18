@@ -1,16 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/internal-error');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    mock: function(cb) {
-      cb(new Error('query error'));  
-    },
-    next: function() {
-      throw new Error('rule validation function invoked unexpectedly'); 
-    }
-  }
 
   it('should callback with error', function(done) {
     var schema = new Schema(descriptor);
