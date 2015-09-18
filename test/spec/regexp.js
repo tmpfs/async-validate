@@ -1,17 +1,13 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/regexp');
 
 describe("async-validate:", function() {
-
-  var descriptor = {
-    re: {type: "regexp"}
-  }
 
   it("should error on regexp string (positive lookbehind unsupported)",
     function(done) {
       var schema = new Schema(descriptor)
         , source = {re: "(?<=(category=))[a-z-]+"};
-
       schema.validate(source, function(err, res) {
         expect(res.errors.length).to.eql(1);
         expect(res.errors[0].message).to.eql('re is not a valid regexp');
