@@ -1,11 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/boolean');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    flag: {type: 'boolean'},
-  }
 
   it('should error on non-boolean type', function(done) {
     var schema = new Schema(descriptor);
