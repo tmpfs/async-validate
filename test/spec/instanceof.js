@@ -3,7 +3,7 @@ var expect = require('chai').expect
   , Component = require('../fixtures/component')
   , descriptor = require('../fixtures/schema/instanceof')
   , anonymous = require('../fixtures/schema/instanceof-anonymous')
-  , message = require('../fixtures/schema/instanceof-message')
+  , message = require('../fixtures/schema/instanceof-message');
 
 describe("async-validate:", function() {
 

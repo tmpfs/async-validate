@@ -1,11 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/integer');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    port: {type: 'integer'}
-  }
 
   it('should error on number not an integer', function(done) {
     var schema = new Schema(descriptor);
