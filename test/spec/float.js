@@ -4,7 +4,7 @@ var expect = require('chai').expect
 describe('async-validate:', function() {
 
   var descriptor = {
-    ratio: {type: 'float'},
+    ratio: {type: 'float'}
   }
 
   it('should error when a number is not a float', function(done) {

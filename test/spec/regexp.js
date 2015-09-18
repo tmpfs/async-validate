@@ -4,7 +4,7 @@ var expect = require('chai').expect
 describe("async-validate:", function() {
 
   var descriptor = {
-    re: {type: "regexp"},
+    re: {type: "regexp"}
   }
 
   it("should error on regexp string (positive lookbehind unsupported)",

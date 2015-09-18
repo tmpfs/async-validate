@@ -4,7 +4,7 @@ var expect = require('chai').expect
 describe('async-validate:', function() {
 
   var descriptor = {
-    port: {type: 'integer'},
+    port: {type: 'integer'}
   }
 
   it('should error on number not an integer', function(done) {

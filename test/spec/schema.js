@@ -19,7 +19,7 @@ describe("async-validate:", function() {
 
   it("should error with no rules", function(done) {
     function fn() {
-      var schema = new Schema(); 
+      new Schema(); 
     }
     expect(fn).throws(Error);
     expect(fn).throws(/cannot configure/i);
@@ -29,22 +29,12 @@ describe("async-validate:", function() {
 
   it("should error with rules as null", function(done) {
     function fn() {
-      var schema = new Schema(null); 
+      new Schema(null); 
     }
     expect(fn).throws(Error);
     expect(fn).throws(/rules must be an object/i);
     done();
   });
-
-  //it("should error on validate with no rules", function(done) {
-    //var schema = new Schema({}); 
-    //function fn() {
-      //schema.validate({});
-    //}
-    //expect(fn).throws(Error);
-    //expect(fn).throws(/cannot validate with no rules/i);
-    //done();
-  //});
 
   it("should error on validate with no source", function(done) {
     var schema = new Schema({name: function(cb){cb()}}); 
@@ -66,7 +56,6 @@ describe("async-validate:", function() {
     done();
   });
 
-
   it("should error on validate with unknown type", function(done) {
     var schema = new Schema({name: {type: 'unknown-type'}}); 
     function fn() {
@@ -76,6 +65,5 @@ describe("async-validate:", function() {
     expect(fn).throws(/unknown rule type/i);
     done();
   });
-
 
 });

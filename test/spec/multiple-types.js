@@ -3,14 +3,14 @@ var expect = require('chai').expect
 
 describe('async-validate:', function() {
 
-  function Component(){};
+  function Component(){}
 
   var descriptor = {
-    prop: {type: [Boolean, 'string', Component, function(){}]},
+    prop: {type: [Boolean, 'string', Component, function(){}]}
   }
 
   var required = {
-    prop: {type: [Boolean, 'string', Component, function(){}], required: true},
+    prop: {type: [Boolean, 'string', Component, function(){}], required: true}
   }
 
   it('should error on invalid type with multiple types array', function(done) {

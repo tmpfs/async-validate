@@ -29,7 +29,7 @@ describe('async-validate:', function() {
 
   it('should pass state information between rules', function(done) {
     var schema = new Schema(descriptor);
-    schema.validate(source, opts, function(err, res) {
+    schema.validate(source, opts, function() {
       expect(state.email).to.be.an('object');
       expect(state.email.user).to.eql('user');
       expect(state.email.domain).to.eql('example.com');

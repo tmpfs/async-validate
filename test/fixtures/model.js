@@ -1,6 +1,6 @@
 var data = {
   foo: {id: 'foo'},
-  bar: {id: 'bar'},
+  bar: {id: 'bar'}
 }
 
 // mock model class (vars)

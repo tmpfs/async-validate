@@ -4,7 +4,7 @@ var expect = require('chai').expect
 describe('async-validate:', function() {
 
   var descriptor = {
-    id: {type: 'id'},
+    id: {type: 'id'}
   }
 
   before(function(done) {

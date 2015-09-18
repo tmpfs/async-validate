@@ -7,14 +7,14 @@ describe('async-validate:', function() {
     mock: function(cb) {
       cb(new Error('query error'));  
     },
-    next: function(cb) {
+    next: function() {
       throw new Error('rule validation function invoked unexpectedly'); 
     }
   }
 
   it('should callback with error', function(done) {
     var schema = new Schema(descriptor);
-    schema.validate({}, function(err, res) {
+    schema.validate({}, function(err) {
       function fn() {
         throw err;
       }

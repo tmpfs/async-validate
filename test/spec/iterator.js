@@ -24,7 +24,7 @@ describe("async-validate:", function() {
       function multiply(num, cb) {
         cb(new Error('mock error')); 
       }, 
-      function complete(err, results) {
+      function complete(err) {
         function fn() {
           throw err;
         }
@@ -38,7 +38,7 @@ describe("async-validate:", function() {
       function multiply(num, cb) {
         cb(new Error('mock error')); 
       }, 
-      function complete(err, results) {
+      function complete(err) {
         function fn() {
           throw err;
         }

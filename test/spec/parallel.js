@@ -4,7 +4,7 @@ var expect = require('chai').expect
 describe('async-validate:', function() {
 
   var descriptor = {
-    name: {type: 'string', len: 8},
+    name: {type: 'string', len: 8}
   }
 
   it('should use default series iteration', function(done) {

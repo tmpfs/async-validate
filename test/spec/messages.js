@@ -11,7 +11,7 @@ describe('async-validate:', function() {
 
   it('should validate using a custom error message', function(done) {
     var descriptor = {
-      name: {type: 'string', required: true, message: 'Name is required'},
+      name: {type: 'string', required: true, message: 'Name is required'}
     }
     var validator = new schema(descriptor);
     validator.validate({}, function(err, res) {
@@ -31,7 +31,7 @@ describe('async-validate:', function() {
           expect(parameters).to.be.an('array');
           return 'Name is required';
         }
-      },
+      }
     }
     var validator = new schema(descriptor);
     validator.validate({}, function(err, res) {
@@ -52,7 +52,7 @@ describe('async-validate:', function() {
             expect(parameters).to.be.an('array');
             return new Error('Name is required');
           }
-        },
+        }
       }
       var validator = new schema(descriptor);
       validator.validate({}, function(err, res) {
@@ -65,7 +65,7 @@ describe('async-validate:', function() {
 
   it('should validate using custom messages', function(done) {
     var descriptor = {
-      name: {type: 'string', required: true},
+      name: {type: 'string', required: true}
     }
     var validator = new schema(descriptor);
 

@@ -11,9 +11,8 @@
     "disallowSpaceAfterKeywords": false,
     "disallowSpaceBeforeBlockStatements": false,
     "disallowSpacesInsideObjectBrackets": null,
-    "safeContextKeyword": "_this",
     "excludeFiles": [
-      "test/**",
+      "test/spec.js",
       "node_modules",
       "coverage",
       "doc",

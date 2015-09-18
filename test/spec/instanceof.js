@@ -12,7 +12,7 @@ describe("async-validate:", function() {
       }
     }
     var validator = new schema(descriptor);
-    validator.validate({instance: new Array()}, function(err, res) {
+    validator.validate({instance: []}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
         'instance is not an instance of Component');
@@ -27,7 +27,7 @@ describe("async-validate:", function() {
       }
     }
     var validator = new schema(descriptor);
-    validator.validate({instance: new Array()}, function(err, res) {
+    validator.validate({instance: []}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql(
         'instance is not an instance of function (anonymous)');
@@ -47,7 +47,7 @@ describe("async-validate:", function() {
       }
     }
     var validator = new schema(descriptor);
-    validator.validate({instance: new Array()}, function(err, res) {
+    validator.validate({instance: []}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql('instance is not a Component');
       done();

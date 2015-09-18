@@ -15,7 +15,7 @@ describe('async-validate:', function() {
         name: 'Oops',
         street: 'Mock St',
         city: 'Mock City',
-        zip: '12345678',
+        zip: '12345678'
       }
     }
 
@@ -36,7 +36,7 @@ describe('async-validate:', function() {
       address: {
         street: 'Mock St',
         city: 'Mock City',
-        zip: '12345678',
+        zip: '12345678'
       }
     }
     var schema = new Schema(descriptor);

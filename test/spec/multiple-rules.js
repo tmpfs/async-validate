@@ -2,7 +2,7 @@ var expect = require('chai').expect
   , Schema = require('../../index')
   , email = /^.+@.+\..+/;
 
-describe('async-validate:', function(done) {
+describe('async-validate:', function() {
 
   it('should error on multiple validation rules for a field',
     function(done) {

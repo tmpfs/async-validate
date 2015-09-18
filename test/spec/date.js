@@ -5,7 +5,7 @@ var expect = require('chai').expect
   , pattern = require('../fixtures/schema/date-pattern')
   , range = require('../fixtures/schema/date-range');
 
-describe('async-validate:', function(done) {
+describe('async-validate:', function() {
 
   it('should error on invalid date value using a format', function(done) {
     var schema = new Schema(descriptor);
