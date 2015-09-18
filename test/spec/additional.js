@@ -1,24 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/additional');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    type: 'object',
-    additional: false,
-    fields: {
-      address: {
-        type: 'object',
-        required: true,
-        additional: false,
-        fields: {
-          street: {type: 'string', required: true},
-          city: {type: 'string', required: true},
-          zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
-        }
-      }
-    }
-  }
 
   it('should error on invalid object (additional properties)', function(done) {
     var opts = {
@@ -35,8 +19,8 @@ describe('async-validate:', function() {
       }
     }
 
-    var validator = new Schema(descriptor);
-    validator.validate(source, opts, function(err, res) {
+    var schema = new Schema(descriptor);
+    schema.validate(source, opts, function(err, res) {
       //console.dir(res);
       expect(res.errors.length).to.eql(2);
       expect(res.errors[0].message).to.eql(
@@ -55,8 +39,8 @@ describe('async-validate:', function() {
         zip: '12345678',
       }
     }
-    var validator = new Schema(descriptor);
-    validator.validate(source, function(err, res) {
+    var schema = new Schema(descriptor);
+    schema.validate(source, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
       done();

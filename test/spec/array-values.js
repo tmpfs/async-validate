@@ -1,24 +1,10 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
-
-// an error message with the array index is not very useful
-// in this instance use the value instead
-function value(message, parameters) {
-  parameters[0] = this.value;
-  return this.format.apply(this, [message].concat(parameters));
-}
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/typed-array')
+  , mixed = require('../fixtures/schema/typed-array-mixed')
+  , empty = require('../fixtures/schema/typed-array-empty');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    list: {
-      type: 'array',
-      values: {
-        type: 'integer',
-        message: value
-      }
-    },
-  }
 
   it('should error on invalid array value type', function(done) {
     var validator = new Schema(descriptor);
@@ -30,17 +16,7 @@ describe('async-validate:', function() {
   });
 
   it('should error on invalid array value types', function(done) {
-    var descriptor = {
-      list: {
-        type: 'array',
-        values: [
-          {type: 'integer', message: value},
-          {type: 'string', message: value},
-          {type: 'float', message: value}
-        ]
-      },
-    }
-    var validator = new Schema(descriptor);
+    var validator = new Schema(mixed);
     validator.validate({list: [16,'foo', 12]}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql('12 is not a float');
@@ -76,13 +52,7 @@ describe('async-validate:', function() {
   });
 
   it('should ignore validation with empty array as values', function(done) {
-    var descriptor = {
-      list: {
-        type: 'array',
-        values: []
-      },
-    }
-    var validator = new Schema(descriptor);
+    var validator = new Schema(empty);
     validator.validate({list: [1,2,3, 'foo']}, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);
