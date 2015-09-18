@@ -1,5 +1,6 @@
 var value = require('../value-message')
   , schema = {
+      type: 'object',
       fields: {
         list: {
           type: 'array',

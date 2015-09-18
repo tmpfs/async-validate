@@ -10,8 +10,9 @@ describe('async-validate:', function() {
   });
 
   it('should clone array', function(done) {
-    var value = [1,2,3];
-    expect(Schema.clone(value)).to.eql([1,2,3]);
+    var value = [1,2,['foo']];
+    expect(Schema.clone(value)).to.eql([1,2,['foo']]);
     done();
   });
+
 });

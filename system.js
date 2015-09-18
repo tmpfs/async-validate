@@ -6,10 +6,11 @@ var schema = {
     match: /./,
     fields: {
       additional: {type: 'boolean'},
-      list: {type: 'array'},
       fields: {type: ['object', 'array']},
       format: {type: 'string'},
       len: {type: 'integer'},
+      list: {type: 'array'},
+      local: {type: 'boolean'},
       min: {type: 'integer'},
       max: {type: 'integer'},
       pattern: {type: 'regexp'},

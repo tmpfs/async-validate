@@ -1,19 +1,13 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/date')
+  , noformat = require('../fixtures/schema/date-no-format')
+  , pattern = require('../fixtures/schema/date-pattern')
+  , range = require('../fixtures/schema/date-range');
 
 describe('async-validate:', function(done) {
 
-  var ptn = /^([\d]{4})-([\d]{2})-([\d]{2})$/;
-  var date = {
-    type: 'date',
-    pattern: /^([\d]{4})-([\d]{2})-([\d]{2})$/,
-    format: 'YYYY-MM-DD'
-  }
-
   it('should error on invalid date value using a format', function(done) {
-    var descriptor = {
-      active: {type: 'date', format: 'YYYY-MM-DD'}
-    }
     var schema = new Schema(descriptor);
     schema.validate({active: '2013-06-50'}, function(err, res) {
       expect(res.errors.length).to.eql(1);
@@ -25,10 +19,7 @@ describe('async-validate:', function(done) {
 
   it('should error on invalid date value no format (ISO 8601)',
     function(done) {
-      var descriptor = {
-        active: {type: 'date'}
-      }
-      var schema = new Schema(descriptor);
+      var schema = new Schema(noformat);
       schema.validate({active: '2011-10-10T10:20:90'}, function(err, res) {
         expect(res.errors.length).to.eql(1);
         expect(res.errors[0].message).to.eql(
@@ -40,10 +31,7 @@ describe('async-validate:', function(done) {
 
   it('should error on invalid date value no format (bad input)',
     function(done) {
-      var descriptor = {
-        active: {type: 'date'}
-      }
-      var schema = new Schema(descriptor);
+      var schema = new Schema(noformat);
       schema.validate({active: 'not a date'}, function(err, res) {
         expect(res.errors.length).to.eql(1);
         expect(res.errors[0].message).to.eql(
@@ -55,27 +43,18 @@ describe('async-validate:', function(done) {
 
   it('should error on invalid date value using a format and pattern',
     function(done) {
-      var descriptor = {
-        active: {
-          type: 'date',
-          format: 'YYYY-MM-DD',
-          pattern: ptn
-        }
-      }
-      var schema = new Schema(descriptor);
+      var schema = new Schema(pattern);
       schema.validate({active: '13-06-24'}, function(err, res) {
         expect(res.errors.length).to.eql(1);
         expect(res.errors[0].message).to.eql(
-          'active value 13-06-24 does not match pattern ' + ptn);
+          'active value 13-06-24 does not match pattern '
+          + pattern.fields.active.pattern);
         done();
       });
     }
   );
 
   it('should validate date value using a format', function(done) {
-    var descriptor = {
-      active: {type: 'date', format: 'YYYY-MM-DD'}
-    }
     var schema = new Schema(descriptor);
     schema.validate({active: '2013-06-24'}, function(err, res) {
       expect(err).to.eql(null);
@@ -109,11 +88,7 @@ describe('async-validate:', function(done) {
   });
 
   it('should validate optional date range reference', function(done) {
-    var descriptor = {
-      start: date,
-      end: date
-    }
-    var schema = new Schema(descriptor);
+    var schema = new Schema(range);
     schema.validate({start: '', end: '2013-06-24'}, function(err, res) {
       expect(err).to.eql(null);
       expect(res).to.eql(null);

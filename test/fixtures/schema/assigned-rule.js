@@ -1,5 +1,6 @@
 var expect = require('chai').expect
   , schema = {
+      type: 'object',
       fields: {
         id: {
           foo: 'bar',
