@@ -1,7 +1,9 @@
 // validate a field with a plugin rule
 var Schema = require('../..')
   , descriptor = {
-      id: {type: 'id', required: true}
+      fields: {
+        id: {type: 'id', required: true}
+      }
     }
   , source = {id: '-foo'}
   , schema;
@@ -10,7 +12,7 @@ require('../../plugin/all');
 
 // create plugin function
 function plugin() {
-  var pattern = /^[a-z0-9-]$/i;
+  var pattern = /^[a-z0-9]$/i;
   // create static rule function
   this.main.id = function id(cb) {
     if(!pattern.test(this.value)) {

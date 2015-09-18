@@ -1,12 +1,14 @@
 // override error message with function
 var Schema = require('../..')
   , descriptor = {
-      name: {
-        type: 'string',
-        required: true,
-        message: function(msg, parameters) {
-          return this.format(
-            'name must be specified (field: %s)', this.field);
+      fields: {
+        name: {
+          type: 'string',
+          required: true,
+          message: function(msg, parameters) {
+            return this.format(
+              'name must be specified (field: %s)', this.field);
+          }
         }
       }
     }

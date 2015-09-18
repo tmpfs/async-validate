@@ -1,11 +1,13 @@
 // use a placeholder to set a default value
 var Schema = require('../..')
   , descriptor = {
-      list: {
-        type: 'array',
-        values: {type: 'integer'},
-        placeholder: function() {
-          return []; 
+      fields: {
+        list: {
+          type: 'array',
+          values: {type: 'integer'},
+          placeholder: function() {
+            return []; 
+          }
         }
       }
     }

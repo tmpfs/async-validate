@@ -1,7 +1,9 @@
 // validate a field as required
 var Schema = require('../..')
   , descriptor = {
-      name: {type: 'string', required: true}
+      fields: {
+        name: {type: 'string', required: true}
+      }
     }
   , source = {}
   , schema;

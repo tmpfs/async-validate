@@ -2,7 +2,9 @@
 var Schema = require('../..')
   , Component = function Component(){}
   , descriptor = {
-      comp: {type: Component, required: true}
+      fields: {
+        comp: {type: Component, required: true}
+      }
     }
   , source = {comp: {}}
   , schema;

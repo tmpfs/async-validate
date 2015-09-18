@@ -1,7 +1,9 @@
 // validate a field type
 var Schema = require('../..')
   , descriptor = {
-      flag: {type: 'boolean', required: true}
+      fields: {
+        flag: {type: 'boolean', required: true}
+      }
     }
   , source = {flag: 'foo'}
   , schema;

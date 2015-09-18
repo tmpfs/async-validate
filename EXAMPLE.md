@@ -10,14 +10,15 @@ Table of Contents
       * [inline-rule](#inline-rule)
       * [instanceof](#instanceof)
       * [len](#len)
+      * [match](#match)
       * [max](#max)
       * [message-clone](#message-clone)
       * [message-function](#message-function)
       * [message-override](#message-override)
       * [message](#message)
       * [min](#min)
+      * [multiple-rules](#multiple-rules)
       * [multiple-types](#multiple-types)
-      * [multiple](#multiple)
       * [pattern](#pattern)
       * [placeholder](#placeholder)
       * [plugin-rule](#plugin-rule)
@@ -90,18 +91,20 @@ schema.validate(source, opts, function(err, res) {
 // assign a function to a rule
 var Schema = require('async-validate')
   , descriptor = {
-      id: {
-        expected: 'foo',
-        test: function(cb) {
-          if(this.value !== this.expected) {
-            this.raise(
-              this.reason('unexpected-id'),
-              'id expects %s, got %s',
-              this.expected,
-              this.value
-            ) 
+      fields: {
+        id: {
+          expected: 'foo',
+          test: function(cb) {
+            if(this.value !== this.expected) {
+              this.raise(
+                this.reason('unexpected-id'),
+                'id expects %s, got %s',
+                this.expected,
+                this.value
+              ) 
+            }
+            cb();
           }
-          cb();
         }
       }
     }
@@ -129,13 +132,15 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , opts = {bail: true}
   , descriptor = {
-      address: {
-        type: 'object',
-        fields: {
-          name: {type: 'string', required: true},
-          street: {type: 'string', required: true},
-          city: {type: 'string', required: true},
-          zip: {type: 'string', required: true}
+      fields: {
+        address: {
+          type: 'object',
+          fields: {
+            name: {type: 'string', required: true},
+            street: {type: 'string', required: true},
+            city: {type: 'string', required: true},
+            zip: {type: 'string', required: true}
+          }
         }
       }
     }
@@ -162,13 +167,15 @@ schema.validate(source, opts, function(err, res) {
 // validate properties of a nested object
 var Schema = require('async-validate')
   , descriptor = {
-      address: {
-        type: 'object',
-        fields: {
-          name: {type: 'string', required: true},
-          street: {type: 'string', required: true},
-          city: {type: 'string', required: true},
-          zip: {type: 'string', required: true}
+      fields: {
+        address: {
+          type: 'object',
+          fields: {
+            name: {type: 'string', required: true},
+            street: {type: 'string', required: true},
+            city: {type: 'string', required: true},
+            zip: {type: 'string', required: true}
+          }
         }
       }
     }
@@ -196,11 +203,13 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , reserved = ['foo']
   , descriptor = {
-      id: function(cb) {
-        if(~reserved.indexOf(this.value)) {
-          this.raise('%s is a reserved id', this.value); 
+      fields: {
+        id: function(cb) {
+          if(~reserved.indexOf(this.value)) {
+            this.raise('%s is a reserved id', this.value); 
+          }
+          cb();
         }
-        cb();
       }
     }
   , source = {id: 'foo'}
@@ -227,7 +236,9 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , Component = function Component(){}
   , descriptor = {
-      comp: {type: Component, required: true}
+      fields: {
+        comp: {type: Component, required: true}
+      }
     }
   , source = {comp: {}}
   , schema;
@@ -252,7 +263,9 @@ schema.validate(source, function(err, res) {
 // validate a field length
 var Schema = require('async-validate')
   , descriptor = {
-      func: {type: 'function', required: true, len: 1}
+      fields: {
+        func: {type: 'function', required: true, len: 1}
+      }
     }
   , source = {func: function noop(){}}
   , schema;
@@ -269,6 +282,38 @@ schema.validate(source, function(err, res) {
 [ { [Error: func must have exactly 1 arguments] field: 'func', reason: { id: 'length' } } ]
 ```
 
+#### match
+
+* [doc/example/match](https://github.com/freeformsystems/async-validate/blob/master/doc/example/match.js).
+
+```javascript
+// validate all fields of an object
+var Schema = require('async-validate')
+  , descriptor = {
+      type: 'object',
+      required: true,
+      //fields: {
+        all: {
+          match: /./,
+          type: 'string'
+        }
+      //}
+    }
+  , source = {address1: 'foo', address2: 'bar', address3: false}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: address3 is not a string] field: 'address3', reason: { id: 'type' } } ]
+```
+
 #### max
 
 * [doc/example/max](https://github.com/freeformsystems/async-validate/blob/master/doc/example/max.js).
@@ -277,7 +322,9 @@ schema.validate(source, function(err, res) {
 // validate a field has a maximum length
 var Schema = require('async-validate')
   , descriptor = {
-      func: {type: 'function', required: true, max: 1}
+      fields: {
+        func: {type: 'function', required: true, max: 1}
+      }
     }
   , source = {func: function noop(foo, bar){}}
   , schema;
@@ -303,9 +350,11 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , messages = Schema.clone(require('async-validate/messages'))
   , descriptor = {
-      name: {
-        type: 'string',
-        required: true
+      fields: {
+        name: {
+          type: 'string',
+          required: true
+        }
       }
     }
   , source = {}
@@ -335,12 +384,14 @@ schema.validate(source, function(err, res) {
 // override error message with function
 var Schema = require('async-validate')
   , descriptor = {
-      name: {
-        type: 'string',
-        required: true,
-        message: function(msg, parameters) {
-          return this.format(
-            'name must be specified (field: %s)', this.field);
+      fields: {
+        name: {
+          type: 'string',
+          required: true,
+          message: function(msg, parameters) {
+            return this.format(
+              'name must be specified (field: %s)', this.field);
+          }
         }
       }
     }
@@ -368,9 +419,11 @@ schema.validate(source, function(err, res) {
 var Schema = require('async-validate')
   , messages = require('async-validate/messages')
   , descriptor = {
-      name: {
-        type: 'string',
-        required: true
+      fields: {
+        name: {
+          type: 'string',
+          required: true
+        }
       }
     }
   , source = {}
@@ -399,10 +452,12 @@ schema.validate(source, function(err, res) {
 // override error message
 var Schema = require('async-validate')
   , descriptor = {
-      name: {
-        type: 'string',
-        required: true,
-        message: 'name must be specified'
+      fields: {
+        name: {
+          type: 'string',
+          required: true,
+          message: 'name must be specified'
+        }
       }
     }
   , source = {}
@@ -428,7 +483,9 @@ schema.validate(source, function(err, res) {
 // validate a field has a minimum length
 var Schema = require('async-validate')
   , descriptor = {
-      func: {type: 'function', required: true, min: 1}
+      fields: {
+        func: {type: 'function', required: true, min: 1}
+      }
     }
   , source = {func: function noop(){}}
   , schema;
@@ -445,51 +502,28 @@ schema.validate(source, function(err, res) {
 [ { [Error: func must have at least 1 arguments] field: 'func', reason: { id: 'min' } } ]
 ```
 
-#### multiple-types
+#### multiple-rules
 
-* [doc/example/multiple-types](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple-types.js).
-
-```javascript
-// validate a field as one of multiple types
-var Schema = require('async-validate')
-  , descriptor = {
-      flag: {type: ['boolean', Boolean], required: true}
-    }
-  , source = {flag: 'foo'}
-  , schema;
-
-require('async-validate/plugin/all');
-
-schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
-  console.dir(res.errors);
-});
-```
-
-```
-[ { [Error: flag is not one of the allowed types boolean, Boolean] field: 'flag', reason: { id: 'type' } } ]
-```
-
-#### multiple
-
-* [doc/example/multiple](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple.js).
+* [doc/example/multiple-rules](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple-rules.js).
 
 ```javascript
 // validate a field with multiple rules
 var Schema = require('async-validate')
   , data = {bar: 'qux'}
   , descriptor = {
-      id: [
-        {type: 'string', required: true},
-        function exists(cb) {
-          if(!data[this.value]) {
-            this.raise(
-              this.reason('missing-id'),
-              'id %s does not exist', this.value);
+      fields: {
+        id: [
+          {type: 'string', required: true},
+          function exists(cb) {
+            if(!data[this.value]) {
+              this.raise(
+                this.reason('missing-id'),
+                'id %s does not exist', this.value);
+            }
+            cb();
           }
-          cb();
-        }
-      ]
+        ]
+      }
     }
   , source = {id: 'foo'}
   , schema;
@@ -506,6 +540,33 @@ schema.validate(source, function(err, res) {
 [ { [Error: id foo does not exist] field: 'id', reason: { id: 'missing-id' } } ]
 ```
 
+#### multiple-types
+
+* [doc/example/multiple-types](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple-types.js).
+
+```javascript
+// validate a field as one of multiple types
+var Schema = require('async-validate')
+  , descriptor = {
+      fields: {
+        flag: {type: ['boolean', Boolean], required: true}
+      }
+    }
+  , source = {flag: 'foo'}
+  , schema;
+
+require('async-validate/plugin/all');
+
+schema = new Schema(descriptor);
+schema.validate(source, function(err, res) {
+  console.dir(res.errors);
+});
+```
+
+```
+[ { [Error: flag is not one of the allowed types boolean, Boolean] field: 'flag', reason: { id: 'type' } } ]
+```
+
 #### pattern
 
 * [doc/example/pattern](https://github.com/freeformsystems/async-validate/blob/master/doc/example/pattern.js).
@@ -514,7 +575,9 @@ schema.validate(source, function(err, res) {
 // validate a field as matching a pattern
 var Schema = require('async-validate')
   , descriptor = {
-      name: {type: 'string', required: true, pattern: /^[a-z0-9]+$/i}
+      fields: {
+        name: {type: 'string', required: true, pattern: /^[a-z0-9]+$/i}
+      }
     }
   , source = {name: '-name'}
   , schema;
@@ -539,11 +602,13 @@ schema.validate(source, function(err, res) {
 // use a placeholder to set a default value
 var Schema = require('async-validate')
   , descriptor = {
-      list: {
-        type: 'array',
-        values: {type: 'integer'},
-        placeholder: function() {
-          return []; 
+      fields: {
+        list: {
+          type: 'array',
+          values: {type: 'integer'},
+          placeholder: function() {
+            return []; 
+          }
         }
       }
     }
@@ -570,7 +635,9 @@ schema.validate(source, function(err, res) {
 // validate a field with a plugin rule
 var Schema = require('async-validate')
   , descriptor = {
-      id: {type: 'id', required: true}
+      fields: {
+        id: {type: 'id', required: true}
+      }
     }
   , source = {id: '-foo'}
   , schema;
@@ -579,7 +646,7 @@ require('async-validate/plugin/all');
 
 // create plugin function
 function plugin() {
-  var pattern = /^[a-z0-9-]$/i;
+  var pattern = /^[a-z0-9]$/i;
   // create static rule function
   this.main.id = function id(cb) {
     if(!pattern.test(this.value)) {
@@ -610,7 +677,9 @@ schema.validate(source, function(err, res) {
 // validate a field has a length within a range
 var Schema = require('async-validate')
   , descriptor = {
-      func: {type: 'function', required: true, min: 1, max: 2}
+      fields: {
+        func: {type: 'function', required: true, min: 1, max: 2}
+      }
     }
   , source = {func: function noop(foo, bar, qux){}}
   , schema;
@@ -635,7 +704,9 @@ schema.validate(source, function(err, res) {
 // validate a field as required
 var Schema = require('async-validate')
   , descriptor = {
-      name: {type: 'string', required: true}
+      fields: {
+        name: {type: 'string', required: true}
+      }
     }
   , source = {}
   , schema;
@@ -687,32 +758,34 @@ var Schema = require('async-validate')
   , state = {}
   , opts = {state: state}
   , descriptor = {
-      email: [
-        {type: 'string', required: true, pattern: /^.+@.+\..+/},
-        function parse(cb) {
-          var at = this.value.indexOf('@')
-            , user = this.value.substr(0, at)
-            , domain = this.value.substr(at + 1);
-          // assign to validation state
-          this.state.email = {user: user, domain: domain};
-          cb(); 
-        },
-        function lookup(cb) {
-          function resolve(err, addr) {
-            if(err && err.code === 'ENOTFOUND') {
-              this.raise(
-                '%s: could not resolve dns for domain %s',
-                this.field,
-                this.state.email.domain);
-            }else if(err) {
-              return cb(err); 
-            }
-            this.state.addr = addr;
+      fields: {
+        email: [
+          {type: 'string', required: true, pattern: /^.+@.+\..+/},
+          function parse(cb) {
+            var at = this.value.indexOf('@')
+              , user = this.value.substr(0, at)
+              , domain = this.value.substr(at + 1);
+            // assign to validation state
+            this.state.email = {user: user, domain: domain};
             cb(); 
+          },
+          function lookup(cb) {
+            function resolve(err, addr) {
+              if(err && err.code === 'ENOTFOUND') {
+                this.raise(
+                  '%s: could not resolve dns for domain %s',
+                  this.field,
+                  this.state.email.domain);
+              }else if(err) {
+                return cb(err); 
+              }
+              this.state.addr = addr;
+              cb(); 
+            }
+            dns.resolve(this.state.email.domain, resolve.bind(this));
           }
-          dns.resolve(this.state.email.domain, resolve.bind(this));
-        }
-      ]
+        ]
+      }
     }
   // force dns failure with random domain
   , source = {email: 'foo@' + Date.now() + '.com'}
@@ -727,7 +800,7 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442469859410.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442542446886.com] field: 'email' } ]
 ```
 
 #### type
@@ -738,7 +811,9 @@ schema.validate(source, opts, function(err, res) {
 // validate a field type
 var Schema = require('async-validate')
   , descriptor = {
-      flag: {type: 'boolean', required: true}
+      fields: {
+        flag: {type: 'boolean', required: true}
+      }
     }
   , source = {flag: 'foo'}
   , schema;
@@ -763,7 +838,9 @@ schema.validate(source, function(err, res) {
 // validate a field as whitespace
 var Schema = require('async-validate')
   , descriptor = {
-      name: {type: 'string', required: true, whitespace: true}
+      fields: {
+        name: {type: 'string', required: true, whitespace: true}
+      }
     }
   , source = {name: '  '}
   , schema;

@@ -2,9 +2,11 @@
 var Schema = require('../..')
   , messages = Schema.clone(require('../../messages'))
   , descriptor = {
-      name: {
-        type: 'string',
-        required: true
+      fields: {
+        name: {
+          type: 'string',
+          required: true
+        }
       }
     }
   , source = {}

@@ -2,11 +2,13 @@
 var Schema = require('../..')
   , reserved = ['foo']
   , descriptor = {
-      id: function(cb) {
-        if(~reserved.indexOf(this.value)) {
-          this.raise('%s is a reserved id', this.value); 
+      fields: {
+        id: function(cb) {
+          if(~reserved.indexOf(this.value)) {
+            this.raise('%s is a reserved id', this.value); 
+          }
+          cb();
         }
-        cb();
       }
     }
   , source = {id: 'foo'}

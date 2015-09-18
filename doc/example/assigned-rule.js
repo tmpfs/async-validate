@@ -1,18 +1,20 @@
 // assign a function to a rule
 var Schema = require('../..')
   , descriptor = {
-      id: {
-        expected: 'foo',
-        test: function(cb) {
-          if(this.value !== this.expected) {
-            this.raise(
-              this.reason('unexpected-id'),
-              'id expects %s, got %s',
-              this.expected,
-              this.value
-            ) 
+      fields: {
+        id: {
+          expected: 'foo',
+          test: function(cb) {
+            if(this.value !== this.expected) {
+              this.raise(
+                this.reason('unexpected-id'),
+                'id expects %s, got %s',
+                this.expected,
+                this.value
+              ) 
+            }
+            cb();
           }
-          cb();
         }
       }
     }
