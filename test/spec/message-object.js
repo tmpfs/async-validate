@@ -1,17 +1,8 @@
 var expect = require('chai').expect
-  , schema = require('../../index');
+  , schema = require('../../index')
+  , descriptor = require('../fixtures/schema/message-object');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    num: {
-      type: 'number', min: 0, max: 10,
-      message: {
-        min: 'Number may not be below zero',
-        max: 'Number may not be above ten'
-      }
-    }
-  }
 
   it('should validate using a custom error message as min', function(done) {
     var validator = new schema(descriptor);
