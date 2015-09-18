@@ -1,22 +1,22 @@
 var expect = require('chai').expect
-  , schema = require('../../index')
+  , Schema = require('../../index')
   , msg = require('../../messages')
   , descriptor = require('../fixtures/schema/message-string')
   , func = require('../fixtures/schema/message-function')
   , funcerror = require('../fixtures/schema/message-function-error')
-  , override = require('../fixtures/schema/message-string-override')
+  , override = require('../fixtures/schema/message-string-override');
 
 describe('async-validate:', function() {
 
   // clone of the default messages
-  var clone = schema.clone(msg);
+  var clone = Schema.clone(msg);
 
   // change a message
   clone.required = '%s is a required field';
 
   it('should validate using a custom error message', function(done) {
-    var validator = new schema(descriptor);
-    validator.validate({}, function(err, res) {
+    var schema = new Schema(descriptor);
+    schema.validate({}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql('Name is required');
       done();
@@ -24,8 +24,8 @@ describe('async-validate:', function() {
   });
 
   it('should validate using a custom error message function', function(done) {
-    var validator = new schema(func);
-    validator.validate({}, function(err, res) {
+    var schema = new Schema(func);
+    schema.validate({}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql('Name is required');
       done();
@@ -34,8 +34,8 @@ describe('async-validate:', function() {
 
   it('should validate using an message function (returns Error)',
     function(done) {
-      var validator = new schema(funcerror);
-      validator.validate({}, function(err, res) {
+      var schema = new Schema(funcerror);
+      schema.validate({}, function(err, res) {
         expect(res.errors.length).to.eql(1);
         expect(res.errors[0].message).to.eql('Name is required');
         done();
@@ -44,12 +44,12 @@ describe('async-validate:', function() {
   );
 
   it('should validate using custom messages', function(done) {
-    var validator = new schema(override);
+    var schema = new Schema(override);
 
-    // assign updated messages to the schema
-    validator.messages(clone);
+    // assign updated messages to the Schema
+    schema.messages(clone);
 
-    validator.validate({}, function(err, res) {
+    schema.validate({}, function(err, res) {
       expect(res.errors.length).to.eql(1);
       expect(res.errors[0].message).to.eql('name is a required field');
       done();

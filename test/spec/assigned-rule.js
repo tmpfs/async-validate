@@ -3,7 +3,7 @@ var Schema = require('../../index')
 
 describe('async-validate:', function() {
 
-  it('should access rule property from validator function', function(done) {
+  it('should access rule property from test function', function(done) {
     var schema = new Schema(descriptor);
     schema.validate({id: 'mock'}, function() {
       done();
