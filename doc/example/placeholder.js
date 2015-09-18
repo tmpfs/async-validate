@@ -17,6 +17,6 @@ var Schema = require('../..')
 require('../../plugin/all');
 
 schema = new Schema(descriptor);
-schema.validate(source, function(err, res) {
+schema.validate(source, function() {
   console.dir(source);
 });

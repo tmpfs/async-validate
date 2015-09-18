@@ -15,7 +15,6 @@
       "test/spec.js",
       "node_modules",
       "coverage",
-      "doc",
       "async-validate.js"
     ]
 }

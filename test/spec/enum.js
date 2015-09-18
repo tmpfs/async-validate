@@ -1,11 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/enum');
 
 describe('async-validate:', function() {
-
-  var descriptor = {
-    role: {type: 'enum', list: ['admin', 'user', 'guest']}
-  }
 
   it('should error on invalid enum value', function(done) {
     var schema = new Schema(descriptor);

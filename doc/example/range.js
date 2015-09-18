@@ -5,7 +5,13 @@ var Schema = require('../..')
         func: {type: 'function', required: true, min: 1, max: 2}
       }
     }
-  , source = {func: function noop(foo, bar, qux){}}
+  , source = {
+      func: function noop(foo, bar, qux){
+        foo();
+        bar();
+        qux();
+      }
+    }
   , schema;
 
 require('../../plugin/all');

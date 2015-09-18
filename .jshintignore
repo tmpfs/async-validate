@@ -1,5 +1,4 @@
 node_modules
 test/spec.js
 coverage
-doc
 async-validate.js

@@ -12,7 +12,12 @@ var Schema = require('../..')
           fields: {
             street: {type: 'string', required: true},
             city: {type: 'string', required: true},
-            zip: {type: 'string', required: true, len: 8, message: 'Invalid zip'}
+            zip: {
+              type: 'string',
+              required: true,
+              len: 8,
+              message: 'Invalid zip'
+            }
           }
         }
       }
@@ -24,7 +29,7 @@ var Schema = require('../..')
         name: 'unknown-field',
         street: 'Mock St',
         city: 'Mock City',
-        zip: '12345678',
+        zip: '12345678'
       }
     }
   , schema;

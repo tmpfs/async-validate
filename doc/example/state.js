@@ -1,6 +1,5 @@
 // pass state information between rule test functions
 var Schema = require('../..')
-  , url = require('url')
   , dns = require('dns')
   , state = {}
   , opts = {state: state}
