@@ -3,8 +3,26 @@ var expect = require('chai').expect
 
 describe("async-validate:", function() {
 
+  var descriptor = {
+    type: 'object',
+    fields: {
+      name: {
+        type: 'string'
+      }
+    }
+  }
+
+  var unknown = {
+    type: 'object',
+    fields: {
+      name: {
+        type: 'unknown-type'
+      }
+    }
+  }
+
   it("should define with fields", function(done) {
-    var schema = new Schema({fields: {name: {type: 'string'}}}); 
+    var schema = new Schema(descriptor); 
     expect(schema.rules).to.be.an('object');
     expect(schema.rules.fields).to.be.an('object');
     done();
@@ -30,7 +48,7 @@ describe("async-validate:", function() {
   });
 
   it("should error on validate with no source", function(done) {
-    var schema = new Schema({name: function(cb){cb()}}); 
+    var schema = new Schema(descriptor); 
     function fn() {
       schema.validate();
     }
@@ -40,7 +58,7 @@ describe("async-validate:", function() {
   });
 
   it("should error on validate with no callback", function(done) {
-    var schema = new Schema({name: function(cb){cb()}}); 
+    var schema = new Schema(descriptor); 
     function fn() {
       schema.validate({});
     }
@@ -50,14 +68,7 @@ describe("async-validate:", function() {
   });
 
   it("should error on validate with unknown type", function(done) {
-    var descriptor = {
-          fields: {
-            name: {
-              type: 'unknown-type'
-            }
-          }
-        }
-      , schema = new Schema(descriptor); 
+    var schema = new Schema(unknown); 
 
     function fn() {
       schema.validate({}, function noop(){});

@@ -65,7 +65,10 @@ describe('async-validate:', function() {
 
   it('should validate date value using a format and local', function(done) {
     var descriptor = {
-      active: {type: 'date', format: 'YYYY-MM-DD', local: true}
+      type: 'object',
+      fields: {
+        active: {type: 'date', format: 'YYYY-MM-DD', local: true}
+      }
     }
     var schema = new Schema(descriptor);
     schema.validate({active: '2013-06-24'}, function(err, res) {
@@ -76,9 +79,6 @@ describe('async-validate:', function() {
   });
 
   it('should validate date value no format (ISO 8601)', function(done) {
-    var descriptor = {
-      active: {type: 'date'}
-    }
     var schema = new Schema(descriptor);
     schema.validate({active: '2011-10-10T10:20:30'}, function(err, res) {
       expect(err).to.eql(null);

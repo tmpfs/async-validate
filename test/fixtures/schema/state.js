@@ -1,5 +1,6 @@
 var expect = require('chai').expect
   , schema = {
+      type: 'object',
       fields: {
         email: [
           {type: 'string', required: true, pattern: /^.+@.+\..+/},
