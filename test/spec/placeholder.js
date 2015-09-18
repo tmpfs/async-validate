@@ -1,16 +1,8 @@
 var expect = require('chai').expect
-  , Schema = require('../../index');
+  , Schema = require('../../index')
+  , descriptor = require('../fixtures/schema/placeholder');
 
 describe("async-validate:", function() {
-  var descriptor = {
-    list: {
-      type: 'array',
-      values: {type: 'integer'},
-      placeholder: function() {
-        return []; 
-      }
-    }
-  }
 
   it("should set default value for field (placeholder)", function(done) {
     var schema= new Schema(descriptor)
