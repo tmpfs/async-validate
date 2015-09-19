@@ -53,8 +53,6 @@ Table of Contents
         * [validate](#validate)
         * [Schema.plugin](#schemaplugin)
         * [Schema.clone](#schemaclone)
-      * [Reason](#reason)
-      * [Error](#error)
       * [Rule](#rule)
         * [isRoot](#isroot)
         * [reason](#reason)
@@ -62,6 +60,8 @@ Table of Contents
         * [format](#format)
         * [validates](#validates)
         * [diff](#diff)
+      * [Error](#error)
+      * [Reason](#reason)
   * [Developer](#developer)
     * [Test](#test-1)
     * [Spec](#spec)
@@ -833,25 +833,6 @@ function clone(source, [target])
 
 Static clone; deep copies simple objects and arrays, `RegExp` instances are passed by reference.
 
-#### Reason
-
-```javascript
-function Reason(id, [opts])
-```
-
-Represents the reason for a validation error, may be created using `reason()`.
-
-You must supply a reason `id`; if `opts` are passed they are assigned as properties of the reason instance. When `toString()` is called on a `Reason` instance the `id` is returned.
-
-#### Error
-
-The errors created by [raise](#raise) are assigned the following public fields:
-
-* `field`: The name of the field that failed validation.
-* `value`: The value of the field.
-* `parent`: The parent object that declares the field. 
-* `reason`: A [Reason](#reason) for the error when available.
-
 #### Rule
 
 ```javascript
@@ -922,6 +903,25 @@ function diff(expected, received)
 ```
 
 Compare two arrays, return `false` if they are equal otherwise return an array that is the difference between the supplied arrays.
+
+#### Error
+
+The errors created by [raise](#raise) are assigned the following public fields:
+
+* `field`: The name of the field that failed validation.
+* `value`: The value of the field.
+* `parent`: The parent object that declares the field. 
+* `reason`: A [Reason](#reason) for the error when available.
+
+#### Reason
+
+```javascript
+function Reason(id, [opts])
+```
+
+Represents the reason for a validation error, may be created using `reason()`.
+
+You must supply a reason `id`; if `opts` are passed they are assigned as properties of the reason instance. When `toString()` is called on a `Reason` instance the `id` is returned.
 
 ## Developer
 
