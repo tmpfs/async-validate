@@ -16,7 +16,7 @@ var schema = {
     required: {type: 'boolean'},
     test: {type: 'function'},
     type: {
-      type: ['string', 'function'],
+      type: ['string', 'function', 'array'],
       required: true
     },
     values: {type: ['object', 'array']},

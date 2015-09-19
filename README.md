@@ -339,7 +339,7 @@ See the [system schema](https://github.com/freeformsystems/async-validate/blob/m
 
 ##### Type Identifier
 
-* `type <string|function>`: Type identifier or constructor function.
+* `type <string|function|array>`: Type identifier, constructor function or list of types.
 
 The `type` property indicates the type of rule to use, a type corresponds to a plugin function and the plugin should have been loaded.
 
