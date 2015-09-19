@@ -72,8 +72,9 @@ function Rule(opts)
 Encapsulates the data associated with a validation rule and the value to be validated. Rule functions are invoked in the scope of a `Rule` instance which exposes the following public fields:
 
 * `rule`: The validation rule in the schema descriptor.
-* `value`: The value of the source object property being validated.
-* `field`: The name of the field being validated.
+* `value`: The value of the property being validated.
+* `field`: The name of the property being validated.
+* `parent`: The parent object that declares the property.
 * `source`: The source object passed to `validate()`.
 * `messages`: Reference to the schema messages.
 * `errors`: Array of errors for the field validation.
