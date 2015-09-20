@@ -8,9 +8,9 @@ describe('async-validate:', function() {
     var schema = new Schema(descriptor)
       , source = {address:{}};
     schema.validate(source, function(err, res) {
-      console.dir(res.fields);
-      //expect(res.errors.length).to.eql(1);
-      //expect(res.errors[0].message).to.eql('flag is not a boolean');
+      //console.dir(res.fields);
+      expect(res.fields.name.length).to.eql(1);
+      expect(res.fields['address.name'].length).to.eql(1);
       done();
     });
   });
