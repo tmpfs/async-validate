@@ -139,6 +139,7 @@ Compare two arrays, return `false` if they are equal otherwise return an array t
 
 The errors created by [raise](#raise) are assigned the following public fields:
 
+* `key`: Unique key for the error, eg: `address.name`.
 * `field`: The name of the property that failed validation.
 * `value`: The value of the property.
 * `parent`: The parent object that declares the property.

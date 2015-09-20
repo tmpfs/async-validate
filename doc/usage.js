@@ -19,8 +19,8 @@ schema.validate(source, function(err, res) {
     throw err; 
   }else if(res) {
     // validation failed, res.errors is an array of all errors
-    // res.fields is a map keyed by field name with an array of
-    // errors per field
+    // res.fields is a map keyed by field unique id (eg: `address.name`)
+    // assigned an array of errors per field
     return console.dir(res.errors)
   }
   // validation passed

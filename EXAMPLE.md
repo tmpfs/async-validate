@@ -84,8 +84,24 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: extraneous fields (id, name) found in root] field: 'root', reason: { id: 'additional' } },
-  { [Error: extraneous fields (name) found in address] field: 'address', reason: { id: 'additional' } } ]
+[ { [Error: extraneous fields (id, name) found in root]
+    field: 'root',
+    value: { id: 'unknown-field', name: 'unknown-field', address: [Object] },
+    parent: { id: 'unknown-field', name: 'unknown-field', address: [Object] },
+    names: [],
+    key: 'root',
+    reason: { id: 'additional' } },
+  { [Error: extraneous fields (name) found in address]
+    field: 'address',
+    value: 
+     { name: 'unknown-field',
+       street: 'Mock St',
+       city: 'Mock City',
+       zip: '12345678' },
+    parent: { id: 'unknown-field', name: 'unknown-field', address: [Object] },
+    names: [ 'address' ],
+    key: 'address',
+    reason: { id: 'additional' } } ]
 ```
 
 #### assigned-rule
@@ -126,7 +142,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: id expects foo, got qux] field: 'id', reason: { id: 'unexpected-id' } } ]
+[ { [Error: id expects foo, got qux]
+    field: 'id',
+    value: 'qux',
+    parent: { id: 'qux' },
+    names: [ 'id' ],
+    key: 'id',
+    reason: { id: 'unexpected-id' } } ]
 ```
 
 #### bail
@@ -163,7 +185,13 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: street is required] field: 'street', reason: { id: 'required' } } ]
+[ { [Error: street is required]
+    field: 'street',
+    value: undefined,
+    parent: undefined,
+    names: [ 'address' ],
+    key: 'address.street',
+    reason: { id: 'required' } } ]
 ```
 
 #### deep
@@ -199,7 +227,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: zip is required] field: 'zip', reason: { id: 'required' } } ]
+[ { [Error: zip is required]
+    field: 'zip',
+    value: undefined,
+    parent: undefined,
+    names: [ 'address' ],
+    key: 'address.zip',
+    reason: { id: 'required' } } ]
 ```
 
 #### inline-rule
@@ -233,7 +267,12 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: foo is a reserved id] field: 'id' } ]
+[ { [Error: foo is a reserved id]
+    field: 'id',
+    value: 'foo',
+    parent: { id: 'foo' },
+    names: [ 'id' ],
+    key: 'id' } ]
 ```
 
 #### instanceof
@@ -262,7 +301,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: comp is not an instance of Component] field: 'comp', reason: { id: 'instanceof' } } ]
+[ { [Error: comp is not an instance of Component]
+    field: 'comp',
+    value: {},
+    parent: { comp: {} },
+    names: [ 'comp' ],
+    key: 'comp',
+    reason: { id: 'instanceof' } } ]
 ```
 
 #### len
@@ -290,7 +335,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: func must have exactly 1 arguments] field: 'func', reason: { id: 'length' } } ]
+[ { [Error: func must have exactly 1 arguments]
+    field: 'func',
+    value: [Function: noop],
+    parent: { func: [Function: noop] },
+    names: [ 'func' ],
+    key: 'func',
+    reason: { id: 'length' } } ]
 ```
 
 #### match
@@ -322,7 +373,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: address3 is not a string] field: 'address3', reason: { id: 'type' } } ]
+[ { [Error: address3 is not a string]
+    field: 'address3',
+    value: false,
+    parent: { address1: 'foo', address2: 'bar', address3: false },
+    names: [ 'address3' ],
+    key: 'address3',
+    reason: { id: 'type' } } ]
 ```
 
 #### max
@@ -355,7 +412,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: func cannot have more than 1 arguments] field: 'func', reason: { id: 'max' } } ]
+[ { [Error: func cannot have more than 1 arguments]
+    field: 'func',
+    value: [Function: noop],
+    parent: { func: [Function: noop] },
+    names: [ 'func' ],
+    key: 'func',
+    reason: { id: 'max' } } ]
 ```
 
 #### message-clone
@@ -391,7 +454,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: name is a required field] field: 'name', reason: { id: 'required' } } ]
+[ { [Error: name is a required field]
+    field: 'name',
+    value: undefined,
+    parent: undefined,
+    names: [],
+    key: 'name',
+    reason: { id: 'required' } } ]
 ```
 
 #### message-function
@@ -426,7 +495,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: name must be specified (field: name)] field: 'name', reason: { id: 'required' } } ]
+[ { [Error: name must be specified (field: name)]
+    field: 'name',
+    value: undefined,
+    parent: undefined,
+    names: [],
+    key: 'name',
+    reason: { id: 'required' } } ]
 ```
 
 #### message-override
@@ -461,7 +536,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: name is a required field] field: 'name', reason: { id: 'required' } } ]
+[ { [Error: name is a required field]
+    field: 'name',
+    value: undefined,
+    parent: undefined,
+    names: [],
+    key: 'name',
+    reason: { id: 'required' } } ]
 ```
 
 #### message
@@ -493,7 +574,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: name must be specified] field: 'name', reason: { id: 'required' } } ]
+[ { [Error: name must be specified]
+    field: 'name',
+    value: undefined,
+    parent: undefined,
+    names: [],
+    key: 'name',
+    reason: { id: 'required' } } ]
 ```
 
 #### min
@@ -521,7 +608,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: func must have at least 1 arguments] field: 'func', reason: { id: 'min' } } ]
+[ { [Error: func must have at least 1 arguments]
+    field: 'func',
+    value: [Function: noop],
+    parent: { func: [Function: noop] },
+    names: [ 'func' ],
+    key: 'func',
+    reason: { id: 'min' } } ]
 ```
 
 #### multiple-rules
@@ -560,7 +653,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: id foo does not exist] field: 'id', reason: { id: 'missing-id' } } ]
+[ { [Error: id foo does not exist]
+    field: 'id',
+    value: 'foo',
+    parent: { id: 'foo' },
+    names: [ 'id' ],
+    key: 'id',
+    reason: { id: 'missing-id' } } ]
 ```
 
 #### multiple-types
@@ -588,7 +687,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: flag is not one of the allowed types boolean, Boolean] field: 'flag', reason: { id: 'type' } } ]
+[ { [Error: flag is not one of the allowed types boolean, Boolean]
+    field: 'flag',
+    value: 'foo',
+    parent: { flag: 'foo' },
+    names: [ 'flag' ],
+    key: 'flag',
+    reason: { id: 'type' } } ]
 ```
 
 #### pattern
@@ -616,7 +721,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: name value -name does not match pattern /^[a-z0-9]+$/i] field: 'name', reason: { id: 'pattern' } } ]
+[ { [Error: name value -name does not match pattern /^[a-z0-9]+$/i]
+    field: 'name',
+    value: '-name',
+    parent: { name: '-name' },
+    names: [ 'name' ],
+    key: 'name',
+    reason: { id: 'pattern' } } ]
 ```
 
 #### placeholder
@@ -693,7 +804,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: invalid id -foo] field: 'id', reason: { id: 'id' } } ]
+[ { [Error: invalid id -foo]
+    field: 'id',
+    value: '-foo',
+    parent: { id: '-foo' },
+    names: [ 'id' ],
+    key: 'id',
+    reason: { id: 'id' } } ]
 ```
 
 #### range
@@ -727,7 +844,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: func must have arguments length between 1 and 2] field: 'func', reason: { id: 'max' } } ]
+[ { [Error: func must have arguments length between 1 and 2]
+    field: 'func',
+    value: [Function: noop],
+    parent: { func: [Function: noop] },
+    names: [ 'func' ],
+    key: 'func',
+    reason: { id: 'max' } } ]
 ```
 
 #### required
@@ -755,7 +878,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: name is required] field: 'name', reason: { id: 'required' } } ]
+[ { [Error: name is required]
+    field: 'name',
+    value: undefined,
+    parent: undefined,
+    names: [],
+    key: 'name',
+    reason: { id: 'required' } } ]
 ```
 
 #### source-type
@@ -778,7 +907,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: source is not an object] field: 'source', reason: { id: 'type' } } ]
+[ { [Error: source is not an object]
+    field: 'source',
+    value: 'foo',
+    parent: 'foo',
+    names: [],
+    key: 'source',
+    reason: { id: 'type' } } ]
 ```
 
 #### state
@@ -835,7 +970,12 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442566773189.com] field: 'email' } ]
+[ { [Error: email: could not resolve dns for domain 1442714024700.com]
+    field: 'email',
+    value: 'foo@1442714024700.com',
+    parent: { email: 'foo@1442714024700.com' },
+    names: [ 'email' ],
+    key: 'email' } ]
 ```
 
 #### type
@@ -863,7 +1003,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: flag is not a boolean] field: 'flag', reason: { id: 'type' } } ]
+[ { [Error: flag is not a boolean]
+    field: 'flag',
+    value: 'foo',
+    parent: { flag: 'foo' },
+    names: [ 'flag' ],
+    key: 'flag',
+    reason: { id: 'type' } } ]
 ```
 
 #### whitespace
@@ -891,7 +1037,13 @@ schema.validate(source, function(err, res) {
 ```
 
 ```
-[ { [Error: name cannot be empty] field: 'name', reason: { id: 'whitespace' } } ]
+[ { [Error: name cannot be empty]
+    field: 'name',
+    value: '  ',
+    parent: { name: '  ' },
+    names: [ 'name' ],
+    key: 'name',
+    reason: { id: 'whitespace' } } ]
 ```
 
 Generated by [mdp(1)](https://github.com/freeformsystems/mdp).

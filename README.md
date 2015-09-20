@@ -113,8 +113,8 @@ schema.validate(source, function(err, res) {
     throw err; 
   }else if(res) {
     // validation failed, res.errors is an array of all errors
-    // res.fields is a map keyed by field name with an array of
-    // errors per field
+    // res.fields is a map keyed by field unique id (eg: `address.name`)
+    // assigned an array of errors per field
     return console.dir(res.errors)
   }
   // validation passed
@@ -909,6 +909,7 @@ Compare two arrays, return `false` if they are equal otherwise return an array t
 
 The errors created by [raise](#raise) are assigned the following public fields:
 
+* `key`: Unique key for the error, eg: `address.name`.
 * `field`: The name of the property that failed validation.
 * `value`: The value of the property.
 * `parent`: The parent object that declares the property.
