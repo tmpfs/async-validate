@@ -83,8 +83,6 @@ Async Validate
 
 Asynchronous validation for [node](http://nodejs.org) and the browser.
 
-Test cache invalidation.
-
 Examples are in [EXAMPLE](https://github.com/tmpfs/async-validate/blob/master/EXAMPLE.md) and the [example directory](https://github.com/tmpfs/async-validate/blob/master/doc/example).
 
 ## Install
