@@ -78,7 +78,8 @@ Async Validate
 ==============
 
 [<img src="https://travis-ci.org/tmpfs/async-validate.svg" alt="Build Status">](https://travis-ci.org/tmpfs/async-validate)
-[<img src="http://img.shields.io/npm/v/async-validate.svg" alt="npm version">](https://npmjs.org/package/async-validate).
+[<img src="http://img.shields.io/npm/v/async-validate.svg" alt="npm version">](https://npmjs.org/package/async-validate)
+[<img src="https://coveralls.io/repos/tmpfs/async-validate/badge.svg?branch=master&service=github" alt="Coverage Status">](https://coveralls.io/github/tmpfs/async-validate?branch=master).
 
 Asynchronous validation for [node](http://nodejs.org) and the browser.
 
