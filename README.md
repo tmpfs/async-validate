@@ -77,6 +77,8 @@ Table of Contents
 Async Validate
 ==============
 
+[<img src="https://travis-ci.org/tmpfs/async-validate.svg" alt="Build Status">](https://travis-ci.org/tmpfs/async-validate).
+
 Asynchronous validation for [node](http://nodejs.org) and the browser.
 
 Examples are in [EXAMPLE](https://github.com/tmpfs/async-validate/blob/master/EXAMPLE.md) and the [example directory](https://github.com/tmpfs/async-validate/blob/master/doc/example).
