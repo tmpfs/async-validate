@@ -7,7 +7,7 @@
   "browser": "./lib/schema.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/freeformsystems/async-validate.git"
+    "url": "https://github.com/tmpfs/async-validate.git"
   },
   "keywords": [
     "validation",
@@ -45,7 +45,7 @@
     "require": "lib",
     "links": "links.md",
     "toc": "Table of Contents",
-    "base": "https://github.com/freeformsystems/async-validate",
+    "base": "https://github.com/tmpfs/async-validate",
     "partial": [
       {
         "inc": [
