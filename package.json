@@ -23,6 +23,7 @@
     "async": "~1.4.2",
     "browserify": "~11.1.0",
     "chai": "~3.2.0",
+    "coveralls": "~2.11.6",
     "istanbul": "~0.3.17",
     "mocha": "~2.3.2",
     "moment": "~2.10.6"
@@ -36,7 +37,8 @@
     "clean": "rm -rf coverage ./async-validate.js ./test/spec.js",
     "spec": "node test/build.js > test/index.js && browserify -o test/spec.js -e test/index.js",
     "test": "NODE_ENV=test mocha test/global ${SPEC:-test/spec}",
-    "cover": "NODE_ENV=test istanbul cover _mocha -- test/global ${SPEC:-test/spec}"
+    "cover": "NODE_ENV=test istanbul cover _mocha -- test/global ${SPEC:-test/spec}",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "mdp": {
     "title": "Async Validate",

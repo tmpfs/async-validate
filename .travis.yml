@@ -8,4 +8,4 @@ node_js:
   - "0.10"
   - "stable"
 after_success:
-  - coveralls
+  - npm run coveralls
