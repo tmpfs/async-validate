@@ -77,7 +77,8 @@ Table of Contents
 Async Validate
 ==============
 
-[<img src="https://travis-ci.org/tmpfs/async-validate.svg" alt="Build Status">](https://travis-ci.org/tmpfs/async-validate).
+[<img src="https://travis-ci.org/tmpfs/async-validate.svg" alt="Build Status">](https://travis-ci.org/tmpfs/async-validate)
+[<img src="http://img.shields.io/npm/v/async-validate.svg" alt="npm version">](https://npmjs.org/package/async-validate).
 
 Asynchronous validation for [node](http://nodejs.org) and the browser.
 
