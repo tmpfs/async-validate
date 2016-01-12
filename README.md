@@ -30,6 +30,7 @@ Table of Contents
         * [Length](#length)
         * [Values](#values)
         * [Match](#match)
+        * [Resolve](#resolve)
         * [Test](#test)
         * [Whitespace](#whitespace)
     * [Errors](#errors)
@@ -491,6 +492,14 @@ This is useful when you have a sequence of properties that share the same rules:
 ```javascript
 {match: /^address[1-3]$/, type: 'string'}
 ```
+
+##### Resolve
+
+* `resolve <function>`: Rule location function.
+
+A function that may be declared to conditionally determine the rule to use for a given object, if is invoked *synchronously* in the scope of the object being validated. It should inspect the object and return a rule to use for that particular object.
+
+This is typically used to allow rules to be conditional on a property of an object, for example an object may have a `type` field that determines the type or class of object and validation needs to change for the different types.
 
 ##### Test
 
