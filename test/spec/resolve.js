@@ -46,6 +46,19 @@ describe("async-validate:", function() {
     }
   }
 
+  var mixed = {
+    type: 'object',
+    fields: {
+      performer: {
+        type: 'array',
+        values: {
+          type: 'object',
+          resolve: resolve
+        }
+      }
+    }
+  }
+
   it("should use resolve function error on required (Person)", function(done) {
     var schema = new Schema(descriptor)
       , source = {performer: {type: 'Person'}};
@@ -80,7 +93,7 @@ describe("async-validate:", function() {
 
   it("should use resolve function (Group type)", function(done) {
     var schema = new Schema(descriptor)
-      , source = {performer: {type: 'Group', name: 'joe'}};
+      , source = {performer: {type: 'Group', name: 'john'}};
     schema.validate(source, function(err, res){
       expect(err).to.be.null;
       expect(res).to.be.null;
@@ -96,6 +109,21 @@ describe("async-validate:", function() {
     }
     expect(fn).throws(/Unknown performer type/i);
     done();
+  });
+
+  it("should use resolve function (mixed types)", function(done) {
+    var schema = new Schema(mixed)
+      , source = {
+        performer: [
+          {type: 'Person', name: 'joe'},
+          {type: 'Group', name: 'john'}
+        ]
+      };
+    schema.validate(source, function(err, res){
+      expect(err).to.be.null;
+      expect(res).to.be.null;
+      done();
+    });
   });
 
 });
