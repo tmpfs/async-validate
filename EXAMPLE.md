@@ -36,7 +36,7 @@ Async Validate
 
 #### additional
 
-* [doc/example/additional](https://github.com/freeformsystems/async-validate/blob/master/doc/example/additional.js).
+* [doc/example/additional](https://github.com/tmpfs/async-validate/blob/master/doc/example/additional.js).
 
 ```javascript
 // generate errors when additional fields are present
@@ -106,7 +106,7 @@ schema.validate(source, opts, function(err, res) {
 
 #### assigned-rule
 
-* [doc/example/assigned-rule](https://github.com/freeformsystems/async-validate/blob/master/doc/example/assigned-rule.js).
+* [doc/example/assigned-rule](https://github.com/tmpfs/async-validate/blob/master/doc/example/assigned-rule.js).
 
 ```javascript
 // assign a function to a rule
@@ -153,7 +153,7 @@ schema.validate(source, function(err, res) {
 
 #### bail
 
-* [doc/example/bail](https://github.com/freeformsystems/async-validate/blob/master/doc/example/bail.js).
+* [doc/example/bail](https://github.com/tmpfs/async-validate/blob/master/doc/example/bail.js).
 
 ```javascript
 // bail on first error encountered
@@ -196,7 +196,7 @@ schema.validate(source, opts, function(err, res) {
 
 #### deep
 
-* [doc/example/deep](https://github.com/freeformsystems/async-validate/blob/master/doc/example/deep.js).
+* [doc/example/deep](https://github.com/tmpfs/async-validate/blob/master/doc/example/deep.js).
 
 ```javascript
 // validate properties of a nested object
@@ -238,7 +238,7 @@ schema.validate(source, function(err, res) {
 
 #### inline-rule
 
-* [doc/example/inline-rule](https://github.com/freeformsystems/async-validate/blob/master/doc/example/inline-rule.js).
+* [doc/example/inline-rule](https://github.com/tmpfs/async-validate/blob/master/doc/example/inline-rule.js).
 
 ```javascript
 // assign a function as a rule
@@ -277,7 +277,7 @@ schema.validate(source, function(err, res) {
 
 #### instanceof
 
-* [doc/example/instanceof](https://github.com/freeformsystems/async-validate/blob/master/doc/example/instanceof.js).
+* [doc/example/instanceof](https://github.com/tmpfs/async-validate/blob/master/doc/example/instanceof.js).
 
 ```javascript
 // validate a field is an instanceof a function
@@ -312,7 +312,7 @@ schema.validate(source, function(err, res) {
 
 #### len
 
-* [doc/example/len](https://github.com/freeformsystems/async-validate/blob/master/doc/example/len.js).
+* [doc/example/len](https://github.com/tmpfs/async-validate/blob/master/doc/example/len.js).
 
 ```javascript
 // validate a field length
@@ -346,7 +346,7 @@ schema.validate(source, function(err, res) {
 
 #### match
 
-* [doc/example/match](https://github.com/freeformsystems/async-validate/blob/master/doc/example/match.js).
+* [doc/example/match](https://github.com/tmpfs/async-validate/blob/master/doc/example/match.js).
 
 ```javascript
 // validate all fields of an object
@@ -384,7 +384,7 @@ schema.validate(source, function(err, res) {
 
 #### max
 
-* [doc/example/max](https://github.com/freeformsystems/async-validate/blob/master/doc/example/max.js).
+* [doc/example/max](https://github.com/tmpfs/async-validate/blob/master/doc/example/max.js).
 
 ```javascript
 // validate a field has a maximum length
@@ -423,7 +423,7 @@ schema.validate(source, function(err, res) {
 
 #### message-clone
 
-* [doc/example/message-clone](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message-clone.js).
+* [doc/example/message-clone](https://github.com/tmpfs/async-validate/blob/master/doc/example/message-clone.js).
 
 ```javascript
 // clone default messages
@@ -465,7 +465,7 @@ schema.validate(source, function(err, res) {
 
 #### message-function
 
-* [doc/example/message-function](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message-function.js).
+* [doc/example/message-function](https://github.com/tmpfs/async-validate/blob/master/doc/example/message-function.js).
 
 ```javascript
 // override error message with function
@@ -506,7 +506,7 @@ schema.validate(source, function(err, res) {
 
 #### message-override
 
-* [doc/example/message-override](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message-override.js).
+* [doc/example/message-override](https://github.com/tmpfs/async-validate/blob/master/doc/example/message-override.js).
 
 ```javascript
 // override default error message
@@ -547,7 +547,7 @@ schema.validate(source, function(err, res) {
 
 #### message
 
-* [doc/example/message](https://github.com/freeformsystems/async-validate/blob/master/doc/example/message.js).
+* [doc/example/message](https://github.com/tmpfs/async-validate/blob/master/doc/example/message.js).
 
 ```javascript
 // override error message
@@ -585,7 +585,7 @@ schema.validate(source, function(err, res) {
 
 #### min
 
-* [doc/example/min](https://github.com/freeformsystems/async-validate/blob/master/doc/example/min.js).
+* [doc/example/min](https://github.com/tmpfs/async-validate/blob/master/doc/example/min.js).
 
 ```javascript
 // validate a field has a minimum length
@@ -619,7 +619,7 @@ schema.validate(source, function(err, res) {
 
 #### multiple-rules
 
-* [doc/example/multiple-rules](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple-rules.js).
+* [doc/example/multiple-rules](https://github.com/tmpfs/async-validate/blob/master/doc/example/multiple-rules.js).
 
 ```javascript
 // validate a field with multiple rules
@@ -664,7 +664,7 @@ schema.validate(source, function(err, res) {
 
 #### multiple-types
 
-* [doc/example/multiple-types](https://github.com/freeformsystems/async-validate/blob/master/doc/example/multiple-types.js).
+* [doc/example/multiple-types](https://github.com/tmpfs/async-validate/blob/master/doc/example/multiple-types.js).
 
 ```javascript
 // validate a field as one of multiple types
@@ -698,7 +698,7 @@ schema.validate(source, function(err, res) {
 
 #### pattern
 
-* [doc/example/pattern](https://github.com/freeformsystems/async-validate/blob/master/doc/example/pattern.js).
+* [doc/example/pattern](https://github.com/tmpfs/async-validate/blob/master/doc/example/pattern.js).
 
 ```javascript
 // validate a field as matching a pattern
@@ -732,7 +732,7 @@ schema.validate(source, function(err, res) {
 
 #### placeholder
 
-* [doc/example/placeholder](https://github.com/freeformsystems/async-validate/blob/master/doc/example/placeholder.js).
+* [doc/example/placeholder](https://github.com/tmpfs/async-validate/blob/master/doc/example/placeholder.js).
 
 ```javascript
 // use a placeholder to set a default value
@@ -766,7 +766,7 @@ schema.validate(source, function() {
 
 #### plugin-rule
 
-* [doc/example/plugin-rule](https://github.com/freeformsystems/async-validate/blob/master/doc/example/plugin-rule.js).
+* [doc/example/plugin-rule](https://github.com/tmpfs/async-validate/blob/master/doc/example/plugin-rule.js).
 
 ```javascript
 // validate a field with a plugin rule
@@ -815,7 +815,7 @@ schema.validate(source, function(err, res) {
 
 #### range
 
-* [doc/example/range](https://github.com/freeformsystems/async-validate/blob/master/doc/example/range.js).
+* [doc/example/range](https://github.com/tmpfs/async-validate/blob/master/doc/example/range.js).
 
 ```javascript
 // validate a field has a length within a range
@@ -855,7 +855,7 @@ schema.validate(source, function(err, res) {
 
 #### required
 
-* [doc/example/required](https://github.com/freeformsystems/async-validate/blob/master/doc/example/required.js).
+* [doc/example/required](https://github.com/tmpfs/async-validate/blob/master/doc/example/required.js).
 
 ```javascript
 // validate a field as required
@@ -889,7 +889,7 @@ schema.validate(source, function(err, res) {
 
 #### source-type
 
-* [doc/example/source-type](https://github.com/freeformsystems/async-validate/blob/master/doc/example/source-type.js).
+* [doc/example/source-type](https://github.com/tmpfs/async-validate/blob/master/doc/example/source-type.js).
 
 ```javascript
 // validate the type of the source object
@@ -918,7 +918,7 @@ schema.validate(source, function(err, res) {
 
 #### state
 
-* [doc/example/state](https://github.com/freeformsystems/async-validate/blob/master/doc/example/state.js).
+* [doc/example/state](https://github.com/tmpfs/async-validate/blob/master/doc/example/state.js).
 
 ```javascript
 // pass state information between rule test functions
@@ -970,17 +970,17 @@ schema.validate(source, opts, function(err, res) {
 ```
 
 ```
-[ { [Error: email: could not resolve dns for domain 1442714024700.com]
+[ { [Error: email: could not resolve dns for domain 1452926841026.com]
     field: 'email',
-    value: 'foo@1442714024700.com',
-    parent: { email: 'foo@1442714024700.com' },
+    value: 'foo@1452926841026.com',
+    parent: { email: 'foo@1452926841026.com' },
     names: [ 'email' ],
     key: 'email' } ]
 ```
 
 #### type
 
-* [doc/example/type](https://github.com/freeformsystems/async-validate/blob/master/doc/example/type.js).
+* [doc/example/type](https://github.com/tmpfs/async-validate/blob/master/doc/example/type.js).
 
 ```javascript
 // validate a field type
@@ -1014,7 +1014,7 @@ schema.validate(source, function(err, res) {
 
 #### whitespace
 
-* [doc/example/whitespace](https://github.com/freeformsystems/async-validate/blob/master/doc/example/whitespace.js).
+* [doc/example/whitespace](https://github.com/tmpfs/async-validate/blob/master/doc/example/whitespace.js).
 
 ```javascript
 // validate a field as whitespace
@@ -1046,7 +1046,7 @@ schema.validate(source, function(err, res) {
     reason: { id: 'whitespace' } } ]
 ```
 
-Generated by [mdp(1)](https://github.com/freeformsystems/mdp).
+Generated by [mdp(1)](https://github.com/tmpfs/mdp).
 
 [node]: http://nodejs.org
 [npm]: http://www.npmjs.org
