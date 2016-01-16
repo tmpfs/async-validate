@@ -7,7 +7,7 @@ module.exports = function() {
     if(!this.isRoot()
       && this.rule.required
       && (!this.source.hasOwnProperty(this.field)
-        || this.value === undefined || this.value === null)) {
+        || this.value === undefined)) {
       this.raise(
         this.reasons.required,
         this.messages.required, this.field);
