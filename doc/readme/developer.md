@@ -32,7 +32,7 @@ npm run cover
 
 ### Lint
 
-Run the source tree through [jshint][]:
+Run the source tree through [jshint][] and [jscs][]:
 
 ```
 npm run lint
