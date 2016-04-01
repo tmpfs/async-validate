@@ -46,6 +46,7 @@ Options:
 * `parent`: Parent object for the `source` value.
 * `state`: Object to be used as the initial user data state.
 * `vars`: Object map of variables to assign to each rule.
+* `literal`: If `true` do not use parameter replacement for messages, pass through literally.
 
 ##### Schema.plugin
 
