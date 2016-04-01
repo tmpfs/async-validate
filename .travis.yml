@@ -1,11 +1,20 @@
 language: node_js
 script: npm run cover
 node_js:
-  - "4.1"
-  - "4.0"
-  - "0.12"
-  - "0.11"
-  - "0.10"
-  - "stable"
+  - '4.1'
+  - '4.0'
+  - '0.12'
+  - '0.11'
+  - '0.10'
+  - stable
 after_success:
   - npm run coveralls
+deploy:
+  provider: npm
+  email: freeformsystems@gmail.com
+  api_key:
+    secure: kOctSa5zH42RbwgIVF8z8MuVoqq283QVWqxAVCoHExHk8y6yM3KHyTHyVR+rxUUzZrcdLk9jxB6A4aVP0+6FQNVFpnp/kqO9BpNX0ROofrjst0xMlaZ6wUFMLlpdiauRhn3FUfyRy9PChz/7yPQ/OnlKSNr5zUKtIvtZXN37NQSK1jC27LmFMIpUSpZ0b0XWhx33xbkBQXvKvdmCv2ISs+mrex1lQJiDZQ9cpRS/7dJMIjool8S+IfOZCNfGwHg4dClgKD6XJc9KDxrOaTmQU+/H8xasC/SCXHDNz9GfsYOe2AIPBvRGvU8bn6AuIvUBWvn0gyNaqsRDfbBXWer+sMgzzhJnrEOU9v8m76U1Z1KT8UfWOBQ1Dcb9UTvoOhA00jJSRUA64t1pUPy/ErC8mCLS2TPxGLGH5X0Cgnz2jC1a36nMUzdlGHUC7ZZH216RxMPPLUZi3QWwDuyxtQeotSiBvFCPtZ97MV9TmoNe8laW9lVDGb6uVwTz1rTndAMhbQu/hMBm0AhvkHO0nPhB/xlC2GGfZR8ivZEYx75jD8XQJk9mMEwrDvVkBl07AH1VoDWOVEX2le4YmHhuxKjqct0SglymPvaa/WRl1XaEY1l3SSVmR7k4WD6XcYySgEsHco+RUWdZcjHTaERCK9NDDuNKyfTDnvEYm7pw/6t4vQU=
+  on:
+    tags: true
+    repo: tmpfs/async-validate
+    node: '4.1'
