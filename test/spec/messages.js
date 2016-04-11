@@ -56,4 +56,15 @@ describe('async-validate:', function() {
     });
   });
 
+  it('should validate using custom messages as option', function(done) {
+    // assign updated messages to the Schema
+    var schema = new Schema(override, {messages: clone});
+
+    schema.validate({}, function(err, res) {
+      expect(res.errors.length).to.eql(1);
+      expect(res.errors[0].message).to.eql('name is a required field');
+      done();
+    });
+  });
+
 });
