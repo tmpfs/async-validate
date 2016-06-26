@@ -2,6 +2,7 @@ var expect = require('chai').expect
   , Schema = require('../../index')
   , email = require('../fixtures/email')
   , descriptor = require('../fixtures/schema/multiple-rules')
+  , source = require('../fixtures/schema/multiple-rules-source')
   , multi = require('../fixtures/schema/multiple-rules-function');
 
 describe('async-validate:', function() {
@@ -18,9 +19,10 @@ describe('async-validate:', function() {
       });
     }
   );
+
   it('should error on multiple validation rules for a field single failure',
     function(done) {
-      var schema = new Schema(descriptor);
+      var schema = new Schema(source);
       schema.validate({email: 'user@example'}, function(err, res) {
         expect(res.errors.length).to.eql(1);
         expect(res.errors[0].message).to.eql(

@@ -7,7 +7,11 @@ var email = require('../email')
         email: [
           {type: 'string', required: true},
           {type: 'string', pattern: email}
-        ]
+        ],
+        token: function(cb) {
+          expect(this.source.email).to.be.a('string');
+          cb();
+        }
       }
     }
 
