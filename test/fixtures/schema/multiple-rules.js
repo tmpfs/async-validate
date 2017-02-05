@@ -1,6 +1,4 @@
-var expect = require('chai').expect;
-
-var email = require('../email') 
+var email = require('../email')
   , schema = {
       type: 'object',
       fields: {

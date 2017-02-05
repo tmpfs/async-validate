@@ -74,8 +74,8 @@ describe("async-validate:", function() {
     var schema = new Schema(descriptor)
       , source = {performer: {type: 'Person', name: 'joe'}};
     schema.validate(source, function(err, res){
-      expect(err).to.be.null;
-      expect(res).to.be.null;
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });
@@ -95,8 +95,8 @@ describe("async-validate:", function() {
     var schema = new Schema(descriptor)
       , source = {performer: {type: 'Group', name: 'john'}};
     schema.validate(source, function(err, res){
-      expect(err).to.be.null;
-      expect(res).to.be.null;
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });
@@ -105,7 +105,7 @@ describe("async-validate:", function() {
     var schema = new Schema(descriptor)
       , source = {performer: {type: 'Unknown', name: 'joe'}};
     function fn() {
-      schema.validate(source, function(err, res){});
+      schema.validate(source, function(/*err, res*/){});
     }
     expect(fn).throws(/Unknown performer type/i);
     done();
@@ -120,8 +120,8 @@ describe("async-validate:", function() {
         ]
       };
     schema.validate(source, function(err, res){
-      expect(err).to.be.null;
-      expect(res).to.be.null;
+      expect(err).to.eql(null);
+      expect(res).to.eql(null);
       done();
     });
   });

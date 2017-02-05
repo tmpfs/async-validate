@@ -19,22 +19,6 @@ describe('async-validate:', function() {
     });
   });
 
-  //it('should error on required string field (null)', function(done) {
-    //var descriptor = {
-      //type: 'object',
-      //fields: {
-        //name: {type: 'string', required: true}
-      //}
-    //}
-    //var schema = new Schema(descriptor);
-    //schema.validate({name: null}, function(err, res) {
-      //expect(res.errors.length).to.eql(2);
-      //expect(res.fields.name.length).to.eql(2);
-      //expect(res.errors[0].message).to.eql('name is required');
-      //done();
-    //});
-  //});
-
   it('should error on non-string type', function(done) {
     var descriptor = {
       type: 'object',
