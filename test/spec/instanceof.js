@@ -21,8 +21,9 @@ describe("async-validate:", function() {
     var schema = new Schema(anonymous);
     schema.validate({instance: []}, function(err, res) {
       expect(res.errors.length).to.eql(1);
-      expect(res.errors[0].message).to.eql(
-        'instance is not an instance of function (anonymous)');
+      expect(
+        /instance is not an instance of/.test(res.errors[0].message))
+          .to.eql(true)
       done();
     });
   });
