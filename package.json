@@ -13,7 +13,8 @@
     "validation",
     "validate",
     "valid",
-    "object"
+    "object",
+    "type"
   ],
   "dependencies": {
     "format-util": "~1.0.3",
@@ -30,7 +31,7 @@
   "scripts": {
     "lint": "jshint . && jscs .",
     "docs": "npm run example && npm run readme",
-    "readme": "mdp --force -v",
+    "readme": "mk readme",
     "example": "mdp --force -v -i doc/example.json -o EXAMPLE.md",
     "browser": "browserify -o async-validate.js -e ./lib/schema.js && du -bh async-validate.js",
     "clean": "rm -rf coverage ./async-validate.js ./test/spec.js",
@@ -38,47 +39,5 @@
     "test": "NODE_ENV=test mocha test/global ${SPEC:-test/spec}",
     "cover": "NODE_ENV=test istanbul cover _mocha -- test/global ${SPEC:-test/spec}",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-  },
-  "mdp": {
-    "title": "Async Validate",
-    "pedantic": true,
-    "include": "doc/readme",
-    "require": "lib",
-    "links": "links.md",
-    "toc": "Table of Contents",
-    "base": "https://github.com/tmpfs/async-validate",
-    "partial": [
-      {
-        "inc": [
-          "introduction.md",
-          "install.md",
-          "usage.md"
-        ]
-      },
-      {
-        "inc": "../usage.js",
-        "type": "code",
-        "language": "javascript"
-      },
-      {
-        "inc": [
-          "guide.md",
-          "messages.md",
-          "transform.md"
-        ]
-      },
-      {
-        "inc": "../transform.js",
-        "type": "code",
-        "language": "javascript"
-      },
-      {
-        "inc": [
-          "api.md",
-          "developer.md",
-          "license.md"
-        ]
-      }
-    ]
   }
 }

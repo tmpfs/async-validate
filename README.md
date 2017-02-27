@@ -1,86 +1,40 @@
-Table of Contents
-=================
+## Async Validate
 
-* [Async Validate](#async-validate)
-  * [Install](#install)
-  * [Usage](#usage)
-  * [Guide](#guide)
-    * [Descriptor](#descriptor)
-      * [Object Definition](#object-definition)
-      * [Array Definition](#array-definition)
-      * [Function Definition](#function-definition)
-      * [Composite Definition](#composite-definition)
-    * [Rules](#rules)
-      * [Inline Rule](#inline-rule)
-      * [Assigned Rule](#assigned-rule)
-      * [Plugin Rule](#plugin-rule)
-      * [Multiple Rules](#multiple-rules)
-      * [Deep Rules](#deep-rules)
-      * [Properties](#properties)
-        * [Type Identifier](#type-identifier)
-        * [Enumerable](#enumerable)
-        * [Date Format](#date-format)
-        * [Message](#message)
-        * [Required](#required)
-        * [Additional](#additional)
-        * [Fields](#fields)
-        * [Pattern](#pattern)
-        * [Placeholder](#placeholder)
-        * [Range](#range)
-        * [Length](#length)
-        * [Values](#values)
-        * [Match](#match)
-        * [Resolve](#resolve)
-        * [Test](#test)
-        * [Whitespace](#whitespace)
-    * [Errors](#errors)
-    * [Plugins](#plugins)
-      * [Loading Plugins](#loading-plugins)
-      * [Creating Plugins](#creating-plugins)
-      * [Helper Plugins](#helper-plugins)
-        * [pattern](#pattern)
-        * [range](#range)
-        * [required](#required)
-        * [type](#type)
-    * [Validation](#validation)
-      * [Bail](#bail)
-      * [Variables](#variables)
-      * [State](#state)
-    * [Messages](#messages)
-    * [Transform](#transform)
-    * [API](#api)
-      * [Schema](#schema)
-        * [messages](#messages)
-        * [validate](#validate)
-        * [Schema.plugin](#schemaplugin)
-        * [Schema.clone](#schemaclone)
-      * [Rule](#rule)
-        * [isRoot](#isroot)
-        * [reason](#reason)
-        * [raise](#raise)
-        * [format](#format)
-        * [validates](#validates)
-        * [diff](#diff)
-      * [Error](#error)
-      * [Reason](#reason)
-  * [Developer](#developer)
-    * [Test](#test-1)
-    * [Spec](#spec)
-    * [Cover](#cover)
-    * [Lint](#lint)
-    * [Browser](#browser)
-    * [Clean](#clean)
-    * [Docs](#docs)
-    * [Example](#example)
-    * [Readme](#readme)
-  * [License](#license)
+[![Build Status](https://travis-ci.org/tmpfs/async-validate.svg)](https://travis-ci.org/tmpfs/async-validate)
+[![npm version](http://img.shields.io/npm/v/async-validate.svg)](https://npmjs.org/package/async-validate)
+[![Coverage Status](https://coveralls.io/repos/tmpfs/async-validate/badge.svg?branch=master&service=github&v=1)](https://coveralls.io/github/tmpfs/async-validate?branch=master)
 
-Async Validate
-==============
+---
 
-[<img src="https://travis-ci.org/tmpfs/async-validate.svg" alt="Build Status">](https://travis-ci.org/tmpfs/async-validate)
-[<img src="http://img.shields.io/npm/v/async-validate.svg" alt="npm version">](https://npmjs.org/package/async-validate)
-[<img src="https://coveralls.io/repos/tmpfs/async-validate/badge.svg?branch=master&service=github&v=1" alt="Coverage Status">](https://coveralls.io/github/tmpfs/async-validate?branch=master).
+- [Async Validate](#async-validate)
+- [Install](#install)
+- [Usage](#usage)
+- [Guide](#guide)
+  - [Descriptor](#descriptor)
+  - [Rules](#rules)
+  - [Errors](#errors)
+  - [Plugins](#plugins)
+  - [Validation](#validation)
+  - [Messages](#messages)
+  - [Transform](#transform)
+  - [API](#api)
+- [Developer](#developer)
+  - [Test](#test)
+  - [Spec](#spec)
+  - [Cover](#cover)
+  - [Lint](#lint)
+  - [Browser](#browser)
+  - [Clean](#clean)
+  - [Docs](#docs)
+  - [Example](#example)
+  - [Readme](#readme)
+- [License](#license)
+
+---
+
+[![Build Status](https://travis-ci.org/tmpfs/async-validate.svg)](https://travis-ci.org/tmpfs/async-validate)
+[![npm version](http://img.shields.io/npm/v/async-validate.svg)](https://npmjs.org/package/async-validate)
+[![Coverage Status](https://coveralls.io/repos/tmpfs/async-validate/badge.svg?branch=master&service=github&v=1)](https://coveralls.io/github/tmpfs/async-validate?branch=master)
 
 Asynchronous validation for [node](http://nodejs.org) and the browser.
 
@@ -562,7 +516,7 @@ function id(cb) {
 
 Plugins are modules defining functions that allow users to only load functionality specific to the rule types being used which allows builds for the browser to be as lean as possible.
 
-See [zephyr](https://github.com/tmpfs/zephyr) for plugin system documentation.
+See [zephyr][] for plugin system documentation.
 
 #### Loading Plugins
 
@@ -941,7 +895,7 @@ You must supply a reason `id`; if `opts` are passed they are assigned as propert
 
 ## Developer
 
-Clone the repository, install project and global dependencies ([mdp](https://github.com/tmpfs/mdp), [jshint](http://jshint.com) and [jscs](http://jscs.info)):
+Clone the repository, install project and global dependencies ([mdp][], [jshint][] and [jscs][]):
 
 ```
 npm i && npm i -g mdp jshint jscs
@@ -973,7 +927,7 @@ npm run cover
 
 ### Lint
 
-Run the source tree through [jshint](http://jshint.com) and [jscs](http://jscs.info):
+Run the source tree through [jshint][] and [jscs][]:
 
 ```
 npm run lint
@@ -981,7 +935,7 @@ npm run lint
 
 ### Browser
 
-Create a standalone [browserify](http://browserify.org/) build:
+Create a standalone [browserify][] build:
 
 ```
 npm run browser
@@ -1005,15 +959,15 @@ npm run docs
 
 ### Example
 
-Generate [EXAMPLE](https://github.com/tmpfs/async-validate/blob/master/EXAMPLE.md) (requires [mdp](https://github.com/tmpfs/mdp)):
+Generate [EXAMPLE](https://github.com/tmpfs/async-validate/blob/master/EXAMPLE.md) (requires [mdp][]):
 
 ```
-npm run example
+npm run example 
 ```
 
 ### Readme
 
-Generate the readme file (requires [mdp](https://github.com/tmpfs/mdp)):
+Generate the readme file (requires [mdp][]):
 
 ```
 npm run readme
@@ -1023,7 +977,9 @@ npm run readme
 
 Everything is [MIT](http://en.wikipedia.org/wiki/MIT_License). Read the [license](https://github.com/tmpfs/async-validate/blob/master/LICENSE) if you feel inclined.
 
-Generated by [mdp(1)](https://github.com/tmpfs/mdp).
+---
+
+Created by [mkdoc](https://github.com/mkdoc/mkdoc) on February 27, 2017
 
 [node]: http://nodejs.org
 [npm]: http://www.npmjs.org
@@ -1032,3 +988,4 @@ Generated by [mdp(1)](https://github.com/tmpfs/mdp).
 [jshint]: http://jshint.com
 [jscs]: http://jscs.info
 [zephyr]: https://github.com/tmpfs/zephyr
+
